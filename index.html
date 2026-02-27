@@ -24,4 +24,126 @@
         .gallery-img { width: 280px; height: 200px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; }
         .gallery-img:hover { transform: scale(1.05); }
 
-        .contact-form { max-width: 600px; margin: 0 auto; background: white; padding:
+        .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; }
+        .form-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+
+        .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; }
+
+        /* Naya Professional Blue Footer Style */
+        .main-footer { background-color: var(--dark-footer); color: white; padding: 60px 5% 20px; }
+        .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .footer-col { flex: 1 1 250px; }
+        .footer-col h3 { font-size: 20px; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+        .footer-col h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 2px; background: white; }
+        .footer-col p { font-size: 14px; opacity: 0.9; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: white; text-decoration: none; font-size: 14px; opacity: 0.8; transition: 0.3s; }
+        .footer-links a:hover { opacity: 1; padding-left: 5px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { color: white; font-size: 20px; opacity: 0.8; transition: 0.3s; }
+        .social-icons a:hover { opacity: 1; transform: translateY(-3px); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; margin-top: 40px; padding-top: 20px; font-size: 13px; opacity: 0.7; }
+    </style>
+</head>
+<body>
+
+    <div class="news-bar">
+        <marquee behavior="scroll" direction="left" scrollamount="7">
+            🌙 رمضان مبارك 🌙 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            🎨 आप सभी को होली की ढेर सारी शुभकामनाएं! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            🚀 Shan Zone ki taraf se high-speed internet ka tohfa!
+        </marquee>
+    </div>
+
+    <header>
+        <div class="logo-box"><img src="logo.jpg" alt="Shan Zone Logo"></div>
+        <a href="tel:6391224488" class="btn-whatsapp" style="padding: 10px 20px; font-size: 14px;"><i class="fa fa-phone"></i> Call Now</a>
+    </header>
+
+    <section class="hero">
+        <h2>Fast and Reliable Fiber Internet</h2>
+        <p>Unlimited Data | High Speed | 24x7 Support</p>
+        <a href="https://wa.me/916391224488" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Get New Connection</a>
+    </section>
+
+    <section style="padding: 60px 5%; text-align: center; background: white;">
+        <h2 style="color: var(--primary-blue);">Our Latest Work & Installations</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px;">
+            <img src="work1.jpg" alt="Installation" class="gallery-img">
+            <img src="work2.jpg" alt="Office" class="gallery-img">
+            <img src="work3.jpg" alt="Fiber Cable" class="gallery-img">
+        </div>
+    </section>
+
+    <section class="plans-section">
+        <h2>Best Value Monthly Plans</h2>
+        <div class="plans-container">
+            <div class="plan-card">
+                <h3>Standard Plan</h3>
+                <div class="price" style="font-size: 40px; font-weight: bold;">₹599<span>/Month</span></div>
+                <a href="https://wa.me/916391224488?text=Interested in 599 Plan" class="btn-whatsapp">Buy Now</a>
+            </div>
+            <div class="plan-card" style="border-color: var(--secondary-blue); transform: scale(1.05);">
+                <h3>Speed Master</h3>
+                <div class="price" style="font-size: 40px; font-weight: bold;">₹799<span>/Month</span></div>
+                <a href="https://wa.me/916391224488?text=Interested in 799 Plan" class="btn-whatsapp">Most Popular</a>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 60px 5%; background: var(--light-bg); text-align: center;">
+        <div class="contact-form">
+            <h2 style="color: var(--primary-blue); text-align: center;">Send us a Message</h2>
+            <form action="https://formspree.io/f/mqaebrda" method="POST">
+                <label>Aapka Naam:</label>
+                <input type="text" name="name" class="form-input" required>
+                <label>Mobile Number:</label>
+                <input type="tel" name="phone" class="form-input" required>
+                <label>Aapka Sawal:</label>
+                <textarea name="message" class="form-input" style="height: 100px;" required></textarea>
+                <button type="submit" class="btn-whatsapp" style="width: 100%; border-radius: 5px;">Submit Karein</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 style="border:none; padding:0; margin-bottom:15px;">
+                    <img src="logo.jpg" alt="Shan Zone Logo" style="height: 50px; background: white; padding: 5px; border-radius: 5px;">
+                </h3>
+                <p>Maharajganj's Leading Fiber Network. Ham aapko dete hain sabse tez aur bharosemand internet connection, hamesha.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Monthly Plans</a></li>
+                    <li><a href="#">New Connection</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> [Aapka Maharajganj Address]</p>
+                <p><i class="fas fa-phone-alt" style="margin-right: 10px;"></i> +91 6391224488</p>
+                <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> shanzones1313@gmail.com</p>
+                <p><i class="fas fa-globe" style="margin-right: 10px;"></i> www.shanwifi.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024-2026 ShanZone. All rights reserved. | Designed & Developed by Shan Zone</p>
+        </div>
+    </footer>
+
+</body>
+</html>
