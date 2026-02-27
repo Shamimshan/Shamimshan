@@ -6,54 +6,22 @@
     <title>Shan Zone | Fast and Reliable Internet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary-blue: #0047ab; --secondary-blue: #007bff; --light-bg: #f8f9fa; }
+        :root { --primary-blue: #0047ab; --secondary-blue: #007bff; --light-bg: #f8f9fa; --dark-footer: #0a2e6e; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
+        
         .news-bar { background: #ffcc00; color: #000; padding: 10px 0; font-weight: bold; font-size: 18px; border-bottom: 2px solid var(--primary-blue); }
+        
         header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo-box img { height: 60px; }
+        
         .hero { background: linear-gradient(rgba(0, 71, 171, 0.8), rgba(0, 123, 255, 0.8)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: white; padding: 100px 20px; text-align: center; }
-        .hero h2 { font-size: 45px; margin-bottom: 20px; }
+        
         .plans-section { padding: 60px 5%; background: var(--light-bg); text-align: center; }
         .plans-container { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
-        .plan-card { background: white; border-radius: 15px; width: 300px; padding: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .price { font-size: 40px; font-weight: bold; margin: 20px 0; }
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; }
-        footer { background: var(--primary-blue); color: white; padding: 40px 5%; text-align: center; }
-    </style>
-</head>
-<body>
-    <div class="news-bar">
-        <marquee behavior="scroll" direction="left" scrollamount="7">
-            🌙 رمضان مبارك 🌙 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            🎨 आप सभी को होली की ढेर सारी शुभकामनाएं! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            🚀 Shan Zone ki taraf se high-speed internet ka tohfa!
-        </marquee>
-    </div>
-    <header>
-        <div class="logo-box"><img src="logo.jpg" alt="Shan Zone Logo"></div>
-        <a href="tel:6391224488" class="btn-whatsapp" style="padding: 10px 20px; font-size: 14px;"><i class="fa fa-phone"></i> Call Now</a>
-    </header>
-    <section class="hero">
-        <h2>Fast and Reliable Fiber Internet</h2>
-        <p>Unlimited Data | High Speed | 24x7 Support</p>
-        <a href="https://wa.me/916391224488" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Get New Connection</a>
-    </section>
-    <section class="plans-section">
-        <div class="plans-container">
-            <div class="plan-card">
-                <h3>Standard Plan</h3>
-                <div class="price">₹599<span>/Month</span></div>
-                <a href="https://wa.me/916391224488?text=Interested in 599 Plan" class="btn-whatsapp">Buy Now</a>
-            </div>
-            <div class="plan-card" style="border-color: var(--secondary-blue); transform: scale(1.05);">
-                <h3>Speed Master</h3>
-                <div class="price">₹799<span>/Month</span></div>
-                <a href="https://wa.me/916391224488?text=Interested in 799 Plan" class="btn-whatsapp">Most Popular</a>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <p>&copy; 2024-2026 ShanZone - Maharajganj's Leading Fiber Network</p>
-    </footer>
-</body>
-</html>
+        .plan-card { background: white; border-radius: 15px; width: 300px; padding: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
+        .plan-card:hover { transform: translateY(-10px); border-color: var(--secondary-blue); }
+        
+        .gallery-img { width: 280px; height: 200px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; }
+        .gallery-img:hover { transform: scale(1.05); }
+
+        .contact-form { max-width: 600px; margin: 0 auto; background: white; padding:
