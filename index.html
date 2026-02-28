@@ -169,24 +169,24 @@
             <h2>Our Fiber Plans</h2>
             <div class="price-grid">
                 <div class="price-card">
-                    <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹499</span></div></div>
+                    <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹599</span></div></div>
                     <div class="card-body">
-                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
+                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
                         <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Choose Plan</button>
                     </div>
                 </div>
                 <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
-                    <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹699</span></div></div>
+                    <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹799</span></div></div>
                     <div class="card-body">
-                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 80 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming</li></ul>
+                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming</li></ul>
                         <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Choose Plan</button>
                     </div>
                 </div>
                 <div class="price-card">
-                    <div class="card-header ultimate"><h3>ULTIMATE</h3><div class="plan-price"><span>₹899</span></div></div>
+                    <div class="card-header boost"><h3>BOOST PLAN</h3><div class="plan-price"><span>₹1150</span></div></div>
                     <div class="card-body">
                         <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Low Latency</li></ul>
-                        <button onclick="sendToWhatsapp('Ultimate Plan')" class="btn-quote" style="width:100%; background: var(--ultimate-color);">Choose Plan</button>
+                        <button onclick="sendToWhatsapp('Boost Plan')" class="btn-quote" style="width:100%; background: var(--ultimate-color);">Choose Plan</button>
                     </div>
                 </div>
             </div>
@@ -282,7 +282,7 @@
                             <option value="">--चुनें (Select)--</option>
                             <option value="LITE">LITE PLAN</option>
                             <option value="PRO">PRO PLAN</option>
-                            <option value="BOST">BOST PLAN</option>
+                            <option value="BOOST">BOOST PLAN</option>
                         </select>
                     </div>
                     <div class="input-item"><label>स्पीड (Mbps):</label><input type="text" id="speedDisplay"></div>
@@ -354,7 +354,7 @@
             } else if (plan === "PRO") {
                 speed.value = "50 Mbps";
                 price.value = "799";
-            } else if (plan === "BOST") {
+            } else if (plan === "BOOST") {
                 speed.value = "100 Mbps";
                 price.value = "1150";
             } else {
