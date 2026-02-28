@@ -24,15 +24,16 @@
         nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; }
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; border: none; cursor: pointer; }
 
-        /* Hero Section */
+        //* Hero Section Updated */
         .hero {
-    background: url('hero-bg.jpg'); /* Apni nayi photo ka naam yahan likhein */
-    background-size: cover;
-    background-position: center;
-    height: 70vh; /* Nayi photo ke liye thodi zyada height */
-}
-        .hero-content h1 { font-size: 48px; margin-bottom: 20px; }
-        .hero-content span { color: var(--accent); }
+            background: url('hero-bg.png') no-repeat; /* GitHub file name '.png' kiya gaya */
+            background-size: contain; /* Isse puri photo dikhegi, kategi nahi */
+            background-position: center top;
+            height: 100vh; /* Photo ki lambai ke hisab se height set ki gayi */
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
 
         /* Pricing */
         .pricing { padding: 80px 5%; text-align: center; background: white; }
@@ -62,12 +63,13 @@
         .footer-col h4 { color: var(--accent); margin-bottom: 20px; }
         .social-links a { color: white; font-size: 20px; margin-right: 15px; transition: 0.3s; }
         .social-links a:hover { color: var(--accent); }
-        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
-
-        @media (max-width: 768px) { .hero-content h1 { font-size: 32px; } }
-    </style>
-</head>
-<body>
+        <section id="home" class="hero">
+        <div class="hero-content">
+            <div style="margin-top: 280px; margin-left: 20px;"> 
+                <a href="https://wa.me/916391224488" class="btn-quote" style="border-radius: 50px; background: var(--accent); padding: 15px 40px;">नया कनेक्शन लें</a>
+            </div>
+        </div>
+    </section>
 
     <div class="news-bar">
         <marquee>🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;     🎨 होली की शुभकामनाएं! &nbsp;&nbsp;     🚀 Shan Zone High-Speed Internet!</marquee>
