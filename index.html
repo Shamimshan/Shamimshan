@@ -26,7 +26,7 @@
 
         /* Hero Section Updated */
         .hero {
-            background: url('hero-bg.jpg') no-repeat; /* GitHub file name '.jpg' check karein */
+            background: url('hero-bg.jpg') no-repeat; 
             background-size: contain; 
             background-position: center top;
             width: 100%;
@@ -34,6 +34,20 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
+        }
+
+        /* Hero Content Flex Box for Button alignment */
+        .hero-content {
+            width: 100%; 
+            display: flex; 
+            flex-direction: column;
+            padding: 0 5%;
+        }
+
+        .right-align-btn {
+            align-self: flex-end; /* Button ko right side dhakelta hai */
+            margin-right: 50px;
+            margin-top: 20px;
         }
 
         /* Pricing */
@@ -58,7 +72,7 @@
         .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         .btn-submit { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
 
-        /* Footer Redesign */
+        /* Footer */
         footer { background: var(--dark); color: white; padding: 60px 5% 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         .footer-col h4 { color: var(--accent); margin-bottom: 20px; }
@@ -66,7 +80,10 @@
         .social-links a:hover { color: var(--accent); }
         .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
 
-        @media (max-width: 768px) { .hero { height: 50vh; background-size: cover; } }
+        @media (max-width: 768px) { 
+            .hero { height: 50vh; background-size: cover; } 
+            .right-align-btn { align-self: center; margin-right: 0; }
+        }
     </style>
 </head>
 <body>
@@ -86,27 +103,16 @@
     </header>
 
     <section id="home" class="hero">
-    <div class="hero-content">
-        <h3 style="color: var(--accent); text-transform: uppercase;">Shan Zone Broadband</h3>
-        <h1>Be connected with <span>Shan Zone</span> Fiber.</h1>
-        <p>परतावल का सबसे भरोसेमंद इंटरनेट पार्टनर।</p>
-        
-        <div class="right-align-btn">
-            <a href="https://wa.me/916391224488" class="btn-quote" style="border-radius: 50px;">नया कनेक्शन के लिए यहाँ क्लिक करें</a>
+        <div class="hero-content">
+            <h3 style="color: var(--accent); text-transform: uppercase;">Shan Zone Broadband</h3>
+            <h1>Be connected with <span>Shan Zone</span> Fiber.</h1>
+            <p>परतावल का सबसे भरोसेमंद इंटरनेट पार्टनर।</p>
+            
+            <div class="right-align-btn">
+                <a href="https://wa.me/916391224488" class="btn-quote" style="border-radius: 50px;">नया कनेक्शन के लिए यहाँ क्लिक करें</a>
+            </div>
         </div>
-    </div>
-</section>
-    /* Styling for right-aligned button */
-.hero-content {
-    width: 100%; /* Ensures container spans full width */
-    display: flex; /* Sets layout for flex alignment */
-    flex-direction: column; /* Stacks content vertically */
-}
-
-.right-align-btn {
-    align-self: flex-end; /* Aligns this specific item to the right */
-    margin-right: 20px; /* Optional: adds space from the right edge */
-}
+    </section>
 
     <section id="plans" class="pricing">
         <h2>Best Value Monthly Plans</h2>
