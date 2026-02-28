@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary-blue: #0047ab; --secondary-blue: #007bff; --light-bg: #f8f9fa; --dark-footer: #0a2e6e; --whatsapp-green: #2ecc71; }
+        :root { --primary-blue: #0047ab; --secondary-blue: #007bff; --light-bg: #f8f9fa; --dark-footer: #061e47; --whatsapp-green: #2ecc71; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; scroll-behavior: smooth; }
         
         /* News Bar */
@@ -33,9 +33,10 @@
         .plan-price { font-size: 32px; font-weight: 800; color: var(--secondary-blue); margin: 15px 0; }
         .plan-price span { font-size: 16px; color: #666; font-weight: normal; }
 
-        .plan-features { list-style: none; padding: 0; margin: 20px 0 30px 0; text-align: center; width: 100%; }
-        .plan-features li { margin: 12px 0; color: #555; font-size: 16px; display: flex; align-items: center; justify-content: center; }
-        .plan-features li i { color: #333; margin-right: 8px; font-size: 14px; }
+        .plan-features { list-style: none; padding: 0; margin: 20px 0 30px 0; text-align: left; width: 80%; }
+        .plan-features li { margin: 12px 0; color: #555; font-size: 16px; display: flex; align-items: center; }
+        /* Green Circle Icons */
+        .plan-features li i { color: #2ecc71; margin-right: 12px; font-size: 18px; }
 
         .btn-plan { 
             background: linear-gradient(to right, #2ecc71, #27ae60); 
@@ -43,26 +44,36 @@
             border-radius: 50px; font-weight: 700; font-size: 18px; 
             border: none; cursor: pointer; transition: 0.3s; width: 80%;
         }
-        .btn-plan:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4); }
+
+        /* Gallery Section */
+        .gallery-section { padding: 60px 5%; text-align: center; background: white; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .gallery-item img { width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+        .gallery-item img:hover { transform: scale(1.03); }
 
         /* Form Styling */
-        .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left; border-top: 5px solid var(--primary-blue); }
-        .form-input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        .form-input:focus { border-color: var(--secondary-blue); outline: none; background: #f0f7ff; }
+        .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left; }
+        .contact-form h2 { color: var(--primary-blue); text-align: center; margin-bottom: 30px; font-size: 28px; }
+        .form-input { width: 100%; padding: 15px; margin: 10px 0; border: 1.5px solid #d1d1d1; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        .btn-submit { background: linear-gradient(to right, #2ecc71, #27ae60); color: white; width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 15px; }
 
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; text-align: center; }
-        .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
-
-        .main-footer { background-color: var(--dark-footer); color: white; padding: 60px 5% 20px; }
+        /* Premium Footer */
+        .main-footer { background-color: #061e47; color: white; padding: 60px 5% 20px; }
         .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; }
         .footer-col { flex: 1 1 250px; }
-        .footer-col h3 { font-size: 20px; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
-        .footer-col h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 2px; background: #ffcc00; }
+        .footer-col h3 { font-size: 24px; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        /* Yellow Underline */
+        .footer-col h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background: #ffcc00; }
+        .footer-col p { font-size: 15px; opacity: 0.9; line-height: 1.8; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col ul li a { color: white; text-decoration: none; opacity: 0.8; transition: 0.3s; }
+        .footer-col ul li a:hover { opacity: 1; padding-left: 5px; }
         
-        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 25px; }
         .social-icons a { background: rgba(255,255,255,0.1); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white; text-decoration: none; transition: 0.4s; }
-        .social-icons a:hover { background: var(--secondary-blue); transform: translateY(-5px); }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; margin-top: 40px; padding-top: 20px; font-size: 13px; opacity: 0.7; }
+        .social-icons a:hover { background: var(--secondary-blue); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; margin-top: 40px; padding-top: 20px; font-size: 13px; opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -75,13 +86,13 @@
         <a href="#top" class="logo-box">
             <img src="logo.jpg" alt="Shan Zone Logo">
         </a>
-        <a href="tel:6391224488" class="btn-whatsapp" style="padding: 10px 20px; font-size: 14px;"><i class="fa fa-phone"></i> Call Now</a>
+        <a href="tel:6391224488" style="background:#25D366; color:white; padding:10px 20px; border-radius:50px; text-decoration:none; font-weight:bold; font-size:14px;"><i class="fa fa-phone"></i> Call Now</a>
     </header>
 
     <section class="hero">
         <h2>Fast and Reliable Fiber Internet</h2>
         <p>Unlimited Data | High Speed | 24x7 Support</p>
-        <a href="https://wa.me/916391224488" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Get New Connection</a>
+        <a href="https://wa.me/916391224488" style="background:#25D366; color:white; padding:15px 30px; border-radius:50px; text-decoration:none; font-weight:bold; display:inline-block;"><i class="fab fa-whatsapp"></i> Get New Connection</a>
     </section>
 
     <section id="plans" class="plans-section">
@@ -91,9 +102,9 @@
                 <h3>Standard Plan</h3>
                 <div class="plan-price">₹599<span>/Month</span></div>
                 <ul class="plan-features">
-                    <li><i class="fas fa-check"></i> Speed upto 30 Mbps</li>
-                    <li><i class="fas fa-check"></i> Unlimited Data</li>
-                    <li><i class="fas fa-check"></i> Fast Browsing</li>
+                    <li><i class="fas fa-check-circle"></i> Speed upto 30 Mbps</li>
+                    <li><i class="fas fa-check-circle"></i> Unlimited Data</li>
+                    <li><i class="fas fa-check-circle"></i> Fast Browsing</li>
                 </ul>
                 <button onclick="sendToWhatsapp('Standard Plan - 599')" class="btn-plan">Buy Now</button>
             </div>
@@ -102,24 +113,32 @@
                 <h3>Speed Master</h3>
                 <div class="plan-price">₹799<span>/Month</span></div>
                 <ul class="plan-features">
-                    <li><i class="fas fa-check"></i> Speed upto 50 Mbps</li>
-                    <li><i class="fas fa-check"></i> Unlimited Data</li>
-                    <li><i class="fas fa-check"></i> Fast Browsing</li>
+                    <li><i class="fas fa-check-circle"></i> Speed upto 50 Mbps</li>
+                    <li><i class="fas fa-check-circle"></i> Unlimited Data</li>
+                    <li><i class="fas fa-check-circle"></i> Fast Browsing</li>
                 </ul>
                 <button onclick="sendToWhatsapp('Speed Master - 799')" class="btn-plan">Most Popular</button>
             </div>
         </div>
     </section>
 
-    <section id="contact-form-section" style="padding: 80px 5%; background: #eef2f7; text-align: center;">
+    <section class="gallery-section">
+        <h2>Our Network Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="g1.jpg" alt="Installation"></div>
+            <div class="gallery-item"><img src="g2.jpg" alt="Fiber Cable"></div>
+            <div class="gallery-item"><img src="g3.jpg" alt="Support Team"></div>
+        </div>
+    </section>
+
+    <section id="contact-form-section" style="padding: 80px 5%; background: #f0f4f8; text-align: center;">
         <div class="contact-form">
-            <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 10px;">हमें मैसेज भेजें</h2>
-            <p style="text-align: center; color: #777; margin-bottom: 25px;">नया कनेक्शन या किसी भी जानकारी के लिए फॉर्म भरें。</p>
+            <h2>Send us a Message</h2>
             <form id="whatsappForm">
-                <input type="text" id="name" class="form-input" placeholder="आपका पूरा नाम" required>
-                <input type="tel" id="phone" class="form-input" placeholder="मोबाइल नंबर" required>
-                <textarea id="message" class="form-input" style="height: 100px;" placeholder="आपका सवाल या पूरा पता (Address)" required></textarea>
-                <button type="button" onclick="validateAndSend()" class="btn-whatsapp" style="width: 100%; border-radius: 8px; margin-top: 10px;">मैसेज भेजें (WhatsApp)</button>
+                <input type="text" id="name" class="form-input" placeholder="Full Name" required>
+                <input type="tel" id="phone" class="form-input" placeholder="Mobile Number" required>
+                <textarea id="message" class="form-input" style="height: 120px;" placeholder="Aapka Sawal ya Address" required></textarea>
+                <button type="button" onclick="validateAndSend()" class="btn-submit">Submit Message</button>
             </form>
         </div>
     </section>
@@ -127,63 +146,7 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-col">
-                <a href="#top"><img src="logo.jpg" alt="Shan Zone Logo" style="height: 50px; background: white; padding: 5px; border-radius: 5px; margin-bottom:15px;"></a>
-                <p>महाराजगंज का नंबर 1 फाइबर नेटवर्क। हम आपको देते हैं सबसे तेज़ और भरोसेमंद इंटरनेट कनेक्शन, हमेशा।</p>
+                <img src="logo.jpg" alt="Shan Zone Logo" style="height: 55px; background: white; padding: 5px; border-radius: 8px; margin-bottom:20px;">
+                <p>Maharajganj's Leading Fiber Network. Ham aapko dete hain sabse tez aur bharosemand internet connection, hamesha.</p>
                 <div class="social-icons">
-                    <a href="https://www.facebook.com/shanzone13" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/shanzone13/" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/916391224488" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul style="list-style:none; padding:0;">
-                    <li><a href="#top" style="color:#ccc; text-decoration:none;">Home</a></li>
-                    <li><a href="#plans" style="color:#ccc; text-decoration:none;">Monthly Plans</a></li>
-                    <li><a href="#contact-info" style="color:#ccc; text-decoration:none;">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <div id="contact-info" class="footer-col">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #ffcc00;"></i> Partawal, Maharajganj, UP, 273301</p>
-                <p><i class="fas fa-phone-alt" style="margin-right: 10px; color: #ffcc00;"></i> +91 6391 2244 88, 9984 3899 23</p>
-                <p><i class="fas fa-envelope" style="margin-right: 10px; color: #ffcc00;"></i> shanzones1313@gmail.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024-2026 ShanZone. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        function validateAndSend() {
-            var name = document.getElementById('name').value;
-            var phone = document.getElementById('phone').value;
-            var msg = document.getElementById('message').value;
-            var whatsappNumber = "916391224488"; 
-
-            if(name == "" || phone == "" || msg == "") {
-                alert("कृपया सभी जानकारी भरें!");
-                return;
-            }
-
-            var url = "https://wa.me/" + whatsappNumber + "?text=" 
-                + "*Website Inquiry*" + "%0a"
-                + "*Name:* " + name + "%0a"
-                + "*Phone:* " + phone + "%0a"
-                + "*Details:* " + msg;
-
-            window.open(url, '_blank').focus();
-        }
-
-        function sendToWhatsapp(planName) {
-            var whatsappNumber = "916391224488";
-            var url = "https://wa.me/" + whatsappNumber + "?text=Hello Shan Zone, I am interested in " + planName;
-            window.open(url, '_blank').focus();
-        }
-    </script>
-
-</body>
-</html>
+                    <a href="#"><i class="fab
