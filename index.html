@@ -26,7 +26,7 @@
             background-color: #f0f2f5;
         }
 
-        /* 1. News Bar Fix */
+        /* News Bar */
         .news-bar { 
             background: #ffcc00; 
             color: #000; 
@@ -37,7 +37,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* 2. Header Fix */
+        /* Navigation Header */
         header { 
             background: white; 
             padding: 15px 5%; 
@@ -55,20 +55,20 @@
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; }
         .btn-quote:hover { transform: scale(1.05); background: #e04d0d; }
 
-        /* 3. Luxury Hero Section Fix (No Gaps) */
+        /* HERO SECTION FIX: Full Width Luxury Look */
         .hero {
             background: url('hero-bg.jpg') no-repeat; 
-            background-size: 100% 100%; /* Ise 100% kiya hai taaki corners cover ho jayein */
-            background-position: center;
+            background-size: cover; /* Image ko poori width par stretch karne ke liye */
+            background-position: center center;
             width: 100%;
-            height: 90vh; /* Premium desktop height */
+            height: 90vh; 
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
         }
 
-        /* 4. Pricing Section */
+        /* Pricing Section */
         .pricing { padding: 80px 5%; text-align: center; background: #fff; }
         .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
         .price-card { 
@@ -81,7 +81,7 @@
             transition: 0.4s ease;
             border: 1px solid #eee;
         }
-        .price-card:hover { transform: translateY(-15px); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+        .price-card:hover { transform: translateY(-15px); }
         .card-header { padding: 35px 25px; color: white; text-align: left; }
         .card-header.lite { background: var(--lite-color); }
         .card-header.pro { background: var(--pro-color); }
@@ -90,10 +90,10 @@
         .plan-price span { font-size: 2rem; font-weight: 800; }
         .card-body { padding: 30px 25px; text-align: left; }
         .price-features { list-style: none; padding: 0; margin-bottom: 30px; }
-        .price-features li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; display: flex; align-items: center; }
-        .price-features i { color: #2ecc71; margin-right: 12px; font-size: 18px; }
+        .price-features li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; }
+        .price-features i { color: #2ecc71; margin-right: 12px; }
 
-        /* 5. Contact Section */
+        /* Contact Section */
         .contact-section { padding: 100px 5%; background: #f4f7fa; }
         .contact-container { 
             display: flex; 
@@ -110,9 +110,8 @@
         .contact-form-box { flex: 1.5; background: #f9fbff; padding: 40px; border-radius: 20px; }
         .form-group { margin-bottom: 25px; }
         .form-group input, .form-group textarea { 
-            width: 100%; padding: 18px; border: 1px solid #e0e0e0; border-radius: 12px; font-size: 16px; outline: none; transition: 0.3s;
+            width: 100%; padding: 18px; border: 1px solid #e0e0e0; border-radius: 12px; font-size: 16px; outline: none;
         }
-        .form-group input:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(255,94,20,0.1); }
         .btn-submit { 
             background: var(--accent); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; font-size: 18px; 
         }
@@ -121,23 +120,23 @@
         footer { background: var(--dark); color: white; padding: 80px 5% 30px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
         .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
-        .social-links a { color: white; font-size: 24px; margin-right: 20px; transition: 0.3s; }
-        .social-links a:hover { color: var(--accent); }
+        .footer-col p { margin: 10px 0; }
+        /* Footer Links Style */
+        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); padding-left: 5px; }
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
 
-        /* Responsive Mobile Fix */
         @media (max-width: 768px) { 
-            .hero { height: 40vh; background-size: cover; } 
+            .hero { height: 40vh; } 
             header { padding: 10px 5%; }
             nav { display: none; }
-            .contact-container { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
     <div class="news-bar">
-        <marquee scrollamount="8">🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet: Connect with the Future!</marquee>
+        <marquee scrollamount="8">🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!</marquee>
     </div>
 
     <header>
@@ -153,9 +152,7 @@
     <section id="home" class="hero"></section>
 
     <section id="plans" class="pricing">
-        <h2 style="font-size: 2.8rem; color: var(--dark); margin-bottom: 10px;">Our High-Speed Plans</h2>
-        <p style="font-size: 1.1rem; color: #666; margin-bottom: 50px;">Unlimited Data. Unstoppable Speed.</p>
-        
+        <h2 style="font-size: 2.8rem;">Our Fiber Plans</h2>
         <div class="price-grid">
             <div class="price-card">
                 <div class="card-header lite">
@@ -166,14 +163,11 @@
                     <ul class="price-features">
                         <li><i class="fas fa-bolt"></i> 50 Mbps Speed</li>
                         <li><i class="fas fa-infinity"></i> Unlimited Data</li>
-                        <li><i class="fas fa-headset"></i> 24/7 Support</li>
                     </ul>
-                    <button onclick="sendToWhatsapp('Lite Plan 50Mbps')" class="btn-quote" style="width:100%; background: var(--lite-color);">Choose Plan</button>
+                    <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Choose Plan</button>
                 </div>
             </div>
-
             <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
-                <div style="background: var(--accent); color: white; font-size: 12px; font-weight: bold; padding: 5px 0; text-align: center;">MOST POPULAR</div>
                 <div class="card-header pro">
                     <h3 style="margin:0;">PRO PLAN</h3>
                     <div class="plan-price"><span>₹699</span><small>/Mo</small></div>
@@ -181,13 +175,11 @@
                 <div class="card-body">
                     <ul class="price-features">
                         <li><i class="fas fa-bolt"></i> 80 Mbps Speed</li>
-                        <li><i class="fas fa-tv"></i> 4K Video Support</li>
-                        <li><i class="fas fa-wifi"></i> Free Dual-Band Router</li>
+                        <li><i class="fas fa-tv"></i> 4K Streaming</li>
                     </ul>
-                    <button onclick="sendToWhatsapp('Pro Plan 80Mbps')" class="btn-submit">Choose Plan</button>
+                    <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Choose Plan</button>
                 </div>
             </div>
-
             <div class="price-card">
                 <div class="card-header ultimate">
                     <h3 style="margin:0;">ULTIMATE</h3>
@@ -196,10 +188,9 @@
                 <div class="card-body">
                     <ul class="price-features">
                         <li><i class="fas fa-bolt"></i> 100 Mbps Speed</li>
-                        <li><i class="fas fa-gamepad"></i> Low Latency Gaming</li>
-                        <li><i class="fas fa-users"></i> Connect 10+ Devices</li>
+                        <li><i class="fas fa-gamepad"></i> Low Latency</li>
                     </ul>
-                    <button onclick="sendToWhatsapp('Ultimate Plan 100Mbps')" class="btn-quote" style="width:100%; background: var(--ultimate-color);">Choose Plan</button>
+                    <button onclick="sendToWhatsapp('Ultimate Plan')" class="btn-quote" style="width:100%; background: var(--ultimate-color);">Choose Plan</button>
                 </div>
             </div>
         </div>
@@ -208,25 +199,17 @@
     <section id="contact" class="contact-section">
         <div class="contact-container">
             <div class="contact-info">
-                <h2 style="font-size: 2.5rem; color: var(--dark);">Get Connected Today!</h2>
-                <p style="margin-bottom: 30px; font-size: 1.1rem; color: #555;">Fill the form and our team will contact you within 2 hours for installation.</p>
-                <div style="margin-top:20px;">
-                    <p><i class="fas fa-phone-alt" style="color: var(--accent); margin-right: 15px;"></i> +91 6391 2244 88</p>
-                    <p><i class="fas fa-envelope" style="color: var(--accent); margin-right: 15px;"></i> shanzone1313@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 15px;"></i> Partawal, Maharajganj, UP 273301</p>
-                </div>
-                <div class="social-links" style="margin-top: 30px;">
-                    <a href="https://facebook.com/shanzone13" style="color: #3b5998;"><i class="fab fa-facebook"></i></a>
-                    <a href="https://instagram.com/shanzone13" style="color: #e4405f;"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/916391224488" style="color: #25d366;"><i class="fab fa-whatsapp"></i></a>
-                </div>
+                <h2>Contact Us</h2>
+                <p>Maharajganj's leading high-speed fiber network provider.</p>
+                <p><i class="fas fa-phone-alt"></i> +91 6391 2244 88</p>
+                <p><i class="fas fa-map-marker-alt"></i> Partawal Bazar, Maharajganj, UP</p>
             </div>
             <div class="contact-form-box">
                 <form id="contactForm">
                     <div class="form-group"><input type="text" id="cname" placeholder="Full Name" required></div>
                     <div class="form-group"><input type="tel" id="cphone" placeholder="Mobile Number" required></div>
-                    <div class="form-group"><textarea id="cmessage" rows="4" placeholder="Your Complete Address" required></textarea></div>
-                    <button type="button" onclick="handleContact()" class="btn-submit">Send Installation Request</button>
+                    <div class="form-group"><textarea id="cmessage" rows="4" placeholder="Your Address" required></textarea></div>
+                    <button type="button" onclick="handleContact()" class="btn-submit">Send Message</button>
                 </form>
             </div>
         </div>
@@ -236,13 +219,13 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <img src="logo.jpg" style="height:50px; background:white; padding:5px; border-radius:8px; margin-bottom:20px;">
-                <p>Maharajganj's leading high-speed fiber network provider. Fast, Reliable, and Affordable.</p>
+                <p>Fast, Reliable, and Affordable Fiber Internet in Maharajganj.</p>
             </div>
             <div class="footer-col">
                 <h4>Services</h4>
-                <p>Home</p>
-                <p>Plans</p>
-                <p>Contact</p>
+                <a href="#home">Home</a>
+                <a href="#plans">Plans</a>
+                <a href="#contact">Contact</a>
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
@@ -259,11 +242,11 @@
             var n = document.getElementById('cname').value;
             var p = document.getElementById('cphone').value;
             var m = document.getElementById('cmessage').value;
-            if(!n || !p || !m) return alert("Please fill all details!");
-            window.open("https://wa.me/916391224488?text=Connection Request:%0aName: "+n+"%0aPhone: "+p+"%0aAddress: "+m);
+            if(!n || !p || !m) return alert("Details bharein!");
+            window.open("https://wa.me/916391224488?text=Name: "+n+"%0aPhone: "+p+"%0aAddress: "+m);
         }
         function sendToWhatsapp(plan) {
-            window.open("https://wa.me/916391224488?text=Hi Shan Zone, I want to subscribe to the " + plan);
+            window.open("https://wa.me/916391224488?text=I am interested in " + plan);
         }
     </script>
 </body>
