@@ -149,4 +149,52 @@
                 <img src="logo.jpg" alt="Shan Zone Logo" style="height: 55px; background: white; padding: 5px; border-radius: 8px; margin-bottom:20px;">
                 <p>Maharajganj's Leading Fiber Network. Ham aapko dete hain sabse tez aur bharosemand internet connection, hamesha.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fab
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#top">Home</a></li>
+                    <li><a href="#plans">Monthly Plans</a></li>
+                    <li><a href="#contact-info">Contact Us</a></li>
+                    <li><a href="#">New Connection</a></li>
+                </ul>
+            </div>
+
+            <div id="contact-info" class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #ffcc00;"></i> Partawal, Maharajganj, UP</p>
+                <p><i class="fas fa-phone-alt" style="margin-right: 10px; color: #ffcc00;"></i> +91 6391 2244 88</p>
+                <p><i class="fas fa-envelope" style="margin-right: 10px; color: #ffcc00;"></i> shanzones1313@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024-2026 ShanZone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function validateAndSend() {
+            var name = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+            var msg = document.getElementById('message').value;
+            if(name == "" || phone == "" || msg == "") {
+                alert("Please fill all fields!");
+                return;
+            }
+            var url = "https://wa.me/916391224488?text=*Inquiry*%0a*Name:* "+name+"%0a*Phone:* "+phone+"%0a*Message:* "+msg;
+            window.open(url, '_blank').focus();
+        }
+
+        function sendToWhatsapp(planName) {
+            var url = "https://wa.me/916391224488?text=I am interested in " + planName;
+            window.open(url, '_blank').focus();
+        }
+    </script>
+</body>
+</html>
