@@ -85,7 +85,7 @@
             padding: 50px; 
             border-radius: 30px; 
             box-shadow: 0 20px 60px rgba(0,0,0,0.05); 
-            align-items: center; /* Vertical alignment fixed */
+            align-items: center; 
         }
         .contact-info { flex: 1; min-width: 300px; }
         .contact-form-box { flex: 1.2; min-width: 300px; }
@@ -107,7 +107,7 @@
         .form-section-title { background: var(--primary); color: white; padding: 8px 15px; font-weight: bold; margin: 20px 0 10px; border-radius: 5px; font-size: 14px; }
         .data-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
         .input-item label { display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 3px; }
-        .input-item input, .input-item select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; }
+        .input-item input, .input-item select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; height: 38px; }
         
         .terms-box { font-size: 11px; line-height: 1.4; border: 1px solid #eee; padding: 10px; background: #fafafa; border-radius: 5px; max-height: 250px; overflow-y: auto; }
         .declaration-section { margin-top: 15px; font-size: 13px; background: #fff8e1; padding: 10px; border-radius: 5px; border-left: 5px solid #ffc107; }
@@ -120,10 +120,10 @@
         .btn-p.print { background: #27ae60; }
         .btn-p.reset { background: #e74c3c; }
 
-        /* PRINT SETTINGS - Fixed 'Q' issue and button visibility */
+        /* PRINT SETTINGS */
         @media print {
             body { background: white; -webkit-print-color-adjust: exact; }
-            header, .news-bar, .action-btns, .btn-change-photo, .btn-quote, .btn-submit, footer, .fas, .fab { 
+            header, .news-bar, .action-btns, .btn-change-photo, .btn-quote, .btn-submit, footer, i, .fab, .fas { 
                 display: none !important; 
             }
             #landing-page { display: none !important; }
@@ -169,21 +169,21 @@
             <h2>Our Fiber Plans</h2>
             <div class="price-grid">
                 <div class="price-card">
-                    <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹599</span></div></div>
+                    <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹499</span></div></div>
                     <div class="card-body">
-                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
+                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
                         <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Choose Plan</button>
                     </div>
                 </div>
                 <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
-                    <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹799</span></div></div>
+                    <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹699</span></div></div>
                     <div class="card-body">
-                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming</li></ul>
+                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 80 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming</li></ul>
                         <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Choose Plan</button>
                     </div>
                 </div>
                 <div class="price-card">
-                    <div class="card-header ultimate"><h3>ULTIMATE</h3><div class="plan-price"><span>₹1150</span></div></div>
+                    <div class="card-header ultimate"><h3>ULTIMATE</h3><div class="plan-price"><span>₹899</span></div></div>
                     <div class="card-body">
                         <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Low Latency</li></ul>
                         <button onclick="sendToWhatsapp('Ultimate Plan')" class="btn-quote" style="width:100%; background: var(--ultimate-color);">Choose Plan</button>
@@ -198,7 +198,7 @@
                     <h2>Contact Us</h2>
                     <p>Maharajganj's leading fiber network.</p>
                     <p><i class="fas fa-phone-alt"></i> +91 6391 2244 88</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Partawal Bazar, Maharajganj, UP, 273301</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Partawal Bazar, Maharajganj, UP</p>
                 </div>
                 <div class="contact-form-box">
                     <form id="contactForm">
@@ -226,7 +226,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <a href="#contact" onclick="showHome()">Contact Us</a>
-                    <p>Partawal Bazar, Maharajganj, UP. 273301</p>
+                    <p>Partawal Bazar, Maharajganj</p>
                     <p>Phone: 6391224488</p>
                 </div>
             </div>
@@ -257,14 +257,18 @@
 
             <form id="mainServiceForm">
                 <div class="data-row">
-                    <div class="input-item"><label>तारीख (Date):</label><input type="date"></div>
+                    <div class="input-item">
+                        <label>तारीख (Date):</label>
+                        <input type="text" id="formattedDate" placeholder="DD-MMM-YYYY" readonly onclick="document.getElementById('datePicker').showPicker()" style="cursor:pointer; background: #fff;">
+                        <input type="date" id="datePicker" style="position:absolute; visibility:hidden;" onchange="updateDateDisplay(this)">
+                    </div>
                     <div class="input-item"><label>कस्टमर आईडी (ID):</label><input type="text" placeholder="For Office Use"></div>
                 </div>
 
                 <div class="form-section-title">1. ग्राहक का विवरण (Customer Details)</div>
                 <div class="data-row">
-                    <div class="input-item" style="grid-column: span 2;"><label>नाम (Full Name):</label><input type="text"></div>
-                    <div class="input-item" style="grid-column: span 2;"><label>पिता का नाम (Father's Name):</label><input type="text"></div>
+                    <div class="input-item"><label>नाम (Full Name):</label><input type="text"></div>
+                    <div class="input-item"><label>पिता का नाम (Father's Name):</label><input type="text"></div>
                     <div class="input-item" style="grid-column: span 2;"><label>पूरा पता (Full Address):</label><input type="text"></div>
                     <div class="input-item"><label>मोबाइल नंबर:</label><input type="tel"></div>
                     <div class="input-item"><label>आधार नंबर (Aadhaar No):</label><input type="text"></div>
@@ -274,15 +278,15 @@
                 <div class="data-row">
                     <div class="input-item">
                         <label>प्लान का नाम:</label>
-                        <select>
+                        <select id="planSelector" onchange="autoFillPlan()">
                             <option value="">--चुनें (Select)--</option>
-                            <option value="LITE PLAN">LITE PLAN</option>
-                            <option value="PRO PLAN">PRO PLAN</option>
-                            <option value="BOST PLAN">BOST PLAN</option>
+                            <option value="LITE">LITE PLAN</option>
+                            <option value="PRO">PRO PLAN</option>
+                            <option value="BOST">BOST PLAN</option>
                         </select>
                     </div>
-                    <div class="input-item"><label>स्पीड (Mbps):</label><input type="text"></div>
-                    <div class="input-item"><label>मासिक शुल्क (Bill): ₹</label><input type="number"></div>
+                    <div class="input-item"><label>स्पीड (Mbps):</label><input type="text" id="speedDisplay"></div>
+                    <div class="input-item"><label>मासिक शुल्क (Bill): ₹</label><input type="number" id="priceDisplay"></div>
                     <div class="input-item"><label>इंस्टालेशन शुल्क: ₹</label><input type="number"></div>
                 </div>
 
@@ -327,6 +331,7 @@
     </div>
 
     <script>
+        // Form & Page Navigation
         function showForm() {
             document.getElementById('landing-page').style.display = 'none';
             document.getElementById('service-form-page').style.display = 'block';
@@ -336,6 +341,39 @@
             document.getElementById('landing-page').style.display = 'block';
             document.getElementById('service-form-page').style.display = 'none';
         }
+
+        // Auto Fill Plans (Lite, Pro, Bost)
+        function autoFillPlan() {
+            const plan = document.getElementById('planSelector').value;
+            const speed = document.getElementById('speedDisplay');
+            const price = document.getElementById('priceDisplay');
+
+            if (plan === "LITE") {
+                speed.value = "30 Mbps";
+                price.value = "599";
+            } else if (plan === "PRO") {
+                speed.value = "50 Mbps";
+            } else if (plan === "BOST") {
+                speed.value = "100 Mbps";
+                price.value = "1150";
+            } else {
+                speed.value = "";
+                price.value = "";
+            }
+        }
+
+        // Custom Date Format (JAN, FEB, MAR...)
+        function updateDateDisplay(input) {
+            if (!input.value) return;
+            const dateObj = new Date(input.value);
+            const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const month = months[dateObj.getMonth()];
+            const year = dateObj.getFullYear();
+            document.getElementById('formattedDate').value = `${day}-${month}-${year}`;
+        }
+
+        // Photo Preview
         function previewImg(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -346,6 +384,8 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        // Print & Reset
         function doPrint() {
             if(!document.getElementById('agreeCheck').checked) {
                 alert("कृपया 'Declaration' (घोषणा) पर टिक करें!");
@@ -357,8 +397,11 @@
             if(confirm("Kya aap pura form khali karna chahte hain?")) {
                 document.getElementById('mainServiceForm').reset();
                 document.getElementById('photoFrame').innerHTML = '<span style="color:#999; font-size:12px;">PHOTO</span>';
+                document.getElementById('formattedDate').value = "";
             }
         }
+
+        // External Functions
         function handleContact() {
             var n = document.getElementById('cname').value;
             var p = document.getElementById('cphone').value;
