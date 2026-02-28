@@ -28,16 +28,44 @@
         
         .plans-section { padding: 60px 5%; background: var(--light-bg); text-align: center; }
         .plans-container { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
-        .plan-card { background: white; border-radius: 15px; width: 300px; padding: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
+        
+        /* Fixed & Aligned Plan Cards */
+        .plan-card { 
+            background: white; 
+            border-radius: 15px; 
+            width: 300px; 
+            padding: 30px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
+            border: 1px solid #eee; 
+            transition: 0.3s; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers all content inside the card */
+        }
         .plan-card:hover { transform: translateY(-10px); border-color: var(--secondary-blue); }
         
+        .price { font-size: 28px; font-weight: bold; color: var(--primary-blue); margin: 15px 0; }
+        .price span { font-size: 14px; color: #666; }
+
+        .features { 
+            list-style: none; 
+            padding: 0; 
+            margin: 20px 0; 
+            text-align: left; /* Keeps text aligned but icons consistent */
+            width: 100%;
+            max-width: 200px;
+        }
+        .features li { margin-bottom: 12px; font-size: 16px; display: flex; align-items: center; }
+        .features li i { color: #25D366; margin-right: 12px; font-size: 18px; }
+
         .gallery-img { width: 280px; height: 200px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; }
         .gallery-img:hover { transform: scale(1.05); }
 
         .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; }
         .form-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
 
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; }
+        .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
 
         /* Floating Chatbot Style */
         .chatbot-btn { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; transition: 0.3s; }
@@ -48,11 +76,6 @@
         .footer-col { flex: 1 1 250px; }
         .footer-col h3 { font-size: 20px; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
         .footer-col h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 2px; background: white; }
-        .footer-col p { font-size: 14px; opacity: 0.9; }
-        .footer-links { list-style: none; padding: 0; }
-        .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: white; text-decoration: none; font-size: 14px; opacity: 0.8; transition: 0.3s; }
-        .footer-links a:hover { opacity: 1; padding-left: 5px; }
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
         .social-icons a { color: white; font-size: 20px; opacity: 0.8; transition: 0.3s; }
         .social-icons a:hover { opacity: 1; transform: translateY(-3px); }
@@ -100,9 +123,9 @@
                 <h3>Standard Plan</h3>
                 <div class="price">₹599<span>/Month</span></div>
                 <ul class="features">
-                    <li><i class="fa fa-check"></i> Speed upto 30 Mbps</li>
-                    <li><i class="fa fa-check"></i> Unlimited Data</li>
-                    <li><i class="fa fa-check"></i> Fast Browsing</li>
+                    <li><i class="fa fa-check-circle"></i> Speed upto 30 Mbps</li>
+                    <li><i class="fa fa-check-circle"></i> Unlimited Data</li>
+                    <li><i class="fa fa-check-circle"></i> Fast Browsing</li>
                 </ul>
                 <a href="https://wa.me/916391224488?text=I%20am%20interested%20in%20599%20Plan" class="btn-whatsapp">Buy Now</a>
             </div>
@@ -110,9 +133,9 @@
                 <h3>Speed Master</h3>
                 <div class="price">₹799<span>/Month</span></div>
                 <ul class="features">
-                    <li><i class="fa fa-check"></i> Speed upto 50 Mbps</li>
-                    <li><i class="fa fa-check"></i> Unlimited Data</li>
-                    <li><i class="fa fa-check"></i> Fast Browsing</li>
+                    <li><i class="fa fa-check-circle"></i> Speed upto 50 Mbps</li>
+                    <li><i class="fa fa-check-circle"></i> Unlimited Data</li>
+                    <li><i class="fa fa-check-circle"></i> Fast Browsing</li>
                 </ul>
                 <a href="https://wa.me/916391224488?text=I%20am%20interested%20in%20799%20Plan" class="btn-whatsapp">Most Popular</a>
             </div>
