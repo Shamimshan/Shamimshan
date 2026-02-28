@@ -29,44 +29,31 @@
         .plans-container { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
         
         .plan-card { 
-            background: white; 
-            border-radius: 15px; 
-            width: 300px; 
-            padding: 30px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
-            border: 1px solid #eee; 
-            transition: 0.3s; 
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
+            background: white; border-radius: 15px; width: 300px; padding: 30px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; 
+            transition: 0.3s; display: flex; flex-direction: column; align-items: center; 
         }
         .plan-card:hover { transform: translateY(-10px); border-color: var(--secondary-blue); }
         
         .price { font-size: 28px; font-weight: bold; color: var(--primary-blue); margin: 15px 0; }
         .price span { font-size: 14px; color: #666; }
 
-        .features { 
-            list-style: none; padding: 0; margin: 20px 0; text-align: left; width: 100%; max-width: 200px;
-        }
+        .features { list-style: none; padding: 0; margin: 20px 0; text-align: left; width: 100%; max-width: 200px; }
         .features li { margin-bottom: 12px; font-size: 16px; display: flex; align-items: center; }
         .features li i { color: #25D366; margin-right: 12px; font-size: 18px; }
 
         .gallery-img { width: 280px; height: 200px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; }
         .gallery-img:hover { transform: scale(1.05); }
 
-        /* --- Premium Contact Form --- */
         .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left; border-top: 5px solid var(--primary-blue); }
-        .contact-form label { font-weight: bold; color: #555; display: block; margin-top: 15px; }
-        .form-input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        .form-input:focus { border-color: var(--secondary-blue); outline: none; background: #f0f7ff; }
+        .form-input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; }
 
-        .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; text-align: center; }
-        .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
+        .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
 
         .chatbot-btn { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; transition: 0.3s; }
-        .chatbot-btn:hover { transform: scale(1.1) rotate(10deg); }
 
-        /* --- Premium Footer --- */
+        /* --- Updated Footer Styling --- */
         .main-footer { background-color: var(--dark-footer); color: white; padding: 60px 5% 20px; }
         .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; }
         .footer-col { flex: 1 1 250px; }
@@ -80,12 +67,10 @@
 
         .social-icons { display: flex; gap: 15px; margin-top: 20px; }
         .social-icons a { 
-            background: rgba(255,255,255,0.1); width: 40px; height: 40px; display: flex; align-items: center; 
-            justify-content: center; border-radius: 50%; color: white; text-decoration: none; transition: 0.4s; 
+            background: rgba(255,255,255,0.1); width: 45px; height: 45px; display: flex; align-items: center; 
+            justify-content: center; border-radius: 50%; color: white; text-decoration: none; transition: 0.4s; font-size: 20px;
         }
-        .social-icons a:hover { 
-            background: var(--secondary-blue); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
-        }
+        .social-icons a:hover { background: var(--secondary-blue); transform: translateY(-5px); }
         
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; margin-top: 40px; padding-top: 20px; font-size: 13px; opacity: 0.7; }
     </style>
@@ -100,7 +85,7 @@
         </marquee>
     </div>
 
-    <header>
+    <header id="home">
         <div class="logo-box"><img src="logo.jpg" alt="Shan Zone Logo"></div>
         <a href="tel:6391224488" class="btn-whatsapp" style="padding: 10px 20px; font-size: 14px;"><i class="fa fa-phone"></i> Call Now</a>
     </header>
@@ -115,7 +100,7 @@
         <a href="https://wa.me/916391224488" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Get New Connection</a>
     </section>
 
-    <section style="padding: 60px 5%; text-align: center; background: white;">
+    <section id="services" style="padding: 60px 5%; text-align: center; background: white;">
         <h2 style="color: var(--primary-blue);">Our Latest Work & Installations</h2>
         <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px;">
             <img src="work1.jpg" alt="Installation 1" class="gallery-img"> 
@@ -124,7 +109,7 @@
         </div>
     </section>
 
-    <section class="plans-section">
+    <section id="plans" class="plans-section">
         <h2>Best Value Monthly Plans</h2>
         <div class="plans-container">
             <div class="plan-card">
@@ -150,18 +135,14 @@
         </div>
     </section>
 
-    <section style="padding: 80px 5%; background: #eef2f7; text-align: center;">
+    <section id="contact" style="padding: 80px 5%; background: #eef2f7; text-align: center;">
         <div class="contact-form">
-            <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 10px;">Send us a Message</h2>
-            <p style="text-align: center; color: #777; margin-bottom: 25px;">Naya connection chahiye? Hamein bataein!</p>
+            <h2 style="color: var(--primary-blue); text-align: center;">Send us a Message</h2>
             <form action="https://formspree.io/f/mqaebrda" method="POST">
-                <label>Pura Naam:</label>
-                <input type="text" name="name" class="form-input" placeholder="Enter your name" required>
-                <label>Mobile Number:</label>
-                <input type="tel" name="phone" class="form-input" placeholder="Ex: +91 0000000000" required>
-                <label>Aapka Sawal ya Address:</label>
-                <textarea name="message" class="form-input" style="height: 100px;" placeholder="Write your message here..." required></textarea>
-                <button type="submit" class="btn-whatsapp" style="width: 100%; border-radius: 8px; margin-top: 10px;">Submit Message</button>
+                <input type="text" name="name" class="form-input" placeholder="Pura Naam" required>
+                <input type="tel" name="phone" class="form-input" placeholder="Mobile Number" required>
+                <textarea name="message" class="form-input" style="height: 100px;" placeholder="Aapka Sawal ya Address" required></textarea>
+                <button type="submit" class="btn-whatsapp" style="width: 100%; border-radius: 8px;">Submit Message</button>
             </form>
         </div>
     </section>
@@ -169,14 +150,14 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-col">
-                <h3 style="border:none; padding:0; margin-bottom:15px;">
+                <h3 style="border:none; padding:0;">
                     <img src="logo.jpg" alt="Shan Zone Logo" style="height: 50px; background: white; padding: 5px; border-radius: 5px;">
                 </h3>
-                <p>Maharajganj's Leading Fiber Network. Ham aapko dete hain sabse tez aur bharosemand internet connection, hamesha.</p>
+                <p>Maharajganj's Leading Fiber Network. Ham aapko dete hain sabse tez aur bharosemand internet connection.</p>
+                
                 <div class="social-icons">
-                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://facebook.com/your-page" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/your-profile" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://wa.me/916391224488" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
@@ -184,10 +165,10 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Our Services</a></li>
-                    <li><a href="#">Monthly Plans</a></li>
-                    <li><a href="#">New Connection</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#plans">Monthly Plans</a></li>
+                    <li><a href="#contact">New Connection</a></li>
                 </ul>
             </div>
 
