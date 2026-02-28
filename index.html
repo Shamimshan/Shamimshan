@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary-blue: #0047ab; --secondary-blue: #007bff; --light-bg: #f8f9fa; --dark-footer: #0a2e6e; }
+        :root { --primary-blue: #0047ab; --secondary-blue: #007bff; --light-bg: #f8f9fa; --dark-footer: #0a2e6e; --whatsapp-green: #2ecc71; }
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; scroll-behavior: smooth; }
         
         /* News Bar */
@@ -18,19 +18,40 @@
         
         .hero { background: linear-gradient(rgba(0, 71, 171, 0.8), rgba(0, 123, 255, 0.8)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; color: white; padding: 100px 20px; text-align: center; }
         
+        /* Premium Plans Styling */
         .plans-section { padding: 60px 5%; background: var(--light-bg); text-align: center; }
-        .plans-container { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
+        .plans-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
         
-        .plan-card { background: white; border-radius: 15px; width: 300px; padding: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
-        .plan-card:hover { transform: translateY(-10px); border-color: var(--secondary-blue); }
-        .price { font-size: 28px; font-weight: bold; color: var(--primary-blue); margin: 15px 0; }
+        .plan-card { 
+            background: white; border-radius: 20px; width: 320px; padding: 40px 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #f0f0f0; 
+            transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; 
+        }
+        .plan-card:hover { transform: translateY(-15px); box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
+        
+        .plan-card h3 { font-size: 22px; color: #333; margin-bottom: 10px; font-weight: 700; }
+        .plan-price { font-size: 32px; font-weight: 800; color: var(--secondary-blue); margin: 15px 0; }
+        .plan-price span { font-size: 16px; color: #666; font-weight: normal; }
 
+        .plan-features { list-style: none; padding: 0; margin: 20px 0 30px 0; text-align: center; width: 100%; }
+        .plan-features li { margin: 12px 0; color: #555; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+        .plan-features li i { color: #333; margin-right: 8px; font-size: 14px; }
+
+        .btn-plan { 
+            background: linear-gradient(to right, #2ecc71, #27ae60); 
+            color: white; padding: 14px 40px; text-decoration: none; 
+            border-radius: 50px; font-weight: 700; font-size: 18px; 
+            border: none; cursor: pointer; transition: 0.3s; width: 80%;
+        }
+        .btn-plan:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4); }
+
+        /* Form Styling */
         .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: left; border-top: 5px solid var(--primary-blue); }
         .form-input { width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
         .form-input:focus { border-color: var(--secondary-blue); outline: none; background: #f0f7ff; }
 
         .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; text-align: center; }
-        .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
+        .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
 
         .main-footer { background-color: var(--dark-footer); color: white; padding: 60px 5% 20px; }
         .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; }
@@ -64,27 +85,28 @@
     </section>
 
     <section id="plans" class="plans-section">
-        <h2>Best Value Monthly Plans</h2>
+        <h2 style="font-size: 32px; margin-bottom: 10px;">Best Value Monthly Plans</h2>
         <div class="plans-container">
             <div class="plan-card">
                 <h3>Standard Plan</h3>
-                <div class="price">₹599<span>/Month</span></div>
-                <ul style="list-style:none; padding:0; text-align:left;">
-                    <li>✔ Speed upto 30 Mbps</li>
-                    <li>✔ Unlimited Data</li>
-                    <li>✔ Fast Browsing</li>
+                <div class="plan-price">₹599<span>/Month</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Speed upto 30 Mbps</li>
+                    <li><i class="fas fa-check"></i> Unlimited Data</li>
+                    <li><i class="fas fa-check"></i> Fast Browsing</li>
                 </ul>
-                <button onclick="sendToWhatsapp('Standard Plan - 599')" class="btn-whatsapp" style="margin-top:15px;">Buy Now</button>
+                <button onclick="sendToWhatsapp('Standard Plan - 599')" class="btn-plan">Buy Now</button>
             </div>
+
             <div class="plan-card">
                 <h3>Speed Master</h3>
-                <div class="price">₹799<span>/Month</span></div>
-                <ul style="list-style:none; padding:0; text-align:left;">
-                    <li>✔ Speed upto 50 Mbps</li>
-                    <li>✔ Unlimited Data</li>
-                    <li>✔ Fast Browsing</li>
+                <div class="plan-price">₹799<span>/Month</span></div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i> Speed upto 50 Mbps</li>
+                    <li><i class="fas fa-check"></i> Unlimited Data</li>
+                    <li><i class="fas fa-check"></i> Fast Browsing</li>
                 </ul>
-                <button onclick="sendToWhatsapp('Speed Master - 799')" class="btn-whatsapp" style="margin-top:15px;">Most Popular</button>
+                <button onclick="sendToWhatsapp('Speed Master - 799')" class="btn-plan">Most Popular</button>
             </div>
         </div>
     </section>
