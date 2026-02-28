@@ -3,240 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shan Zone | Maharajganj's #1 Broadband</title>
+    <title>Shan Zone | Maharajganj #1 Fiber</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #0047ab; /* Deep Blue */
-            --accent: #ff5e14;  /* Netfee Orange */
-            --dark: #0a1128;
-            --light: #f4f7fa;
-        }
+        :root { --primary-blue: #0056b3; --accent-red: #ff0000; --dark: #111; --light-gray: #f8f9fa; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: #fff; }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; color: #333; scroll-behavior: smooth; }
-
-        /* Top Bar */
-        .top-bar { background: var(--dark); color: white; padding: 10px 5%; display: flex; justify-content: space-between; font-size: 13px; }
-        .top-bar a { color: white; text-decoration: none; margin-left: 15px; }
-
-        /* Navigation */
-        header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        /* Top Header */
+        .news-bar { background: #ffcc00; color: #000; padding: 10px; text-align: center; font-weight: bold; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); sticky; top: 0; z-index: 1000; }
         .logo img { height: 50px; }
-        nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; }
-        .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; }
+        .btn-quote { background: var(--accent-red); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
 
-        /* Hero Section (Netfee Style) */
-        .hero { 
-            background: linear-gradient(45deg, rgba(10,17,40,0.9), rgba(10,17,40,0.6)), url('hero-bg.jpg'); 
-            background-size: cover; background-position: center;
-            height: 70vh; display: flex; align-items: center; color: white; padding: 0 5%;
-        }
-        .hero-content { max-width: 650px; }
-        .hero-content h1 { font-size: 48px; margin-bottom: 20px; line-height: 1.2; }
-        .hero-content span { color: var(--accent); }
-        .hero-content p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        /* Pricing Section Style */
+        .pricing-section { padding: 80px 5%; text-align: center; background: #fdfdfd; }
+        .pricing-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
 
-        /* Service Cards */
-        .services { padding: 80px 5%; background: var(--light); text-align: center; }
-        .section-title { margin-bottom: 50px; }
-        .section-title h2 { color: var(--primary); font-size: 36px; }
-        .section-title div { width: 60px; height: 3px; background: var(--accent); margin: 10px auto; }
-
-        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .service-card { background: white; padding: 40px; border-radius: 10px; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .service-card:hover { transform: translateY(-10px); background: var(--primary); color: white; }
-        .service-card i { font-size: 45px; color: var(--accent); margin-bottom: 20px; }
-        .service-card:hover i { color: white; }
-
-        /* Pricing Table */
-        .pricing { padding: 80px 5%; text-align: center; background: white; }
-        .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
         .price-card { 
-            background: white; border: 1px solid #eee; padding: 40px; border-radius: 10px; width: 300px; 
-            position: relative; overflow: hidden; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            background: white; width: 320px; border-radius: 10px; overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left; position: relative;
         }
-        .price-card.popular { border: 2px solid var(--accent); transform: scale(1.05); }
-        .price-card h4 { font-size: 24px; color: var(--dark); }
-        .price-amount { font-size: 45px; font-weight: 800; color: var(--primary); margin: 20px 0; }
-        .price-features { list-style: none; padding: 0; margin-bottom: 30px; text-align: left; }
-        .price-features li { padding: 10px 0; border-bottom: 1px solid #eee; }
-        .price-features i { color: var(--accent); margin-right: 10px; }
 
-        /* Gallery Zoom */
-        .gallery-section { padding: 80px 5%; text-align: center; background: var(--light); }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .gallery-item { cursor: zoom-in; overflow: hidden; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .gallery-item img { width: 100%; height: 200px; object-fit: cover; transition: 0.3s; display: block; }
-        .gallery-item:hover img { transform: scale(1.1); }
+        /* Top Colored Header of Card */
+        .card-header { padding: 30px 25px; color: white; position: relative; border-radius: 0 0 50% 0 / 0 0 20% 0; }
+        .card-header.blue { background: #0066ff; }
+        .card-header.red { background: #ff1a1a; }
+        
+        .plan-name { font-size: 24px; font-weight: bold; margin: 0; }
+        .plan-type { font-size: 12px; text-transform: uppercase; opacity: 0.9; }
+        .plan-price { position: absolute; top: 30px; right: 25px; text-align: right; }
+        .plan-price span { font-size: 32px; font-weight: 800; display: block; }
+        .plan-price small { font-size: 12px; }
 
-        /* Contact Us Section */
-        .contact-section { padding: 80px 5%; background: white; }
-        .contact-container { display: flex; flex-wrap: wrap; gap: 50px; max-width: 1100px; margin: 0 auto; }
-        .contact-info { flex: 1; min-width: 300px; }
-        .contact-form-box { flex: 1.5; min-width: 300px; background: var(--light); padding: 40px; border-radius: 15px; }
+        /* Card Content */
+        .card-body { padding: 40px 25px 30px; text-align: center; }
+        .card-body p { color: #666; font-size: 14px; margin-bottom: 25px; }
+        
+        .icon-circle { 
+            width: 60px; height: 60px; background: white; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            margin: -60px auto 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .icon-circle i { font-size: 25px; color: #333; }
+
+        .feature-list { list-style: none; padding: 0; text-align: left; margin-bottom: 30px; }
+        .feature-list li { margin-bottom: 12px; font-size: 15px; color: #444; }
+        .feature-list li i { color: var(--accent-red); margin-right: 10px; }
+
+        /* Gallery Section */
+        .gallery-section { padding: 60px 5%; text-align: center; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .gallery-item img { width: 100%; border-radius: 10px; cursor: zoom-in; }
+
+        /* Contact Section */
+        .contact-section { padding: 80px 5%; background: var(--light-gray); }
+        .contact-container { max-width: 900px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         .form-group { margin-bottom: 20px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
-        .btn-submit { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 18px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn-send { background: var(--accent-red); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
 
-        /* Lightbox Modal */
-        .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
-        .modal-content { max-width: 85%; max-height: 80%; border: 4px solid white; }
-        .close-modal { position: absolute; top: 20px; right: 40px; color: white; font-size: 50px; cursor: pointer; }
-
-        /* Footer */
-        footer { background: var(--dark); color: white; padding: 60px 5% 20px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
-        .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
-        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
-
-        @media (max-width: 768px) { .hero-content h1 { font-size: 32px; } .top-bar { display: none; } }
+        footer { background: #0a1128; color: white; padding: 40px 5%; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div><i class="fas fa-envelope"></i> shanzone1313@gmail.com | <i class="fas fa-map-marker-alt"></i> Partawal, Maharajganj</div>
-        <div>
-            <a href="https://facebook.com/shanzone13" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://instagram.com/shanzone13" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
+    <div class="news-bar">
+        🌙 رمضان मुबारक 🌙 &nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!
     </div>
 
     <header>
-        <div class="logo"><img src="logo.jpg" alt="Shan Zone"></div>
-        <nav>
-            <a href="#home">Home</a>
+        <div class="logo"><img src="logo.jpg"></div>
+        <nav class="nav-links">
             <a href="#plans">Plans</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
+            <a href="#contact">Contact Us</a>
         </nav>
-        <a href="tel:6391224488" class="btn-quote">Call Now</a>
+        <a href="tel:6391224488" class="btn-quote">Get a Quote</a>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h3 style="color: var(--accent); text-transform: uppercase; letter-spacing: 2px;">Shan Zone Broadband</h3>
-            <h1>Be connected with <span>Shan Zone</span> High-Speed Fiber.</h1>
-            <p>परतावल का सबसे भरोसेमंद इंटरनेट पार्टनर। अब पाएँ बिना किसी रुकावट के अल्ट्रा-फास्ट स्पीड।</p>
-            <a href="https://wa.me/916391224488" class="btn-quote" style="padding: 18px 40px; font-size: 18px; border-radius: 50px;">नया कनेक्शन लें</a>
-        </div>
-    </section>
-
-    <section id="plans" class="pricing">
-        <div class="section-title">
-            <h2>Our Internet Plans</h2>
-            <div></div>
-        </div>
-        <div class="price-grid">
+    <section id="plans" class="pricing-section">
+        <h2>Choose Your Best Plan</h2>
+        <div class="pricing-grid">
+            
             <div class="price-card">
-                <h4>Starter</h4>
-                <div class="price-amount">₹599<span>/Mo</span></div>
-                <ul class="price-features">
-                    <li><i class="fas fa-check"></i> 30 Mbps Speed</li>
-                    <li><i class="fas fa-check"></i> Unlimited Data</li>
-                    <li><i class="fas fa-check"></i> 24/7 Support</li>
-                </ul>
-                <button onclick="sendToWhatsapp('599 Plan')" class="btn-quote" style="border:none; cursor:pointer; width:100%;">Buy Now</button>
+                <div class="card-header blue">
+                    <p class="plan-type">Internet</p>
+                    <h4 class="plan-name">Lite Plan</h4>
+                    <div class="plan-price">
+                        <span>₹499</span>
+                        <small>PER MONTH</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="icon-circle"><i class="fas fa-globe"></i></div>
+                    <p>Best for small families and basic browsing needs.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Internet with 30Mbps</li>
+                        <li><i class="fas fa-check"></i> Unlimited Data</li>
+                        <li><i class="fas fa-check"></i> Fiber Optic Internet</li>
+                    </ul>
+                    <a href="https://wa.me/916391224488" class="btn-quote" style="display:block;">Buy Now</a>
+                </div>
             </div>
-            <div class="price-card popular">
-                <div style="background:var(--accent); color:white; position:absolute; top:10px; right:-30px; transform:rotate(45deg); padding:5px 40px; font-size:12px;">BEST</div>
-                <h4>Standard</h4>
-                <div class="price-amount">₹799<span>/Mo</span></div>
-                <ul class="price-features">
-                    <li><i class="fas fa-check"></i> 50 Mbps Speed</li>
-                    <li><i class="fas fa-check"></i> Unlimited Data</li>
-                    <li><i class="fas fa-check"></i> Free Installation</li>
-                </ul>
-                <button onclick="sendToWhatsapp('799 Plan')" class="btn-quote" style="border:none; cursor:pointer; width:100%;">Buy Now</button>
+
+            <div class="price-card">
+                <div class="card-header red">
+                    <p class="plan-type">Internet + TV</p>
+                    <h4 class="plan-name">Pro Plan</h4>
+                    <div class="plan-price">
+                        <span>₹799</span>
+                        <small>PER MONTH</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="icon-circle"><i class="fas fa-tv"></i></div>
+                    <p>Ultimate speed for streaming and multiple devices.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Internet with 80Mbps</li>
+                        <li><i class="fas fa-check"></i> Technical Support</li>
+                        <li><i class="fas fa-check"></i> Fiber Optic Internet</li>
+                    </ul>
+                    <a href="https://wa.me/916391224488" class="btn-quote" style="display:block; background: #333;">Most Popular</a>
+                </div>
             </div>
-            <div class="price-card popular">
-                <div style="background:var(--accent); color:white; position:absolute; top:10px; right:-30px; transform:rotate(45deg); padding:5px 40px; font-size:12px;">BEST</div>
-                <h4>Standard</h4>
-                <div class="price-amount">₹1199<span>/Mo</span></div>
-                <ul class="price-features">
-                    <li><i class="fas fa-check"></i> 100 Mbps Speed</li>
-                    <li><i class="fas fa-check"></i> Unlimited Data</li>
-                    <li><i class="fas fa-check"></i> Free Installation</li>
-                </ul>
-                <button onclick="sendToWhatsapp('1199 Plan')" class="btn-quote" style="border:none; cursor:pointer; width:100%;">Buy Now</button>
-            </div>
-            </div>
+
         </div>
     </section>
 
-    <section id="gallery" class="gallery-section">
-        <div class="section-title">
-            <h2>Work Gallery</h2>
-            <div></div>
-        </div>
+    <section class="gallery-section">
+        <h3>Our Latest Work</h3>
         <div class="gallery-grid">
-            <div class="gallery-item" onclick="openModal('work1.jpg')"><img src="work1.jpg"></div>
-            <div class="gallery-item" onclick="openModal('work2.jpg')"><img src="work2.jpg"></div>
-            <div class="gallery-item" onclick="openModal('work3.jpg')"><img src="work3.jpg"></div>
+            <div class="gallery-item"><img src="work1.jpg"></div>
+            <div class="gallery-item"><img src="work2.jpg"></div>
+            <div class="gallery-item"><img src="work3.jpg"></div>
         </div>
     </section>
 
     <section id="contact" class="contact-section">
-        <div class="section-title">
-            <h2>Contact Us</h2>
-            <div></div>
-        </div>
         <div class="contact-container">
-            <div class="contact-info">
-                <h3>Get In Touch</h3>
-                <p>नया कनेक्शन लगवाने या किसी भी सहायता के लिए हमें संपर्क करें।</p>
-                <div style="margin-top:30px;">
-                    <p><i class="fas fa-phone-alt" style="color:var(--accent); margin-right:15px;"></i> +91 6391 2244 88, 9984 3899 23</p>
-                    <p><i class="fas fa-envelope" style="color:var(--accent); margin-right:15px;"></i> shanzone1313@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt" style="color:var(--accent); margin-right:15px;"></i> Partawal, Maharajganj, UP, 273301</p>
-                </div>
-            </div>
-            <div class="contact-form-box">
-                <form id="contactForm">
-                    <div class="form-group"><input type="text" id="cname" placeholder="आपका नाम" required></div>
-                    <div class="form-group"><input type="tel" id="cphone" placeholder="मोबाइल नंबर" required></div>
-                    <div class="form-group"><textarea id="cmessage" rows="4" placeholder="आपका सवाल या पता (Address)" required></textarea></div>
-                    <button type="button" onclick="handleContact()" class="btn-submit">मैसेज भेजें (WhatsApp)</button>
-                </form>
-            </div>
+            <h2 style="text-align:center;">Contact Us</h2>
+            <form id="waForm">
+                <div class="form-group"><input type="text" id="name" placeholder="आपका नाम" required></div>
+                <div class="form-group"><input type="tel" id="phone" placeholder="मोबाइल नंबर" required></div>
+                <div class="form-group"><textarea id="msg" rows="4" placeholder="आपका पता या सवाल" required></textarea></div>
+                <button type="button" onclick="sendWA()" class="btn-send">Send Message (WhatsApp)</button>
+            </form>
         </div>
     </section>
 
-    <div id="imageModal" class="modal">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="imgFull">
-    </div>
-
     <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <img src="logo.jpg" style="height:50px; background:white; padding:5px; border-radius:5px; margin-bottom:20px;">
-                <p>परतावल का नंबर 1 फाइबर नेटवर्क। हम आपको देते हैं सबसे तेज़ और भरोसेमंद इंटरनेट सेवा।</p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="#home" style="color:white; text-decoration:none; display:block; margin-bottom:10px;">Home</a>
-                <a href="#plans" style="color:white; text-decoration:none; display:block; margin-bottom:10px;">Plans</a>
-                <a href="#contact" style="color:white; text-decoration:none; display:block; margin-bottom:10px;">Contact</a>
-            </div>
-        </div>
-        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved.</div>
+        <p>&copy; 2026 Shan Zone Broadband Maharajganj.</p>
     </footer>
 
     <script>
-        function openModal(imgSrc) { document.getElementById('imageModal').style.display = "flex"; document.getElementById('imgFull').src = imgSrc; }
-        function closeModal() { document.getElementById('imageModal').style.display = "none"; }
-        
-        function handleContact() {
-            var n = document.getElementById('cname').value;
-            var p = document.getElementById('cphone').value;
-            var m = document.getElementById('cmessage').value;
-            if(!n || !p || !m) return alert("कृपया सभी जानकारी भरें!");
-            window.open("https://wa.me/916391224488?text=*New Connection Inquiry*%0aName: "+n+"%0aPhone: "+p+"%0aAddress/Msg: "+m);
-        }
-
-        function sendToWhatsapp(plan) {
-            window.open("https://wa.me/916391224488?text=नमस्ते Shan Zone, मुझे " + plan + " में रुचि है।");
+        function sendWA() {
+            var n = document.getElementById('name').value;
+            var p = document.getElementById('phone').value;
+            var m = document.getElementById('msg').value;
+            if(!n || !p || !m) return alert("Please fill all details!");
+            window.open("https://wa.me/916391224488?text=Name: "+n+"%0aPhone: "+p+"%0aMsg: "+m);
         }
     </script>
 </body>
