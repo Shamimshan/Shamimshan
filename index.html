@@ -8,11 +8,10 @@
     <meta name="description" content="Shan Zone Fiber: Maharajganj's #1 High-Speed Internet Provider. Enjoy Unlimited Data, 99.9% Uptime, and Ultra-Fast WiFi starting at just ₹599. Experience the future of connectivity with 24/7 expert support. Get your new connection today!">
     
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0a2e6e">
-    
-    <link rel="apple-touch-icon" href="favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -29,7 +28,6 @@
         .plans-section { padding: 60px 5%; background: var(--light-bg); text-align: center; }
         .plans-container { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
         
-        /* Fixed & Aligned Plan Cards */
         .plan-card { 
             background: white; 
             border-radius: 15px; 
@@ -40,7 +38,7 @@
             transition: 0.3s; 
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centers all content inside the card */
+            align-items: center; 
         }
         .plan-card:hover { transform: translateY(-10px); border-color: var(--secondary-blue); }
         
@@ -51,7 +49,7 @@
             list-style: none; 
             padding: 0; 
             margin: 20px 0; 
-            text-align: left; /* Keeps text aligned but icons consistent */
+            text-align: left; 
             width: 100%;
             max-width: 200px;
         }
@@ -67,18 +65,13 @@
         .btn-whatsapp { background: #25D366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; font-size: 18px; border: none; cursor: pointer; transition: 0.3s; }
         .btn-whatsapp:hover { background: #1ebe57; transform: scale(1.05); }
 
-        /* Floating Chatbot Style */
         .chatbot-btn { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; transition: 0.3s; }
-        .chatbot-btn:hover { transform: scale(1.1); }
 
         .main-footer { background-color: var(--dark-footer); color: white; padding: 60px 5% 20px; }
         .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; max-width: 1200px; margin: 0 auto; }
         .footer-col { flex: 1 1 250px; }
         .footer-col h3 { font-size: 20px; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
         .footer-col h3::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 2px; background: white; }
-        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
-        .social-icons a { color: white; font-size: 20px; opacity: 0.8; transition: 0.3s; }
-        .social-icons a:hover { opacity: 1; transform: translateY(-3px); }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; margin-top: 40px; padding-top: 20px; font-size: 13px; opacity: 0.7; }
     </style>
 </head>
@@ -110,10 +103,7 @@
     <section style="padding: 60px 5%; text-align: center; background: white;">
         <h2 style="color: var(--primary-blue);">Our Latest Work & Installations</h2>
         <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px;">
-            <img src="work1.jpg" alt="Installation" class="gallery-img">
-            <img src="work2.jpg" alt="Office" class="gallery-img">
-            <img src="work3.jpg" alt="Fiber Cable" class="gallery-img">
-        </div>
+            <img src="work1.jpg" alt="Installation 1" class="gallery-img"> <img src="work2.jpg" alt="Installation 2" class="gallery-img"> <img src="work3.jpg" alt="Installation 3" class="gallery-img"> </div>
     </section>
 
     <section class="plans-section">
@@ -164,12 +154,6 @@
                     <img src="logo.jpg" alt="Shan Zone Logo" style="height: 50px; background: white; padding: 5px; border-radius: 5px;">
                 </h3>
                 <p>Maharajganj's Leading Fiber Network. Ham aapko dete hain sabse tez aur bharosemand internet connection, hamesha.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
             </div>
 
             <div class="footer-col">
@@ -187,23 +171,12 @@
                 <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Partawal, Maharajganj, Uttar Pradesh</p>
                 <p><i class="fas fa-phone-alt" style="margin-right: 10px;"></i> +91 6391224488</p>
                 <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> shanzones1313@gmail.com</p>
-                <p><i class="fas fa-globe" style="margin-right: 10px;"></i> www.shanwifi.com</p>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2024-2026 ShanZone. All rights reserved. | Designed & Developed by Shan Zone</p>
         </div>
     </footer>
-
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('Service Worker Registered'))
-            .catch(err => console.log('Error registering Service Worker', err));
-        });
-      }
-    </script>
 
 </body>
 </html>
