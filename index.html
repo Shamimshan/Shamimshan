@@ -24,12 +24,13 @@
         nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; }
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; border: none; cursor: pointer; }
 
-        //* Hero Section Updated */
+        /* Hero Section Updated */
         .hero {
-            background: url('hero-bg.png') no-repeat; /* GitHub file name '.png' kiya gaya */
-            background-size: contain; /* Isse puri photo dikhegi, kategi nahi */
+            background: url('hero-bg.jpg') no-repeat; /* GitHub file name '.jpg' check karein */
+            background-size: contain; 
             background-position: center top;
-            height: 100vh; /* Photo ki lambai ke hisab se height set ki gayi */
+            width: 100%;
+            height: 100vh; 
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -63,16 +64,15 @@
         .footer-col h4 { color: var(--accent); margin-bottom: 20px; }
         .social-links a { color: white; font-size: 20px; margin-right: 15px; transition: 0.3s; }
         .social-links a:hover { color: var(--accent); }
-        <section id="home" class="hero">
-        <div class="hero-content">
-            <div style="margin-top: 280px; margin-left: 20px;"> 
-                <a href="https://wa.me/916391224488" class="btn-quote" style="border-radius: 50px; background: var(--accent); padding: 15px 40px;">नया कनेक्शन लें</a>
-            </div>
-        </div>
-    </section>
+        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
+
+        @media (max-width: 768px) { .hero { height: 50vh; background-size: cover; } }
+    </style>
+</head>
+<body>
 
     <div class="news-bar">
-        <marquee>🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;     🎨 होली की शुभकामनाएं! &nbsp;&nbsp;     🚀 Shan Zone High-Speed Internet!</marquee>
+        <marquee>🌙 रमजान मुबारक 🌙 &nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!</marquee>
     </div>
 
     <header>
@@ -87,13 +87,12 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h3 style="color: var(--accent); text-transform: uppercase;">Shan Zone Broadband</h3>
-            <h1>Be connected with <span>Shan Zone</span> Fiber.</h1>
-            <p>परतावल का सबसे भरोसेमंद इंटरनेट पार्टनर।</p>
-            <a href="https://wa.me/916391224488" class="btn-quote" style="border-radius: 50px;">नया कनेक्शन लें</a>
+            <div style="margin-top: 300px; margin-left: 20px;"> 
+                <a href="https://wa.me/916391224488" class="btn-quote" style="border-radius: 50px; background: var(--accent); padding: 15px 40px;">नया कनेक्शन लें</a>
+            </div>
         </div>
     </section>
-    
+
     <section id="plans" class="pricing">
         <h2>Best Value Monthly Plans</h2>
         <div class="price-grid">
@@ -190,9 +189,7 @@
                 <p><i class="fas fa-map-marker-alt"></i> Partawal, Maharajganj, 273301</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 Shan Zone Broadband. All rights reserved.
-        </div>
+        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved.</div>
     </footer>
 
     <script>
