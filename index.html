@@ -37,7 +37,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Navigation Header */
+        /* Header Navigation */
         header { 
             background: white; 
             padding: 15px 5%; 
@@ -50,85 +50,82 @@
             z-index: 1000; 
         }
         .logo img { height: 60px; }
-        nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+        nav a { margin: 0 12px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 13px; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
-        .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; }
-        .btn-quote:hover { transform: scale(1.05); background: #e04d0d; }
+        .btn-quote { background: var(--accent); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; font-size: 14px; }
 
-        /* HERO SECTION FIX: Full Width Luxury Look */
+        /* Hero Section - Luxury Full Width */
         .hero {
             background: url('hero-bg.jpg') no-repeat; 
-            background-size: cover; /* Image ko poori width par stretch karne ke liye */
+            background-size: cover; 
             background-position: center center;
             width: 100%;
-            height: 90vh; 
+            height: 85vh; 
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
 
         /* Pricing Section */
         .pricing { padding: 80px 5%; text-align: center; background: #fff; }
-        .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
+        .price-grid { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
         .price-card { 
-            background: white; 
-            border-radius: 20px; 
-            width: 320px; 
-            position: relative; 
-            overflow: hidden; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
-            transition: 0.4s ease;
-            border: 1px solid #eee;
+            background: white; border-radius: 20px; width: 300px; position: relative; 
+            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.4s; border: 1px solid #eee;
         }
-        .price-card:hover { transform: translateY(-15px); }
-        .card-header { padding: 35px 25px; color: white; text-align: left; }
+        .price-card:hover { transform: translateY(-10px); }
+        .card-header { padding: 30px 20px; color: white; text-align: left; }
         .card-header.lite { background: var(--lite-color); }
         .card-header.pro { background: var(--pro-color); }
         .card-header.ultimate { background: var(--ultimate-color); }
-        .plan-price { position: absolute; top: 35px; right: 25px; text-align: right; }
-        .plan-price span { font-size: 2rem; font-weight: 800; }
-        .card-body { padding: 30px 25px; text-align: left; }
-        .price-features { list-style: none; padding: 0; margin-bottom: 30px; }
-        .price-features li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; }
-        .price-features i { color: #2ecc71; margin-right: 12px; }
+        .plan-price { position: absolute; top: 30px; right: 20px; text-align: right; }
+        .plan-price span { font-size: 1.8rem; font-weight: 800; }
+        .card-body { padding: 25px 20px; text-align: left; }
+        .price-features { list-style: none; padding: 0; margin-bottom: 25px; font-size: 14px; }
+        .price-features li { padding: 10px 0; border-bottom: 1px solid #f9f9f9; }
+        .price-features i { color: #2ecc71; margin-right: 10px; }
+
+        /* Luxury Service Form Styling */
+        .service-form-section { padding: 100px 5%; background: #f4f7fa; scroll-margin-top: 80px; }
+        .form-container { 
+            max-width: 850px; margin: 0 auto; background: white; padding: 40px; 
+            border-radius: 25px; box-shadow: 0 15px 50px rgba(0,0,0,0.05); 
+        }
+        .form-header-box { display: flex; justify-content: space-between; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .form-photo-box { 
+            width: 130px; height: 160px; border: 2px dashed #bbb; display: flex; 
+            flex-direction: column; justify-content: center; align-items: center; cursor: pointer; position: relative; background: #fafafa;
+        }
+        .form-section-header { background: var(--primary); color: white; padding: 12px; font-weight: bold; border-radius: 8px; margin: 25px 0 15px; font-size: 15px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 13px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins'; box-sizing: border-box; }
+        .btn-print { background: #27ae60; color: white; border: none; padding: 15px 40px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 30px; transition: 0.3s; }
+        .btn-print:hover { background: #219150; }
 
         /* Contact Section */
-        .contact-section { padding: 100px 5%; background: #f4f7fa; }
-        .contact-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 50px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            background: white; 
-            padding: 50px; 
-            border-radius: 30px; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.05); 
-        }
-        .contact-info { flex: 1; min-width: 300px; }
-        .contact-form-box { flex: 1.5; background: #f9fbff; padding: 40px; border-radius: 20px; }
-        .form-group { margin-bottom: 25px; }
-        .form-group input, .form-group textarea { 
-            width: 100%; padding: 18px; border: 1px solid #e0e0e0; border-radius: 12px; font-size: 16px; outline: none;
-        }
-        .btn-submit { 
-            background: var(--accent); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; font-size: 18px; 
-        }
+        .contact-section { padding: 80px 5%; background: white; }
+        .contact-container { display: flex; flex-wrap: wrap; gap: 40px; max-width: 1100px; margin: 0 auto; }
+        .contact-form-box { flex: 1.5; background: #f9fbff; padding: 35px; border-radius: 20px; }
 
-        /* Footer */
-        footer { background: var(--dark); color: white; padding: 80px 5% 30px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
-        .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
-        .footer-col p { margin: 10px 0; }
-        /* Footer Links Style */
-        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
+        /* Footer Navigation */
+        footer { background: var(--dark); color: white; padding: 70px 5% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h4 { color: var(--accent); margin-bottom: 20px; }
+        .footer-col a { color: rgba(255,255,255,0.8); text-decoration: none; display: block; margin-bottom: 12px; font-size: 14px; transition: 0.3s; }
         .footer-col a:hover { color: var(--accent); padding-left: 5px; }
-        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
+        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
+
+        /* Print Media Queries */
+        @media print {
+            .news-bar, header, .hero, .pricing, .contact-section, footer, .btn-print { display: none !important; }
+            .service-form-section { padding: 0; background: white; }
+            .form-container { box-shadow: none; border: 1px solid #000; max-width: 100%; border-radius: 0; }
+        }
 
         @media (max-width: 768px) { 
-            .hero { height: 40vh; } 
-            header { padding: 10px 5%; }
+            .hero { height: 45vh; } 
+            .form-grid { grid-template-columns: 1fr; }
             nav { display: none; }
         }
     </style>
@@ -136,7 +133,7 @@
 <body>
 
     <div class="news-bar">
-        <marquee scrollamount="8">🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!</marquee>
+        <marquee scrollamount="7">🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Fiber Internet!</marquee>
     </div>
 
     <header>
@@ -144,72 +141,114 @@
         <nav>
             <a href="#home">Home</a>
             <a href="#plans">Plans</a>
+            <a href="#service-form">Service Form</a>
             <a href="#contact">Contact</a>
         </nav>
-        <a href="tel:6391224488" class="btn-quote">Call Now</a>
+        <a href="tel:6391224488" class="btn-quote">Call: 6391224488</a>
     </header>
 
     <section id="home" class="hero"></section>
 
     <section id="plans" class="pricing">
-        <h2 style="font-size: 2.8rem;">Our Fiber Plans</h2>
+        <h2 style="font-size: 2.4rem; margin-bottom: 40px;">Our Unlimited Plans</h2>
         <div class="price-grid">
             <div class="price-card">
-                <div class="card-header lite">
-                    <h3 style="margin:0;">LITE PLAN</h3>
-                    <div class="plan-price"><span>₹499</span><small>/Mo</small></div>
-                </div>
+                <div class="card-header lite"><h4>LITE PLAN</h4><div class="plan-price"><span>₹499</span></div></div>
                 <div class="card-body">
-                    <ul class="price-features">
-                        <li><i class="fas fa-bolt"></i> 50 Mbps Speed</li>
-                        <li><i class="fas fa-infinity"></i> Unlimited Data</li>
-                    </ul>
-                    <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Choose Plan</button>
+                    <ul class="price-features"><li><i class="fas fa-check"></i> 50 Mbps Speed</li><li><i class="fas fa-check"></i> Unlimited Data</li></ul>
+                    <button onclick="order('Lite 499')" class="btn-quote" style="width:100%; background:var(--lite-color);">Buy Now</button>
                 </div>
             </div>
             <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
-                <div class="card-header pro">
-                    <h3 style="margin:0;">PRO PLAN</h3>
-                    <div class="plan-price"><span>₹699</span><small>/Mo</small></div>
-                </div>
+                <div class="card-header pro"><h4>PRO PLAN</h4><div class="plan-price"><span>₹699</span></div></div>
                 <div class="card-body">
-                    <ul class="price-features">
-                        <li><i class="fas fa-bolt"></i> 80 Mbps Speed</li>
-                        <li><i class="fas fa-tv"></i> 4K Streaming</li>
-                    </ul>
-                    <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Choose Plan</button>
+                    <ul class="price-features"><li><i class="fas fa-check"></i> 80 Mbps Speed</li><li><i class="fas fa-check"></i> Best for 4K Video</li></ul>
+                    <button onclick="order('Pro 699')" class="btn-quote" style="width:100%; background:var(--pro-color);">Buy Now</button>
                 </div>
             </div>
             <div class="price-card">
-                <div class="card-header ultimate">
-                    <h3 style="margin:0;">ULTIMATE</h3>
-                    <div class="plan-price"><span>₹899</span><small>/Mo</small></div>
-                </div>
+                <div class="card-header ultimate"><h4>ULTIMATE</h4><div class="plan-price"><span>₹899</span></div></div>
                 <div class="card-body">
-                    <ul class="price-features">
-                        <li><i class="fas fa-bolt"></i> 100 Mbps Speed</li>
-                        <li><i class="fas fa-gamepad"></i> Low Latency</li>
-                    </ul>
-                    <button onclick="sendToWhatsapp('Ultimate Plan')" class="btn-quote" style="width:100%; background: var(--ultimate-color);">Choose Plan</button>
+                    <ul class="price-features"><li><i class="fas fa-check"></i> 100 Mbps Speed</li><li><i class="fas fa-check"></i> Gaming & Low Latency</li></ul>
+                    <button onclick="order('Ultimate 899')" class="btn-quote" style="width:100%; background:var(--ultimate-color);">Buy Now</button>
                 </div>
             </div>
         </div>
     </section>
 
+    <section id="service-form" class="service-form-section">
+        <div class="form-container">
+            <div class="form-header-box">
+                <div>
+                    <img src="logo.jpg" style="height:55px;">
+                    <p style="font-size: 11px; margin:0; font-weight:bold;">GSTIN: 09ENXPS9608J1ZQ</p>
+                </div>
+                <div style="text-align:center;">
+                    <h2 style="margin:0; font-size: 1.5rem; color: var(--primary);">Service Application Form</h2>
+                    <p style="font-size: 13px; margin:5px 0;">Customer Care: +91 6391224488</p>
+                </div>
+                <div class="form-photo-box" id="display-photo">
+                    <label style="cursor:pointer; text-align:center; padding: 10px;">
+                        <span id="photo-txt" style="font-size: 11px; color:#666;">ATTACH PHOTO<br>(.jpg format)</span>
+                        <input type="file" accept="image/jpeg" style="display:none;" onchange="handlePhoto(this)">
+                    </label>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-grid">
+                    <div class="form-group"><label>तारीख (Date):</label><input type="date"></div>
+                    <div class="form-group"><label>कस्टमर आईडी (Office Use):</label><input type="text"></div>
+                </div>
+
+                <div class="form-section-header">1. ग्राहक का विवरण (Customer Details)</div>
+                <div class="form-grid">
+                    <div class="form-group" style="grid-column: span 2;"><label>पूरा नाम (Full Name):</label><input type="text"></div>
+                    <div class="form-group" style="grid-column: span 2;"><label>पूरा पता (Full Address):</label><textarea rows="2"></textarea></div>
+                    <div class="form-group"><label>मोबाइल नंबर (Mobile):</label><input type="tel"></div>
+                    <div class="form-group"><label>आधार कार्ड नंबर:</label><input type="text"></div>
+                </div>
+
+                <div class="form-section-header">2. कनेक्शन का विवरण (Plan & Installation)</div>
+                <div class="form-grid">
+                    <div class="form-group"><label>प्लान का नाम:</label><input type="text" placeholder="e.g. Pro Plan"></div>
+                    <div class="form-group"><label>स्पीड (Mbps):</label><input type="text"></div>
+                    <div class="form-group"><label>मासिक शुल्क (Monthly Bill): ₹</label><input type="number"></div>
+                    <div class="form-group"><label>इंस्टालेशन शुल्क: ₹</label><input type="number"></div>
+                </div>
+
+                <div class="form-section-header">3. नियम और शर्तें (Terms & Conditions)</div>
+                <div style="font-size: 11px; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; line-height: 1.6;">
+                    1. एडेप्टर और वायर Shan Zone की संपत्ति हैं। कनेक्शन कटने पर वापस करना होगा।<br>
+                    2. मासिक बिल का भुगतान हर महीने की 1 से 5 तारीख तक करना अनिवार्य है।<br>
+                    3. किसी भी अवैध गतिविधि के लिए इंटरनेट का उपयोग करना कानूनी अपराध है।<br>
+                    4. तकनीकी खराबी को 24-48 घंटों के भीतर ठीक किया जाएगा।
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:50px;">
+                    <div style="border-top:1px solid #333; width:220px; text-align:center; padding-top:8px; font-size: 13px;">ग्राहक के हस्ताक्षर</div>
+                    <div style="border-top:1px solid #333; width:220px; text-align:center; padding-top:8px; font-size: 13px;">शान ज़ोन अधिकृत हस्ताक्षर</div>
+                </div>
+
+                <div style="text-align:center;"><button type="button" class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print Application Form</button></div>
+            </form>
+        </div>
+    </section>
+
     <section id="contact" class="contact-section">
         <div class="contact-container">
-            <div class="contact-info">
-                <h2>Contact Us</h2>
-                <p>Maharajganj's leading high-speed fiber network provider.</p>
+            <div class="contact-info" style="flex:1;">
+                <h3 style="font-size: 2rem;">Contact Us</h3>
+                <p>Naya connection lagwane ke liye abhi call ya message karein.</p>
                 <p><i class="fas fa-phone-alt"></i> +91 6391 2244 88</p>
                 <p><i class="fas fa-map-marker-alt"></i> Partawal Bazar, Maharajganj, UP</p>
             </div>
             <div class="contact-form-box">
-                <form id="contactForm">
-                    <div class="form-group"><input type="text" id="cname" placeholder="Full Name" required></div>
-                    <div class="form-group"><input type="tel" id="cphone" placeholder="Mobile Number" required></div>
-                    <div class="form-group"><textarea id="cmessage" rows="4" placeholder="Your Address" required></textarea></div>
-                    <button type="button" onclick="handleContact()" class="btn-submit">Send Message</button>
+                <form>
+                    <div class="form-group"><input type="text" id="name" placeholder="Name" required></div>
+                    <div class="form-group" style="margin: 15px 0;"><input type="tel" id="phone" placeholder="Phone" required></div>
+                    <div class="form-group"><textarea id="msg" rows="3" placeholder="Address" required></textarea></div>
+                    <button type="button" onclick="handleChat()" class="btn-quote" style="width:100%; margin-top:15px; border:none; padding:15px; cursor:pointer;">Send to WhatsApp</button>
                 </form>
             </div>
         </div>
@@ -218,35 +257,57 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <img src="logo.jpg" style="height:50px; background:white; padding:5px; border-radius:8px; margin-bottom:20px;">
-                <p>Fast, Reliable, and Affordable Fiber Internet in Maharajganj.</p>
+                <img src="logo.jpg" style="height:45px; background:white; padding:5px; border-radius:5px; margin-bottom:15px;">
+                <p>Maharajganj's fastest fiber broadband network.</p>
             </div>
             <div class="footer-col">
-                <h4>Services</h4>
+                <h4>Quick Links</h4>
                 <a href="#home">Home</a>
-                <a href="#plans">Plans</a>
-                <a href="#contact">Contact</a>
+                <a href="#plans">Broadband Plans</a>
+                <a href="#service-form">Customer Service Form</a>
+                <a href="#contact">Contact Support</a>
             </div>
             <div class="footer-col">
-                <h4>Contact</h4>
-                <p>Partawal Bazar, Maharajganj</p>
-                <p>Phone: 6391224488</p>
+                <h4>Contact Info</h4>
+                <p>Partawal, Maharajganj, 273301</p>
                 <p>Email: shanzone1313@gmail.com</p>
+                <p>Call: 6391224488</p>
             </div>
         </div>
-        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband | Designed for Speed.</div>
+        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved.</div>
     </footer>
 
     <script>
-        function handleContact() {
-            var n = document.getElementById('cname').value;
-            var p = document.getElementById('cphone').value;
-            var m = document.getElementById('cmessage').value;
-            if(!n || !p || !m) return alert("Details bharein!");
-            window.open("https://wa.me/916391224488?text=Name: "+n+"%0aPhone: "+p+"%0aAddress: "+m);
+        // Photo Preview Function
+        function handlePhoto(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var box = document.getElementById('display-photo');
+                    document.getElementById('photo-txt').style.display = 'none';
+                    var existingImg = box.querySelector('img');
+                    if(existingImg) existingImg.remove();
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover';
+                    box.appendChild(img);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-        function sendToWhatsapp(plan) {
+
+        // WhatsApp Order Function
+        function order(plan) {
             window.open("https://wa.me/916391224488?text=I am interested in " + plan);
+        }
+
+        // WhatsApp Contact Function
+        function handleChat() {
+            var n = document.getElementById('name').value;
+            var p = document.getElementById('phone').value;
+            var m = document.getElementById('msg').value;
+            if(!n || !p || !m) { alert("Please fill all details"); return; }
+            window.open("https://wa.me/916391224488?text=Name: "+n+"%0aPhone: "+p+"%0aAddress: "+m);
         }
     </script>
 </body>
