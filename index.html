@@ -44,45 +44,39 @@
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
         .btn-quote:hover { background: #e04d0d; }
 
-/* Hero Section Responsive Fix */
-.hero {
-    background: url('hero-bg.jpg') no-repeat;
-    /* Isse image center mein rahegi aur kategi nahi */
-    background-position: center center; 
-    /* Isse image poore box ko cover karegi bina stretch hue */
-    background-size: cover; 
-    width: 100%;
-    /* Mobile aur Desktop dono ke liye height adjust ki gayi hai */
-    height: 90vh; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
+        /* Hero Section Responsive Fix */
+        .hero {
+            background: url('hero-bg.jpg') no-repeat;
+            background-position: center center; 
+            background-size: cover; 
+            width: 100%;
+            height: 90vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
 
-/* Mobile Screens ke liye special adjustement */
-@media (max-width: 768px) {
-    .hero {
-        height: 50vh; /* Mobile par height kam rakhein taki image saaf dikhe */
-        background-size: contain; /* Isse poori image dikhegi, kategi nahi */
-        background-color: #f0f2f5; /* Khali jagah ke liye background color */
-    }
-}
-       /* About Section */
-.about-section {
-    background: white;
-    max-width: 900px;
-    /* Is niche wali line ko dekhein */
-    margin: 20px auto 40px auto; 
-    /* Pehle yahan -50px tha, ab ise 20px ya 40px kar dein */
-    
-    padding: 40px 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    text-align: center;
-    position: relative;
-    z-index: 10;
-}
+        @media (max-width: 768px) {
+            .hero {
+                height: 50vh; 
+                background-size: contain; 
+                background-color: #f0f2f5; 
+            }
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+            max-width: 900px;
+            margin: 20px auto 40px auto; 
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
         .about-section h2 { color: var(--primary); margin-top: 0; font-size: 26px; margin-bottom: 15px; }
         .about-section p { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 0; }
         .about-features { display: flex; justify-content: center; gap: 30px; margin-top: 25px; }
@@ -128,6 +122,50 @@
         .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
         .footer-col a:hover { color: var(--accent); }
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
+
+        /* NAYA: Footer Logo Slider CSS */
+        .footer-slider-container {
+            width: 100%;
+            height: 120px;
+            background: white;
+            overflow: hidden;
+            position: relative;
+            border-top: 1px solid #eee;
+            padding: 20px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            width: calc(250px * 6); /* (Slide ki width * total photos) */
+            animation: scroll 20s linear infinite;
+        }
+
+        .slide {
+            width: 250px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 80px;
+            filter: grayscale(100%); 
+            transition: 0.3s;
+            opacity: 0.6;
+        }
+
+        .slide img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 3)); } 
+        }
     </style>
 </head>
 <body>
@@ -137,11 +175,11 @@
     </div>
 
     <header>
-    <div class="logo">
-    <a href="#home">
-        <img src="logo.jpg" alt="Shan Zone" style="cursor: pointer;">
-    </a>
-</div>
+        <div class="logo">
+            <a href="#home">
+                <img src="logo.jpg" alt="Shan Zone" style="cursor: pointer;">
+            </a>
+        </div>
         <nav>
             <a href="#home">Home</a>
             <a href="#plans">Plans</a>
@@ -210,6 +248,24 @@
         </div>
     </section>
 
+    <div class="footer-slider-container">
+        <div class="slider-track">
+            <div class="slide">
+                <img src="logo-bg.jpg" alt="Logo BG">
+            </div>
+            <div class="slide">
+                <img src="photo2.jpg" alt="Partner 2">
+            </div>
+            <div class="slide">
+                <img src="photo3.jpg" alt="Partner 3">
+            </div>
+            
+            <div class="slide"><img src="logo-bg.jpg" alt="Logo BG"></div>
+            <div class="slide"><img src="photo2.jpg" alt="Partner 2"></div>
+            <div class="slide"><img src="photo3.jpg" alt="Partner 3"></div>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
@@ -234,7 +290,6 @@
     </footer>
 
     <script>
-        // Landing Page Contact Features
         function handleContact() {
             var n = document.getElementById('cname').value;
             var p = document.getElementById('cphone').value;
