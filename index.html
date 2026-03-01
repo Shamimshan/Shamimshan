@@ -69,7 +69,6 @@
         }
         .about-section p { color: #555; font-size: 16px; line-height: 1.6; }
         
-        /* Features Icons CSS (Wapas add kiya gaya) */
         .about-features { display: flex; justify-content: center; gap: 30px; margin-top: 25px; flex-wrap: wrap; }
         .about-features span { font-size: 14px; font-weight: 600; color: var(--dark); }
         .about-features i { color: var(--accent); margin-right: 5px; }
@@ -94,7 +93,7 @@
         .price-features i { color: #2ecc71; margin-right: 12px; }
         .btn-submit { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; transition: 0.3s; }
 
-        /* Contact Section Design */
+        /* Contact Section */
         .contact-section-new { padding: 60px 5%; background: #fdfdfd; }
         .new-contact-wrapper { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 30px; }
         
@@ -122,9 +121,15 @@
 
         /* Footer */
         footer { background: var(--dark); color: white; padding: 80px 5% 30px; margin-top: 40px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
         .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
+        
+        /* Links display block for vertical stacking */
         .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
+        
+        .social-link i { margin-right: 10px; font-size: 18px; width: 20px; text-align: center; }
+
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
     </style>
 </head>
@@ -209,15 +214,6 @@
                     <li><i class="fas fa-check"></i> Deliver prompt on-ground technical support</li>
                     <li><i class="fas fa-check"></i> Expand connectivity to the remotest areas</li>
                 </ul>
-
-                <div class="sub-heading"><i class="fas fa-star"></i> Our Core Strengths</div>
-                <ul class="list-style-new">
-                    <li><i class="fas fa-star"></i> Hybrid Fiber-Wireless Technology</li>
-                    <li><i class="fas fa-star"></i> Customer-first support approach</li>
-                    <li><i class="fas fa-star"></i> Instant installation services</li>
-                    <li><i class="fas fa-star"></i> Low-latency gaming & streaming</li>
-                    <li><i class="fas fa-star"></i> No hidden costs - Transparent pricing</li>
-                </ul>
             </div>
 
             <div class="contact-card-right">
@@ -245,8 +241,8 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <img src="logo.jpg" style="height:60px; background:white; padding:5px; border-radius:8px; margin-bottom:15px;">
-                <p style="font-size: 14px; line-height: 1.6; color: #d1d5db;">
-                    "महराजगंज का नंबर 1 फाइबर नेटवर्क — शान ज़ोन! पाएं सुपरफ़ास्ट स्पीड और अटूट कनेक्टिविटी। स्ट्रीमिंग हो या वर्क-फ्रॉम-होम, शान ज़ोन के साथ हर पल रहें सबसे आगे।"
+                <p style="font-size: 13px; line-height: 1.6; color: #d1d5db;">
+                    "महराजगंज का नंबर 1 फाइबर नेटवर्क — शान ज़ोन!"
                 </p>
             </div>
             <div class="footer-col">
@@ -255,6 +251,13 @@
                 <a href="#plans">Plans</a>
                 <a href="#contact">Contact Us</a>
             </div>
+            
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="https://www.facebook.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</a>
+                <a href="https://www.instagram.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-instagram" style="color: #E4405F;"></i> Instagram</a>
+            </div>
+
             <div class="footer-col">
                 <h4>Contact Us</h4>
                 <p>Partawal Bazar, Maharajganj</p>
@@ -268,7 +271,6 @@
         let currentSlide = 0;
         const slider = document.getElementById('mainSlider');
         const totalSlides = document.querySelectorAll('.slide').length;
-        
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
@@ -281,7 +283,6 @@
             var p = document.getElementById('pphone').value;
             var m = document.getElementById('pmessage').value;
             if(!n || !p || !m) return alert("Kripya sahi jankari bharein!");
-            
             var text = `New Contact Form Submission:%0aName: ${n}%0aEmail: ${e}%0aPhone: ${p}%0aMessage: ${m}`;
             window.open("https://wa.me/916391224488?text=" + text);
         }
