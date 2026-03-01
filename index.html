@@ -44,75 +44,46 @@
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
         .btn-quote:hover { background: #e04d0d; }
 
-        /* NAYA: Top Logo Slider CSS (Header ke niche ke liye) */
-        .top-slider-container {
+        /* NAYA: Hero Slider CSS */
+        .hero-slider-container {
             width: 100%;
-            height: 100px;
-            background: white;
-            overflow: hidden;
+            height: 90vh; /* Premium height for desktop */
             position: relative;
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
+            overflow: hidden;
+            background: #000;
         }
 
-        .slider-track {
+        .slider {
             display: flex;
-            width: calc(250px * 6);
-            animation: scroll 20s linear infinite;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
         }
 
         .slide {
-            width: 250px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
         }
 
-        .slide img {
-            max-width: 100%;
-            max-height: 70px;
-            filter: none; /* Black & White hata diya gaya hai */
-            opacity: 1; /* Full color aur clear images */
-            transition: 0.3s;
-        }
-
-        .slide img:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 3)); }
-        }
-
-        /* Hero Section Fix */
-        .hero {
-            background: url('hero-bg.jpg') no-repeat;
-            background-position: center center; 
-            background-size: cover; 
-            width: 100%;
-            height: 80vh; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
+        /* Desktop Height */
         @media (max-width: 768px) {
-            .hero {
-                height: 50vh; 
-                background-size: contain; 
-                background-color: #f0f2f5; 
+            .hero-slider-container {
+                height: 50vh; /* Mobile height for visibility */
+            }
+            .slide {
+                background-size: contain; /* Don't crop, but show full image on mobile */
+                background-color: #f0f2f5; /* Fill the gaps */
             }
         }
 
-        /* About Section */
+        /* About Section (Space Adjusted) */
         .about-section {
             background: white;
             max-width: 900px;
-            margin: 20px auto 40px auto; 
+            margin: -50px auto 40px auto; /* Overlaps hero slider gently */
             padding: 40px 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -174,11 +145,11 @@
     </div>
 
     <header>
-        <div class="logo">
-            <a href="#home">
-                <img src="logo.jpg" alt="Shan Zone" style="cursor: pointer;">
-            </a>
-        </div>
+    <div class="logo">
+    <a href="#home">
+        <img src="logo.jpg" alt="Shan Zone" style="cursor: pointer;">
+    </a>
+</div>
         <nav>
             <a href="#home">Home</a>
             <a href="#plans">Plans</a>
@@ -187,18 +158,13 @@
         <a href="tel:6391224488" class="btn-quote">Call Now</a>
     </header>
 
-    <div class="top-slider-container">
-        <div class="slider-track">
-            <div class="slide"><img src="logo-bg.jpg" alt="Logo BG"></div>
-            <div class="slide"><img src="photo2.jpg" alt="Partner 2"></div>
-            <div class="slide"><img src="photo3.jpg" alt="Partner 3"></div>
-            <div class="slide"><img src="logo-bg.jpg" alt="Logo BG"></div>
-            <div class="slide"><img src="photo2.jpg" alt="Partner 2"></div>
-            <div class="slide"><img src="photo3.jpg" alt="Partner 3"></div>
+    <section id="home" class="hero-slider-container">
+        <div class="slider" id="mainSlider">
+            <div class="slide" style="background-image: url('hero-bg.jpg');"></div>
+            <div class="slide" style="background-image: url('poster-fiber.jpg');"></div>
+            <div class="slide" style="background-image: url('poster-plans.jpg');"></div>
         </div>
-    </div>
-
-    <section id="home" class="hero"></section>
+    </section>
 
     <section class="about-section">
         <h2>Welcome to Shan Zone Broadband</h2>
@@ -282,6 +248,20 @@
     </footer>
 
     <script>
+        // NAYA: Hero Slider JavaScript (Posters change karne ke liye)
+        let currentSlide = 0;
+        const slider = document.getElementById('mainSlider');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Automatic shift interval (3 seconds)
+        setInterval(nextSlide, 3000); 
+
+        // Landing Page Contact Features
         function handleContact() {
             var n = document.getElementById('cname').value;
             var p = document.getElementById('cphone').value;
