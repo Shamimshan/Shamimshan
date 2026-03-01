@@ -19,19 +19,23 @@
 
         body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; color: #333; scroll-behavior: smooth; background-color: #f0f2f5; }
 
-        /* Navigation & Landing Page */
+        /* Navigation & Header */
         .news-bar { background: #ffcc00; color: #000; padding: 12px 0; font-weight: bold; font-size: 16px; border-bottom: 2px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo img { height: 60px; }
         nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; cursor: pointer; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
+        
+        /* Service Form Special Link */
+        .nav-form-link { color: var(--accent) !important; border: 1px solid var(--accent); padding: 5px 10px; border-radius: 5px; }
+        .nav-form-link:hover { background: var(--accent); color: white !important; }
+
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; border: none; cursor: pointer; transition: 0.3s; }
         
-        #landing-page { display: block; }
-        #service-form-page { display: none; padding: 40px 20px; background: #eef2f7; min-height: 100vh; }
+        /* Hero Section */
+        .hero { height: 80vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('hero-bg.jpg') center/cover; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        .hero-content h1 { font-size: 3rem; margin-bottom: 20px; }
 
-        .hero { height: 90vh; background: url('hero-bg.jpg') center/cover; display: flex; align-items: center; justify-content: center; position: relative; }
-        
         /* Pricing Section */
         .pricing { padding: 80px 5%; text-align: center; background: #fff; }
         .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
@@ -56,364 +60,108 @@
         .form-group { margin-bottom: 25px; }
         .form-group input, .form-group textarea { width: 100%; padding: 18px; border: 1px solid #e0e0e0; border-radius: 12px; font-size: 16px; outline: none; box-sizing: border-box; }
         .btn-submit { background: var(--accent); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; font-size: 18px; transition: 0.3s; }
-        .btn-submit:hover { background: #e04d0d; }
 
         /* Footer */
         footer { background: var(--dark); color: white; padding: 80px 5% 30px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
         .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
-        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; cursor: pointer; transition: 0.3s; }
-        .footer-col a:hover { color: var(--accent); }
+        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
-
-        /* --- LUXURY SERVICE FORM STYLING --- */
-        .form-luxury-container { background: #fff; max-width: 850px; margin: 0 auto; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #ddd; }
-        .form-header-row { display: flex; justify-content: space-between; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px; }
-        
-        .form-section-title { background: var(--primary); color: white; padding: 6px 15px; font-weight: bold; margin: 15px 0 8px; border-radius: 5px; font-size: 14px; }
-        .form-section-title.center { text-align: center; }
-
-        .data-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
-        .input-item label { display: block; font-size: 12px; font-weight: 600; color: #444; margin-bottom: 2px; }
-        .input-item input, .input-item select { width: 100%; padding: 6px 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; box-sizing: border-box; height: 32px; }
-        
-        /* Photo Box */
-        .form-photo-upload-box { width: 110px; text-align: center; }
-        .photo-frame { width: 100px; height: 130px; border: 2px dashed #999; display: flex; align-items: center; justify-content: center; margin-bottom: 5px; overflow: hidden; background: #f9f9f9; }
-        .btn-change-photo { font-size: 10px; background: #555; color: #fff; padding: 4px 6px; border-radius: 4px; border: none; cursor: pointer; width: 100%; }
-
-        /* KYC */
-        .kyc-section { display: flex; gap: 20px; padding: 8px 10px; background: #f9f9f9; border-radius: 5px; border: 1px solid #eee; align-items: center; }
-        .kyc-item { display: flex; align-items: center; font-size: 12px; font-weight: bold; }
-        .kyc-item input { margin-right: 6px; width: 15px; height: 15px; }
-
-        /* FULL TERMS 2 COLUMN GRID */
-        .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 5px; }
-        .terms-column { font-size: 10.5px; line-height: 1.4; color: #222; text-align: justify; }
-        .terms-column b.head { display: block; margin-bottom: 5px; color: var(--primary); border-bottom: 1px solid #eee; font-size: 12px; padding-bottom: 2px; }
-        .terms-column ol { padding-left: 15px; margin: 0; }
-        .terms-column ol li { margin-bottom: 4px; }
-
-        /* Declaration & Footer */
-        .declaration-section { margin-top: 10px; font-size: 12px; background: #fff8e1; padding: 8px; border-radius: 5px; border-left: 5px solid #ffc107; }
-        .footer-sigs { display: flex; justify-content: space-between; margin-top: 30px; }
-        .sig-box { border-top: 1px solid #000; width: 220px; text-align: center; padding-top: 5px; font-weight: bold; font-size: 12px; }
-        .sig-date { font-size: 11px; font-weight: normal; margin-top: 4px; color: #555; }
-
-        .action-btns { text-align: center; margin-top: 20px; }
-        .btn-p { padding: 10px 25px; font-weight: bold; border-radius: 8px; border: none; cursor: pointer; margin: 0 10px; color: #fff; }
-        .btn-p.print { background: #27ae60; }
-        .btn-p.reset { background: #e74c3c; }
-
-        /* PRINT SETTINGS (A4 FIX) */
-        @media print {
-            @page { size: A4; margin: 0; }
-            body { background: white; -webkit-print-color-adjust: exact; margin: 0; }
-            header, .news-bar, .action-btns, .btn-change-photo, .btn-quote, .btn-submit, footer, i, .fab, .fas { display: none !important; }
-            #landing-page { display: none !important; }
-            #service-form-page { display: block !important; padding: 0 !important; margin: 0 !important; background: transparent !important; }
-            .form-luxury-container { max-width: 100% !important; margin: 0 !important; padding: 12mm 15mm !important; border: none !important; box-shadow: none !important; }
-            .form-section-title { background: var(--primary) !important; color: white !important; }
-            input, select { border: 1px solid #000 !important; }
-        }
     </style>
 </head>
 <body>
 
-    <div id="landing-page">
-        <div class="news-bar">
-            <marquee scrollamount="8">🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!</marquee>
-        </div>
-
-        <header>
-            <div class="logo"><img src="logo.jpg" alt="Shan Zone"></div>
-            <nav>
-                <a onclick="showHome()">Home</a>
-                <a href="#plans" onclick="showHome()">Plans</a>
-                <a href="#contact" onclick="showHome()">Contact</a>
-                <a onclick="checkPassword()">Service Form</a>
-            </nav>
-            <a href="tel:6391224488" class="btn-quote">Call Now</a>
-        </header>
-
-        <section id="home" class="hero"></section>
-
-        <section id="plans" class="pricing">
-            <h2>Our Fiber Plans</h2>
-            <div class="price-grid">
-                <div class="price-card">
-                    <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹599</span></div></div>
-                    <div class="card-body">
-                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
-                        <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Choose Plan</button>
-                    </div>
-                </div>
-                <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
-                    <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹799</span></div></div>
-                    <div class="card-body">
-                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming</li></ul>
-                        <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Choose Plan</button>
-                    </div>
-                </div>
-                <div class="price-card">
-                    <div class="card-header boost"><h3>BOOST PLAN</h3><div class="plan-price"><span>₹1150</span></div></div>
-                    <div class="card-body">
-                        <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Low Latency</li></ul>
-                        <button onclick="sendToWhatsapp('Boost Plan')" class="btn-quote" style="width:100%; background: var(--boost-color);">Choose Plan</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact-section">
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h2>Contact Us</h2>
-                    <p>Maharajganj's leading fiber network.</p>
-                    <p><i class="fas fa-phone-alt"></i> +91 6391 2244 88</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Partawal Bazar, Maharajganj, UP</p>
-                </div>
-                <div class="contact-form-box">
-                    <form id="contactForm">
-                        <div class="form-group"><input type="text" id="cname" placeholder="Full Name" required></div>
-                        <div class="form-group"><input type="tel" id="cphone" placeholder="Mobile Number" required></div>
-                        <div class="form-group"><textarea id="cmessage" rows="4" placeholder="Your Address" required></textarea></div>
-                        <button type="button" onclick="handleContact()" class="btn-submit">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-grid">
-                <div class="footer-col"><img src="logo.jpg" style="height:50px; background:white; padding:5px; border-radius:8px;"><p>Maharajganj's #1 Fiber Provider.</p></div>
-                <div class="footer-col"><h4>Services</h4><a onclick="showHome()">Home</a><a href="#plans" onclick="showHome()">Plans</a><a onclick="checkPassword()">Service Form</a></div>
-                <div class="footer-col"><h4>Contact</h4><p>Partawal Bazar, Maharajganj</p><p>Phone: 6391224488</p></div>
-            </div>
-            <div class="footer-bottom">&copy; 2026 Shan Zone Broadband</div>
-        </footer>
+    <div class="news-bar">
+        <marquee scrollamount="8">🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!</marquee>
     </div>
 
-    <div id="service-form-page">
-        <div class="form-luxury-container">
-            <div class="form-header-row">
-                <div>
-                    <img src="logo.jpg" style="height:50px;">
-                    <p style="font-size: 11px; margin:0;"><b>Address:</b> Malmaliya Urf Sirsia, Partawal Bazar</p>
-                    <p style="font-size: 11px; margin:0;"><b>Distt:</b> Maharajganj (U.P.) 273301</p>
-                    <p style="font-size: 11px; margin:0;"><b>GSTIN:</b> 09ENXPS9608J1ZQ</p>
-                </div>
-                <div style="text-align:center;">
-                    <h2 style="margin:0; color:var(--primary); font-size: 24px; text-transform:uppercase;">Customer Service Form</h2>
-                    <p style="margin:2px 0; font-size: 12px; font-weight: bold;">(Service Application Form)</p>
-                    <p style="margin:2px 0; font-size: 13px; font-weight: bold; color: #e74c3c;">App No: <span id="appNo">---</span></p>
-                    <p style="margin:2px 0; font-size: 12px;">Customer Care: +91 6391 2244 88</p>
-                </div>
-                <div class="form-photo-upload-box">
-                    <div class="photo-frame" id="photoFrame"><span style="color:#999; font-size: 11px;">PHOTO</span></div>
-                    <input type="file" id="photoInput" accept="image/jpeg" style="display:none;" onchange="previewImg(this)">
-                    <button type="button" class="btn-change-photo" onclick="document.getElementById('photoInput').click()">Change Photo</button>
+    <header>
+        <div class="logo"><img src="logo.jpg" alt="Shan Zone"></div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#plans">Plans</a>
+            <a href="#contact">Contact</a>
+            <a href="https://aapka-username.github.io/shanzone-portal/" target="_blank" class="nav-form-link">Service Form</a>
+        </nav>
+        <a href="tel:6391224488" class="btn-quote">Call Now</a>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Experience Ultra-Fast Fiber</h1>
+            <p>Maharajganj's Most Trusted Broadband Service</p>
+            <a href="#plans" class="btn-quote">View Plans</a>
+        </div>
+    </section>
+
+    <section id="plans" class="pricing">
+        <h2>Choose Your Perfect Plan</h2>
+        <div class="price-grid">
+            <div class="price-card">
+                <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹599</span></div></div>
+                <div class="card-body">
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
+                    <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Choose Plan</button>
                 </div>
             </div>
-
-            <form id="mainServiceForm">
-                <div class="data-row">
-                    <div class="input-item">
-                        <label>तारीख (Date):</label>
-                        <input type="text" id="formattedDate" placeholder="DD-MMM-YYYY" readonly onclick="document.getElementById('datePicker').showPicker()" style="cursor:pointer; background: #fff;">
-                        <input type="date" id="datePicker" style="position:absolute; visibility:hidden;" onchange="updateDateDisplay(this)">
-                    </div>
-                    <div class="input-item"><label>कस्टमर आईडी (ID):</label><input type="text" placeholder="Office Use Only"></div>
+            <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
+                <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹799</span></div></div>
+                <div class="card-body">
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming</li></ul>
+                    <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Choose Plan</button>
                 </div>
-
-                <div class="form-section-title">1. ग्राहक का विवरण एवं KYC (Customer Details & KYC)</div>
-                <div class="data-row">
-                    <div class="input-item"><label>नाम (Full Name):</label><input type="text"></div>
-                    <div class="input-item"><label>पिता का नाम (Father's Name):</label><input type="text"></div>
-                    <div class="input-item"><label>मोबाइल नंबर (Mobile No):</label><input type="tel"></div>
-                    <div class="input-item"><label>ईमेल (Email ID):</label><input type="email" placeholder="example@gmail.com"></div>
-                    <div class="input-item" style="grid-column: span 2;"><label>पूरा पता (Full Address):</label><input type="text"></div>
+            </div>
+            <div class="price-card">
+                <div class="card-header boost"><h3>BOOST PLAN</h3><div class="plan-price"><span>₹1150</span></div></div>
+                <div class="card-body">
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Low Latency</li></ul>
+                    <button onclick="sendToWhatsapp('Boost Plan')" class="btn-quote" style="width:100%; background: var(--boost-color);">Choose Plan</button>
                 </div>
-
-                <label style="font-size: 12px; font-weight: bold; margin-bottom: 3px; display: block; color: #444;">KYC Documents Attached (संलग्न दस्तावेज़ टिक करें):</label>
-                <div class="kyc-section">
-                    <div class="kyc-item"><input type="checkbox"> Aadhaar Card</div>
-                    <div class="kyc-item"><input type="checkbox"> Voter ID</div>
-                    <div class="kyc-item"><input type="checkbox"> PAN Card</div>
-                    <div class="kyc-item">Other: <input type="text" style="width:100px; border:none; border-bottom:1px solid #000; background: transparent; padding: 2px;"></div>
-                </div>
-
-                <div class="form-section-title">2. कनेक्शन का विवरण (Plan & Technical Details)</div>
-                <div class="data-row">
-                    <div class="input-item">
-                        <label>प्लान का नाम (Select Plan):</label>
-                        <select id="planSelector" onchange="autoFillPlan()">
-                            <option value="">--Select--</option>
-                            <option value="LITE">LITE PLAN (30Mbps)</option>
-                            <option value="PRO">PRO PLAN (50Mbps)</option>
-                            <option value="BOOST">BOOST PLAN (100Mbps)</option>
-                        </select>
-                    </div>
-                    <div class="input-item"><label>स्पीड (Speed):</label><input type="text" id="speedDisplay" readonly style="background:#f9f9f9;"></div>
-                    <div class="input-item"><label>मासिक शुल्क (Monthly Bill): ₹</label><input type="number" id="priceDisplay" readonly style="background:#f9f9f9;"></div>
-                    <div class="input-item"><label>इंस्टालेशन शुल्क (Installation): ₹</label><input type="number"></div>
-                    
-                    <div class="input-item"><label>MAC Address (राउटर मैक एड्रेस):</label><input type="text" placeholder="00:00:00:00:00:00"></div>
-                    <div class="input-item"><label>Comment (टिप्पणी):</label><input type="text" placeholder="Remarks..."></div>
-                </div>
-
-                <div class="form-section-title center">3. नियम और शर्तें (Terms & Conditions)</div>
-                <div class="terms-grid">
-                    <div class="terms-column">
-                        <b class="head">सामान्य नियम:</b>
-                        <ol>
-                            <li><b>सामान की ओनरशिप:</b> ग्राहक के घर पर लगाया गया रेडियो एंटीना, एडेप्टर और वायर शान ज़ोन ब्रॉडबैंड की संपत्ति है। कनेक्शन कटने पर यह सामान वापस करना अनिवार्य होगा।</li>
-                            <li><b>बिल भुगतान:</b> इंटरनेट का मासिक बिल हर महीने की 1 से 5 तारीख तक जमा करना होगा। भुगतान न होने पर सर्विस बंद कर दी जाएगी।</li>
-                            <li><b>बिजली की जिम्मेदारी:</b> एंटीना को बिजली (Power) देने की जिम्मेदारी ग्राहक की होगी।</li>
-                            <li><b>दुरुपयोग पर रोक:</b> इंटरनेट का उपयोग किसी भी गैर-कानूनी या आपत्तिजनक गतिविधि के लिए नहीं किया जाएगा। ऐसा करने पर ग्राहक स्वयं जिम्मेदार होगा।</li>
-                            <li><b>सर्विस का समय:</b> किसी भी तकनीकी खराबी को 24 से 48 घंटे के भीतर ठीक किया जाएगा (मौसम खराब होने की स्थिति में अधिक समय लग सकता है)।</li>
-                            <li><b>सामान की सुरक्षा:</b> प्राकृतिक आपदा (बिजली गिरना, तूफान) या ग्राहक की लापरवाही से सामान खराब होने पर मरम्मत का खर्च ग्राहक को देना होगा।</li>
-                            <li><b>शिफ्टिंग चार्ज (Shifting):</b> कनेक्शन को एक जगह से दूसरी जगह (या दूसरे कमरे में) शिफ्ट कराने पर अलग से शिफ्टिंग चार्ज लागू होगा।</li>
-                            <li><b>री-कॉन्फ़िगरेशन समय (Re-configuration Time):</b> राउटर सेटिंग्स खराब होने की स्थिति में, उसे तकनीकी टीम द्वारा दोबारा कॉन्फ़िगर करने में 24 से 48 कार्य घंटों का समय लग सकता है।</li>
-                            <li><b>प्लान बदलाव (Plan Change):</b> मौजूदा प्लान को अपग्रेड या डाउनग्रेड करने का अनुरोध केवल बिलिंग साइकिल के शुरुआत में ही किया जा सकता है।</li>
-                        </ol>
-                    </div>
-                    <div class="terms-column">
-                        <b class="head">DoT (दूरसंचार विभाग) की महत्वपूर्ण शर्तें:</b>
-                        <ol>
-                            <li><b>राष्ट्रीय सुरक्षा (National Security):</b> इंटरनेट का उपयोग किसी भी ऐसी गतिविधि के लिए नहीं किया जाएगा जो देश की सुरक्षा, एकता और अखंडता के खिलाफ हो। किसी भी संदिग्ध गतिविधि की स्थिति में सेवा तुरंत बंद कर दी जाएगी।</li>
-                            <li><b>लॉग रिटेंशन (Log Retention):</b> सरकार के निर्देशानुसार, ग्राहक द्वारा उपयोग किए गए इंटरनेट का 'IP लॉग' रिकॉर्ड किया जाता है। किसी भी कानूनी जांच के समय यह डाटा सुरक्षा एजेंसियों को दिया जा सकता है।</li>
-                            <li><b>अवैध गतिविधि (Illegal Activities):</b> साइबर अपराध, अश्लील सामग्री, या कॉपीराइट उल्लंघन जैसी गतिविधियों के लिए इंटरनेट का उपयोग पूर्णतः वर्जित है।</li>
-                            <li><b>पते का सत्यापन (Address Verification):</b> ग्राहक को अपना सही नाम और वर्तमान पते का प्रमाण (आधार कार्ड/Voter ID) देना अनिवार्य है। गलत जानकारी पाए जाने पर कानूनी कार्रवाई की जा सकती है।</li>
-                            <li><b>री-सेलिंग पर रोक (No Reselling):</b> ग्राहक इस कनेक्शन का उपयोग केवल अपने व्यक्तिगत या व्यावसायिक परिसर के लिए करेगा। इस इंटरनेट को आगे किसी और को बेचना या साझा करना कानूनी अपराध है।</li>
-                            <li><b>नेटवर्क सुरक्षा (Network Security):</b> ग्राहक को अपने वाई-फाई का पासवर्ड सुरक्षित रखना होगा। यदि कनेक्शन से कोई दूसरा व्यक्ति गलत काम करता है, तो जिम्मेदारी मुख्य ग्राहक की होगी।</li>
-                            <li><b>बल्क स्पैमिंग:</b> बिना अनुमति के बल्क ईमेल या मैसेज (Spam) भेजना वर्जित है।</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="declaration-section">
-                    <div class="form-section-title" style="margin:0 0 8px 0; padding: 4px 10px;">4. घोषणा (Declaration)</div>
-                    <label style="cursor:pointer; display:flex; align-items:center;">
-                        <input type="checkbox" id="agreeCheck" style="width:18px; height:18px; margin-right:10px;">
-                        मैं यह घोषणा करता/करती हूँ कि मैंने ऊपर दिए गए सभी नियमों को पढ़ लिया है और मैं इनका पालन करने के लिए सहमत हूँ।
-                    </label>
-                </div>
-
-                <div class="footer-sigs">
-                    <div class="sig-box">
-                        ग्राहक के हस्ताक्षर
-                        <div class="sig-date">Date: ____/____/202___</div>
-                    </div>
-                    <div class="sig-box">
-                        शान ज़ोन अधिकृत हस्ताक्षर
-                        <div class="sig-date" style="height: 15px;"></div>
-                    </div>
-                </div>
-
-                <div class="action-btns">
-                    <button type="button" class="btn-p reset" onclick="resetForm()">Reset Form</button>
-                    <button type="button" class="btn-p print" onclick="doPrint()">Print Application Form</button>
-                    <button type="button" class="btn-p" style="background:#555;" onclick="showHome()">Back to Home</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p>Maharajganj's leading fiber network.</p>
+                <p><i class="fas fa-phone-alt"></i> +91 6391 2244 88</p>
+                <p><i class="fas fa-map-marker-alt"></i> Partawal Bazar, Maharajganj, UP</p>
+            </div>
+            <div class="contact-form-box">
+                <form id="contactForm">
+                    <div class="form-group"><input type="text" id="cname" placeholder="Full Name" required></div>
+                    <div class="form-group"><input type="tel" id="cphone" placeholder="Mobile Number" required></div>
+                    <div class="form-group"><textarea id="cmessage" rows="4" placeholder="Your Address" required></textarea></div>
+                    <button type="button" onclick="handleContact()" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logo.jpg" style="height:50px; background:white; padding:5px; border-radius:8px;">
+                <p>Maharajganj's #1 Fiber Provider.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#plans">Plans</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p>Partawal Bazar, Maharajganj</p>
+                <p>Phone: 6391224488</p>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband</div>
+    </footer>
 
     <script>
-        // App No aur Date ko page load hote hi generate karne ka function
-        window.onload = function() {
-            if(document.getElementById('appNo').innerText === "---") {
-                document.getElementById('appNo').innerText = "SZ-" + Math.floor(1000 + Math.random() * 9000);
-                const d = new Date();
-                const ms = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-                document.getElementById('formattedDate').value = String(d.getDate()).padStart(2,'0') + "-" + ms[d.getMonth()] + "-" + d.getFullYear();
-            }
-        };
-
-        // PASSWORD SETTING
-        const PASS = "Doha@123";
-
-        function checkPassword() {
-            let p = prompt("Enter Password to Access Form:");
-            if(p === PASS) showForm();
-            else if(p !== null) alert("Wrong Password!");
-        }
-
-        function showForm() {
-            document.getElementById('landing-page').style.display='none';
-            document.getElementById('service-form-page').style.display='block';
-            window.scrollTo(0,0);
-        }
-
-        function showHome() {
-            document.getElementById('landing-page').style.display='block';
-            document.getElementById('service-form-page').style.display='none';
-        }
-
-        // Auto Fill Plans (Lite, Pro, Bost)
-        function autoFillPlan() {
-            const plan = document.getElementById('planSelector').value;
-            const speed = document.getElementById('speedDisplay');
-            const price = document.getElementById('priceDisplay');
-
-            if (plan === "LITE") {
-                speed.value = "30 Mbps";
-                price.value = "599";
-            } else if (plan === "PRO") {
-                speed.value = "50 Mbps";
-                price.value = "799";
-            } else if (plan === "BOOST") {
-                speed.value = "100 Mbps";
-                price.value = "1150";
-            } else {
-                speed.value = "";
-                price.value = "";
-            }
-        }
-
-        // Custom Date Format
-        function updateDateDisplay(input) {
-            if (!input.value) return;
-            const dateObj = new Date(input.value);
-            const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-            const day = String(dateObj.getDate()).padStart(2, '0');
-            const month = months[dateObj.getMonth()];
-            const year = dateObj.getFullYear();
-            document.getElementById('formattedDate').value = `${day}-${month}-${year}`;
-        }
-
-        // Photo Preview
-        function previewImg(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var frame = document.getElementById('photoFrame');
-                    frame.innerHTML = '<img src="'+e.target.result+'" style="width:100%; height:100%; object-fit:cover;">';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Print & Reset Checks
-        function doPrint() {
-            if(!document.getElementById('agreeCheck').checked) {
-                alert("कृपया 'Declaration' (घोषणा) पर टिक करें!");
-                return;
-            }
-            window.print();
-        }
-        function resetForm() {
-            if(confirm("Kya aap pura form khali karna chahte hain?")) {
-                document.getElementById('mainServiceForm').reset();
-                document.getElementById('photoFrame').innerHTML = '<span style="color:#999; font-size:11px;">PHOTO</span>';
-                
-                // Reset karne ke baad naya App No assign karna
-                document.getElementById('appNo').innerText = "SZ-" + Math.floor(1000 + Math.random() * 9000);
-            }
-        }
-
-        // Landing Page Contact Features
         function handleContact() {
             var n = document.getElementById('cname').value;
             var p = document.getElementById('cphone').value;
