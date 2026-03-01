@@ -9,13 +9,12 @@
     <style>
         :root {
             --primary: #0047ab;
-            --accent: #ff5e14;
+            --accent: #ff5e14; /* Yeh Orange color hai */
             --dark: #0a1128;
             --light: #f4f7fa;
             --lite-color: #3498db;
             --pro-color: #e67e22;
             --boost-color: #2c3e50;
-            --red-design: #0047ab; /* Headings ko aapke logo ke blue color mein rakha hai */
         }
 
         body { 
@@ -25,8 +24,8 @@
             background-color: #f0f2f5;
         }
 
-        /* Global Heading Color */
-        h2 { color: var(--primary) !important; }
+        /* Global Heading Color - Orange kiya gaya */
+        h2 { color: var(--accent) !important; }
 
         /* News Bar */
         .news-bar { 
@@ -46,6 +45,7 @@
         nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; transition: 0.3s; cursor: pointer; }
         nav a:hover { color: var(--accent); }
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
+        .btn-quote:hover { background: #e04d0d; }
 
         /* Hero Slider */
         .hero-slider-container {
@@ -65,8 +65,29 @@
             padding: 40px 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             text-align: center; position: relative; z-index: 10;
         }
+        .about-section p { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 0; }
 
-        /* Updated Contact Section Design */
+        /* Pricing Section (Plans) */
+        .pricing { padding: 40px 5% 80px; text-align: center; }
+        .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
+        .price-card { 
+            background: white; border-radius: 20px; width: 320px; position: relative; 
+            overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); transition: 0.4s ease; border: 1px solid #eee;
+        }
+        .price-card:hover { transform: translateY(-15px); }
+        .card-header { padding: 35px 25px; color: white; text-align: left; }
+        .card-header.lite { background: var(--lite-color); }
+        .card-header.pro { background: var(--pro-color); }
+        .card-header.boost { background: var(--boost-color); }
+        .plan-price { position: absolute; top: 35px; right: 25px; text-align: right; }
+        .plan-price span { font-size: 2rem; font-weight: 800; }
+        .card-body { padding: 30px 25px; text-align: left; }
+        .price-features { list-style: none; padding: 0; margin-bottom: 30px; }
+        .price-features li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; }
+        .price-features i { color: #2ecc71; margin-right: 12px; }
+        .btn-submit { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; transition: 0.3s; }
+
+        /* Contact Section Design */
         .contact-section-new { padding: 60px 5%; background: #fdfdfd; }
         .new-contact-wrapper { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 30px; }
         
@@ -78,23 +99,34 @@
         .info-item { margin-bottom: 10px; font-size: 14.5px; }
         .info-item strong { color: #444; }
 
-        .sub-heading { color: var(--primary); font-size: 20px; margin: 25px 0 10px; display: flex; align-items: center; gap: 10px; }
+        /* Sub Headings ko bhi Orange kar diya */
+        .sub-heading { color: var(--accent); font-size: 20px; margin: 25px 0 10px; display: flex; align-items: center; gap: 10px; }
         
         .vision-text { font-size: 14px; line-height: 1.6; color: #666; font-style: italic; }
         
         .list-style-new { list-style: none; padding: 0; margin-top: 10px; }
         .list-style-new li { margin-bottom: 8px; font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
-        .list-style-new li i { color: var(--primary); margin-top: 3px; }
+        /* List Icons ko bhi Orange kar diya */
+        .list-style-new li i { color: var(--accent); margin-top: 3px; }
 
         .form-input-new { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
+        /* Send Button ko wapas theme se match karta hua primary blue/orange rakh sakte hain. Yahan blue rakha hai as per contrast */
         .btn-blue-send { background: var(--primary); color: #fff; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-blue-send:hover { opacity: 0.9; }
 
         .get-connected-footer { text-align: center; margin-top: 50px; }
         .btn-whatsapp-green { background: #25D366; color: #fff; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; }
 
+        /* Footer */
         footer { background: var(--dark); color: white; padding: 80px 5% 30px; margin-top: 40px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
-        .footer-col h4 { color: var(--primary); margin-bottom: 25px; }
+        
+        /* Footer Headings ko Orange kiya gaya */
+        .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
+        
+        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
     </style>
 </head>
@@ -105,7 +137,7 @@
     </div>
 
     <header>
-        <div class="logo"><a href="#home"><img src="logo.jpg" alt="Shan Zone"></a></div>
+        <div class="logo"><a href="#home"><img src="logo.jpg" alt="Shan Zone" style="height: 60px;"></a></div>
         <nav>
             <a href="#home">Home</a>
             <a href="#plans">Plans</a>
@@ -125,6 +157,33 @@
     <section class="about-section">
         <h2>Welcome to Shan Zone Broadband</h2>
         <p>Shan Zone is Maharajganj's most trusted internet service provider. We deliver high-speed connectivity through advanced Fiber and Wireless technology to keep you ahead.</p>
+    </section>
+
+    <section id="plans" class="pricing">
+        <h2>Our Fiber Plans</h2>
+        <div class="price-grid">
+            <div class="price-card">
+                <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹599</span></div></div>
+                <div class="card-body">
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
+                    <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Order Now</button>
+                </div>
+            </div>
+            <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
+                <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹799</span></div></div>
+                <div class="card-body">
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming</li></ul>
+                    <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Order Now</button>
+                </div>
+            </div>
+            <div class="price-card">
+                <div class="card-header boost"><h3>BOOST PLAN</h3><div class="plan-price"><span>₹1150</span></div></div>
+                <div class="card-body">
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Low Latency</li></ul>
+                    <button onclick="sendToWhatsapp('Boost Plan')" class="btn-quote" style="width:100%; background: var(--boost-color);">Order Now</button>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="contact" class="contact-section-new">
@@ -182,26 +241,31 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <img src="logo.jpg" style="height:50px; background:white; padding:5px; border-radius:5px;">
-                <p>Maharajganj's #1 Fiber & Wireless Network.</p>
+                <img src="logo.jpg" style="height:60px; background:white; padding:5px; border-radius:8px; margin-bottom:15px;">
+                <p style="font-size: 14px; line-height: 1.6; color: #d1d5db;">
+                    "महराजगंज का नंबर 1 फाइबर नेटवर्क — शान ज़ोन! पाएं सुपरफ़ास्ट स्पीड और अटूट कनेक्टिविटी। स्ट्रीमिंग हो या वर्क-फ्रॉम-होम, शान ज़ोन के साथ हर पल रहें सबसे आगे।"
+                </p>
             </div>
             <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="#home">Home</a><a href="#plans">Plans</a>
+                <h4>Services</h4>
+                <a href="#home">Home</a>
+                <a href="#plans">Plans</a>
+                <a href="#contact">Contact Us</a>
             </div>
             <div class="footer-col">
-                <h4>Support</h4>
+                <h4>Contact Us</h4>
                 <p>Partawal Bazar, Maharajganj</p>
                 <p>Phone: 6391224488</p>
             </div>
         </div>
-        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved.</div>
+        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved. | Designed & Developed by Shamim_Shan</div>
     </footer>
 
     <script>
         let currentSlide = 0;
         const slider = document.getElementById('mainSlider');
         const totalSlides = document.querySelectorAll('.slide').length;
+        
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             slider.style.transform = `translateX(-${currentSlide * 100}%)`;
@@ -210,10 +274,17 @@
 
         function handlePremiumContact() {
             var n = document.getElementById('pname').value;
+            var e = document.getElementById('pemail').value;
             var p = document.getElementById('pphone').value;
             var m = document.getElementById('pmessage').value;
-            if(!n || !p || !m) return alert("Sahi jankari bharein!");
-            window.open(`https://wa.me/916391224488?text=Inquiry from ${n}%0aPhone: ${p}%0aMessage: ${m}`);
+            if(!n || !p || !m) return alert("Kripya sahi jankari bharein!");
+            
+            var text = `New Contact Form Submission:%0aName: ${n}%0aEmail: ${e}%0aPhone: ${p}%0aMessage: ${m}`;
+            window.open("https://wa.me/916391224488?text=" + text);
+        }
+
+        function sendToWhatsapp(plan) {
+            window.open("https://wa.me/916391224488?text=I am interested in " + plan);
         }
     </script>
 </body>
