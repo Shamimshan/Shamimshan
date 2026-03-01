@@ -42,16 +42,35 @@
         nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; transition: 0.3s; cursor: pointer; }
         nav a:hover { color: var(--accent); }
         .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
+        .btn-quote:hover { background: #e04d0d; }
 
-        /* Hero Section - Clean without text as requested */
+        /* Hero Section */
         .hero {
             background: url('hero-bg.jpg') no-repeat; 
             background-size: cover; background-position: center center;
-            width: 100%; height: 90vh; display: flex; align-items: center; justify-content: center; position: relative;
+            width: 100%; height: 85vh; display: flex; align-items: center; justify-content: center; position: relative;
         }
 
+        /* About Section (New) */
+        .about-section {
+            background: white;
+            max-width: 900px;
+            margin: -50px auto 40px auto; /* Hero image par thoda upar overlap karega */
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        .about-section h2 { color: var(--primary); margin-top: 0; font-size: 26px; margin-bottom: 15px; }
+        .about-section p { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 0; }
+        .about-features { display: flex; justify-content: center; gap: 30px; margin-top: 25px; }
+        .about-features span { font-size: 14px; font-weight: 600; color: var(--dark); }
+        .about-features i { color: var(--accent); margin-right: 5px; }
+
         /* Pricing Section */
-        .pricing { padding: 80px 5%; text-align: center; background: #fff; }
+        .pricing { padding: 40px 5% 80px; text-align: center; }
         .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
         .price-card { 
             background: white; border-radius: 20px; width: 320px; position: relative; 
@@ -68,27 +87,19 @@
         .price-features { list-style: none; padding: 0; margin-bottom: 30px; }
         .price-features li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; }
         .price-features i { color: #2ecc71; margin-right: 12px; }
+        .btn-submit { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; transition: 0.3s; }
+        .btn-submit:hover { background: #e04d0d; }
 
         /* Contact Section */
         .contact-section { padding: 100px 5%; background: #f4f7fa; }
         .contact-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 50px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            background: white; 
-            padding: 50px; 
-            border-radius: 30px; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.05); 
-            align-items: center; 
+            display: flex; flex-wrap: wrap; gap: 50px; max-width: 1200px; margin: 0 auto; 
+            background: white; padding: 50px; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.05); align-items: center; 
         }
         .contact-info { flex: 1; min-width: 300px; }
         .contact-form-box { flex: 1.2; min-width: 300px; }
         .form-group { margin-bottom: 25px; }
         .form-group input, .form-group textarea { width: 100%; padding: 18px; border: 1px solid #e0e0e0; border-radius: 12px; font-size: 16px; outline: none; box-sizing: border-box; }
-        .btn-submit { background: var(--accent); color: white; border: none; padding: 18px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; font-size: 18px; transition: 0.3s; }
-        .btn-submit:hover { background: #e04d0d; }
 
         /* Footer */
         footer { background: var(--dark); color: white; padding: 80px 5% 30px; }
@@ -97,11 +108,6 @@
         .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
         .footer-col a:hover { color: var(--accent); }
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
-
-        /* Print Settings for Landing Page */
-        @media print {
-            .news-bar, header, .action-btns, footer, .btn-submit, .btn-quote { display: none !important; }
-        }
     </style>
 </head>
 <body>
@@ -121,6 +127,18 @@
     </header>
 
     <section id="home" class="hero"></section>
+
+    <section class="about-section">
+        <h2>Welcome to Shan Zone Broadband</h2>
+        <p>
+            Shan Zone is Maharajganj's most trusted fiber network provider. We are committed to empowering our community with lightning-fast internet, unmatched reliability, and dedicated customer support. Whether it's uninterrupted work-from-home, online learning, or non-stop 4K entertainment, Shan Zone is your ultimate gateway to the digital world.
+        </p>
+        <div class="about-features">
+            <span><i class="fas fa-rocket"></i> Ultra-Fast Speed</span>
+            <span><i class="fas fa-headset"></i> 24/7 Support</span>
+            <span><i class="fas fa-wifi"></i> Seamless Connectivity</span>
+        </div>
+    </section>
 
     <section id="plans" class="pricing">
         <h2>Our Fiber Plans</h2>
@@ -153,7 +171,7 @@
         <div class="contact-container">
             <div class="contact-info">
                 <h2>Contact Us</h2>
-                <p>"महराजगंज का नंबर 1 फाइबर नेटवर्क — शान ज़ोन!"</p>
+                <p>Maharajganj's leading fiber network.</p>
                 <p><i class="fas fa-phone-alt"></i> +91 6391 2244 88</p>
                 <p><i class="fas fa-map-marker-alt"></i> Partawal Bazar, Maharajganj, UP</p>
             </div>
@@ -171,18 +189,19 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <img src="logo.jpg" style="height:50px; background:white; padding:5px; border-radius:8px; margin-bottom:20px;">
-                <p>"महराजगंज का नंबर 1 फाइबर नेटवर्क — शान ज़ोन!
-पाएं सुपरफ़ास्ट स्पीड और अटूट कनेक्टिविटी। स्ट्रीमिंग हो या वर्क-फ्रॉम-होम, शान ज़ोन के साथ हर पल रहें सबसे आगे।"</p>
+                <img src="logo.jpg" style="height:60px; background:white; padding:5px; border-radius:8px; margin-bottom:15px;">
+                <p style="font-size: 14px; line-height: 1.6; color: #d1d5db;">
+                    "महराजगंज का नंबर 1 फाइबर नेटवर्क — शान ज़ोन! पाएं सुपरफ़ास्ट स्पीड और अटूट कनेक्टिविटी। स्ट्रीमिंग हो या वर्क-फ्रॉम-होम, शान ज़ोन के साथ हर पल रहें सबसे आगे।"
+                </p>
             </div>
             <div class="footer-col">
                 <h4>Services</h4>
                 <a href="#home">Home</a>
                 <a href="#plans">Plans</a>
+                <a href="#contact">Contact Us</a>
             </div>
             <div class="footer-col">
-                <h4>Contact</h4>
-                <a href="#contact">Contact Us</a>
+                <h4>Contact Us</h4>
                 <p>Partawal Bazar, Maharajganj</p>
                 <p>Phone: 6391224488</p>
             </div>
