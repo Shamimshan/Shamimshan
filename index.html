@@ -1,308 +1,596 @@
+```html
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shan Zone</title>
-    
-    <link rel="icon" type="image/jpeg" href="favicon.png">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0047ab;
-            --accent: #ff5e14; /* Orange color */
-            --dark: #0a1128;
-            --light: #f4f7fa;
-            --lite-color: #3498db;
-            --pro-color: #e67e22;
-            --boost-color: #2c3e50;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            margin: 0; padding: 0; color: #333; 
-            scroll-behavior: smooth;
-            background-color: #f0f2f5;
-        }
+<title>Shan Zone Broadband</title>
 
-        /* Global Heading Color - Orange */
-        h2 { color: var(--accent) !important; }
+<link rel="icon" href="favicon.png">
 
-        /* News Bar */
-        .news-bar { 
-            background: #ffcc00; color: #000; padding: 12px 0; 
-            font-weight: bold; font-size: 16px; border-bottom: 2px solid var(--primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        /* Navigation Header */
-        header { 
-            background: white; padding: 15px 5%; display: flex; 
-            justify-content: space-between; align-items: center; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
-            position: sticky; top: 0; z-index: 1000; 
-        }
-        .logo img { height: 60px; }
-        nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; transition: 0.3s; cursor: pointer; }
-        nav a:hover { color: var(--accent); }
-        .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        /* Hero Slider */
-        .hero-slider-container {
-            width: 100%; height: 90vh; position: relative; overflow: hidden; background: #000;
-        }
-        .slider { display: flex; width: 100%; height: 100%; transition: transform 0.8s ease-in-out; }
-        .slide { min-width: 100%; height: 100%; background-size: cover; background-position: center center; }
+<style>
 
-        @media (max-width: 768px) {
-            .hero-slider-container { height: 50vh; }
-            .slide { background-size: contain; background-color: #f0f2f5; }
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-        /* About Section (Welcome) */
-        .about-section {
-            background: white; max-width: 900px; margin: 20px auto 40px auto; 
-            padding: 40px 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            text-align: center; position: relative; z-index: 10;
-        }
-        .about-section p { color: #555; font-size: 16px; line-height: 1.6; }
-        
-        .about-features { display: flex; justify-content: center; gap: 30px; margin-top: 25px; flex-wrap: wrap; }
-        .about-features span { font-size: 14px; font-weight: 600; color: var(--dark); }
-        .about-features i { color: var(--accent); margin-right: 5px; }
+body{
+font-family:'Poppins',sans-serif;
+background:#f5f7fb;
+color:#222;
+scroll-behavior:smooth;
+}
 
-        /* Pricing Section */
-        .pricing { padding: 40px 5% 80px; text-align: center; }
-        .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
-        .price-card { 
-            background: white; border-radius: 20px; width: 320px; position: relative; 
-            overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); transition: 0.4s ease; border: 1px solid #eee;
-        }
-        .price-card:hover { transform: translateY(-15px); }
-        .card-header { padding: 35px 25px; color: white; text-align: left; }
-        .card-header.lite { background: var(--lite-color); }
-        .card-header.pro { background: var(--pro-color); }
-        .card-header.boost { background: var(--boost-color); }
-        .plan-price { position: absolute; top: 35px; right: 25px; text-align: right; }
-        .plan-price span { font-size: 2rem; font-weight: 800; }
-        .card-body { padding: 30px 25px; text-align: left; }
-        .price-features { list-style: none; padding: 0; margin-bottom: 30px; }
-        .price-features li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; }
-        .price-features i { color: #2ecc71; margin-right: 12px; }
-        .btn-submit { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; transition: 0.3s; }
+/* NEWS BAR */
 
-        /* Contact Section */
-        .contact-section-new { padding: 60px 5%; background: #fdfdfd; }
-        .new-contact-wrapper { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 30px; }
-        
-        .contact-card-left, .contact-card-right { 
-            background: #fff; flex: 1; min-width: 320px; padding: 35px; 
-            border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #f1f1f1;
-        }
+.news-bar{
+background:linear-gradient(90deg,#ff7a18,#ffb347);
+color:white;
+font-weight:600;
+overflow:hidden;
+white-space:nowrap;
+}
 
-        .info-item { margin-bottom: 10px; font-size: 14.5px; }
-        .info-item strong { color: #444; }
+.news-bar span{
+display:inline-block;
+padding:10px 0;
+animation:news 18s linear infinite;
+}
 
-        .sub-heading { color: var(--accent); font-size: 20px; margin: 25px 0 10px; display: flex; align-items: center; gap: 10px; }
-        
-        .vision-text { font-size: 14px; line-height: 1.6; color: #666; font-style: italic; }
-        
-        .list-style-new { list-style: none; padding: 0; margin-top: 10px; }
-        .list-style-new li { margin-bottom: 8px; font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
-        .list-style-new li i { color: var(--accent); margin-top: 3px; }
+@keyframes news{
+0%{transform:translateX(100%)}
+100%{transform:translateX(-100%)}
+}
 
-        .form-input-new { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .btn-blue-send { background: var(--primary); color: #fff; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+/* HEADER */
 
-        .get-connected-footer { text-align: center; margin-top: 50px; }
-        .btn-whatsapp-green { background: #25D366; color: #fff; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; }
+header{
+position:sticky;
+top:0;
+z-index:999;
+background:white;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 6%;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
 
-        /* Footer */
-        footer { background: var(--dark); color: white; padding: 80px 5% 30px; margin-top: 40px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
-        .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
-        
-        /* Links display block for vertical stacking */
-        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
-        .footer-col a:hover { color: var(--accent); }
-        
-        .social-link i { margin-right: 10px; font-size: 18px; width: 20px; text-align: center; }
+.logo img{
+height:42px;
+}
 
-        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
-    </style>
+nav a{
+margin:0 15px;
+text-decoration:none;
+font-weight:600;
+font-size:14px;
+color:#222;
+}
+
+nav a:hover{
+color:#ff5e14;
+}
+
+.call-btn{
+background:#ff5e14;
+color:white;
+padding:10px 22px;
+border-radius:6px;
+font-weight:600;
+}
+
+/* HERO */
+
+.hero{
+height:85vh;
+position:relative;
+overflow:hidden;
+}
+
+.slider{
+display:flex;
+height:100%;
+transition:1s;
+}
+
+.slide{
+min-width:100%;
+background-size:cover;
+background-position:center;
+}
+
+.hero-overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55));
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+flex-direction:column;
+}
+
+.hero-overlay h1{
+font-size:46px;
+margin-bottom:15px;
+}
+
+.hero-overlay p{
+font-size:18px;
+margin-bottom:25px;
+}
+
+.hero-btn{
+background:#ff5e14;
+color:white;
+padding:14px 30px;
+border-radius:6px;
+font-weight:600;
+}
+
+/* ABOUT */
+
+.about{
+padding:80px 6%;
+text-align:center;
+background:white;
+}
+
+.about h2{
+color:#ff5e14;
+margin-bottom:20px;
+}
+
+.about p{
+max-width:850px;
+margin:auto;
+line-height:1.7;
+}
+
+/* PLANS */
+
+.plans{
+padding:80px 6%;
+text-align:center;
+}
+
+.plans h2{
+color:#ff5e14;
+}
+
+.plan-grid{
+margin-top:40px;
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:center;
+}
+
+.card{
+background:white;
+border-radius:18px;
+padding:30px;
+width:320px;
+box-shadow:0 10px 40px rgba(0,0,0,0.08);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 50px rgba(0,0,0,0.15);
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.price{
+font-size:32px;
+font-weight:700;
+color:#ff5e14;
+margin-bottom:20px;
+}
+
+.card ul{
+list-style:none;
+margin-bottom:20px;
+}
+
+.card ul li{
+margin:10px 0;
+}
+
+.speed-bar{
+background:#eee;
+height:8px;
+border-radius:6px;
+overflow:hidden;
+margin-bottom:15px;
+}
+
+.speed-fill{
+background:#ff5e14;
+height:100%;
+}
+
+.order-btn{
+background:#ff5e14;
+color:white;
+border:none;
+padding:14px;
+width:100%;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+margin-bottom:10px;
+}
+
+.speed-test{
+background:#0047ab;
+color:white;
+border:none;
+padding:12px;
+width:100%;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* CONTACT */
+
+.contact{
+padding:80px 6%;
+background:white;
+}
+
+.contact-wrapper{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+max-width:1100px;
+margin:auto;
+}
+
+.contact-box{
+flex:1;
+min-width:300px;
+}
+
+.contact input,
+.contact textarea{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:6px;
+}
+
+.submit-btn{
+background:#0047ab;
+color:white;
+border:none;
+padding:14px;
+width:100%;
+border-radius:6px;
+font-weight:600;
+}
+
+/* FOOTER */
+
+footer{
+background:#0a1128;
+color:white;
+padding:70px 6% 30px;
+}
+
+.footer-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:40px;
+}
+
+.footer-grid h4{
+color:#ff5e14;
+margin-bottom:15px;
+}
+
+.footer-grid a{
+display:block;
+margin:8px 0;
+color:white;
+}
+
+.footer-bottom{
+margin-top:40px;
+text-align:center;
+opacity:0.7;
+font-size:14px;
+}
+
+/* WHATSAPP FLOAT */
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#25D366;
+color:white;
+font-size:22px;
+padding:14px;
+border-radius:50%;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.logo img{
+height:36px;
+}
+
+.hero-overlay h1{
+font-size:32px;
+}
+
+.hero{
+height:60vh;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <div class="news-bar">
-        <marquee scrollamount="8">🌙 रमजान मुबारक 🌙 &nbsp;&nbsp;&nbsp; 🎨 होली की शुभकामनाएं! &nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!</marquee>
-    </div>
+<div class="news-bar">
+<span>
+🌙 रमजान मुबारक &nbsp;&nbsp; 🚀 Shan Zone High-Speed Fiber Internet &nbsp;&nbsp; 🎨 होली की शुभकामनाएं
+</span>
+</div>
 
-    <header>
-        <div class="logo"><a href="#home"><img src="logo.jpg" alt="Shan Zone" style="height: 60px;"></a></div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#plans">Plans</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <a href="tel:6391224488" class="btn-quote">Call Now</a>
-    </header>
+<header>
 
-    <section id="home" class="hero-slider-container">
-        <div class="slider" id="mainSlider">
-            <div class="slide" style="background-image: url('hero-bg.jpg');"></div>
-            <div class="slide" style="background-image: url('photo2.jpg');"></div>
-            <div class="slide" style="background-image: url('photo3.jpg');"></div>
-        </div>
-    </section>
+<div class="logo">
+<img src="logo.jpg">
+</div>
 
-    <section class="about-section">
-        <h2>Experience the Future of Connectivity</h2>
-        <p>At Shan Zone, we are redefining the digital landscape of Maharajganj. As a premier technology partner, we bridge the gap between you and the global world through cutting-edge Fiber and Hybrid Wireless solutions. Our commitment is to provide a seamless, high-speed experience tailored for homes, professionals, and growing businesses alike.</p>
-        <div class="about-features">
-            <span><i class="fas fa-rocket"></i> Ultra-Fast Speed</span>
-            <span><i class="fas fa-headset"></i> 24/7 Priority Support</span>
-            <span><i class="fas fa-wifi"></i> Seamless Connectivity</span>
-        </div>
-    </section>
+<nav>
+<a href="#">Home</a>
+<a href="#plans">Plans</a>
+<a href="#contact">Contact</a>
+</nav>
 
-    <section id="plans" class="pricing">
-        <h2>Premium Fiber Plans</h2>
-        <div class="price-grid">
-            <div class="price-card">
-                <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹599</span></div></div>
-                <div class="card-body">
-                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
-                    <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Order Now</button>
-                </div>
-            </div>
-            <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
-                <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹799</span></div></div>
-                <div class="card-body">
-                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming Ready</li></ul>
-                    <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Order Now</button>
-                </div>
-            </div>
-            <div class="price-card">
-                <div class="card-header boost"><h3>BOOST PLAN</h3><div class="plan-price"><span>₹1150</span></div></div>
-                <div class="card-body">
-                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Ultra-Low Latency</li></ul>
-                    <button onclick="sendToWhatsapp('Boost Plan')" class="btn-quote" style="width:100%; background: var(--boost-color);">Order Now</button>
-                </div>
-            </div>
-        </div>
-    </section>
+<a href="tel:6391224488" class="call-btn">Call Now</a>
 
-    <section id="contact" class="contact-section-new">
-        <div class="new-contact-wrapper">
-            <div class="contact-card-left">
-                <h2>Corporate Profile</h2>
-                <div class="info-item"><strong>Brand Name:</strong> Shan Zone Broadband</div>
-                <div class="info-item"><strong>GSTIN:</strong> 09ENXPS9608J1ZQ</div>
-                <div class="info-item"><strong>Industry Presence:</strong> 3+ Years of Excellence</div>
-                <div class="info-item"><strong>Core Expertise:</strong> Fiber-to-the-Home (FTTH) & Wireless Infrastructure</div>
-                <div class="info-item"><strong>Our Workforce:</strong> Certified Network Specialists & On-Field Technicians</div>
-                
-                <div class="sub-heading"><i class="fas fa-address-book"></i> Contact Info</div>
-                <div class="info-item"><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 10px;"></i><strong>Address:</strong> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj, UP</div>
-                <div class="info-item"><i class="fas fa-phone-alt" style="color: var(--accent); margin-right: 10px;"></i><strong>Phone:</strong> +91-6391224488, +91-9984389923</div>
-                <div class="info-item"><i class="fas fa-envelope" style="color: var(--accent); margin-right: 10px;"></i><strong>Email:</strong> shanzones1313@gmail.com</div>
+</header>
 
-                <div class="sub-heading"><i class="fas fa-eye"></i> Our Vision</div>
-                <p class="vision-text">To lead the digital transformation in Maharajganj by making world-class, high-speed internet a standard for every household and commercial enterprise, fostering a truly connected community.</p>
+<section class="hero">
 
-                <div class="sub-heading"><i class="fas fa-bullseye"></i> Our Mission</div>
-                <ul class="list-style-new">
-                    <li><i class="fas fa-check"></i> Deploying high-performance infrastructure for buffer-free internet.</li>
-                    <li><i class="fas fa-check"></i> Ensuring 99.9% network reliability for critical business and personal tasks.</li>
-                    <li><i class="fas fa-check"></i> Delivering localized, rapid-response technical assistance.</li>
-                    <li><i class="fas fa-check"></i> Expanding our footprint to empower rural and underserved areas.</li>
-                </ul>
-                
-                <div class="sub-heading"><i class="fas fa-star"></i> Why Choose Shan Zone?</div>
-                <ul class="list-style-new">
-                    <li><i class="fas fa-star"></i> Reliable Hybrid Technology (Fiber + Wireless)</li>
-                    <li><i class="fas fa-star"></i> Customer-centric service philosophy</li>
-                    <li><i class="fas fa-star"></i> Rapid deployment and zero hidden costs</li>
-                </ul>
-            </div>
+<div class="slider" id="slider">
 
-            <div class="contact-card-right">
-                <h2>Request a Connection</h2>
-                <form id="premiumForm">
-                    <input type="text" id="pname" class="form-input-new" placeholder="Full Name *" required>
-                    <input type="email" id="pemail" class="form-input-new" placeholder="Email Address">
-                    <input type="tel" id="pphone" class="form-input-new" placeholder="Mobile Number *" required>
-                    <textarea id="pmessage" class="form-input-new" rows="5" placeholder="Address & Plan Requirement *" required></textarea>
-                    <button type="button" onclick="handlePremiumContact()" class="btn-blue-send">Submit Inquiry</button>
-                </form>
-            </div>
-        </div>
+<div class="slide" style="background-image:url(hero-bg.jpg)"></div>
+<div class="slide" style="background-image:url(photo2.jpg)"></div>
+<div class="slide" style="background-image:url(photo3.jpg)"></div>
 
-        <div class="get-connected-footer">
-            <h2>Let’s Get You Connected</h2>
-            <p><i class="fas fa-phone-alt" style="color: var(--accent);"></i> Support: +91-6391224488, +91-9984389923 | <i class="fas fa-envelope" style="color: var(--accent);"></i> Email: shanzones1313@gmail.com</p>
-            <a href="https://wa.me/916391224488" class="btn-whatsapp-green">
-                <i class="fab fa-whatsapp"></i> Instant Help on WhatsApp
-            </a>
-        </div>
-    </section>
+</div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <img src="logo.jpg" style="height:60px; background:white; padding:5px; border-radius:8px; margin-bottom:15px;">
-                <p style="font-size: 13px; line-height: 1.6; color: #d1d5db;">
-                    "महराजगंज का विश्वसनीय नेटवर्क — शान ज़ोन। हम केवल इंटरनेट नहीं, बल्कि दुनिया से जुड़ने का एक तेज़ और भरोसेमंद रास्ता प्रदान करते हैं। कल के डिजिटल महराजगंज की शुरुआत आज हमारे साथ करें।"
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="#home">Home</a>
-                <a href="#plans">Our Plans</a>
-                <a href="#contact">Contact Support</a>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Follow Our Journey</h4>
-                <a href="https://www.facebook.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</a>
-                <a href="https://www.instagram.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-instagram" style="color: #E4405F;"></i> Instagram</a>
-            </div>
+<div class="hero-overlay">
 
-            <div class="footer-col">
-                <h4>Registered Office</h4>
-                <p style="margin-bottom: 8px;"><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 8px;"></i> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj (U.P.) 273301</p>
-                <p style="margin-bottom: 8px;"><i class="fas fa-phone-alt" style="color: var(--accent); margin-right: 8px;"></i> 6391224488, 9984389923</p>
-                <p style="margin-bottom: 8px;"><i class="fas fa-envelope" style="color: var(--accent); margin-right: 8px;"></i> shanzones1313@gmail.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved. | Built with ❤️ by Shamim_Shan</div>
-    </footer>
+<h1>Ultra Fast Fiber Internet</h1>
+<p>Seamless streaming, gaming & work from home</p>
 
-    <script>
-        let currentSlide = 0;
-        const slider = document.getElementById('mainSlider');
-        const totalSlides = document.querySelectorAll('.slide').length;
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-        setInterval(nextSlide, 3000); 
+<a href="#plans" class="hero-btn">View Plans</a>
 
-        function handlePremiumContact() {
-            var n = document.getElementById('pname').value;
-            var e = document.getElementById('pemail').value;
-            var p = document.getElementById('pphone').value;
-            var m = document.getElementById('pmessage').value;
-            if(!n || !p || !m) return alert("Kripya sahi jankari bharein!");
-            var text = `New Connection Request:%0aName: ${n}%0aEmail: ${e}%0aPhone: ${p}%0aMessage: ${m}`;
-            window.open("https://wa.me/916391224488?text=" + text);
-        }
+</div>
 
-        function sendToWhatsapp(plan) {
-            window.open("https://wa.me/916391224488?text=I am interested in the " + plan);
-        }
-    </script>
+</section>
+
+<section class="about">
+
+<h2>Experience the Future of Connectivity</h2>
+
+<p>
+Shan Zone Broadband provides reliable fiber internet designed for homes and businesses in Maharajganj.
+</p>
+
+</section>
+
+<section class="plans" id="plans">
+
+<h2>Premium Fiber Plans</h2>
+
+<div class="plan-grid">
+
+<div class="card">
+
+<h3>LITE PLAN</h3>
+<div class="price">₹599</div>
+
+<ul>
+<li>30 Mbps Speed</li>
+<li>Unlimited Data</li>
+</ul>
+
+<div class="speed-bar">
+<div class="speed-fill" style="width:30%"></div>
+</div>
+
+<button onclick="order('Lite Plan')" class="order-btn">Order Now</button>
+<button onclick="speedTest(30)" class="speed-test">Test Speed</button>
+
+</div>
+
+<div class="card">
+
+<h3>PRO PLAN</h3>
+<div class="price">₹799</div>
+
+<ul>
+<li>50 Mbps Speed</li>
+<li>4K Streaming</li>
+</ul>
+
+<div class="speed-bar">
+<div class="speed-fill" style="width:50%"></div>
+</div>
+
+<button onclick="order('Pro Plan')" class="order-btn">Order Now</button>
+<button onclick="speedTest(50)" class="speed-test">Test Speed</button>
+
+</div>
+
+<div class="card">
+
+<h3>BOOST PLAN</h3>
+<div class="price">₹1150</div>
+
+<ul>
+<li>100 Mbps Speed</li>
+<li>Ultra Low Latency</li>
+</ul>
+
+<div class="speed-bar">
+<div class="speed-fill" style="width:100%"></div>
+</div>
+
+<button onclick="order('Boost Plan')" class="order-btn">Order Now</button>
+<button onclick="speedTest(100)" class="speed-test">Test Speed</button>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="contact" id="contact">
+
+<h2 style="text-align:center;margin-bottom:40px;color:#ff5e14;">Installation Request</h2>
+
+<div class="contact-wrapper">
+
+<div class="contact-box">
+
+<p>📍 Malmaliya Urf Sirsia, Maharajganj</p>
+<p>📞 6391224488</p>
+<p>📧 shanzones1313@gmail.com</p>
+
+</div>
+
+<div class="contact-box">
+
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Mobile Number">
+<textarea id="msg" placeholder="Address & Plan"></textarea>
+
+<button onclick="send()" class="submit-btn">Submit Request</button>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<img src="logo.jpg" style="height:50px;margin-bottom:10px">
+
+<p>Reliable Fiber Internet Provider</p>
+
+</div>
+
+<div>
+
+<h4>Quick Links</h4>
+
+<a href="#">Home</a>
+<a href="#plans">Plans</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+<div>
+
+<h4>Social</h4>
+
+<a href="#">Facebook</a>
+<a href="#">Instagram</a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 Shan Zone Broadband
+</div>
+
+</footer>
+
+<a href="https://wa.me/916391224488" class="whatsapp">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+
+let slide=0;
+
+function autoSlide(){
+
+const slides=document.querySelectorAll('.slide');
+
+slide++;
+
+if(slide>=slides.length){slide=0}
+
+document.getElementById("slider").style.transform="translateX(-"+slide*100+"%)";
+
+}
+
+setInterval(autoSlide,3000);
+
+function order(plan){
+window.open("https://wa.me/916391224488?text=I want "+plan)
+}
+
+function speedTest(speed){
+alert("Simulated Speed Test: "+speed+" Mbps Plan")
+}
+
+function send(){
+
+let n=document.getElementById("name").value
+let p=document.getElementById("phone").value
+let m=document.getElementById("msg").value
+
+let text=`New Installation Request %0A Name: ${n} %0A Phone: ${p} %0A Message: ${m}`
+
+window.open("https://wa.me/916391224488?text="+text)
+
+}
+
+</script>
+
 </body>
+
 </html>
+```
