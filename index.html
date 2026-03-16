@@ -1,7 +1,6 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -9,12 +8,13 @@
 
 <title>Shan Zone Broadband</title>
 
+<meta name="description" content="High speed fiber broadband in Maharajganj">
+
 <link rel="icon" href="favicon.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -26,7 +26,7 @@ box-sizing:border-box;
 
 body{
 font-family:'Poppins',sans-serif;
-background:#f5f7fb;
+background:#f4f7fb;
 color:#222;
 scroll-behavior:smooth;
 }
@@ -57,13 +57,13 @@ animation:news 18s linear infinite;
 header{
 position:sticky;
 top:0;
-z-index:999;
 background:white;
 display:flex;
 align-items:center;
 justify-content:space-between;
 padding:12px 6%;
 box-shadow:0 5px 20px rgba(0,0,0,0.08);
+z-index:999;
 }
 
 .logo img{
@@ -156,21 +156,11 @@ color:#ff5e14;
 margin-bottom:20px;
 }
 
-.about p{
-max-width:850px;
-margin:auto;
-line-height:1.7;
-}
-
 /* PLANS */
 
 .plans{
 padding:80px 6%;
 text-align:center;
-}
-
-.plans h2{
-color:#ff5e14;
 }
 
 .plan-grid{
@@ -187,16 +177,6 @@ border-radius:18px;
 padding:30px;
 width:320px;
 box-shadow:0 10px 40px rgba(0,0,0,0.08);
-transition:0.4s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 20px 50px rgba(0,0,0,0.15);
-}
-
-.card h3{
-margin-bottom:10px;
 }
 
 .price{
@@ -209,10 +189,6 @@ margin-bottom:20px;
 .card ul{
 list-style:none;
 margin-bottom:20px;
-}
-
-.card ul li{
-margin:10px 0;
 }
 
 .speed-bar{
@@ -309,20 +285,13 @@ color:#ff5e14;
 margin-bottom:15px;
 }
 
-.footer-grid a{
-display:block;
-margin:8px 0;
-color:white;
-}
-
 .footer-bottom{
 margin-top:40px;
 text-align:center;
 opacity:0.7;
-font-size:14px;
 }
 
-/* WHATSAPP FLOAT */
+/* WHATSAPP */
 
 .whatsapp{
 position:fixed;
@@ -335,21 +304,13 @@ padding:14px;
 border-radius:50%;
 }
 
-/* MOBILE */
-
 @media(max-width:768px){
 
-.logo img{
-height:36px;
-}
+.logo img{height:36px;}
 
-.hero-overlay h1{
-font-size:32px;
-}
+.hero-overlay h1{font-size:30px;}
 
-.hero{
-height:60vh;
-}
+.hero{height:60vh;}
 
 }
 
@@ -360,9 +321,7 @@ height:60vh;
 <body>
 
 <div class="news-bar">
-<span>
-🌙 रमजान मुबारक &nbsp;&nbsp; 🚀 Shan Zone High-Speed Fiber Internet &nbsp;&nbsp; 🎨 होली की शुभकामनाएं
-</span>
+<span>🚀 Shan Zone High Speed Fiber Internet &nbsp;&nbsp; 🌙 Ramadan Kareem &nbsp;&nbsp; 🎉 Welcome to Shan Zone</span>
 </div>
 
 <header>
@@ -394,7 +353,7 @@ height:60vh;
 <div class="hero-overlay">
 
 <h1>Ultra Fast Fiber Internet</h1>
-<p>Seamless streaming, gaming & work from home</p>
+<p>Reliable high speed broadband</p>
 
 <a href="#plans" class="hero-btn">View Plans</a>
 
@@ -404,11 +363,9 @@ height:60vh;
 
 <section class="about">
 
-<h2>Experience the Future of Connectivity</h2>
+<h2>Experience The Future Of Connectivity</h2>
 
-<p>
-Shan Zone Broadband provides reliable fiber internet designed for homes and businesses in Maharajganj.
-</p>
+<p>Shan Zone Broadband delivers high speed fiber internet for homes and businesses in Maharajganj.</p>
 
 </section>
 
@@ -433,7 +390,8 @@ Shan Zone Broadband provides reliable fiber internet designed for homes and busi
 </div>
 
 <button onclick="order('Lite Plan')" class="order-btn">Order Now</button>
-<button onclick="speedTest(30)" class="speed-test">Test Speed</button>
+
+<button onclick="speedTest()" class="speed-test">Check Internet Speed</button>
 
 </div>
 
@@ -452,7 +410,8 @@ Shan Zone Broadband provides reliable fiber internet designed for homes and busi
 </div>
 
 <button onclick="order('Pro Plan')" class="order-btn">Order Now</button>
-<button onclick="speedTest(50)" class="speed-test">Test Speed</button>
+
+<button onclick="speedTest()" class="speed-test">Check Internet Speed</button>
 
 </div>
 
@@ -471,7 +430,8 @@ Shan Zone Broadband provides reliable fiber internet designed for homes and busi
 </div>
 
 <button onclick="order('Boost Plan')" class="order-btn">Order Now</button>
-<button onclick="speedTest(100)" class="speed-test">Test Speed</button>
+
+<button onclick="speedTest()" class="speed-test">Check Internet Speed</button>
 
 </div>
 
@@ -512,30 +472,15 @@ Shan Zone Broadband provides reliable fiber internet designed for homes and busi
 <div class="footer-grid">
 
 <div>
-
 <img src="logo.jpg" style="height:50px;margin-bottom:10px">
-
 <p>Reliable Fiber Internet Provider</p>
-
 </div>
 
 <div>
-
 <h4>Quick Links</h4>
-
 <a href="#">Home</a>
 <a href="#plans">Plans</a>
 <a href="#contact">Contact</a>
-
-</div>
-
-<div>
-
-<h4>Social</h4>
-
-<a href="#">Facebook</a>
-<a href="#">Instagram</a>
-
 </div>
 
 </div>
@@ -569,11 +514,15 @@ document.getElementById("slider").style.transform="translateX(-"+slide*100+"%)";
 setInterval(autoSlide,3000);
 
 function order(plan){
+
 window.open("https://wa.me/916391224488?text=I want "+plan)
+
 }
 
-function speedTest(speed){
-alert("Simulated Speed Test: "+speed+" Mbps Plan")
+function speedTest(){
+
+window.open("https://fast.com")
+
 }
 
 function send(){
@@ -591,6 +540,5 @@ window.open("https://wa.me/916391224488?text="+text)
 </script>
 
 </body>
-
 </html>
 ```
