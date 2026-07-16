@@ -3,198 +3,532 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shan Zone</title>
-    
+    <title>Shan Zone Broadband | Fiber & Wireless Internet — Maharajganj</title>
+
     <link rel="icon" type="image/jpeg" href="favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #0047ab;
-            --accent: #ff5e14; /* Orange color */
-            --dark: #0a1128;
-            --light: #f4f7fa;
-            --lite-color: #3498db;
-            --pro-color: #e67e22;
-            --boost-color: #2c3e50;
+            --void: #060b18;
+            --navy: #0b1b3a;
+            --deep-blue: #0d3aa8;
+            --orange: #ff5e14;
+            --orange-2: #ff8a3d;
+            --pulse: #00e0c7;
+            --pearl: #f6f8fc;
+            --paper: #ffffff;
+            --ink: #101826;
+            --ink-soft: #5b6474;
+            --line: #eef0f5;
+
+            --lite-color: #2e6fd6;
+            --pro-color: var(--orange);
+            --boost-color: #10203f;
+
+            --radius: 18px;
+            --shadow-soft: 0 20px 50px rgba(9, 20, 45, 0.08);
+            --shadow-lift: 0 25px 60px rgba(9, 20, 45, 0.16);
         }
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            margin: 0; padding: 0; color: #333; 
-            scroll-behavior: smooth;
-            background-color: #f0f2f5;
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0; padding: 0;
+            color: var(--ink);
+            background: var(--pearl);
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Global Heading Color - Orange */
-        h2 { color: var(--accent) !important; }
-
-        /* News Bar */
-        .news-bar { 
-            background: #ffcc00; color: #000; padding: 12px 0; 
-            font-weight: bold; font-size: 16px; border-bottom: 2px solid var(--primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        h1, h2, h3, .display {
+            font-family: 'Space Grotesk', 'Poppins', sans-serif;
+            letter-spacing: -0.01em;
         }
 
-        /* Navigation Header */
-        header { 
-            background: white; padding: 15px 5%; display: flex; 
-            justify-content: space-between; align-items: center; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
-            position: sticky; top: 0; z-index: 1000; 
-        }
-        .logo img { height: 60px; }
-        nav a { margin: 0 15px; text-decoration: none; color: var(--dark); font-weight: 600; text-transform: uppercase; font-size: 14px; transition: 0.3s; cursor: pointer; }
-        nav a:hover { color: var(--accent); }
-        .btn-quote { background: var(--accent); color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
+        h2 { color: var(--ink); font-weight: 700; }
+        h2 .accent-word { color: var(--orange); }
 
-        /* Hero Slider */
-        .hero-slider-container {
-            width: 100%; height: 90vh; position: relative; overflow: hidden; background: #000;
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--orange);
+            margin-bottom: 14px;
         }
-        .slider { display: flex; width: 100%; height: 100%; transition: transform 0.8s ease-in-out; }
-        .slide { min-width: 100%; height: 100%; background-size: cover; background-position: center center; }
-
-        @media (max-width: 768px) {
-            .hero-slider-container { height: 50vh; }
-            .slide { background-size: contain; background-color: #f0f2f5; }
+        .eyebrow::before {
+            content: ''; width: 22px; height: 2px; background: var(--orange); display: inline-block;
         }
 
-        /* About Section (Welcome) */
-        .about-section {
-            background: white; max-width: 900px; margin: 20px auto 40px auto; 
-            padding: 40px 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            text-align: center; position: relative; z-index: 10;
+        a { color: inherit; }
+
+        /* ===== News Bar ===== */
+        .news-bar {
+            background: linear-gradient(90deg, var(--void), var(--navy));
+            color: #ffd77a;
+            padding: 10px 0;
+            font-weight: 600; font-size: 14px;
+            overflow: hidden; white-space: nowrap; position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-        .about-section p { color: #555; font-size: 16px; line-height: 1.6; }
-        
-        .about-features { display: flex; justify-content: center; gap: 30px; margin-top: 25px; flex-wrap: wrap; }
-        .about-features span { font-size: 14px; font-weight: 600; color: var(--dark); }
-        .about-features i { color: var(--accent); margin-right: 5px; }
-
-        /* Pricing Section */
-        .pricing { padding: 40px 5% 80px; text-align: center; }
-        .price-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
-        .price-card { 
-            background: white; border-radius: 20px; width: 320px; position: relative; 
-            overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); transition: 0.4s ease; border: 1px solid #eee;
+        .marquee-track {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 22s linear infinite;
         }
-        .price-card:hover { transform: translateY(-15px); }
-        .card-header { padding: 35px 25px; color: white; text-align: left; }
-        .card-header.lite { background: var(--lite-color); }
-        .card-header.pro { background: var(--pro-color); }
-        .card-header.boost { background: var(--boost-color); }
-        .plan-price { position: absolute; top: 35px; right: 25px; text-align: right; }
-        .plan-price span { font-size: 2rem; font-weight: 800; }
-        .card-body { padding: 30px 25px; text-align: left; }
-        .price-features { list-style: none; padding: 0; margin-bottom: 30px; }
-        .price-features li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 15px; }
-        .price-features i { color: #2ecc71; margin-right: 12px; }
-        .btn-submit { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; transition: 0.3s; }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .news-bar i { color: var(--pulse); margin: 0 8px; }
 
-        /* Contact Section */
-        .contact-section-new { padding: 60px 5%; background: #fdfdfd; }
-        .new-contact-wrapper { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 30px; }
-        
-        .contact-card-left, .contact-card-right { 
-            background: #fff; flex: 1; min-width: 320px; padding: 35px; 
-            border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #f1f1f1;
+        /* ===== Header ===== */
+        header {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 14px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 1px 0 rgba(16,24,38,0.06);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo img { height: 52px; display: block; }
+        nav.main-nav { display: flex; align-items: center; gap: 6px; }
+        nav.main-nav a {
+            margin: 0 6px; padding: 8px 6px;
+            text-decoration: none; color: var(--ink); font-weight: 600;
+            font-size: 14px; letter-spacing: 0.02em; text-transform: uppercase;
+            position: relative; transition: 0.25s;
+        }
+        nav.main-nav a::after {
+            content: ''; position: absolute; left: 6px; right: 6px; bottom: 2px; height: 2px;
+            background: var(--orange); transform: scaleX(0); transform-origin: left; transition: 0.3s;
+        }
+        nav.main-nav a:hover { color: var(--orange); }
+        nav.main-nav a:hover::after { transform: scaleX(1); }
+
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .btn-quote {
+            background: var(--orange); color: white; padding: 12px 24px; border-radius: 999px;
+            text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255,94,20,0.3);
+        }
+        .btn-quote:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(255,94,20,0.4); }
+
+        .nav-toggle { display: none; background: none; border: none; font-size: 22px; color: var(--ink); cursor: pointer; }
+
+        @media (max-width: 900px) {
+            nav.main-nav {
+                position: fixed; top: 0; right: -280px; width: 260px; height: 100vh;
+                background: var(--void); flex-direction: column; align-items: flex-start;
+                padding: 90px 28px; transition: right 0.35s ease; z-index: 1100;
+            }
+            nav.main-nav.open { right: 0; }
+            nav.main-nav a { color: white; width: 100%; padding: 14px 0; margin: 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .nav-toggle { display: block; }
+            .header-actions .btn-quote span.full-label { display: none; }
         }
 
-        .info-item { margin-bottom: 10px; font-size: 14.5px; }
-        .info-item strong { color: #444; }
+        /* ===== Hero ===== */
+        .hero {
+            position: relative; min-height: 92vh; overflow: hidden;
+            background: var(--void); color: white; display: flex; align-items: center;
+        }
+        .hero-slide-bg {
+            position: absolute; inset: 0; background-size: cover; background-position: center;
+            opacity: 0; transition: opacity 1.4s ease; transform: scale(1.08);
+            animation: kenburns 12s ease-in-out infinite;
+        }
+        .hero-slide-bg.active { opacity: 1; }
+        @keyframes kenburns {
+            0% { transform: scale(1.08); }
+            50% { transform: scale(1.0); }
+            100% { transform: scale(1.08); }
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(100deg, rgba(6,11,24,0.94) 15%, rgba(6,11,24,0.75) 50%, rgba(11,27,58,0.55) 100%);
+        }
 
-        .sub-heading { color: var(--accent); font-size: 20px; margin: 25px 0 10px; display: flex; align-items: center; gap: 10px; }
-        
-        .vision-text { font-size: 14px; line-height: 1.6; color: #666; font-style: italic; }
-        
+        .signal-lines {
+            position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+        }
+
+        .hero-content {
+            position: relative; z-index: 2; max-width: 640px; padding: 60px 5%;
+        }
+        .hero-content .eyebrow { color: var(--pulse); }
+        .hero-content .eyebrow::before { background: var(--pulse); }
+        .hero-content h1 {
+            font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.12; margin: 0 0 18px;
+            font-weight: 700;
+        }
+        .hero-content h1 .hi-line { display: block; font-size: clamp(1.1rem, 2.4vw, 1.5rem); font-weight: 500; color: #cfd8ee; margin-top: 10px; font-family: 'Poppins', sans-serif; }
+        .hero-content p.lead { color: #b9c3da; font-size: 16px; line-height: 1.7; max-width: 500px; margin-bottom: 30px; }
+
+        .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 46px; }
+        .btn-ghost-light {
+            border: 1.5px solid rgba(255,255,255,0.35); color: white; padding: 12px 24px;
+            border-radius: 999px; font-weight: 600; font-size: 14px; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; background: rgba(255,255,255,0.04);
+        }
+        .btn-ghost-light:hover { background: rgba(255,255,255,0.12); border-color: var(--pulse); }
+
+        .hero-stats {
+            display: flex; gap: 36px; flex-wrap: wrap;
+            border-top: 1px solid rgba(255,255,255,0.15); padding-top: 26px;
+        }
+        .hero-stats .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--pulse); font-family: 'Space Grotesk', sans-serif; }
+        .hero-stats .stat-label { font-size: 12.5px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+        .slide-dots { position: absolute; bottom: 24px; right: 5%; z-index: 3; display: flex; gap: 8px; }
+        .slide-dots button {
+            width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,0.35);
+            cursor: pointer; transition: 0.3s; padding: 0;
+        }
+        .slide-dots button.active { background: var(--pulse); width: 22px; border-radius: 6px; }
+
+        @media (max-width: 700px) {
+            .hero { min-height: 78vh; }
+            .hero-stats { gap: 22px; }
+        }
+
+        /* ===== Section base ===== */
+        section { padding: 90px 5%; }
+        .section-head { text-align: center; max-width: 640px; margin: 0 auto 50px; }
+        .section-head p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.7; }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+        /* ===== About ===== */
+        .about-section { background: var(--pearl); padding-top: 70px; }
+        .about-card {
+            background: var(--paper); max-width: 960px; margin: 0 auto;
+            padding: 48px 44px; border-radius: var(--radius); box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+        .about-card p { color: var(--ink-soft); font-size: 16px; line-height: 1.75; max-width: 720px; margin: 0 auto; }
+        .about-features { display: flex; justify-content: center; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+        .about-features span {
+            font-size: 13.5px; font-weight: 600; color: var(--ink);
+            background: var(--pearl); padding: 10px 18px; border-radius: 999px;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .about-features i { color: var(--orange); }
+
+        /* ===== Signature: Network Path ===== */
+        .network-path { background: var(--void); color: white; position: relative; overflow: hidden; }
+        .network-path::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 15% 30%, rgba(0,224,199,0.12), transparent 45%),
+                        radial-gradient(circle at 85% 70%, rgba(255,94,20,0.10), transparent 45%);
+        }
+        .np-inner { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; text-align: center; }
+        .np-inner .eyebrow { color: var(--pulse); justify-content: center; }
+        .np-inner .eyebrow::before { display: none; }
+        .np-inner h2 { color: white; font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 44px; }
+        .np-inner h2 .accent-word { color: var(--pulse); }
+
+        .path-row { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+        .path-node {
+            display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;
+        }
+        .path-node .node-icon {
+            width: 74px; height: 74px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.18); font-size: 26px;
+        }
+        .path-node:nth-child(1) .node-icon { color: var(--orange); }
+        .path-node:nth-child(3) .node-icon { color: var(--pulse); }
+        .path-node span.node-label { font-size: 13px; font-weight: 600; color: #cfd8ee; letter-spacing: 0.02em; }
+
+        .path-link {
+            flex: 1; min-width: 90px; max-width: 220px; height: 2px; position: relative;
+            background: linear-gradient(90deg, rgba(255,94,20,0.5), rgba(0,224,199,0.5));
+            margin: 0 -4px; top: -18px;
+        }
+        .path-link .pulse-dot {
+            position: absolute; top: -3px; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--pulse); box-shadow: 0 0 14px 4px rgba(0,224,199,0.7);
+            animation: travel 2.4s linear infinite;
+        }
+        @keyframes travel {
+            0% { left: -4px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+        @media (max-width: 700px) {
+            .path-row { flex-direction: column; gap: 26px; }
+            .path-link { width: 2px; height: 50px; max-width: none; margin: 0; top: 0; transform: rotate(90deg) translateX(0); }
+            .path-link { writing-mode: vertical-lr; }
+        }
+        .np-caption { margin-top: 40px; color: #9aa5c0; font-size: 14px; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+        /* ===== Pricing ===== */
+        .pricing { background: var(--paper); text-align: center; }
+        .price-grid { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-top: 10px; }
+        .price-card {
+            background: var(--paper); border-radius: 22px; width: 320px; position: relative;
+            overflow: hidden; box-shadow: var(--shadow-soft); transition: 0.4s ease; border: 1px solid var(--line);
+        }
+        .price-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lift); }
+        .price-card.featured { border: 2px solid var(--orange); transform: scale(1.04); }
+        .price-card.featured:hover { transform: scale(1.04) translateY(-10px); }
+        .popular-tag {
+            position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+            background: var(--orange); color: white; font-size: 11px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px;
+            z-index: 3; box-shadow: 0 6px 16px rgba(255,94,20,0.4);
+        }
+        .card-header {
+            padding: 40px 26px 34px; color: white; text-align: left; position: relative; overflow: hidden;
+        }
+        .card-header::after {
+            content: ''; position: absolute; right: -30px; top: -30px; width: 120px; height: 120px;
+            border-radius: 50%; background: rgba(255,255,255,0.08);
+        }
+        .card-header.lite { background: linear-gradient(135deg, var(--lite-color), #1c4fa0); }
+        .card-header.pro { background: linear-gradient(135deg, var(--pro-color), #d84400); }
+        .card-header.boost { background: linear-gradient(135deg, var(--boost-color), #05101f); }
+        .card-header h3 { margin: 0; font-size: 1.1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+        .plan-price { margin-top: 16px; display: flex; align-items: baseline; gap: 4px; }
+        .plan-price span.amount { font-size: 2.3rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
+        .plan-price span.per { font-size: 13px; opacity: 0.85; }
+        .card-body { padding: 30px 26px 34px; text-align: left; }
+        .price-features { list-style: none; padding: 0; margin: 0 0 26px; }
+        .price-features li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; display: flex; align-items: center; gap: 10px; }
+        .price-features li:last-child { border-bottom: none; }
+        .price-features i { color: #2ecc71; width: 16px; }
+        .btn-submit, .btn-plan {
+            border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%;
+            font-size: 15px; transition: 0.3s; color: white;
+        }
+        .btn-plan.lite { background: var(--lite-color); }
+        .btn-plan.pro { background: var(--orange); }
+        .btn-plan.boost { background: var(--boost-color); }
+        .btn-plan:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+        /* ===== Contact ===== */
+        .contact-section-new { background: var(--pearl); }
+        .new-contact-wrapper { max-width: 1080px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 28px; }
+
+        .contact-card-left, .contact-card-right {
+            background: var(--paper); flex: 1; min-width: 320px; padding: 40px;
+            border-radius: var(--radius); box-shadow: var(--shadow-soft);
+        }
+        .contact-card-left h2, .contact-card-right h2 { font-size: 1.5rem; margin-top: 0; }
+
+        .info-item { margin-bottom: 11px; font-size: 14.5px; color: var(--ink); }
+        .info-item strong { color: var(--ink-soft); font-weight: 600; }
+        .info-item i { color: var(--orange); margin-right: 10px; width: 16px; }
+
+        .sub-heading { color: var(--ink); font-size: 17px; margin: 28px 0 12px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+        .sub-heading i { color: var(--orange); }
+
+        .vision-text { font-size: 14px; line-height: 1.7; color: var(--ink-soft); font-style: italic; border-left: 3px solid var(--orange); padding-left: 14px; }
+
         .list-style-new { list-style: none; padding: 0; margin-top: 10px; }
-        .list-style-new li { margin-bottom: 8px; font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
-        .list-style-new li i { color: var(--accent); margin-top: 3px; }
+        .list-style-new li { margin-bottom: 10px; font-size: 14px; display: flex; align-items: flex-start; gap: 10px; color: var(--ink); }
+        .list-style-new li i { color: var(--orange); margin-top: 3px; }
 
-        .form-input-new { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .btn-blue-send { background: var(--primary); color: #fff; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .form-input-new {
+            width: 100%; padding: 13px 14px; margin-bottom: 18px; border: 1.5px solid var(--line);
+            border-radius: 8px; box-sizing: border-box; font-family: 'Poppins', sans-serif; font-size: 14px;
+            transition: 0.25s; background: var(--pearl);
+        }
+        .form-input-new:focus { outline: none; border-color: var(--orange); background: white; }
+        .btn-blue-send {
+            background: var(--deep-blue); color: #fff; width: 100%; padding: 15px; border: none;
+            border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 15px;
+        }
+        .btn-blue-send:hover { background: #0a2f88; transform: translateY(-2px); }
 
-        .get-connected-footer { text-align: center; margin-top: 50px; }
-        .btn-whatsapp-green { background: #25D366; color: #fff; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; }
+        .get-connected-footer { text-align: center; margin-top: 60px; }
+        .get-connected-footer h2 { margin-bottom: 10px; }
+        .get-connected-footer p { color: var(--ink-soft); font-size: 14.5px; margin-bottom: 22px; }
+        .btn-whatsapp-green {
+            background: #25D366; color: #fff; padding: 14px 30px; border-radius: 999px;
+            text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 10px;
+            box-shadow: 0 12px 26px rgba(37,211,102,0.35); transition: 0.3s;
+        }
+        .btn-whatsapp-green:hover { transform: translateY(-3px); }
 
-        /* Footer */
-        footer { background: var(--dark); color: white; padding: 80px 5% 30px; margin-top: 40px; }
+        /* ===== Footer ===== */
+        footer { background: var(--void); color: white; padding: 80px 5% 30px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
-        .footer-col h4 { color: var(--accent); margin-bottom: 25px; font-size: 20px; }
-        
-        /* Links display block for vertical stacking */
-        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; }
-        .footer-col a:hover { color: var(--accent); }
-        
-        .social-link i { margin-right: 10px; font-size: 18px; width: 20px; text-align: center; }
+        .footer-col h4 { color: var(--orange); margin-bottom: 22px; font-size: 18px; font-family: 'Space Grotesk', sans-serif; }
 
-        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; opacity: 0.7; }
+        .footer-col a { color: #cfd8ee; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.3s; font-size: 14.5px; }
+        .footer-col a:hover { color: var(--orange); }
+
+        .footer-col p { color: #9aa5c0; font-size: 13px; }
+        .social-link i { margin-right: 10px; font-size: 17px; width: 20px; text-align: center; }
+
+        .footer-bottom {
+            text-align: center; margin-top: 60px; padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.1); font-size: 13.5px; color: #7c869e;
+        }
+        .footer-bottom a { color: #9aa5c0; }
     </style>
 </head>
 <body>
 
     <div class="news-bar">
-        <marquee scrollamount="8">&nbsp;&nbsp;&nbsp; ⚡ Unlimited Data, Unstoppable Speed! ⚡ &nbsp;&nbsp;&nbsp; 🚀 Shan Zone High-Speed Internet!</marquee>
+        <div class="marquee-track">
+            <i class="fas fa-bolt"></i> Unlimited Data, Unstoppable Speed! <i class="fas fa-tower-broadcast"></i> Shan Zone High-Speed Fiber & Wireless Internet — Maharajganj &nbsp;&nbsp;&nbsp;
+            <i class="fas fa-bolt"></i> Unlimited Data, Unstoppable Speed! <i class="fas fa-tower-broadcast"></i> Shan Zone High-Speed Fiber & Wireless Internet — Maharajganj
+        </div>
     </div>
 
     <header>
-        <div class="logo"><a href="#home"><img src="logo.jpg" alt="Shan Zone" style="height: 60px;"></a></div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#plans">Plans</a>
-            <a href="#contact">Contact</a>
+        <div class="logo"><a href="#home"><img src="logo.jpg" alt="Shan Zone"></a></div>
+        <nav class="main-nav" id="mainNav">
+            <a href="#home" onclick="closeNav()">Home</a>
+            <a href="#about" onclick="closeNav()">About</a>
+            <a href="#plans" onclick="closeNav()">Plans</a>
+            <a href="#contact" onclick="closeNav()">Contact</a>
         </nav>
-        <a href="tel:6391224488" class="btn-quote">Call Now</a>
+        <div class="header-actions">
+            <a href="tel:6391224488" class="btn-quote"><i class="fas fa-phone-alt"></i><span class="full-label">Call Now</span></a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        </div>
     </header>
 
-    <section id="home" class="hero-slider-container">
-        <div class="slider" id="mainSlider">
-            <div class="slide" style="background-image: url('hero-bg.jpg');"></div>
-            <div class="slide" style="background-image: url('photo2.jpg');"></div>
-            <div class="slide" style="background-image: url('photo3.jpg');"></div>
+    <section id="home" class="hero">
+        <div class="hero-slide-bg active" style="background-image: url('hero-bg.jpg');"></div>
+        <div class="hero-slide-bg" style="background-image: url('photo2.jpg');"></div>
+        <div class="hero-slide-bg" style="background-image: url('photo3.jpg');"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="eyebrow">Fiber + Wireless Network</div>
+            <h1>Unstoppable Internet for Maharajganj
+                <span class="hi-line">महराजगंज की रफ़्तार, अब बिना रुकावट</span>
+            </h1>
+            <p class="lead">Shan Zone brings reliable, high-speed FTTH and hybrid wireless broadband to homes and businesses — backed by local, on-field support that actually shows up.</p>
+
+            <div class="hero-cta-row">
+                <button class="btn-quote" onclick="sendToWhatsapp('a new connection')"><i class="fab fa-whatsapp"></i> Get Connected</button>
+                <a href="#plans" class="btn-ghost-light"><i class="fas fa-list"></i> View Plans</a>
+            </div>
+
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-num">3+ Yrs</div>
+                    <div class="stat-label">Local Presence</div>
+                </div>
+                <div>
+                    <div class="stat-num">100 Mbps</div>
+                    <div class="stat-label">Top Speed</div>
+                </div>
+                <div>
+                    <div class="stat-num">24/7</div>
+                    <div class="stat-label">Priority Support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-dots" id="slideDots"></div>
+    </section>
+
+    <section id="about" class="about-section reveal">
+        <div class="about-card">
+            <div class="eyebrow" style="justify-content:center;">Who We Are</div>
+            <h2>Experience the Future of <span class="accent-word">Connectivity</span></h2>
+            <p>At Shan Zone, we are redefining the digital landscape of Maharajganj. As a premier technology partner, we bridge the gap between you and the global world through cutting-edge Fiber and Hybrid Wireless solutions. Our commitment is to provide a seamless, high-speed experience tailored for homes, professionals, and growing businesses alike.</p>
+            <div class="about-features">
+                <span><i class="fas fa-rocket"></i> Ultra-Fast Speed</span>
+                <span><i class="fas fa-headset"></i> 24/7 Priority Support</span>
+                <span><i class="fas fa-wifi"></i> Seamless Connectivity</span>
+                <span><i class="fas fa-shield-halved"></i> Zero Hidden Costs</span>
+            </div>
         </div>
     </section>
 
-    <section class="about-section">
-        <h2>Experience the Future of Connectivity</h2>
-        <p>At Shan Zone, we are redefining the digital landscape of Maharajganj. As a premier technology partner, we bridge the gap between you and the global world through cutting-edge Fiber and Hybrid Wireless solutions. Our commitment is to provide a seamless, high-speed experience tailored for homes, professionals, and growing businesses alike.</p>
-        <div class="about-features">
-            <span><i class="fas fa-rocket"></i> Ultra-Fast Speed</span>
-            <span><i class="fas fa-headset"></i> 24/7 Priority Support</span>
-            <span><i class="fas fa-wifi"></i> Seamless Connectivity</span>
+    <section class="network-path reveal">
+        <div class="np-inner">
+            <div class="eyebrow">How It Reaches You</div>
+            <h2>One <span class="accent-word">Hybrid Network</span>. Built for Maharajganj.</h2>
+            <div class="path-row">
+                <div class="path-node">
+                    <div class="node-icon"><i class="fas fa-tower-broadcast"></i></div>
+                    <span class="node-label">Shan Zone Tower</span>
+                </div>
+                <div class="path-link"><div class="pulse-dot"></div></div>
+                <div class="path-node">
+                    <div class="node-icon"><i class="fas fa-diagram-project"></i></div>
+                    <span class="node-label">FTTH + Wireless Relay</span>
+                </div>
+                <div class="path-link"><div class="pulse-dot" style="animation-delay:1.2s;"></div></div>
+                <div class="path-node">
+                    <div class="node-icon"><i class="fas fa-house-signal"></i></div>
+                    <span class="node-label">Your Home / Office</span>
+                </div>
+            </div>
+            <p class="np-caption">Fiber where it can reach, wireless where it needs to stretch — 99.9% network reliability engineered for buffer-free streaming, work, and gaming.</p>
         </div>
     </section>
 
-    <section id="plans" class="pricing">
-        <h2>Premium Fiber Plans</h2>
+    <section id="plans" class="pricing reveal">
+        <div class="section-head">
+            <div class="eyebrow" style="justify-content:center;">Simple, Honest Pricing</div>
+            <h2>Premium Fiber <span class="accent-word">Plans</span></h2>
+            <p>Pick a speed that fits your home or business. No hidden charges, no surprises.</p>
+        </div>
         <div class="price-grid">
             <div class="price-card">
-                <div class="card-header lite"><h3>LITE PLAN</h3><div class="plan-price"><span>₹599</span></div></div>
+                <div class="card-header lite">
+                    <h3>Lite Plan</h3>
+                    <div class="plan-price"><span class="amount">₹599</span><span class="per">/month</span></div>
+                </div>
                 <div class="card-body">
-                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li></ul>
-                    <button onclick="sendToWhatsapp('Lite Plan')" class="btn-quote" style="width:100%; background: var(--lite-color);">Order Now</button>
+                    <ul class="price-features">
+                        <li><i class="fas fa-bolt"></i> 30 Mbps Speed</li>
+                        <li><i class="fas fa-infinity"></i> Unlimited Data</li>
+                        <li><i class="fas fa-headset"></i> Standard Support</li>
+                    </ul>
+                    <button onclick="sendToWhatsapp('Lite Plan')" class="btn-plan lite">Order Now</button>
                 </div>
             </div>
-            <div class="price-card" style="border: 2px solid var(--accent); transform: scale(1.05);">
-                <div class="card-header pro"><h3>PRO PLAN</h3><div class="plan-price"><span>₹799</span></div></div>
+            <div class="price-card featured">
+                <div class="popular-tag">Most Popular</div>
+                <div class="card-header pro">
+                    <h3>Pro Plan</h3>
+                    <div class="plan-price"><span class="amount">₹799</span><span class="per">/month</span></div>
+                </div>
                 <div class="card-body">
-                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming Ready</li></ul>
-                    <button onclick="sendToWhatsapp('Pro Plan')" class="btn-submit">Order Now</button>
+                    <ul class="price-features">
+                        <li><i class="fas fa-bolt"></i> 50 Mbps Speed</li>
+                        <li><i class="fas fa-tv"></i> 4K Streaming Ready</li>
+                        <li><i class="fas fa-headset"></i> Priority Support</li>
+                    </ul>
+                    <button onclick="sendToWhatsapp('Pro Plan')" class="btn-plan pro">Order Now</button>
                 </div>
             </div>
             <div class="price-card">
-                <div class="card-header boost"><h3>BOOST PLAN</h3><div class="plan-price"><span>₹1150</span></div></div>
+                <div class="card-header boost">
+                    <h3>Boost Plan</h3>
+                    <div class="plan-price"><span class="amount">₹1150</span><span class="per">/month</span></div>
+                </div>
                 <div class="card-body">
-                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Ultra-Low Latency</li></ul>
-                    <button onclick="sendToWhatsapp('Boost Plan')" class="btn-quote" style="width:100%; background: var(--boost-color);">Order Now</button>
+                    <ul class="price-features">
+                        <li><i class="fas fa-bolt"></i> 100 Mbps Speed</li>
+                        <li><i class="fas fa-gamepad"></i> Ultra-Low Latency</li>
+                        <li><i class="fas fa-headset"></i> Dedicated Support</li>
+                    </ul>
+                    <button onclick="sendToWhatsapp('Boost Plan')" class="btn-plan boost">Order Now</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact-section-new">
+    <section id="contact" class="contact-section-new reveal">
         <div class="new-contact-wrapper">
             <div class="contact-card-left">
                 <h2>Corporate Profile</h2>
@@ -203,11 +537,11 @@
                 <div class="info-item"><strong>Industry Presence:</strong> 3+ Years of Excellence</div>
                 <div class="info-item"><strong>Core Expertise:</strong> Fiber-to-the-Home (FTTH) & Wireless Infrastructure</div>
                 <div class="info-item"><strong>Our Workforce:</strong> Certified Network Specialists & On-Field Technicians</div>
-                
+
                 <div class="sub-heading"><i class="fas fa-address-book"></i> Contact Info</div>
-                <div class="info-item"><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 10px;"></i><strong>Address:</strong> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj, UP</div>
-                <div class="info-item"><i class="fas fa-phone-alt" style="color: var(--accent); margin-right: 10px;"></i><strong>Phone:</strong> +91-6391224488, +91-9984389923</div>
-                <div class="info-item"><i class="fas fa-envelope" style="color: var(--accent); margin-right: 10px;"></i><strong>Email:</strong> shanzones1313@gmail.com</div>
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i><strong>Address:</strong> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj, UP</div>
+                <div class="info-item"><i class="fas fa-phone-alt"></i><strong>Phone:</strong> +91-6391224488, +91-9984389923</div>
+                <div class="info-item"><i class="fas fa-envelope"></i><strong>Email:</strong> shanzones1313@gmail.com</div>
 
                 <div class="sub-heading"><i class="fas fa-eye"></i> Our Vision</div>
                 <p class="vision-text">To lead the digital transformation in Maharajganj by making world-class, high-speed internet a standard for every household and commercial enterprise, fostering a truly connected community.</p>
@@ -219,7 +553,7 @@
                     <li><i class="fas fa-check"></i> Delivering localized, rapid-response technical assistance.</li>
                     <li><i class="fas fa-check"></i> Expanding our footprint to empower rural and underserved areas.</li>
                 </ul>
-                
+
                 <div class="sub-heading"><i class="fas fa-star"></i> Why Choose Shan Zone?</div>
                 <ul class="list-style-new">
                     <li><i class="fas fa-star"></i> Reliable Hybrid Technology (Fiber + Wireless)</li>
@@ -230,19 +564,19 @@
 
             <div class="contact-card-right">
                 <h2>Request a Connection</h2>
-                <form id="premiumForm">
+                <div id="premiumForm">
                     <input type="text" id="pname" class="form-input-new" placeholder="Full Name *" required>
                     <input type="email" id="pemail" class="form-input-new" placeholder="Email Address">
                     <input type="tel" id="pphone" class="form-input-new" placeholder="Mobile Number *" required>
                     <textarea id="pmessage" class="form-input-new" rows="5" placeholder="Address & Plan Requirement *" required></textarea>
                     <button type="button" onclick="handlePremiumContact()" class="btn-blue-send">Submit Inquiry</button>
-                </form>
+                </div>
             </div>
         </div>
 
         <div class="get-connected-footer">
-            <h2>Let’s Get You Connected</h2>
-            <p><i class="fas fa-phone-alt" style="color: var(--accent);"></i> Support: +91-6391224488, +91-9984389923 | <i class="fas fa-envelope" style="color: var(--accent);"></i> Email: shanzones1313@gmail.com</p>
+            <h2>Let's Get You Connected</h2>
+            <p><i class="fas fa-phone-alt" style="color: var(--orange);"></i> Support: +91-6391224488, +91-9984389923 &nbsp;|&nbsp; <i class="fas fa-envelope" style="color: var(--orange);"></i> shanzones1313@gmail.com</p>
             <a href="https://wa.me/916391224488" class="btn-whatsapp-green">
                 <i class="fab fa-whatsapp"></i> Instant Help on WhatsApp
             </a>
@@ -252,18 +586,19 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <img src="logo.jpg" style="height:60px; background:white; padding:5px; border-radius:8px; margin-bottom:15px;">
-                <p style="font-size: 13px; line-height: 1.6; color: #d1d5db;">
+                <img src="logo.jpg" style="height:56px; background:white; padding:6px; border-radius:8px; margin-bottom:18px;">
+                <p style="line-height: 1.7;">
                     "महराजगंज का विश्वसनीय नेटवर्क — शान ज़ोन। हम केवल इंटरनेट नहीं, बल्कि दुनिया से जुड़ने का एक तेज़ और भरोसेमंद रास्ता प्रदान करते हैं। कल के डिजिटल महराजगंज की शुरुआत आज हमारे साथ करें।"
                 </p>
             </div>
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <a href="#home">Home</a>
+                <a href="#about">About Us</a>
                 <a href="#plans">Our Plans</a>
                 <a href="#contact">Contact Support</a>
             </div>
-            
+
             <div class="footer-col">
                 <h4>Follow Our Journey</h4>
                 <a href="https://www.facebook.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</a>
@@ -272,36 +607,72 @@
 
             <div class="footer-col">
                 <h4>Registered Office</h4>
-                <p style="margin-bottom: 8px;"><i class="fas fa-map-marker-alt" style="color: var(--accent); margin-right: 8px;"></i> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj (U.P.) 273301</p>
-                <p style="margin-bottom: 8px;"><i class="fas fa-phone-alt" style="color: var(--accent); margin-right: 8px;"></i> 6391224488, 9984389923</p>
-                <p style="margin-bottom: 8px;"><i class="fas fa-envelope" style="color: var(--accent); margin-right: 8px;"></i> shanzones1313@gmail.com</p>
+                <p style="margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--orange); margin-right: 8px;"></i> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj (U.P.) 273301</p>
+                <p style="margin-bottom: 10px;"><i class="fas fa-phone-alt" style="color: var(--orange); margin-right: 8px;"></i> 6391224488, 9984389923</p>
+                <p style="margin-bottom: 10px;"><i class="fas fa-envelope" style="color: var(--orange); margin-right: 8px;"></i> shanzones1313@gmail.com</p>
             </div>
         </div>
         <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved. | Built with ❤️ by Shamim_Shan</div>
     </footer>
 
     <script>
+        // ---- Hero slider with dots ----
+        const slides = document.querySelectorAll('.hero-slide-bg');
+        const dotsWrap = document.getElementById('slideDots');
         let currentSlide = 0;
-        const slider = document.getElementById('mainSlider');
-        const totalSlides = document.querySelectorAll('.slide').length;
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-        setInterval(nextSlide, 3000); 
 
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsWrap.appendChild(dot);
+        });
+
+        function goToSlide(i) {
+            slides[currentSlide].classList.remove('active');
+            dotsWrap.children[currentSlide].classList.remove('active');
+            currentSlide = i;
+            slides[currentSlide].classList.add('active');
+            dotsWrap.children[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % slides.length;
+            goToSlide(next);
+        }
+        setInterval(nextSlide, 4500);
+
+        // ---- Mobile nav ----
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        navToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+        function closeNav() { mainNav.classList.remove('open'); }
+
+        // ---- Scroll reveal ----
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => observer.observe(el));
+
+        // ---- Contact form ----
         function handlePremiumContact() {
             var n = document.getElementById('pname').value;
             var e = document.getElementById('pemail').value;
             var p = document.getElementById('pphone').value;
             var m = document.getElementById('pmessage').value;
-            if(!n || !p || !m) return alert("Kripya sahi jankari bharein!");
+            if (!n || !p || !m) return alert("Kripya sahi jankari bharein!");
             var text = `New Connection Request:%0aName: ${n}%0aEmail: ${e}%0aPhone: ${p}%0aMessage: ${m}`;
             window.open("https://wa.me/916391224488?text=" + text);
         }
 
         function sendToWhatsapp(plan) {
-            window.open("https://wa.me/916391224488?text=I am interested in the " + plan);
+            window.open("https://wa.me/916391224488?text=I am interested in " + plan);
         }
     </script>
 </body>
