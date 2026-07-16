@@ -64,6 +64,17 @@
             content: ''; width: 22px; height: 2px; background: var(--orange); display: inline-block;
         }
 
+        .grain-surface { position: relative; }
+        .grain-surface::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.05;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .section-wave { position: absolute; left: 0; width: 100%; line-height: 0; z-index: 3; pointer-events: none; }
+        .section-wave.bottom { bottom: -1px; }
+        .section-wave svg { width: 100%; height: 70px; display: block; }
+
         a { color: inherit; }
 
         /* ===== News Bar ===== */
@@ -164,10 +175,10 @@
 
         .header-actions { display: flex; align-items: center; gap: 12px; }
         .btn-quote {
-            background: var(--orange); color: white; padding: 12px 24px; border-radius: 999px;
+            background: linear-gradient(135deg, var(--orange-2), var(--orange) 55%, #d84400); color: white; padding: 12px 24px; border-radius: 999px;
             text-decoration: none; font-weight: 600; font-size: 14px; transition: 0.3s;
             display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255,94,20,0.3);
+            box-shadow: 0 10px 25px rgba(255,94,20,0.35), inset 0 1px 0 rgba(255,255,255,0.35);
         }
         .btn-quote:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(255,94,20,0.4); }
 
@@ -254,6 +265,27 @@
         }
         @media (max-width: 700px) { .float-orb { display: none; } }
 
+        .hero-status-card {
+            position: absolute; z-index: 4; right: 5%; bottom: 90px;
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; padding: 16px 20px;
+            display: flex; align-items: center; gap: 14px; box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+            animation: statusFloat 4.5s ease-in-out infinite;
+        }
+        @keyframes statusFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .hero-status-card .status-dot {
+            width: 10px; height: 10px; border-radius: 50%; background: #22e08a; flex-shrink: 0;
+            box-shadow: 0 0 0 0 rgba(34,224,138,0.6); animation: statusPing 1.8s ease-in-out infinite;
+        }
+        @keyframes statusPing {
+            0% { box-shadow: 0 0 0 0 rgba(34,224,138,0.55); }
+            70% { box-shadow: 0 0 0 9px rgba(34,224,138,0); }
+            100% { box-shadow: 0 0 0 0 rgba(34,224,138,0); }
+        }
+        .hero-status-card .status-title { font-size: 13.5px; font-weight: 700; color: white; font-family: 'Space Grotesk', sans-serif; }
+        .hero-status-card .status-sub { font-size: 11.5px; color: #b9c3da; margin-top: 1px; }
+        @media (max-width: 900px) { .hero-status-card { display: none; } }
+
         .hero-content {
             position: relative; z-index: 2; max-width: 640px; padding: 60px 5%;
         }
@@ -323,7 +355,11 @@
         .about-card {
             background: var(--paper); max-width: 960px; margin: 0 auto;
             padding: 48px 44px; border-radius: var(--radius); box-shadow: var(--shadow-soft);
-            text-align: center;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .about-card::before, .contact-card-left::before, .contact-card-right::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--pulse));
         }
         .about-card p { color: var(--ink-soft); font-size: 16px; line-height: 1.75; max-width: 720px; margin: 0 auto; }
         .about-features { display: flex; justify-content: center; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
@@ -341,6 +377,12 @@
         .about-features span:nth-child(4) { transition-delay: 0.44s; }
         .about-features span:hover { background: #fff1e9; box-shadow: 0 6px 16px rgba(255,94,20,0.15); transform: translateY(-3px); }
         .about-features i { color: var(--orange); }
+        .chip-icon {
+            width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+            background: linear-gradient(135deg, var(--orange-2), var(--orange));
+            color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 11px;
+        }
+        .about-features span { padding: 8px 18px 8px 8px; }
 
         /* ===== Signature: Network Path ===== */
         .network-path { background: var(--void); color: white; position: relative; overflow: hidden; }
@@ -441,6 +483,11 @@
         .card-header.lite { background: linear-gradient(135deg, var(--lite-color), #1c4fa0); }
         .card-header.pro { background: linear-gradient(135deg, var(--pro-color), #d84400); }
         .card-header.boost { background: linear-gradient(135deg, var(--boost-color), #05101f); }
+        .card-icon-badge {
+            width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,0.18);
+            display: flex; align-items: center; justify-content: center; font-size: 17px; margin-bottom: 14px;
+            position: relative; z-index: 1;
+        }
         .card-header h3 { margin: 0; font-size: 1.1rem; letter-spacing: 0.04em; text-transform: uppercase; }
         .plan-price { margin-top: 16px; display: flex; align-items: baseline; gap: 4px; }
         .plan-price span.amount { font-size: 2.3rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
@@ -454,10 +501,10 @@
             border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%;
             font-size: 15px; transition: 0.3s; color: white;
         }
-        .btn-plan.lite { background: var(--lite-color); }
-        .btn-plan.pro { background: var(--orange); }
-        .btn-plan.boost { background: var(--boost-color); }
-        .btn-plan:hover { filter: brightness(1.1); transform: translateY(-2px); }
+        .btn-plan.lite { background: linear-gradient(135deg, var(--lite-color), #1c4fa0); }
+        .btn-plan.pro { background: linear-gradient(135deg, var(--orange-2), var(--orange) 60%, #d84400); }
+        .btn-plan.boost { background: linear-gradient(135deg, #223a5e, var(--boost-color)); }
+        .btn-plan:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,0.18); }
 
         /* ===== Contact ===== */
         .contact-section-new { background: var(--pearl); }
@@ -466,6 +513,7 @@
         .contact-card-left, .contact-card-right {
             background: var(--paper); flex: 1; min-width: 320px; padding: 40px;
             border-radius: var(--radius); box-shadow: var(--shadow-soft);
+            position: relative; overflow: hidden;
         }
         .contact-card-left h2, .contact-card-right h2 { font-size: 1.5rem; margin-top: 0; }
 
@@ -514,7 +562,12 @@
         .btn-whatsapp-green:hover { transform: translateY(-3px); }
 
         /* ===== Footer ===== */
-        footer { background: var(--void); color: white; padding: 80px 5% 30px; }
+        footer { background: var(--void); color: white; padding: 80px 5% 30px; position: relative; overflow: hidden; }
+        footer::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--pulse), var(--deep-blue));
+            z-index: 2;
+        }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
         .footer-col h4 { color: var(--orange); margin-bottom: 22px; font-size: 18px; font-family: 'Space Grotesk', sans-serif; }
 
@@ -562,7 +615,7 @@
         </div>
     </header>
 
-    <section id="home" class="hero">
+    <section id="home" class="hero grain-surface">
         <div class="hero-slide-bg active" style="background-image: url('hero-bg.jpg');"></div>
         <div class="hero-slide-bg" style="background-image: url('photo2.jpg');"></div>
         <div class="hero-slide-bg" style="background-image: url('photo3.jpg');"></div>
@@ -575,6 +628,14 @@
         <div class="float-orb orb-2"></div>
         <div class="float-orb orb-3"></div>
         <div class="float-orb orb-4"></div>
+
+        <div class="hero-status-card">
+            <div class="status-dot"></div>
+            <div>
+                <div class="status-title">Network Live · 99.9% Uptime</div>
+                <div class="status-sub">Maharajganj Fiber + Wireless Grid</div>
+            </div>
+        </div>
 
         <div class="hero-content">
             <div class="eyebrow">Fiber + Wireless Network</div>
@@ -608,6 +669,7 @@
         </div>
 
         <div class="slide-dots" id="slideDots"></div>
+        <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,30 C360,80 1080,-10 1440,35 L1440,70 L0,70 Z" fill="#f6f8fc"></path></svg></div>
     </section>
 
     <section id="about" class="about-section reveal">
@@ -616,15 +678,15 @@
             <h2>Experience the Future of <span class="accent-word">Connectivity</span></h2>
             <p>At Shan Zone, we are redefining the digital landscape of Maharajganj. As a premier technology partner, we bridge the gap between you and the global world through cutting-edge Fiber and Hybrid Wireless solutions. Our commitment is to provide a seamless, high-speed experience tailored for homes, professionals, and growing businesses alike.</p>
             <div class="about-features">
-                <span><i class="fas fa-rocket"></i> Ultra-Fast Speed</span>
-                <span><i class="fas fa-headset"></i> 24/7 Priority Support</span>
-                <span><i class="fas fa-wifi"></i> Seamless Connectivity</span>
-                <span><i class="fas fa-shield-halved"></i> Zero Hidden Costs</span>
+                <span><span class="chip-icon"><i class="fas fa-rocket"></i></span> Ultra-Fast Speed</span>
+                <span><span class="chip-icon"><i class="fas fa-headset"></i></span> 24/7 Priority Support</span>
+                <span><span class="chip-icon"><i class="fas fa-wifi"></i></span> Seamless Connectivity</span>
+                <span><span class="chip-icon"><i class="fas fa-shield-halved"></i></span> Zero Hidden Costs</span>
             </div>
         </div>
     </section>
 
-    <section class="network-path reveal">
+    <section class="network-path grain-surface reveal">
         <div class="np-inner">
             <div class="eyebrow">How It Reaches You</div>
             <h2>One <span class="accent-word">Hybrid Network</span>. Built for Maharajganj.</h2>
@@ -646,6 +708,7 @@
             </div>
             <p class="np-caption">Fiber where it can reach, wireless where it needs to stretch — 99.9% network reliability engineered for buffer-free streaming, work, and gaming.</p>
         </div>
+        <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,35 C360,-10 1080,80 1440,30 L1440,70 L0,70 Z" fill="#ffffff"></path></svg></div>
     </section>
 
     <section id="plans" class="pricing reveal">
@@ -657,6 +720,7 @@
         <div class="price-grid">
             <div class="price-card">
                 <div class="card-header lite">
+                    <div class="card-icon-badge"><i class="fas fa-wifi"></i></div>
                     <h3>Lite Plan</h3>
                     <div class="plan-price"><span class="amount">₹599</span><span class="per">/month</span></div>
                 </div>
@@ -672,6 +736,7 @@
             <div class="price-card featured">
                 <div class="popular-tag">Most Popular</div>
                 <div class="card-header pro">
+                    <div class="card-icon-badge"><i class="fas fa-star"></i></div>
                     <h3>Pro Plan</h3>
                     <div class="plan-price"><span class="amount">₹799</span><span class="per">/month</span></div>
                 </div>
@@ -686,6 +751,7 @@
             </div>
             <div class="price-card">
                 <div class="card-header boost">
+                    <div class="card-icon-badge"><i class="fas fa-rocket"></i></div>
                     <h3>Boost Plan</h3>
                     <div class="plan-price"><span class="amount">₹1150</span><span class="per">/month</span></div>
                 </div>
@@ -758,7 +824,7 @@
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-    <footer>
+    <footer class="grain-surface">
         <div class="footer-grid">
             <div class="footer-col">
                 <img src="logo.jpg" style="height:56px; background:white; padding:6px; border-radius:8px; margin-bottom:18px;">
