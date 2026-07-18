@@ -174,6 +174,42 @@
         .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
         .back-to-top:hover { background: var(--orange); color: white; transform: translateY(-4px); }
 
+        /* ===== Floating WhatsApp button ===== */
+        .float-whatsapp {
+            position: fixed; bottom: 26px; left: 26px; width: 56px; height: 56px; border-radius: 50%;
+            background: #25D366; color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 26px; text-decoration: none; z-index: 900; box-shadow: 0 14px 30px rgba(37,211,102,0.45);
+        }
+        .float-whatsapp::before {
+            content: ''; position: absolute; inset: 0; border-radius: 50%; background: #25D366;
+            animation: waPing 2.2s ease-out infinite; z-index: -1;
+        }
+        @keyframes waPing {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.9); opacity: 0; }
+        }
+        @media (max-width: 700px) { .float-whatsapp { bottom: 78px; left: 18px; width: 50px; height: 50px; font-size: 22px; } }
+
+        /* ===== Mobile sticky action bar ===== */
+        .mobile-action-bar { display: none; }
+        @media (max-width: 700px) {
+            .mobile-action-bar {
+                display: flex; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 950;
+                background: var(--void); border-top: 1px solid rgba(255,255,255,0.1);
+                box-shadow: 0 -8px 24px rgba(0,0,0,0.25);
+            }
+            .mobile-action-bar a {
+                flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+                gap: 3px; padding: 10px 0 12px; color: white; text-decoration: none; font-size: 11px; font-weight: 600;
+            }
+            .mobile-action-bar a i { font-size: 17px; }
+            .mobile-action-bar a.ma-call i { color: var(--orange); }
+            .mobile-action-bar a.ma-whatsapp i { color: #25D366; }
+            .mobile-action-bar a.ma-plans i { color: var(--pulse); }
+            .mobile-action-bar a + a { border-left: 1px solid rgba(255,255,255,0.08); }
+            body { padding-bottom: 62px; }
+        }
+
         /* ===== Header ===== */
         header {
             background: rgba(255,255,255,0.85);
@@ -301,6 +337,29 @@
             display: flex; align-items: center; gap: 14px; box-shadow: 0 20px 50px rgba(0,0,0,0.35);
             animation: statusFloat 4.5s ease-in-out infinite;
         }
+
+        /* ===== Hero lead-capture card ===== */
+        .hero-lead-card {
+            position: absolute; z-index: 4; right: 5%; top: 130px; width: 310px;
+            background: rgba(11,17,33,0.55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.16); border-radius: 20px; padding: 24px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+        }
+        .hero-lead-card .lead-badge {
+            display: inline-flex; align-items: center; gap: 6px; background: rgba(201,164,76,0.16);
+            border: 1px solid rgba(201,164,76,0.4); color: var(--gold-light); font-size: 11px; font-weight: 700;
+            padding: 5px 12px; border-radius: 999px; margin-bottom: 14px; letter-spacing: 0.03em;
+        }
+        .hero-lead-card h3 { color: white; font-size: 1.05rem; margin: 0 0 16px; font-weight: 600; }
+        .hero-lead-card input {
+            width: 100%; padding: 11px 13px; margin-bottom: 11px; border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: white;
+            font-family: 'Poppins', sans-serif; font-size: 13.5px; box-sizing: border-box; transition: 0.25s;
+        }
+        .hero-lead-card input::placeholder { color: #8b96b3; }
+        .hero-lead-card input:focus { outline: none; border-color: var(--pulse); background: rgba(255,255,255,0.1); }
+        .hero-lead-card .lead-note { font-size: 11px; color: #8b96b3; text-align: center; margin-top: 10px; }
+        @media (max-width: 1100px) { .hero-lead-card { display: none; } }
         @keyframes statusFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         .hero-status-card .status-dot {
             width: 10px; height: 10px; border-radius: 50%; background: #22e08a; flex-shrink: 0;
@@ -316,7 +375,7 @@
         @media (max-width: 900px) { .hero-status-card { display: none; } }
 
         .hero-content {
-            position: relative; z-index: 2; max-width: 640px; padding: 60px 5%;
+            position: relative; z-index: 2; max-width: 580px; padding: 60px 5%;
         }
         .hero-content .eyebrow { color: var(--pulse); }
         .hero-content .eyebrow::before { background: var(--pulse); animation: eyebrowPulse 1.8s ease-in-out infinite; }
@@ -450,6 +509,44 @@
         .feature-card h3 { font-size: 1.05rem; margin: 0 0 10px; }
         .feature-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; margin: 0; }
 
+        /* ===== Speed Test ===== */
+        .speedtest-section { background: var(--paper); text-align: center; }
+        .speedtest-card {
+            max-width: 620px; margin: 0 auto; background: var(--void); border-radius: 24px;
+            padding: 48px 30px 38px; box-shadow: var(--shadow-lift); position: relative; overflow: hidden;
+        }
+        .speedtest-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(0,224,199,0.12), transparent 45%),
+                        radial-gradient(circle at 85% 80%, rgba(255,94,20,0.10), transparent 45%);
+        }
+        .gauge-wrap { position: relative; width: 220px; height: 220px; margin: 0 auto 10px; z-index: 1; }
+        .gauge-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .gauge-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 10; }
+        .gauge-fill {
+            fill: none; stroke: url(#gaugeGradient); stroke-width: 10; stroke-linecap: round;
+            stroke-dasharray: 439.8; stroke-dashoffset: 439.8; transition: stroke-dashoffset 0.25s linear;
+        }
+        .gauge-center {
+            position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .gauge-value { font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 700; color: white; line-height: 1; }
+        .gauge-unit { font-size: 12px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+        .speedtest-stats { display: flex; justify-content: center; gap: 40px; margin: 20px 0 26px; position: relative; z-index: 1; }
+        .speedtest-stats div { text-align: center; }
+        .speedtest-stats .st-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--pulse); }
+        .speedtest-stats .st-label { font-size: 11.5px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+        .speedtest-status { font-size: 13px; color: #b9c3da; min-height: 18px; margin-bottom: 18px; position: relative; z-index: 1; }
+        .btn-speedtest {
+            position: relative; z-index: 1; border: none; cursor: pointer; padding: 14px 34px; border-radius: 999px;
+            font-weight: 600; font-size: 14.5px; color: white;
+            background: linear-gradient(135deg, var(--orange-2), var(--orange) 60%, #d84400);
+            box-shadow: 0 12px 26px rgba(255,94,20,0.35); transition: 0.3s;
+        }
+        .btn-speedtest:hover:not(:disabled) { transform: translateY(-2px); }
+        .btn-speedtest:disabled { opacity: 0.75; cursor: not-allowed; }
+        .speedtest-disclaimer { font-size: 11.5px; color: #7c869e; margin-top: 18px; position: relative; z-index: 1; }
+
         /* ===== Signature: Network Path ===== */
         .network-path { background: var(--void); color: white; position: relative; overflow: hidden; }
         .network-path::before {
@@ -538,6 +635,12 @@
             background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2a1f05; font-size: 11px; font-weight: 700;
             letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px;
             z-index: 3; box-shadow: 0 6px 16px rgba(201,164,76,0.45);
+        }
+        .plan-tag {
+            position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+            background: rgba(255,255,255,0.14); color: white; font-size: 10.5px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
+            z-index: 3; border: 1px solid rgba(255,255,255,0.3);
         }
         .card-header {
             padding: 40px 26px 34px; color: white; text-align: left; position: relative; overflow: hidden;
@@ -711,6 +814,16 @@
             </div>
         </div>
 
+        <div class="hero-lead-card">
+            <div class="lead-badge">🚀 Free Installation</div>
+            <h3>Check Availability</h3>
+            <input type="text" id="leadName" placeholder="Full Name">
+            <input type="tel" id="leadPhone" placeholder="Mobile Number">
+            <input type="text" id="leadArea" placeholder="Area / Village">
+            <button class="btn-quote" style="width:100%; justify-content:center;" onclick="submitLeadCard()"><i class="fab fa-whatsapp"></i> Check & Apply</button>
+            <div class="lead-note">We'll confirm on WhatsApp within a few hours.</div>
+        </div>
+
         <div class="hero-content">
             <div class="eyebrow">Fiber + Wireless Network</div>
             <h1><span class="word-reveal"><span style="animation-delay:0.05s">Unstoppable</span></span>
@@ -821,6 +934,47 @@
         <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,35 C360,-10 1080,80 1440,30 L1440,70 L0,70 Z" fill="#ffffff"></path></svg></div>
     </section>
 
+    <section id="speedtest" class="speedtest-section reveal">
+        <div class="section-head">
+            <div class="eyebrow" style="justify-content:center;">Know Before You Switch</div>
+            <h2>Test Your Current <span class="accent-word">Internet Speed</span></h2>
+            <p>See what speed you're really getting right now — then compare it with our plans below.</p>
+        </div>
+        <div class="speedtest-card">
+            <svg width="0" height="0">
+                <defs>
+                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ff5e14"/>
+                        <stop offset="100%" stop-color="#00e0c7"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="gauge-wrap">
+                <svg class="gauge-svg" viewBox="0 0 160 160">
+                    <circle class="gauge-track" cx="80" cy="80" r="70"></circle>
+                    <circle class="gauge-fill" id="gaugeFill" cx="80" cy="80" r="70"></circle>
+                </svg>
+                <div class="gauge-center">
+                    <div class="gauge-value" id="stDownload">0</div>
+                    <div class="gauge-unit">Mbps Down</div>
+                </div>
+            </div>
+            <div class="speedtest-stats">
+                <div>
+                    <div class="st-num" id="stPing">--</div>
+                    <div class="st-label">Ping (ms)</div>
+                </div>
+                <div>
+                    <div class="st-num" id="stData">0</div>
+                    <div class="st-label">MB Tested</div>
+                </div>
+            </div>
+            <div class="speedtest-status" id="stStatus">Tap start to test your current connection</div>
+            <button class="btn-speedtest" id="stStartBtn" onclick="runSpeedTest()"><i class="fas fa-gauge-high"></i> Start Test</button>
+            <div class="speedtest-disclaimer">Measures your device's current internet connection in real time via your browser. Actual Shan Zone speeds depend on your active plan.</div>
+        </div>
+    </section>
+
     <section id="plans" class="pricing reveal">
         <div class="section-head">
             <div class="eyebrow" style="justify-content:center;">Simple, Honest Pricing</div>
@@ -860,6 +1014,7 @@
                 </div>
             </div>
             <div class="price-card">
+                <div class="plan-tag">Giga Speed</div>
                 <div class="card-header boost">
                     <div class="card-icon-badge"><i class="fas fa-rocket"></i></div>
                     <h3>Boost Plan</h3>
@@ -933,6 +1088,14 @@
     </section>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <a href="https://wa.me/916391224488" class="float-whatsapp" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+    <div class="mobile-action-bar">
+        <a href="tel:6391224488" class="ma-call"><i class="fas fa-phone-alt"></i> Call</a>
+        <a href="https://wa.me/916391224488" class="ma-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="#plans" class="ma-plans"><i class="fas fa-list"></i> Plans</a>
+    </div>
 
     <footer class="grain-surface">
         <div class="footer-grid">
@@ -1114,6 +1277,85 @@
 
         function sendToWhatsapp(plan) {
             window.open("https://wa.me/916391224488?text=I am interested in " + plan);
+        }
+
+        function submitLeadCard() {
+            var n = document.getElementById('leadName').value;
+            var p = document.getElementById('leadPhone').value;
+            var a = document.getElementById('leadArea').value;
+            if (!n || !p || !a) return alert("Kripya sahi jankari bharein!");
+            var text = `Check Availability Request:%0aName: ${n}%0aPhone: ${p}%0aArea: ${a}`;
+            window.open("https://wa.me/916391224488?text=" + text);
+        }
+
+        // ---- Real speed test (measures the visitor's actual current connection) ----
+        const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 70;
+        const GAUGE_MAX_MBPS = 150;
+        const SPEEDTEST_FILE = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+        const PING_FILE = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css";
+
+        function setGauge(mbps) {
+            const pct = Math.max(0, Math.min(mbps / GAUGE_MAX_MBPS, 1));
+            const offset = GAUGE_CIRCUMFERENCE - pct * GAUGE_CIRCUMFERENCE;
+            document.getElementById('gaugeFill').style.strokeDashoffset = offset;
+        }
+
+        async function runSpeedTest() {
+            const btn = document.getElementById('stStartBtn');
+            const downloadEl = document.getElementById('stDownload');
+            const pingEl = document.getElementById('stPing');
+            const dataEl = document.getElementById('stData');
+            const statusEl = document.getElementById('stStatus');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+            downloadEl.textContent = '0';
+            dataEl.textContent = '0';
+            pingEl.textContent = '--';
+            setGauge(0);
+
+            try {
+                // Ping test
+                statusEl.textContent = 'Measuring ping...';
+                let pings = [];
+                for (let i = 0; i < 3; i++) {
+                    const t0 = performance.now();
+                    await fetch(PING_FILE + '?cb=' + Math.random(), { cache: 'no-store', mode: 'cors' });
+                    pings.push(performance.now() - t0);
+                }
+                const avgPing = Math.round(pings.reduce((a, b) => a + b, 0) / pings.length);
+                pingEl.textContent = avgPing;
+
+                // Download test — repeatedly fetches a real file for ~4 seconds and measures throughput
+                statusEl.textContent = 'Measuring download speed...';
+                const testDurationMs = 4000;
+                const startTime = performance.now();
+                let totalBytes = 0;
+
+                while (performance.now() - startTime < testDurationMs) {
+                    const res = await fetch(SPEEDTEST_FILE + '?cb=' + Math.random(), { cache: 'no-store', mode: 'cors' });
+                    const blob = await res.blob();
+                    totalBytes += blob.size;
+                    const elapsedSec = (performance.now() - startTime) / 1000;
+                    if (elapsedSec > 0) {
+                        const mbps = ((totalBytes * 8) / 1e6) / elapsedSec;
+                        downloadEl.textContent = mbps.toFixed(1);
+                        dataEl.textContent = (totalBytes / 1e6).toFixed(1);
+                        setGauge(mbps);
+                    }
+                }
+
+                const finalElapsedSec = (performance.now() - startTime) / 1000;
+                const finalMbps = ((totalBytes * 8) / 1e6) / finalElapsedSec;
+                downloadEl.textContent = finalMbps.toFixed(1);
+                setGauge(finalMbps);
+                statusEl.textContent = 'Test complete — run again anytime';
+            } catch (err) {
+                statusEl.textContent = 'Could not complete test. Check your connection and try again.';
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-gauge-high"></i> Test Again';
         }
     </script>
 </body>
