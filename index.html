@@ -1359,6 +1359,13 @@
             }
         }
 
+        // Only these districts are in Shan Zone's actual service area
+        const SERVICE_DISTRICTS = ['maharajganj', 'kushinagar', 'gorakhpur'];
+        function isInServiceArea(district) {
+            const d = (district || '').toLowerCase();
+            return SERVICE_DISTRICTS.some(sd => d.includes(sd));
+        }
+
         async function fetchVillageSuggestions(query) {
             const box = document.getElementById('areaSuggestions');
             box.innerHTML = '<div class="area-suggestion-empty">Searching...</div>';
@@ -1367,14 +1374,13 @@
                 const res = await fetch(`https://api.postalpincode.in/postoffice/${encodeURIComponent(query)}`);
                 const data = await res.json();
                 if (!data || !data[0] || data[0].Status !== 'Success') {
-                    box.innerHTML = '<div class="area-suggestion-empty">No matches — you can type manually</div>';
+                    box.innerHTML = '<div class="area-suggestion-empty">No matches in Maharajganj, Kushinagar or Gorakhpur — try another spelling</div>';
                     return;
                 }
                 const results = data[0].PostOffice || [];
-                const local = results.filter(p => (p.District || '').toLowerCase().includes('maharajganj'));
-                const list = (local.length ? local : results).slice(0, 8);
+                const list = results.filter(p => isInServiceArea(p.District)).slice(0, 8);
                 if (!list.length) {
-                    box.innerHTML = '<div class="area-suggestion-empty">No matches — you can type manually</div>';
+                    box.innerHTML = '<div class="area-suggestion-empty">No matches in Maharajganj, Kushinagar or Gorakhpur — try another spelling</div>';
                     return;
                 }
                 box.innerHTML = list.map(p =>
@@ -1399,9 +1405,9 @@
                     box.innerHTML = '<div class="area-suggestion-empty">No matches found for this PIN</div>';
                     return;
                 }
-                const list = (data[0].PostOffice || []).slice(0, 8);
+                const list = (data[0].PostOffice || []).filter(p => isInServiceArea(p.District)).slice(0, 8);
                 if (!list.length) {
-                    box.innerHTML = '<div class="area-suggestion-empty">No matches found for this PIN</div>';
+                    box.innerHTML = '<div class="area-suggestion-empty">This PIN is outside our service area (Maharajganj, Kushinagar, Gorakhpur)</div>';
                     return;
                 }
                 box.innerHTML = list.map(p =>
@@ -1428,15 +1434,34 @@
         });
 
         // ---- Real speed test (measures the visitor's actual current connection) ----
+        // Uses multiple parallel connections + a warm-up phase, like real speed-test tools,
+        // because a single sequential connection under-reports true bandwidth due to TCP slow-start.
         const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 70;
-        const GAUGE_MAX_MBPS = 150;
+        const GAUGE_MAX_MBPS = 300;
         const SPEEDTEST_FILE = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
-        const PING_FILE = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css";
+        const PING_ENDPOINT = "https://www.gstatic.com/generate_204";
+        const DOWNLOAD_CONCURRENCY = 6;
+        const WARMUP_MS = 700;
+        const MEASURE_MS = 4500;
 
         function setGauge(mbps) {
             const pct = Math.max(0, Math.min(mbps / GAUGE_MAX_MBPS, 1));
             const offset = GAUGE_CIRCUMFERENCE - pct * GAUGE_CIRCUMFERENCE;
             document.getElementById('gaugeFill').style.strokeDashoffset = offset;
+        }
+
+        async function measurePing() {
+            const samples = [];
+            for (let i = 0; i < 6; i++) {
+                const t0 = performance.now();
+                try {
+                    await fetch(PING_ENDPOINT + '?cb=' + Math.random() + Date.now(), { mode: 'no-cors', cache: 'no-store' });
+                } catch (e) { /* ignore, still timed */ }
+                samples.push(performance.now() - t0);
+            }
+            samples.shift(); // discard first sample — cold connection setup skews it
+            samples.sort((a, b) => a - b);
+            return Math.round(samples[Math.floor(samples.length / 2)]); // median
         }
 
         async function runSpeedTest() {
@@ -1454,38 +1479,62 @@
             setGauge(0);
 
             try {
-                // Ping test
                 statusEl.textContent = 'Measuring ping...';
-                let pings = [];
-                for (let i = 0; i < 3; i++) {
-                    const t0 = performance.now();
-                    await fetch(PING_FILE + '?cb=' + Math.random(), { cache: 'no-store', mode: 'cors' });
-                    pings.push(performance.now() - t0);
-                }
-                const avgPing = Math.round(pings.reduce((a, b) => a + b, 0) / pings.length);
-                pingEl.textContent = avgPing;
+                pingEl.textContent = await measurePing();
 
-                // Download test — repeatedly fetches a real file for ~4 seconds and measures throughput
-                statusEl.textContent = 'Measuring download speed...';
-                const testDurationMs = 4000;
-                const startTime = performance.now();
-                let totalBytes = 0;
+                statusEl.textContent = 'Warming up connection...';
+                const testStart = performance.now();
+                const warmupEndsAt = testStart + WARMUP_MS;
+                const testEndsAt = warmupEndsAt + MEASURE_MS;
 
-                while (performance.now() - startTime < testDurationMs) {
-                    const res = await fetch(SPEEDTEST_FILE + '?cb=' + Math.random(), { cache: 'no-store', mode: 'cors' });
-                    const blob = await res.blob();
-                    totalBytes += blob.size;
-                    const elapsedSec = (performance.now() - startTime) / 1000;
-                    if (elapsedSec > 0) {
-                        const mbps = ((totalBytes * 8) / 1e6) / elapsedSec;
+                let totalBytes = 0;      // all bytes, including warm-up (shown as "MB Tested")
+                let measuredBytes = 0;   // bytes counted only after warm-up (used for the real speed figure)
+                let measuredStart = null;
+                let switchedToMeasuring = false;
+
+                function onChunk(len) {
+                    totalBytes += len;
+                    dataEl.textContent = (totalBytes / 1e6).toFixed(1);
+                    const now = performance.now();
+                    if (now < warmupEndsAt) return;
+                    if (!switchedToMeasuring) {
+                        switchedToMeasuring = true;
+                        measuredStart = now;
+                        statusEl.textContent = 'Measuring download speed...';
+                    }
+                    measuredBytes += len;
+                    const elapsedSec = (now - measuredStart) / 1000;
+                    if (elapsedSec > 0.05) {
+                        const mbps = ((measuredBytes * 8) / 1e6) / elapsedSec;
                         downloadEl.textContent = mbps.toFixed(1);
-                        dataEl.textContent = (totalBytes / 1e6).toFixed(1);
                         setGauge(mbps);
                     }
                 }
 
-                const finalElapsedSec = (performance.now() - startTime) / 1000;
-                const finalMbps = ((totalBytes * 8) / 1e6) / finalElapsedSec;
+                async function worker() {
+                    while (performance.now() < testEndsAt) {
+                        try {
+                            const res = await fetch(SPEEDTEST_FILE + '?cb=' + Math.random() + Date.now(), { cache: 'no-store', mode: 'cors' });
+                            if (!res.body) {
+                                const blob = await res.blob();
+                                onChunk(blob.size);
+                                continue;
+                            }
+                            const reader = res.body.getReader();
+                            while (true) {
+                                const { done, value } = await reader.read();
+                                if (done) break;
+                                onChunk(value.length);
+                                if (performance.now() >= testEndsAt) { reader.cancel(); break; }
+                            }
+                        } catch (e) { break; }
+                    }
+                }
+
+                await Promise.all(Array.from({ length: DOWNLOAD_CONCURRENCY }, () => worker()));
+
+                const finalElapsedSec = measuredStart ? (performance.now() - measuredStart) / 1000 : 0;
+                const finalMbps = finalElapsedSec > 0 ? ((measuredBytes * 8) / 1e6) / finalElapsedSec : 0;
                 downloadEl.textContent = finalMbps.toFixed(1);
                 setGauge(finalMbps);
                 statusEl.textContent = 'Test complete — run again anytime';
