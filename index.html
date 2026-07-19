@@ -360,6 +360,34 @@
         .hero-lead-card input:focus { outline: none; border-color: var(--pulse); background: rgba(255,255,255,0.1); }
         .hero-lead-card .lead-note { font-size: 11px; color: #8b96b3; text-align: center; margin-top: 10px; }
         @media (max-width: 1100px) { .hero-lead-card { display: none; } }
+
+        /* ===== Area toggle + autocomplete ===== */
+        .area-toggle { display: flex; gap: 6px; margin-bottom: 10px; }
+        .area-tab {
+            flex: 1; padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+            color: #b9c3da; font-size: 11.5px; font-weight: 600; font-family: 'Poppins', sans-serif;
+            transition: 0.25s;
+        }
+        .area-tab.active {
+            background: linear-gradient(135deg, var(--orange-2), var(--orange)); color: white; border-color: transparent;
+        }
+        .area-input-wrap { position: relative; }
+        .area-suggestions {
+            position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 20;
+            background: rgba(11,17,33,0.98); border: 1px solid rgba(255,255,255,0.16); border-radius: 10px;
+            max-height: 190px; overflow-y: auto; display: none;
+            box-shadow: 0 18px 36px rgba(0,0,0,0.45);
+        }
+        .area-suggestions.show { display: block; }
+        .area-suggestion-item {
+            padding: 10px 13px; font-size: 13px; color: #e2e7f5; cursor: pointer; text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 0.2s;
+        }
+        .area-suggestion-item:last-child { border-bottom: none; }
+        .area-suggestion-item:hover { background: rgba(0,224,199,0.12); }
+        .area-suggestion-item small { display: block; color: #8b96b3; font-size: 11px; margin-top: 2px; }
+        .area-suggestion-empty { padding: 12px 13px; font-size: 12.5px; color: #8b96b3; text-align: center; }
         @keyframes statusFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         .hero-status-card .status-dot {
             width: 10px; height: 10px; border-radius: 50%; background: #22e08a; flex-shrink: 0;
@@ -815,11 +843,20 @@
         </div>
 
         <div class="hero-lead-card">
-            <div class="lead-badge">🚀 Free Installation</div>
+            <div class="lead-badge">⚡ Quick Response</div>
             <h3>Check Availability</h3>
             <input type="text" id="leadName" placeholder="Full Name">
             <input type="tel" id="leadPhone" placeholder="Mobile Number">
-            <input type="text" id="leadArea" placeholder="Area / Village">
+
+            <div class="area-toggle">
+                <button type="button" class="area-tab active" data-mode="village" onclick="setAreaMode('village')">Village Name</button>
+                <button type="button" class="area-tab" data-mode="pin" onclick="setAreaMode('pin')">PIN Code</button>
+            </div>
+            <div class="area-input-wrap">
+                <input type="text" id="leadArea" placeholder="Type village name (min 2 letters)" autocomplete="off" oninput="handleAreaInput()">
+                <div class="area-suggestions" id="areaSuggestions"></div>
+            </div>
+
             <button class="btn-quote" style="width:100%; justify-content:center;" onclick="submitLeadCard()"><i class="fab fa-whatsapp"></i> Check & Apply</button>
             <div class="lead-note">We'll confirm on WhatsApp within a few hours.</div>
         </div>
@@ -1287,6 +1324,108 @@
             var text = `Check Availability Request:%0aName: ${n}%0aPhone: ${p}%0aArea: ${a}`;
             window.open("https://wa.me/916391224488?text=" + text);
         }
+
+        // ---- Village / PIN autocomplete (uses India Post's public PIN code database) ----
+        let areaMode = 'village';
+        let areaDebounce;
+
+        function setAreaMode(mode) {
+            areaMode = mode;
+            document.querySelectorAll('.area-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+            const input = document.getElementById('leadArea');
+            input.value = '';
+            document.getElementById('areaSuggestions').classList.remove('show');
+            if (mode === 'pin') {
+                input.placeholder = 'Enter 6-digit PIN code';
+                input.setAttribute('inputmode', 'numeric');
+                input.setAttribute('maxlength', '6');
+            } else {
+                input.placeholder = 'Type village name (min 2 letters)';
+                input.removeAttribute('inputmode');
+                input.removeAttribute('maxlength');
+            }
+        }
+
+        function handleAreaInput() {
+            clearTimeout(areaDebounce);
+            const query = document.getElementById('leadArea').value.trim();
+            const box = document.getElementById('areaSuggestions');
+            if (areaMode === 'village') {
+                if (query.length < 2) { box.classList.remove('show'); return; }
+                areaDebounce = setTimeout(() => fetchVillageSuggestions(query), 400);
+            } else {
+                if (!/^\d{6}$/.test(query)) { box.classList.remove('show'); return; }
+                areaDebounce = setTimeout(() => fetchPinSuggestions(query), 200);
+            }
+        }
+
+        async function fetchVillageSuggestions(query) {
+            const box = document.getElementById('areaSuggestions');
+            box.innerHTML = '<div class="area-suggestion-empty">Searching...</div>';
+            box.classList.add('show');
+            try {
+                const res = await fetch(`https://api.postalpincode.in/postoffice/${encodeURIComponent(query)}`);
+                const data = await res.json();
+                if (!data || !data[0] || data[0].Status !== 'Success') {
+                    box.innerHTML = '<div class="area-suggestion-empty">No matches — you can type manually</div>';
+                    return;
+                }
+                const results = data[0].PostOffice || [];
+                const local = results.filter(p => (p.District || '').toLowerCase().includes('maharajganj'));
+                const list = (local.length ? local : results).slice(0, 8);
+                if (!list.length) {
+                    box.innerHTML = '<div class="area-suggestion-empty">No matches — you can type manually</div>';
+                    return;
+                }
+                box.innerHTML = list.map(p =>
+                    `<div class="area-suggestion-item" onclick="selectArea('${p.Name.replace(/'/g, "\\'")}', '${p.Pincode}')">
+                        ${p.Name}
+                        <small>${p.District}, ${p.State} — PIN ${p.Pincode}</small>
+                    </div>`
+                ).join('');
+            } catch (e) {
+                box.innerHTML = '<div class="area-suggestion-empty">Could not fetch suggestions — type manually</div>';
+            }
+        }
+
+        async function fetchPinSuggestions(pin) {
+            const box = document.getElementById('areaSuggestions');
+            box.innerHTML = '<div class="area-suggestion-empty">Searching...</div>';
+            box.classList.add('show');
+            try {
+                const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+                const data = await res.json();
+                if (!data || !data[0] || data[0].Status !== 'Success') {
+                    box.innerHTML = '<div class="area-suggestion-empty">No matches found for this PIN</div>';
+                    return;
+                }
+                const list = (data[0].PostOffice || []).slice(0, 8);
+                if (!list.length) {
+                    box.innerHTML = '<div class="area-suggestion-empty">No matches found for this PIN</div>';
+                    return;
+                }
+                box.innerHTML = list.map(p =>
+                    `<div class="area-suggestion-item" onclick="selectArea('${p.Name.replace(/'/g, "\\'")}', '${p.Pincode}')">
+                        ${p.Name}
+                        <small>${p.District}, ${p.State}</small>
+                    </div>`
+                ).join('');
+            } catch (e) {
+                box.innerHTML = '<div class="area-suggestion-empty">Could not fetch — type manually</div>';
+            }
+        }
+
+        function selectArea(name, pin) {
+            document.getElementById('leadArea').value = `${name} - ${pin}`;
+            document.getElementById('areaSuggestions').classList.remove('show');
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.area-input-wrap') && !e.target.closest('.area-toggle')) {
+                const box = document.getElementById('areaSuggestions');
+                if (box) box.classList.remove('show');
+            }
+        });
 
         // ---- Real speed test (measures the visitor's actual current connection) ----
         const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 70;
