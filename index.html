@@ -388,6 +388,15 @@
         .area-suggestion-item:hover { background: rgba(0,224,199,0.12); }
         .area-suggestion-item small { display: block; color: #8b96b3; font-size: 11px; margin-top: 2px; }
         .area-suggestion-empty { padding: 12px 13px; font-size: 12.5px; color: #8b96b3; text-align: center; }
+
+        .block-select-wrap { display: flex; gap: 8px; margin-bottom: 4px; }
+        .block-select-wrap select {
+            flex: 1; padding: 11px 10px; border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: white;
+            font-family: 'Poppins', sans-serif; font-size: 13px; box-sizing: border-box;
+        }
+        .block-select-wrap select:disabled { opacity: 0.5; }
+        .block-select-wrap select option { background: #0b1121; color: white; }
         @keyframes statusFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         .hero-status-card .status-dot {
             width: 10px; height: 10px; border-radius: 50%; background: #22e08a; flex-shrink: 0;
@@ -540,30 +549,64 @@
         /* ===== Speed Test ===== */
         .speedtest-section { background: var(--paper); text-align: center; }
         .speedtest-card {
-            max-width: 620px; margin: 0 auto; background: var(--void); border-radius: 24px;
-            padding: 48px 30px 38px; box-shadow: var(--shadow-lift); position: relative; overflow: hidden;
+            max-width: 640px; margin: 0 auto; background: var(--void); border-radius: 24px;
+            padding: 40px 30px 34px; box-shadow: var(--shadow-lift); position: relative; overflow: hidden;
         }
         .speedtest-card::before {
             content: ''; position: absolute; inset: 0;
             background: radial-gradient(circle at 20% 20%, rgba(0,224,199,0.12), transparent 45%),
                         radial-gradient(circle at 85% 80%, rgba(255,94,20,0.10), transparent 45%);
         }
-        .gauge-wrap { position: relative; width: 220px; height: 220px; margin: 0 auto 10px; z-index: 1; }
-        .gauge-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-        .gauge-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 10; }
-        .gauge-fill {
-            fill: none; stroke: url(#gaugeGradient); stroke-width: 10; stroke-linecap: round;
-            stroke-dasharray: 439.8; stroke-dashoffset: 439.8; transition: stroke-dashoffset 0.25s linear;
+
+        .st-topline { display: flex; justify-content: center; gap: 56px; position: relative; z-index: 1; margin-bottom: 6px; }
+        .st-topline-label {
+            font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: #9aa5c0;
+            display: flex; align-items: center; gap: 6px; justify-content: center;
         }
-        .gauge-center {
-            position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        .st-topline-label i { font-size: 11px; }
+        .st-topline-item:first-child .st-topline-label i { color: var(--pulse); }
+        .st-topline-item:last-child .st-topline-label i { color: var(--gold-light); }
+        .st-topline-label span { font-weight: 500; color: #6b7590; }
+        .st-topline-value {
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; color: white; line-height: 1.2;
         }
-        .gauge-value { font-family: 'Space Grotesk', sans-serif; font-size: 2.6rem; font-weight: 700; color: white; line-height: 1; }
-        .gauge-unit { font-size: 12px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
-        .speedtest-stats { display: flex; justify-content: center; gap: 40px; margin: 20px 0 26px; position: relative; z-index: 1; }
-        .speedtest-stats div { text-align: center; }
-        .speedtest-stats .st-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--pulse); }
-        .speedtest-stats .st-label { font-size: 11.5px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+        .st-midline {
+            display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
+            font-size: 12.5px; color: #9aa5c0; margin: 8px 0 6px; position: relative; z-index: 1;
+        }
+        .st-midline i { color: var(--pulse); margin-right: 4px; }
+        .st-midline b { color: white; font-weight: 600; }
+
+        .gauge-wrap { position: relative; width: 260px; height: 205px; margin: 6px auto 0; z-index: 1; }
+        .gauge-svg { width: 100%; height: 100%; }
+        .gauge-track-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; stroke-linecap: round; }
+        .gauge-track-fill {
+            fill: none; stroke: url(#gaugeGradient); stroke-width: 9; stroke-linecap: round;
+            stroke-dasharray: 401; stroke-dashoffset: 401; transition: stroke-dashoffset 0.2s linear;
+        }
+        .gauge-tick { stroke: rgba(255,255,255,0.35); stroke-width: 1.5; }
+        .gauge-tick-label { fill: #8b96b3; font-size: 9px; font-family: 'Space Grotesk', sans-serif; }
+        .gauge-needle-group { transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
+        .gauge-needle { stroke: var(--orange-2); stroke-width: 2.5; stroke-linecap: round; }
+        .gauge-needle-hub { fill: var(--orange-2); stroke: white; stroke-width: 1.5; }
+        .gauge-center-value {
+            position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); text-align: center;
+        }
+        .gauge-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.9rem; font-weight: 700; color: white; line-height: 1; }
+        .gauge-unit { font-size: 10.5px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+        .st-category-row {
+            display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
+            margin: 12px 0 18px; position: relative; z-index: 1;
+        }
+        .st-category { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 66px; }
+        .st-category i { font-size: 16px; color: #cfd8ee; }
+        .st-category span { font-size: 10px; color: #8b96b3; text-transform: uppercase; letter-spacing: 0.03em; }
+        .st-dots { display: flex; gap: 3px; }
+        .st-dots span { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.15); display: block; }
+        .st-dots span.filled { background: var(--pulse); }
+
         .speedtest-status { font-size: 13px; color: #b9c3da; min-height: 18px; margin-bottom: 18px; position: relative; z-index: 1; }
         .btn-speedtest {
             position: relative; z-index: 1; border: none; cursor: pointer; padding: 14px 34px; border-radius: 999px;
@@ -573,6 +616,14 @@
         }
         .btn-speedtest:hover:not(:disabled) { transform: translateY(-2px); }
         .btn-speedtest:disabled { opacity: 0.75; cursor: not-allowed; }
+
+        .st-isp-row {
+            display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-top: 20px;
+            padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;
+        }
+        .st-isp-row > div { font-size: 12.5px; color: #cfd8ee; display: flex; flex-direction: column; gap: 2px; }
+        .st-isp-label { font-size: 10px; color: #7c869e; text-transform: uppercase; letter-spacing: 0.06em; }
+
         .speedtest-disclaimer { font-size: 11.5px; color: #7c869e; margin-top: 18px; position: relative; z-index: 1; }
 
         /* ===== Signature: Network Path ===== */
@@ -849,12 +900,24 @@
             <input type="tel" id="leadPhone" placeholder="Mobile Number">
 
             <div class="area-toggle">
-                <button type="button" class="area-tab active" data-mode="village" onclick="setAreaMode('village')">Village Name</button>
+                <button type="button" class="area-tab active" data-mode="village" onclick="setAreaMode('village')">Village</button>
                 <button type="button" class="area-tab" data-mode="pin" onclick="setAreaMode('pin')">PIN Code</button>
+                <button type="button" class="area-tab" data-mode="block" onclick="setAreaMode('block')">Block</button>
             </div>
             <div class="area-input-wrap">
                 <input type="text" id="leadArea" placeholder="Type village name (min 2 letters)" autocomplete="off" oninput="handleAreaInput()">
                 <div class="area-suggestions" id="areaSuggestions"></div>
+            </div>
+            <div class="block-select-wrap" id="blockSelectWrap" style="display:none;">
+                <select id="blockDistrictSelect" onchange="onBlockDistrictChange()">
+                    <option value="">Select District</option>
+                    <option value="M">Maharajganj</option>
+                    <option value="K">Kushinagar</option>
+                    <option value="G">Gorakhpur</option>
+                </select>
+                <select id="blockNameSelect" onchange="onBlockSelect()" disabled>
+                    <option value="">Select Block</option>
+                </select>
             </div>
 
             <button class="btn-quote" style="width:100%; justify-content:center;" onclick="submitLeadCard()"><i class="fab fa-whatsapp"></i> Check & Apply</button>
@@ -978,39 +1041,84 @@
             <p>See what speed you're really getting right now — then compare it with our plans below.</p>
         </div>
         <div class="speedtest-card">
-            <svg width="0" height="0">
-                <defs>
-                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ff5e14"/>
-                        <stop offset="100%" stop-color="#00e0c7"/>
-                    </linearGradient>
-                </defs>
-            </svg>
+            <div class="st-topline">
+                <div class="st-topline-item">
+                    <div class="st-topline-label"><i class="fas fa-arrow-down"></i> DOWNLOAD <span>Mbps</span></div>
+                    <div class="st-topline-value" id="stDownload">0</div>
+                </div>
+                <div class="st-topline-item">
+                    <div class="st-topline-label"><i class="fas fa-arrow-up"></i> UPLOAD <span>Mbps</span></div>
+                    <div class="st-topline-value" id="stUpload">0</div>
+                </div>
+            </div>
+            <div class="st-midline">
+                <div><i class="fas fa-signal"></i> Ping <b id="stPing">--</b> ms</div>
+                <div><i class="fas fa-wave-square"></i> Jitter <b id="stJitter">--</b> ms</div>
+                <div><i class="fas fa-download"></i> <b id="stData">0</b> MB Tested</div>
+            </div>
+
             <div class="gauge-wrap">
-                <svg class="gauge-svg" viewBox="0 0 160 160">
-                    <circle class="gauge-track" cx="80" cy="80" r="70"></circle>
-                    <circle class="gauge-fill" id="gaugeFill" cx="80" cy="80" r="70"></circle>
+                <svg class="gauge-svg" viewBox="0 0 240 190">
+                    <defs>
+                        <linearGradient id="gaugeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ff5e14"/>
+                            <stop offset="55%" stop-color="#c9a44c"/>
+                            <stop offset="100%" stop-color="#00e0c7"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="gauge-track-bg" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
+                    <path class="gauge-track-fill" id="gaugeFill" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
+
+                    <line x1="64.3" y1="167.0" x2="46.3" y2="179.6" class="gauge-tick"/>
+                    <text x="79.0" y="156.7" class="gauge-tick-label" text-anchor="middle">0</text>
+                    <line x1="52.1" y1="132.4" x2="30.2" y2="133.9" class="gauge-tick"/>
+                    <text x="70.1" y="131.3" class="gauge-tick-label" text-anchor="middle">5</text>
+                    <line x1="59.7" y1="96.6" x2="40.2" y2="86.4" class="gauge-tick"/>
+                    <text x="75.6" y="104.9" class="gauge-tick-label" text-anchor="middle">10</text>
+                    <line x1="84.7" y1="69.9" x2="73.3" y2="51.1" class="gauge-tick"/>
+                    <text x="94.1" y="85.3" class="gauge-tick-label" text-anchor="middle">50</text>
+                    <line x1="120.0" y1="60.0" x2="120.0" y2="38.0" class="gauge-tick"/>
+                    <text x="120.0" y="78.0" class="gauge-tick-label" text-anchor="middle">100</text>
+                    <line x1="155.3" y1="69.9" x2="166.7" y2="51.1" class="gauge-tick"/>
+                    <text x="145.9" y="85.3" class="gauge-tick-label" text-anchor="middle">250</text>
+                    <line x1="180.3" y1="96.6" x2="199.8" y2="86.4" class="gauge-tick"/>
+                    <text x="164.4" y="104.9" class="gauge-tick-label" text-anchor="middle">500</text>
+                    <line x1="187.9" y1="132.4" x2="209.8" y2="133.9" class="gauge-tick"/>
+                    <text x="169.9" y="131.3" class="gauge-tick-label" text-anchor="middle">750</text>
+                    <line x1="175.7" y1="167.0" x2="193.7" y2="179.6" class="gauge-tick"/>
+                    <text x="161.0" y="156.7" class="gauge-tick-label" text-anchor="middle">1000</text>
+
+                    <g id="gaugeNeedle" class="gauge-needle-group" style="transform-origin: 120px 128px;">
+                        <line x1="120" y1="128" x2="120" y2="52" class="gauge-needle"/>
+                        <circle cx="120" cy="128" r="6" class="gauge-needle-hub"/>
+                    </g>
                 </svg>
-                <div class="gauge-center">
-                    <div class="gauge-value" id="stDownload">0</div>
-                    <div class="gauge-unit">Mbps Down</div>
+                <div class="gauge-center-value">
+                    <div class="gauge-value" id="gaugeCenterVal">0</div>
+                    <div class="gauge-unit">Mbps</div>
                 </div>
             </div>
-            <div class="speedtest-stats">
-                <div>
-                    <div class="st-num" id="stPing">--</div>
-                    <div class="st-label">Ping (ms)</div>
-                </div>
-                <div>
-                    <div class="st-num" id="stData">0</div>
-                    <div class="st-label">MB Tested</div>
-                </div>
+
+            <div class="st-category-row">
+                <div class="st-category" id="catBrowsing"><i class="fas fa-window-restore"></i><span>Browsing</span><div class="st-dots"></div></div>
+                <div class="st-category" id="catGaming"><i class="fas fa-gamepad"></i><span>Gaming</span><div class="st-dots"></div></div>
+                <div class="st-category" id="catStreaming"><i class="fas fa-play"></i><span>Streaming</span><div class="st-dots"></div></div>
+                <div class="st-category" id="catVideoChat"><i class="fas fa-video"></i><span>Video Chat</span><div class="st-dots"></div></div>
             </div>
+
             <div class="speedtest-status" id="stStatus">Tap start to test your current connection</div>
             <button class="btn-speedtest" id="stStartBtn" onclick="runSpeedTest()"><i class="fas fa-gauge-high"></i> Start Test</button>
+
+            <div class="st-isp-row" id="stIspRow" style="display:none;">
+                <div><span class="st-isp-label">ISP</span><span id="stIsp">—</span></div>
+                <div><span class="st-isp-label">IP</span><span id="stIp">—</span></div>
+                <div><span class="st-isp-label">Location</span><span id="stLoc">—</span></div>
+            </div>
+
             <div class="speedtest-disclaimer">Measures your device's current internet connection in real time via your browser. Actual Shan Zone speeds depend on your active plan.</div>
         </div>
     </section>
+
 
     <section id="plans" class="pricing reveal">
         <div class="section-head">
@@ -1325,16 +1433,1608 @@
             window.open("https://wa.me/916391224488?text=" + text);
         }
 
-        // ---- Village / PIN autocomplete (uses India Post's public PIN code database) ----
+        // ---- Village / PIN autocomplete ----
+        // Complete official India Post directory for Shan Zone's 3 service districts,
+        // embedded locally so every village/PIN in these districts is searchable instantly (no missing entries, no network dependency).
+        const LOCAL_AREA_DATA = [
+['A.P.Station','273002','G'],
+['Alawalpur','273213','G'],
+['Alinagar','273001','G'],
+['Allahadadpur','273001','G'],
+['Amhia','273202','G'],
+['Amtaura','273212','G'],
+['Arogyamandir','273003','G'],
+['Arwagadish','273407','G'],
+['Ashauji Bazar','273213','G'],
+['Ashok Nagar (Gorakhpur)','273004','G'],
+['Awadhpur','273202','G'],
+['B.R.D Medical College','273013','G'],
+['Babhnauli','273404','G'],
+['Badago','273213','G'],
+['Badhara Baraipar','273306','G'],
+['Baghar','273201','G'],
+['Baghrain','273403','G'],
+['Bahrampur','273016','G'],
+['Baidabazar','273158','G'],
+['Baksuri','273413','G'],
+['Balapar','273007','G'],
+['Baluwa','273158','G'],
+['Balwa Dakhli','273402','G'],
+['Ban','273165','G'],
+['Bank Road (Gorakhpur)','273001','G'],
+['Bansgaon (Gorakhpur)','273403','G'],
+['Baraipar','273412','G'],
+['Baraipur','273002','G'],
+['Baraipurwa','273406','G'],
+['Baranagar','273409','G'],
+['Baraw','273213','G'],
+['Barayapar','273211','G'],
+['Bargahan','273212','G'],
+['Bargahpur','273157','G'],
+['Bargo','273016','G'],
+['Barhalganj','273402','G'],
+['Barhi (Gorakhpur)','273405','G'],
+['Barhyachowk','273165','G'],
+['Baria Khas','273402','G'],
+['Bariepar','273209','G'],
+['Barigaon','273211','G'],
+['Baripur','273213','G'],
+['Barni Gopalpur','273406','G'],
+['Barpar','273402','G'],
+['Barpar Mafi','273409','G'],
+['Basahi','273407','G'],
+['Basantpur','273158','G'],
+['Basdila','273202','G'],
+['Basharatpur','273004','G'],
+['Bashwanpur','273413','G'],
+['Basiakhor','273212','G'],
+['Bautha','273405','G'],
+['Bela Khurd','273407','G'],
+['Belabirbhan','273411','G'],
+['Belakanta','273152','G'],
+['Belghat','273404','G'],
+['Belipar','273413','G'],
+['Belkur','273411','G'],
+['Belwa Babu','273202','G'],
+['Bhagawanpur','273401','G'],
+['Bhaghagarha','273401','G'],
+['Bhaisa Bazar','273212','G'],
+['Bhaisaha','273202','G'],
+['Bharohiya','273212','G'],
+['Bharpahi','273209','G'],
+['Bharroh','273402','G'],
+['Bharshad','273209','G'],
+['Bhashla','273209','G'],
+['Bhatauli','273406','G'],
+['Bhathat','273306','G'],
+['Bhatpar','273402','G'],
+['Bhaurabari','273158','G'],
+['Bhauwapar Bazar','273202','G'],
+['Bheunsa','273211','G'],
+['Bhita','273403','G'],
+['Bhiti','273412','G'],
+['Bhiti','273401','G'],
+['Bhitirawat','273209','G'],
+['Bhowapar','273401','G'],
+['Bhrauli','273402','G'],
+['Bhuswal','273403','G'],
+['Bigahi','273212','G'],
+['Bihari Bujurg','273212','G'],
+['Bimuti','273402','G'],
+['Biraikhurd','273407','G'],
+['Bisaunpur','273403','G'],
+['Bishunpur Raja','273409','G'],
+['Bishunpura','273405','G'],
+['Bishwnathpur','273201','G'],
+['Boopgarh','273413','G'],
+['Brahmasari','273213','G'],
+['Brahmpur (Gorakhpur)','273203','G'],
+['Campierganj','273158','G'],
+['Chadrawn','273209','G'],
+['Chauri Chaura','273201','G'],
+['Chawaria Buzurg','273413','G'],
+['Cheriya','273401','G'],
+['Chhapiya','273016','G'],
+['Chhapra','273412','G'],
+['Chhatai','273212','G'],
+['Chilwa','273408','G'],
+['Chiuthan','273306','G'],
+['Civil Court (Gorakhpur)','273001','G'],
+['Dadri','273412','G'],
+['Dandi','273411','G'],
+['Davarpar','273016','G'],
+['Davipur','273158','G'],
+['Deepgarh','273408','G'],
+['Deharatikar','273213','G'],
+['Deidiha','273409','G'],
+['Derwa','273402','G'],
+['Dewalapar','273408','G'],
+['Dewrartula','273212','G'],
+['Dhakhwa Bazar','273211','G'],
+['Dhanaha Naik','273301','G'],
+['Dhanwda Buzurg','273413','G'],
+['Dharamshala','273001','G'],
+['Dharmpur','273158','G'],
+['Dharsi','273411','G'],
+['Dhobouli','273212','G'],
+['Dhrampur','273158','G'],
+['Dhudhara','273407','G'],
+['Dhuriapar','273209','G'],
+['Dhuripar','273407','G'],
+['Dihghat','273405','G'],
+['Dohariya Bazar','273015','G'],
+['Domara','273165','G'],
+['Dubauli','273413','G'],
+['Dumarinivas','273209','G'],
+['Dumraila','273405','G'],
+['Dumri Khas','273202','G'],
+['Fardahani','273165','G'],
+['Farsand','273402','G'],
+['Fertilizer Factory','273007','G'],
+['GR Railway Station','273012','G'],
+['Gadar','273212','G'],
+['Gagaha','273411','G'],
+['Gahanshad','273209','G'],
+['Gahira','273202','G'],
+['Gaighat','273404','G'],
+['Gajpur','273413','G'],
+['Gajpur','273407','G'],
+['Gangapar','273412','G'],
+['Gangibazar','273165','G'],
+['Gaunar','273201','G'],
+['Gaurkhas','273407','G'],
+['Gaursaira','273406','G'],
+['Ghaghsara','273209','G'],
+['Ghorsaon','273411','G'],
+['Gigani Bujurg','273407','G'],
+['Girdharpur','273413','G'],
+['Gita Press','273005','G'],
+['Gita Vatika','273006','G'],
+['Gola (Gorakhpur)','273408','G'],
+['Golghar','273001','G'],
+['Gopalpur','273002','G'],
+['Gopalpur','273408','G'],
+['Gorakhnath Mandir','273015','G'],
+['Gorakhpur','273001','G'],
+['Gorakhpur Kutchery','273001','G'],
+['Gorakhpur University','273009','G'],
+['Gulharia','273013','G'],
+['Gulhariya','273158','G'],
+['Haraiya','273203','G'],
+['Hardi Chak','273406','G'],
+['Hariharpur','273212','G'],
+['Harpur','273409','G'],
+['Harpur Budhat','273209','G'],
+['Hata Buzurg','273403','G'],
+['Hemdhapur','273152','G'],
+['Israuli','273211','G'],
+['Jadishpur Bhaluwan','273411','G'],
+['Jagatabela','273015','G'],
+['Jagdishpur','273002','G'],
+['Jainpur','273306','G'],
+['Jaitpur','273212','G'],
+['Jakahi','273212','G'],
+['Jangle Agahi','273165','G'],
+['Jangle Beni Madho','273007','G'],
+['Jangle Dhushar','273014','G'],
+['Jangle Laxmipur','273014','G'],
+['Jangle Salikram','273014','G'],
+['Jangle Tulshiram','273014','G'],
+['Janipur','273413','G'],
+['Jhangha','273202','G'],
+['Jharkata','273409','G'],
+['Jhudiya','273212','G'],
+['Jhungia Bazar','273013','G'],
+['Jigina Bhion','273403','G'],
+['Jingle Ayodhayay Prasad','273013','G'],
+['Jungle Aurahi','273013','G'],
+['Jungle Chauri','273010','G'],
+['Jungle Dumri No-1','273306','G'],
+['Jungle Gauri','273202','G'],
+['Jungle Ramgarh','273002','G'],
+['Jungle Rasoolpur','273203','G'],
+['Junjle Dumri No-2','273306','G'],
+['Kakarakhore','273401','G'],
+['Kakrahi','273408','G'],
+['Kalyanpur','273165','G'],
+['Kamasinkhurd','273158','G'],
+['Kanaicha','273413','G'],
+['Kanail','273413','G'],
+['Kanapar','273403','G'],
+['Kanapar','273165','G'],
+['Karamdeva','273211','G'],
+['Karanjahi','273413','G'],
+['Karanpura','273212','G'],
+['Karwal Majhgawa','273411','G'],
+['Kataharimahurasar','273165','G'],
+['Katai Tikar','273212','G'],
+['Kauriram','273413','G'],
+['Kekaria','273165','G'],
+['Keshawapar','273407','G'],
+['Khajani Tehsil','273212','G'],
+['Khajni','273212','G'],
+['Khajurgawan','273158','G'],
+['Khajuri','273212','G'],
+['Khajuri Baboo','273412','G'],
+['Khakhaichkhor','273412','G'],
+['Khandaesari','273402','G'],
+['Khesrari','273163','G'],
+['Khirkitadubey','273412','G'],
+['Khortha','273401','G'],
+['Khutahan Khas','273306','G'],
+['Kodari','273209','G'],
+['Kodarpandey','273412','G'],
+['Kodri','273408','G'],
+['Kohra Buzurg','273411','G'],
+['Kotha','273411','G'],
+['Kotwa','273407','G'],
+['Kunraghat','273008','G'],
+['Kunwar','273158','G'],
+['Kuri Bazar','273404','G'],
+['Kusmaul','273401','G'],
+['Kusumhi Bazar','273002','G'],
+['Lachchipur','273007','G'],
+['Lahsari','273016','G'],
+['Lakhanapaar','273209','G'],
+['Lakhuapakar','273404','G'],
+['Lalpur Tikar','273016','G'],
+['Lehrabazar','273157','G'],
+['Loco Workshop LSG','273012','G'],
+['Loharpurwa','273158','G'],
+['Luhsi','273152','G'],
+['M.M.M.E.College','273010','G'],
+['Madanpura','273212','G'],
+['Madhonagar','273158','G'],
+['Madria','273402','G'],
+['Mahaita','273209','G'],
+['Mahawan Khore','273165','G'],
+['Mahuarkol','273413','G'],
+['Mahubujurg','273407','G'],
+['Mahuja','273413','G'],
+['Mahupar','273402','G'],
+['Mahuraon','273212','G'],
+['Mahuwashukul','273158','G'],
+['Maina Bhagar','273007','G'],
+['Majhauna','273165','G'],
+['Makhanaha','273165','G'],
+['Malahanpar','273403','G'],
+['Malaon','273413','G'],
+['Maniram','273007','G'],
+['Manjharia','273015','G'],
+['Mannipursahdauli','273408','G'],
+['Mansorganj Khurd','273165','G'],
+['Marwatiya','273407','G'],
+['Mathia','273412','G'],
+['Maulaganj','273158','G'],
+['Mehia','273201','G'],
+['Minwa','273209','G'],
+['Mirpur','273007','G'],
+['Mirzapur Bazar','273016','G'],
+['Mishraula','273401','G'],
+['Mithbel','273203','G'],
+['Mohaddipur (Gorakhpur)','273008','G'],
+['Mohaljalkar','273412','G'],
+['Mokarimpur','273407','G'],
+['Mundera Bazar','273201','G'],
+['Munderathakurai','273413','G'],
+['Murarpur','273409','G'],
+['Murdewa','273211','G'],
+['Naiyapar Khurd','273152','G'],
+['Narakataha Bazar','273165','G'],
+['Natwa Jungle','273306','G'],
+['Nausar','273016','G'],
+['Nauwa Awal','273016','G'],
+['Nauwabari','273203','G'],
+['Nawapar','273165','G'],
+['Netwar Bazar','273158','G'],
+['Newada','273412','G'],
+['Newaijpar','273402','G'],
+['Newas','273407','G'],
+['Nibidubey','273402','G'],
+['Niwas','273209','G'],
+['Nuaon','273408','G'],
+['Pac Camp','273014','G'],
+['Pachauri','273212','G'],
+['Pachperwa','273407','G'],
+['Pagar','273212','G'],
+['Pakdidubey','273413','G'],
+['Pali','273403','G'],
+['Pandeypura','273403','G'],
+['Pandeypura','273407','G'],
+['Paniara','273158','G'],
+['Parasurampur','273152','G'],
+['Parmeshwar Pur','273007','G'],
+['Parmeswarpur','273209','G'],
+['Parsauni','273201','G'],
+['Parsia','273402','G'],
+['Patakhuli','273213','G'],
+['Patauha','273408','G'],
+['Patna','273402','G'],
+['Patra Bazar','273152','G'],
+['Pepeeganj','273165','G'],
+['Pholwaria','273201','G'],
+['Phothwa Inar','273202','G'],
+['Pichaura','273401','G'],
+['Piparpati','273306','G'],
+['Piparshandi','273404','G'],
+['Pipraich','273152','G'],
+['Pirahani','273402','G'],
+['Purwa Bazar','273407','G'],
+['Raiganj','273010','G'],
+['Railway Colony (Gorakhpur)','273012','G'],
+['Rajabari','273165','G'],
+['Rajdhani','273202','G'],
+['Rajgharh','273411','G'],
+['Rajpur','273158','G'],
+['Rajuarakhurd','273158','G'],
+['Rakhat','273411','G'],
+['Rakhore','273165','G'],
+['Ramchaura','273158','G'],
+['Rampur','273016','G'],
+['Rampur Bhaghaura','273412','G'],
+['Rampur Pandey','273212','G'],
+['Rampur Rakba','273201','G'],
+['Rampurgopalpur','273007','G'],
+['Randauli','273209','G'],
+['Raujadaragah','273407','G'],
+['Rautapur','273209','G'],
+['Rawatganj','273165','G'],
+['Riaon','273412','G'],
+['Rigouli','273158','G'],
+['Rithuwakhor','273209','G'],
+['Rohari','273407','G'],
+['Ropnari','273406','G'],
+['S Athwa Purvi','273201','G'],
+['Sadhna','273405','G'],
+['Sahajanwa','273209','G'],
+['Sahupar','273403','G'],
+['Sahuwakol','273412','G'],
+['Salarpur','273411','G'],
+['Samayathanbhiti','273408','G'],
+['Samdar Khurd','273306','G'],
+['Saraya Tiwari','273406','G'],
+['Sardar Nagar','273202','G'],
+['Sarhari','273165','G'],
+['Semar Dadi','273212','G'],
+['Semra Khurd','273412','G'],
+['Shahpur','273407','G'],
+['Shankarpur','273404','G'],
+['Shingaha','273413','G'],
+['Shivpur (Gorakhpur)','273412','G'],
+['Shivpurinewcolony','273016','G'],
+['Siddharth Enclave','273017','G'],
+['Sidhagaur','273402','G'],
+['Sidhauli','273209','G'],
+['Sidhawana','273407','G'],
+['Sihaijpar','273412','G'],
+['Sihoria','273002','G'],
+['Sihorwa','273007','G'],
+['Sikriganj','273213','G'],
+['Siswa Babu','273404','G'],
+['Siswa Bazar','273163','G'],
+['Siswa Urf Siuwa','273403','G'],
+['Sogaura','273413','G'],
+['Sonbarsa','273201','G'],
+['Sonbarsa Babu','273212','G'],
+['Sonbarsa Bazar','273002','G'],
+['Sonoura Bujurg','273158','G'],
+['Sukahlpuri','273402','G'],
+['Sukrauli','273213','G'],
+['Sumergarh','273306','G'],
+['Suras','273158','G'],
+['Tanda','273402','G'],
+['Tarayapar','273409','G'],
+['Tenuwa','273212','G'],
+['Thakurnagar','273158','G'],
+['Thawaipar','273165','G'],
+['Thunni Mahadev Chak','273413','G'],
+['Tiar','273413','G'],
+['Tighara','273165','G'],
+['Tigharakhairwa','273413','G'],
+['Tiha Mohammadpur','273402','G'],
+['Tihamahapur Chak','273413','G'],
+['Tikaria','273165','G'],
+['Trilokpur','273213','G'],
+['Turkwalia','273165','G'],
+['Uchagaon','273409','G'],
+['Ujjarpar','273412','G'],
+['Unaula','273152','G'],
+['Unwal','273406','G'],
+['Urdu Bazar','273005','G'],
+['Uruwa Bazar','273407','G'],
+['Ahraulibazar','274149','K'],
+['Amawa Digar','274302','K'],
+['Amwa Bazar','274305','K'],
+['Arjun Dumari','274203','K'],
+['Asana','274149','K'],
+['Atharaha','274301','K'],
+['Babuiya Harpur','274304','K'],
+['Bagahi','274407','K'],
+['Baghachaur','274409','K'],
+['Bahadur Pur','274409','K'],
+['Bali','274802','K'],
+['Balkuria','274304','K'],
+['Banbira','274401','K'],
+['Bankata Bharpurawa','274149','K'],
+['Bansgaon','274302','K'],
+['Barsaina','274207','K'],
+['Barwa Bazar','274305','K'],
+['Barwa Patti','274302','K'],
+['Barwa Raja Pakar','274407','K'],
+['Barwa Ratanpur','274802','K'],
+['Basdila Pandey','274303','K'],
+['Batrauli Bazar','274303','K'],
+['Baulia','274301','K'],
+['Belwa Jungle','274304','K'],
+['Belwa Karkhana','274401','K'],
+['Belwaghat','274802','K'],
+['Betia','274304','K'],
+['Bhaisaha','274802','K'],
+['Bhaisahi Bazar','274203','K'],
+['Bhaluhi','274149','K'],
+['Bharsar Khas','274301','K'],
+['Bhatahi Khurd','274401','K'],
+['Bhatni Buzurg','274206','K'],
+['Bhatni Dadan','274206','K'],
+['Bhojauli Buzurg','274802','K'],
+['Bhuri Pakar','274203','K'],
+['Bihar Buzurg','274401','K'],
+['Bikram Bhisunpur','274203','K'],
+['Bishunpura','274302','K'],
+['Bodarwar','274149','K'],
+['Captainganj (Kushinagar)','274301','K'],
+['Chaf','274302','K'],
+['Chakhani Bhumihari Patti','274306','K'],
+['Chandarpur','274306','K'],
+['Chandrauta','274401','K'],
+['Chhitauni','274801','K'],
+['Chilua','274207','K'],
+['Chiurapali','274149','K'],
+['Dalip Nagar','274402','K'],
+['Dandopur','274304','K'],
+['Dashahawa','274302','K'],
+['Deoria Baboo','274306','K'],
+['Deoria Pandey','274304','K'],
+['Desahi Barwa','274206','K'],
+['Dhadha Buzurg','274207','K'],
+['Dharampur','274304','K'],
+['Dharampur Parbat','274302','K'],
+['Dharmpur','274203','K'],
+['Dhuria Imilia','274407','K'],
+['Dhuria Khas','274402','K'],
+['Dudhai','274302','K'],
+['Dumarbhar','274304','K'],
+['Dumari Swangi Patti','274206','K'],
+['Fardaha','274301','K'],
+['Farendaha','274401','K'],
+['Fazilnagar','274401','K'],
+['Gaunaria','274301','K'],
+['Gauri Ibrahim','274406','K'],
+['Gauri Jagdish','274406','K'],
+['Gauri Sriram','274302','K'],
+['Gethihawa','274802','K'],
+['Goraria','274303','K'],
+['Gurwalia','274302','K'],
+['Gurwalia','274401','K'],
+['Harpur Mafi','274306','K'],
+['Hata','274203','K'],
+['Hetimpur','274206','K'],
+['Horlapur','274303','K'],
+['J.M.C. Sohasha Mathia','274402','K'],
+['Jabahi Dayal','274409','K'],
+['Jadishpur Dharmdani','274149','K'],
+['Jataha Bazar','274304','K'],
+['Jaura Man Rakhan','274401','K'],
+['Jhanga','274203','K'],
+['Jhankaul','274303','K'],
+['Karitin','274301','K'],
+['Karmaini Premwalia','274402','K'],
+['Kasia','274402','K'],
+['Katai Bharpurwa','274304','K'],
+['Kath Kuiyan','274303','K'],
+['Khabhara Bhar','274301','K'],
+['Khairi','274802','K'],
+['Khajuri Bazar','274305','K'],
+['Khanu Chhapara','274306','K'],
+['Khesia','274304','K'],
+['Khutahi','274306','K'],
+['Kinnerpatti','274304','K'],
+['Kishundeopur','274401','K'],
+['Kohargaddi','274802','K'],
+['Koilasawa','274401','K'],
+['Kotwa Bazar','274305','K'],
+['Kubernath','274304','K'],
+['Kundur','274149','K'],
+['Kurmauta Manjharia','274402','K'],
+['Kushinagar','274403','K'],
+['Kushumhi','274305','K'],
+['Kusumha','274306','K'],
+['Lachhia','274401','K'],
+['Lala Chhapara','274306','K'],
+['Langari','274203','K'],
+['Laxmiganj','274306','K'],
+['Laxmipur','274303','K'],
+['Laxmipur Baboo','274407','K'],
+['Laxmipur Mishra','274401','K'],
+['Lehani','274149','K'],
+['Madanpur Bherihari','274802','K'],
+['Madhopur Buzurg','274406','K'],
+['Maghi Kothilwa','274304','K'],
+['Mahuawa Buzurg','274302','K'],
+['Mahuawa Karkhana','274402','K'],
+['Mahuwa Buzurg','274149','K'],
+['Mainpur','274402','K'],
+['Malukahi','274301','K'],
+['Mania Chhapar','274306','K'],
+['Mansoorganj','274149','K'],
+['Marar Bindwalia','274306','K'],
+['Mathauli','274301','K'],
+['Mathia Buzurg','274802','K'],
+['Mathia Naraipur','274402','K'],
+['Mathia Sriram','274409','K'],
+['Morban','274305','K'],
+['Mujdiha','274149','K'],
+['Mundera','274301','K'],
+['Nadawa Bishunpur','274401','K'],
+['Nahar Chhapra','274304','K'],
+['Naika Chhapar','274206','K'],
+['Nakataha Misir','274401','K'],
+['Narainpur','274203','K'],
+['Natwalia','274402','K'],
+['Naumunda','274207','K'],
+['Naurangia','274305','K'],
+['Nautan Hathia Garh','274206','K'],
+['Nebua Raiganj','274802','K'],
+['Pachrukhia','274303','K'],
+['Padari','274207','K'],
+['Padari Piperpanti','274304','K'],
+['Padauli Padiapar','274206','K'],
+['Padrauna','274304','K'],
+['Padrauna Chhawani','274304','K'],
+['Padrauna City','274304','K'],
+['Padrauna S.F','274304','K'],
+['Pagar','274306','K'],
+['Pagara Prsad Giri','274407','K'],
+['Paikauli','274203','K'],
+['Pakari','274207','K'],
+['Pakari Buzurg','274304','K'],
+['Pakariyar Bazar','274305','K'],
+['Pakri Birbhadra','274206','K'],
+['Parsauni','274304','K'],
+['Parsauni Buzurg','274407','K'],
+['Parsauni Khurd','274402','K'],
+['Parwarpar','274305','K'],
+['Patherawa','274401','K'],
+['Pindara','274207','K'],
+['Pipara','274203','K'],
+['Pipara Agarwa','274409','K'],
+['Pipara Brahaman','274301','K'],
+['Piparaghat','274406','K'],
+['Pipra Bazar','274305','K'],
+['Pipra Daula Kadam','274206','K'],
+['Pipra Jatampur','274303','K'],
+['Pipra Kanak','274401','K'],
+['Pipraicha','274203','K'],
+['Puraini','274306','K'],
+['Ragarganj','274306','K'],
+['Raja Bazar Khadda','274802','K'],
+['Rakaba Junglepatti','274406','K'],
+['Rambar Buzurg','274305','K'],
+['Ramkola','274305','K'],
+['Rampur Bagaha','274306','K'],
+['Rampur Barhan','274302','K'],
+['Rampur Buzurug','274203','K'],
+['Rampur Chaubey','274301','K'],
+['Rampur Jungle','274801','K'],
+['Rampur Sohrauna','274203','K'],
+['Rohuwa Machhargawa','274149','K'],
+['Ruari','274305','K'],
+['Sahbajpur','274206','K'],
+['Sakhopar','274402','K'],
+['Sakrauli','274203','K'],
+['Salemgarh','274409','K'],
+['Samogar','274203','K'],
+['Sapaha','274402','K'],
+['Sariya Mahanth Patti','274401','K'],
+['Sarpathi','274304','K'],
+['Sarya','274304','K'],
+['Sekhwania','274402','K'],
+['Semara Hardo Patti','274401','K'],
+['Seorahi','274406','K'],
+['Shankar Pat Khauli','274401','K'],
+['Sidhawey','274305','K'],
+['Sidhua Bangar','274304','K'],
+['Sikata','274303','K'],
+['Singaha','274305','K'],
+['Singari','274301','K'],
+['Singha Patti','274304','K'],
+['Sirsia','274203','K'],
+['Siswa Goiti','274304','K'],
+['Siswa Maniraj','274802','K'],
+['Sohang','274401','K'],
+['Sohrauna','274802','K'],
+['Somali','274149','K'],
+['Sukrauli','274207','K'],
+['Sumahi Khurd','274401','K'],
+['Tamkuhi','274407','K'],
+['Tarya Lachhiram','274409','K'],
+['Tarya Sujan','274409','K'],
+['Tekuatar','274305','K'],
+['Tirma Sahun','274302','K'],
+['Turkdiha','274149','K'],
+['Vedupar','274409','K'],
+['Vijaikaf','274207','K'],
+['Adda Bazar','273164','M'],
+['Akasarawa','273164','M'],
+['Amwabujurg','273157','M'],
+['Anandnagar (Maharajganj)','273155','M'],
+['Ardauna','273163','M'],
+['Auratar','273304','M'],
+['Badhara Mir','273207','M'],
+['Badhra Mahant','273163','M'],
+['Bagapar','273303','M'],
+['Baisar','273161','M'],
+['Baithwalia','273304','M'],
+['Bali','273304','M'],
+['Balua','273302','M'],
+['Banarisihakhurd','273164','M'],
+['Bandoh','273161','M'],
+['Banjaria Sonbarsa','273157','M'],
+['Bankata','273155','M'],
+['Baratgarah','273155','M'],
+['Bargadwa Harriya','273155','M'],
+['Bariarpur','273163','M'],
+['Basantpur','273162','M'],
+['Basantpur','273151','M'],
+['Bashia Buzurg','273301','M'],
+['Baspar','273151','M'],
+['Baspar Baijauli','273303','M'],
+['Basuli Farm','273163','M'],
+['Bauliaraja','273303','M'],
+['Belaharriya','273157','M'],
+['Belouha','273161','M'],
+['Belwa Khurd','273303','M'],
+['Belwa Qazi','273303','M'],
+['Belwatikar','273302','M'],
+['Bhagawanpur','273164','M'],
+['Bhagirathpur','273164','M'],
+['Bhainsi','273302','M'],
+['Bheria','273207','M'],
+['Bhitauli Bazar','273302','M'],
+['Biraicha','273151','M'],
+['Bodna','273305','M'],
+['Bribgemanganj','273157','M'],
+['Chainpur','273163','M'],
+['Chakdah','273164','M'],
+['Charalaha','273164','M'],
+['Chargha','273163','M'],
+['Chauk','273303','M'],
+['Chaumukha','273151','M'],
+['Chehari','273303','M'],
+['Dagroopur','273305','M'],
+['Dandwarkhurd','273155','M'],
+['Darahata','273303','M'],
+['Devgatti','273305','M'],
+['Dhanewa Dhanai','273303','M'],
+['Dhani Bazar','273161','M'],
+['Dharmauli','273301','M'],
+['Dhuswakala','273162','M'],
+['Dogahra','273305','M'],
+['Doma Khas','273304','M'],
+['Garaura','273305','M'],
+['Gaunaria','273207','M'],
+['Gaura Dubey','273151','M'],
+['Germa','273163','M'],
+['Ghughli R.S.','273151','M'],
+['Gopala','273302','M'],
+['Goplapur','273155','M'],
+['Guri Badhipurwa','273163','M'],
+['Hagana Mohammadpur','273155','M'],
+['Harakpur','273302','M'],
+['Harpurtiwari','273301','M'],
+['Indrapur','273155','M'],
+['Jaddupipra','273301','M'],
+['Jagdaur','273207','M'],
+['Jamie Pandit','273207','M'],
+['Jara','273164','M'],
+['Jhingti','273305','M'],
+['Jhulnipur','273304','M'],
+['Kaima','273163','M'],
+['Kajari','273164','M'],
+['Kamhariakala','273303','M'],
+['Karamahi','273163','M'],
+['Karamahwa','273164','M'],
+['Karialia','273164','M'],
+['Karimnagar','273155','M'],
+['Karmha','273303','M'],
+['Katahari','273163','M'],
+['Katahra','273303','M'],
+['Keshouli','273157','M'],
+['Khajuria','273303','M'],
+['Khlikgarh','273162','M'],
+['Khoria Bazar','273164','M'],
+['Khutha Bazar','273303','M'],
+['Kolhuai Bazar','273162','M'],
+['Kotamukund Pur','273303','M'],
+['Kothibhar','273163','M'],
+['Kuin Bazar','273405','M'],
+['Lakhima','273301','M'],
+['Lalpur','273157','M'],
+['Laxmipur (Maharajganj)','273162','M'],
+['Laxmipurdeurwa','273302','M'],
+['Laxmipurektanga','273302','M'],
+['Laxmipurkhurd','273305','M'],
+['Laxmipurshiwala','273302','M'],
+['Ledi','273304','M'],
+['Lejarmahdewa','273162','M'],
+['Lohepar','273163','M'],
+['Lvp Nagar','273162','M'],
+['Machhaligaon','273155','M'],
+['Madanpura','273304','M'],
+['Madhubani','273207','M'],
+['Madhwalia','273163','M'],
+['Maharajganj','273303','M'],
+['Mahdewa','273161','M'],
+['Mahuawa','273303','M'],
+['Mahulani','273157','M'],
+['Manikapur','273305','M'],
+['Marhatha','273161','M'],
+['Mathuranagar','273155','M'],
+['Medida','273162','M'],
+['Mednipur','273151','M'],
+['Meghwali Kala','273304','M'],
+['Mishraulia','273207','M'],
+['Mishrouliya','273157','M'],
+['Mithaura Bazar','273207','M'],
+['Mujahna Buzurg','273207','M'],
+['Munderi','273151','M'],
+['Nadua','273303','M'],
+['Nadua Bazar','273303','M'],
+['Naikot','273164','M'],
+['Narayanpur','273151','M'],
+['Nausagra','273161','M'],
+['Nautanwa Bazar','273164','M'],
+['Nebuiya','273301','M'],
+['Neta Surhurwa','273303','M'],
+['Nichlaul','273304','M'],
+['Nipania','273164','M'],
+['Orwalia','273304','M'],
+['Pachrenawa','273207','M'],
+['Pachrukhia','273302','M'],
+['Pakdi Bishunpur','273151','M'],
+['Pakdi Dixit','273302','M'],
+['Pakdiar Bishunpur','273151','M'],
+['Pakdinauni A','273303','M'],
+['Panewa Panei','273303','M'],
+['Parsa Gidahi','273302','M'],
+['Parsamalik','273305','M'],
+['Parsauni','273207','M'],
+['Partawal Bazar MDg','273301','M'],
+['Pharendra Khurd','273155','M'],
+['Piparpati Tiwari','273302','M'],
+['Pipra','273305','M'],
+['Pipra Bazar','273207','M'],
+['Pokharbhinda','273155','M'],
+['Puranderpur','273162','M'],
+['Puraniha','273164','M'],
+['Purena Khandi Chauri','273302','M'],
+['R.Bhawchak','273303','M'],
+['Rajdhani','273162','M'],
+['Rajmandir Kala','273162','M'],
+['Ramnagar','273155','M'],
+['Ramnagar','273164','M'],
+['Rampur Baldiha','273151','M'],
+['Rampur Kala','273163','M'],
+['Ratanpur','273164','M'],
+['Rengahia','273304','M'],
+['Rudhaulibhawshak','273303','M'],
+['Rudrapura Sheonath','273162','M'],
+['Sabaya','273163','M'],
+['Sahjanwa Babu','273157','M'],
+['Salamat Garh','273303','M'],
+['Sarpataha','273155','M'],
+['Sauraha','273157','M'],
+['Sekhanli','273304','M'],
+['Sekhuani','273305','M'],
+['Semra Chandauli','273301','M'],
+['Semra Maharaj','273162','M'],
+['Senduria','273207','M'],
+['Sewareji','273303','M'],
+['Shahabad','273157','M'],
+['Shaildah','273162','M'],
+['Shewatari Bzr','273305','M'],
+['Shikarpur','273302','M'],
+['Shyamdeorva','273306','M'],
+['Siakrgarh','273157','M'],
+['Sikandrajitpur','273161','M'],
+['Siswa Raja','273302','M'],
+['Smardhira','273162','M'],
+['Sohrauna Tiwari','273302','M'],
+['Sonara','273303','M'],
+['Sonauli Bazar','273164','M'],
+['Sonbarsa','273207','M'],
+['Tarkulwa Tiwari','273302','M'],
+['Thuthibari','273305','M'],
+['Uska','273303','M']
+];
+        const DISTRICT_NAMES = { M: 'Maharajganj', K: 'Kushinagar', G: 'Gorakhpur' };
+
+        // Census-2011 village-level names (no individual PIN — India Post assigns PIN at
+        // post-office level, not per village). Being filled in progressively, tehsil by tehsil.
+        // Done so far: Nautanwa, Nichlaul, Pharenda tehsils (Maharajganj district).
+        const CENSUS_VILLAGES = [
+['Achal Garh','Nautanwa','M'],
+['Achalgarh','Nautanwa','M'],
+['Ahirauli','Nautanwa','M'],
+['Amahva','Nautanwa','M'],
+['Amava','Nautanwa','M'],
+['Araji Gayadatt Urf Subedarpur','Nautanwa','M'],
+['Araji Mahuva','Nautanwa','M'],
+['Araji Sarkar','Nautanwa','M'],
+['Araji Sarkar Urf Bairihawa','Nautanwa','M'],
+['Araji Sarkar Urf Jot Pharenda','Nautanwa','M'],
+['Araji Suvain','Nautanwa','M'],
+['Asuraina','Nautanwa','M'],
+['Aurahva Kala','Nautanwa','M'],
+['Aurahva Khurd','Nautanwa','M'],
+['Babhni','Nautanwa','M'],
+['Bagha','Nautanwa','M'],
+['Bahorpur','Nautanwa','M'],
+['Baijnathpur Urf Charka','Nautanwa','M'],
+['Baikunthpur','Nautanwa','M'],
+['Bairva Bankatva','Nautanwa','M'],
+['Bairva Bhatpurva','Nautanwa','M'],
+['Bairva Chandanpur','Nautanwa','M'],
+['Bairva Jungal','Nautanwa','M'],
+['Bakeniya Harraiya','Nautanwa','M'],
+['Banrasiya Kala','Nautanwa','M'],
+['Banrasiya Khurd','Nautanwa','M'],
+['Banvatari','Nautanwa','M'],
+['Barahara','Nautanwa','M'],
+['Barahra Bishwambharpur','Nautanwa','M'],
+['Barahra Shivnath','Nautanwa','M'],
+['Baranhava','Nautanwa','M'],
+['Barawa Bhoj','Nautanwa','M'],
+['Bargadava','Nautanwa','M'],
+['Bargadva Ayodhya','Nautanwa','M'],
+['Bargadva Bishunpur','Nautanwa','M'],
+['Bargadva Madhubani','Nautanwa','M'],
+['Bargadwa Urf Ganwaria','Nautanwa','M'],
+['Bariya','Nautanwa','M'],
+['Barva Kala','Nautanwa','M'],
+['Barwa Khurd','Nautanwa','M'],
+['Basantpur','Nautanwa','M'],
+['Bataediha','Nautanwa','M'],
+['Belahiya','Nautanwa','M'],
+['Belaspur','Nautanwa','M'],
+['Belauha Darra','Nautanwa','M'],
+['Belauha Ghat','Nautanwa','M'],
+['Belbhar','Nautanwa','M'],
+['Belva Buzurg','Nautanwa','M'],
+['Belva Khurd','Nautanwa','M'],
+['Bhagat Purva','Nautanwa','M'],
+['Bhagvanpur','Nautanwa','M'],
+['Bhairi Pipri','Nautanwa','M'],
+['Bhaisahiya','Nautanwa','M'],
+['Bharvaliya','Nautanwa','M'],
+['Bhotaha','Nautanwa','M'],
+['Bhurkurva','Nautanwa','M'],
+['Bishkhop','Nautanwa','M'],
+['Bishunpur Kurthiya','Nautanwa','M'],
+['Bishunpur Phulvariya','Nautanwa','M'],
+['Bishunpura','Nautanwa','M'],
+['Bokava','Nautanwa','M'],
+['Brahmpur','Nautanwa','M'],
+['Chainpur','Nautanwa','M'],
+['Chakdah','Nautanwa','M'],
+['Chakrar','Nautanwa','M'],
+['Chamaini Urf Bhehri','Nautanwa','M'],
+['Chamainiya','Nautanwa','M'],
+['Chandi Than','Nautanwa','M'],
+['Charlaha','Nautanwa','M'],
+['Chautarva','Nautanwa','M'],
+['Chhapwa','Nautanwa','M'],
+['Chhitrapar','Nautanwa','M'],
+['Dashrath Pur','Nautanwa','M'],
+['Deoghatti','Nautanwa','M'],
+['Devipur','Nautanwa','M'],
+['Devipur Kala','Nautanwa','M'],
+['Devpur','Nautanwa','M'],
+['Dhaurahra','Nautanwa','M'],
+['Dhotihva','Nautanwa','M'],
+['Dhuswakala','Nautanwa','M'],
+['Dogahara','Nautanwa','M'],
+['Durgapur','Nautanwa','M'],
+['Ekma','Nautanwa','M'],
+['Eksarva','Nautanwa','M'],
+['Farenda','Nautanwa','M'],
+['Gajaraha','Nautanwa','M'],
+['Gajpati','Nautanwa','M'],
+['Gajrahi','Nautanwa','M'],
+['Ganeshpur','Nautanwa','M'],
+['Gangapur','Nautanwa','M'],
+['Gangvaliya','Nautanwa','M'],
+['Gauharpur','Nautanwa','M'],
+['Ghorahava','Nautanwa','M'],
+['Gujroliya Shanker','Nautanwa','M'],
+['Hanuman Garhiya','Nautanwa','M'],
+['Harakhpura','Nautanwa','M'],
+['Hardi Dali','Nautanwa','M'],
+['Harlalgarh','Nautanwa','M'],
+['Harmandir Kala','Nautanwa','M'],
+['Harpur','Nautanwa','M'],
+['Harraiya Khurd','Nautanwa','M'],
+['Harraiya Raghubir','Nautanwa','M'],
+['Hathiya Garh','Nautanwa','M'],
+['Hathiyahwa','Nautanwa','M'],
+['Jagannath Pur','Nautanwa','M'],
+['Jamuhani','Nautanwa','M'],
+['Jamuhra Kala','Nautanwa','M'],
+['Jara','Nautanwa','M'],
+['Jhigati','Nautanwa','M'],
+['Jigina','Nautanwa','M'],
+['Jignihava','Nautanwa','M'],
+['Jogiabari','Nautanwa','M'],
+['Jungal Gulahariya','Nautanwa','M'],
+['Jungle Hathiyagarh','Nautanwa','M'],
+['Jungle Sonval','Nautanwa','M'],
+['Kaithvaliya Pathak','Nautanwa','M'],
+['Kaithwalia Urf Bargadahi','Nautanwa','M'],
+['Kajari','Nautanwa','M'],
+['Kandhpur','Nautanwa','M'],
+['Kandhpur Van Tangia','Nautanwa','M'],
+['Karaila Ajgarha','Nautanwa','M'],
+['Karailiya','Nautanwa','M'],
+['Karimdadpur','Nautanwa','M'],
+['Karmahava Khurd','Nautanwa','M'],
+['Karmahva','Nautanwa','M'],
+['Karmahva Basantpur','Nautanwa','M'],
+['Kataikot Urf Bhadrahana','Nautanwa','M'],
+['Kavlahi','Nautanwa','M'],
+['Khairati','Nautanwa','M'],
+['Khairhava Jungal','Nautanwa','M'],
+['Khairhva Dube','Nautanwa','M'],
+['Khalik Garh','Nautanwa','M'],
+['Khanua','Nautanwa','M'],
+['Kharag Barva','Nautanwa','M'],
+['Kodaipur Urf Gidaha','Nautanwa','M'],
+['Kohargaddi','Nautanwa','M'],
+['Koharwal','Nautanwa','M'],
+['Koluha Urf Sihorva','Nautanwa','M'],
+['Kot Kamhariya','Nautanwa','M'],
+['Kunserwa','Nautanwa','M'],
+['Kurahava Bujurg','Nautanwa','M'],
+['Kurahava Khurd','Nautanwa','M'],
+['Lalpur Kalyanpur','Nautanwa','M'],
+['Laxhmipur Kaithvaliya','Nautanwa','M'],
+['Laxmi Nagar','Nautanwa','M'],
+['Luhasi','Nautanwa','M'],
+['Luthhahva','Nautanwa','M'],
+['Madrahava Kaktahi','Nautanwa','M'],
+['Mahari','Nautanwa','M'],
+['Mahdeiya','Nautanwa','M'],
+['Mahdeva Basdeela','Nautanwa','M'],
+['Mahdeva Kashiram','Nautanwa','M'],
+['Maheshpur Mahdiya','Nautanwa','M'],
+['Mahuari','Nautanwa','M'],
+['Mahuawa Adda','Nautanwa','M'],
+['Mahuva','Nautanwa','M'],
+['Mahuwa','Nautanwa','M'],
+['Majhauli','Nautanwa','M'],
+['Manglapur','Nautanwa','M'],
+['Manik Talab','Nautanwa','M'],
+['Manikapur','Nautanwa','M'],
+['Marjadpur','Nautanwa','M'],
+['Mathiyaidu','Nautanwa','M'],
+['Moglaha','Nautanwa','M'],
+['Mohnapur','Nautanwa','M'],
+['Murali','Nautanwa','M'],
+['Murehra','Nautanwa','M'],
+['Murila','Nautanwa','M'],
+['Naikot','Nautanwa','M'],
+['Narayanpur','Nautanwa','M'],
+['Narkataha','Nautanwa','M'],
+['Nauniya','Nautanwa','M'],
+['Navabi Ghat','Nautanwa','M'],
+['Navadih Urf Deopur','Nautanwa','M'],
+['Nipaniya','Nautanwa','M'],
+['Paisiya Babu','Nautanwa','M'],
+['Paisiya Lalaien','Nautanwa','M'],
+['Paisiya Urf Konghusari','Nautanwa','M'],
+['Pakardiha','Nautanwa','M'],
+['Parauli','Nautanwa','M'],
+['Pariya Tal','Nautanwa','M'],
+['Parmesrapur','Nautanwa','M'],
+['Parsa','Nautanwa','M'],
+['Parsa Dayaram','Nautanwa','M'],
+['Parsa Malik','Nautanwa','M'],
+['Parsa Pandey','Nautanwa','M'],
+['Parsa Somali','Nautanwa','M'],
+['Parsauni Kala','Nautanwa','M'],
+['Parsoni','Nautanwa','M'],
+['Phulvariya','Nautanwa','M'],
+['Piparhava','Nautanwa','M'],
+['Pipra','Nautanwa','M'],
+['Pipra Sohat','Nautanwa','M'],
+['Piprahiya','Nautanwa','M'],
+['Pipriya','Nautanwa','M'],
+['Pokhar Bhinda','Nautanwa','M'],
+['Pokharbhinda Urf Bangahva','Nautanwa','M'],
+['Purainiya','Nautanwa','M'],
+['Purandrapur Sonbarsa','Nautanwa','M'],
+['Purushottampur','Nautanwa','M'],
+['Raghunath Pur','Nautanwa','M'],
+['Rajabari','Nautanwa','M'],
+['Rajapur','Nautanwa','M'],
+['Rajdhani','Nautanwa','M'],
+['Rajmandir Khurd','Nautanwa','M'],
+['Rajpur Khurd','Nautanwa','M'],
+['Ram Nagar','Nautanwa','M'],
+['Ramgarhva','Nautanwa','M'],
+['Ramnagar','Nautanwa','M'],
+['Rampur Jhalua','Nautanwa','M'],
+['Ranipur','Nautanwa','M'],
+['Ratanpur','Nautanwa','M'],
+['Rehra','Nautanwa','M'],
+['Rudauli Urf Karaila','Nautanwa','M'],
+['Rudrapur Shivnath','Nautanwa','M'],
+['Rudrapur Urf Bangai','Nautanwa','M'],
+['Sagarhava','Nautanwa','M'],
+['Sakasi','Nautanwa','M'],
+['Samardhira','Nautanwa','M'],
+['Sampatiha','Nautanwa','M'],
+['Sarangapur','Nautanwa','M'],
+['Sekhuani','Nautanwa','M'],
+['Semarhava','Nautanwa','M'],
+['Semrahna','Nautanwa','M'],
+['Semrahva Urf Jammu Haniya','Nautanwa','M'],
+['Sevatari','Nautanwa','M'],
+['Shishgarh','Nautanwa','M'],
+['Shishvariya Urf Shismahal','Nautanwa','M'],
+['Shivpuri','Nautanwa','M'],
+['Shyamkat','Nautanwa','M'],
+['Sihabhar','Nautanwa','M'],
+['Singhpur Kala','Nautanwa','M'],
+['Sinhorva','Nautanwa','M'],
+['Sinhpur Tharauli','Nautanwa','M'],
+['Sirsiya Khas','Nautanwa','M'],
+['Sirsiya Masharki','Nautanwa','M'],
+['Sisvaniya Bishun','Nautanwa','M'],
+['Siswa Taufir','Nautanwa','M'],
+['Siswa Urf Khoriya','Nautanwa','M'],
+['Sonbarsa Kahraiya','Nautanwa','M'],
+['Sondhi','Nautanwa','M'],
+['Sonpipri','Nautanwa','M'],
+['Sonval','Nautanwa','M'],
+['Sukrauli','Nautanwa','M'],
+['Sukrauli Urf Argha','Nautanwa','M'],
+['Sukrauli Urf Suryapura','Nautanwa','M'],
+['Sundi','Nautanwa','M'],
+['Surpar','Nautanwa','M'],
+['Suryapura','Nautanwa','M'],
+['Taraini','Nautanwa','M'],
+['Tenduhi','Nautanwa','M'],
+['Terhi','Nautanwa','M'],
+['Tharauli Buzurg','Nautanwa','M'],
+['Tinkonia','Nautanwa','M'],
+['Trilokpur','Nautanwa','M'],
+['Agaya','Nichlaul','M'],
+['Agya','Nichlaul','M'],
+['Amahawa','Nichlaul','M'],
+['Amara Urf Jhulanipur','Nichlaul','M'],
+['Amari','Nichlaul','M'],
+['Amataha','Nichlaul','M'],
+['Amu Talab','Nichlaul','M'],
+['Araji Bairia','Nichlaul','M'],
+['Araji Hira Kathik','Nichlaul','M'],
+['Ardauna','Nichlaul','M'],
+['Auratar','Nichlaul','M'],
+['Badahari','Nichlaul','M'],
+['Bagahi','Nichlaul','M'],
+['Bahrauli','Nichlaul','M'],
+['Bahua Kalan','Nichlaul','M'],
+['Bahuar Khurd','Nichlaul','M'],
+['Baidauli','Nichlaul','M'],
+['Baijnath Pur','Nichlaul','M'],
+['Baithpurwa Urf Gauri','Nichlaul','M'],
+['Baithwaliya','Nichlaul','M'],
+['Bajahi','Nichlaul','M'],
+['Bakul Diha','Nichlaul','M'],
+['Balhi Khor','Nichlaul','M'],
+['Bali','Nichlaul','M'],
+['Baliawa','Nichlaul','M'],
+['Bandi','Nichlaul','M'],
+['Bankatwa','Nichlaul','M'],
+['Banmiswa','Nichlaul','M'],
+['Barahra Mahanth','Nichlaul','M'],
+['Baraipar','Nichlaul','M'],
+['Bargadhi','Nichlaul','M'],
+['Barhai Purwa','Nichlaul','M'],
+['Barhara Chargaha','Nichlaul','M'],
+['Barhya','Nichlaul','M'],
+['Bariar Pur','Nichlaul','M'],
+['Barohia','Nichlaul','M'],
+['Barua Sonia','Nichlaul','M'],
+['Barwa Digambar','Nichlaul','M'],
+['Barwa Dwarika','Nichlaul','M'],
+['Barwa Kala','Nichlaul','M'],
+['Barwa Kripal','Nichlaul','M'],
+['Barwa Pandit','Nichlaul','M'],
+['Barwa Salikram','Nichlaul','M'],
+['Basantpur','Nichlaul','M'],
+['Basauli','Nichlaul','M'],
+['Basdila','Nichlaul','M'],
+['Basuli','Nichlaul','M'],
+['Baswar','Nichlaul','M'],
+['Bathya','Nichlaul','M'],
+['Belaspur','Nichlaul','M'],
+['Belawa','Nichlaul','M'],
+['Belgaria Belbharia','Nichlaul','M'],
+['Belwa','Nichlaul','M'],
+['Belwa Bachee','Nichlaul','M'],
+['Belwa Lalsa','Nichlaul','M'],
+['Bhabhauri','Nichlaul','M'],
+['Bhagatar','Nichlaul','M'],
+['Bhagwan Pur Urf Bhulna','Nichlaul','M'],
+['Bhagwanpur','Nichlaul','M'],
+['Bharwlia','Nichlaul','M'],
+['Bheri Hari','Nichlaul','M'],
+['Bheria','Nichlaul','M'],
+['Bhohtha','Nichlaul','M'],
+['Bhujauli','Nichlaul','M'],
+['Bijapar','Nichlaul','M'],
+['Bindwalia','Nichlaul','M'],
+['Bishun Pura','Nichlaul','M'],
+['Bishunpura','Nichlaul','M'],
+['Bodna','Nichlaul','M'],
+['Burhadih Kalan','Nichlaul','M'],
+['Burhadih Khurd','Nichlaul','M'],
+['Butha Deeh','Nichlaul','M'],
+['Chainpur','Nichlaul','M'],
+['Chamainia','Nichlaul','M'],
+['Chanda','Nichlaul','M'],
+['Chandanpur','Nichlaul','M'],
+['Chankauli','Nichlaul','M'],
+['Charmaria','Nichlaul','M'],
+['Chatia','Nichlaul','M'],
+['Chhitauna','Nichlaul','M'],
+['Chiutaha','Nichlaul','M'],
+['Choragpur Madarha','Nichlaul','M'],
+['Damki','Nichlaul','M'],
+['Dathauli','Nichlaul','M'],
+['Deurwa','Nichlaul','M'],
+['Dhekawe','Nichlaul','M'],
+['Dheso','Nichlaul','M'],
+['Dhuthibari','Nichlaul','M'],
+['Digahi','Nichlaul','M'],
+['Dighawa','Nichlaul','M'],
+['Dighwa','Nichlaul','M'],
+['Domakhas','Nichlaul','M'],
+['Dudhrai','Nichlaul','M'],
+['Dumri','Nichlaul','M'],
+['Durgwalia','Nichlaul','M'],
+['Forest Village-24','Nichlaul','M'],
+['Forest Village-26/27','Nichlaul','M'],
+['Gajauli','Nichlaul','M'],
+['Ganeshpur','Nichlaul','M'],
+['Gangauli','Nichlaul','M'],
+['Gaunaria','Nichlaul','M'],
+['Gaura','Nichlaul','M'],
+['Gaura Nipania','Nichlaul','M'],
+['Gauri Kishunpur','Nichlaul','M'],
+['Gedaura','Nichlaul','M'],
+['Gedauri','Nichlaul','M'],
+['Gerahva','Nichlaul','M'],
+['Germa','Nichlaul','M'],
+['Ghamur','Nichlaul','M'],
+['Ghornar','Nichlaul','M'],
+['Girahia','Nichlaul','M'],
+['Gosaipur','Nichlaul','M'],
+['Gular Bhar','Nichlaul','M'],
+['Gularbhar','Nichlaul','M'],
+['Gurli','Nichlaul','M'],
+['Hardi','Nichlaul','M'],
+['Hargaon','Nichlaul','M'],
+['Harkhora','Nichlaul','M'],
+['Harpur Kalan','Nichlaul','M'],
+['Harpur Khurd','Nichlaul','M'],
+['Harpur Pakri','Nichlaul','M'],
+['Harrai Diha','Nichlaul','M'],
+['Haveli','Nichlaul','M'],
+['Horlapur','Nichlaul','M'],
+['Itahia','Nichlaul','M'],
+['Jagarnathpur','Nichlaul','M'],
+['Jagdaur','Nichlaul','M'],
+['Jahada','Nichlaul','M'],
+['Jai Sri','Nichlaul','M'],
+['Jamuhi Kalan','Nichlaul','M'],
+['Jamui','Nichlaul','M'],
+['Jharwlia','Nichlaul','M'],
+['Kaima','Nichlaul','M'],
+['Kalanahi Khurd','Nichlaul','M'],
+['Kamharia','Nichlaul','M'],
+['Kamta','Nichlaul','M'],
+['Kapar Dhikka','Nichlaul','M'],
+['Kaprauli','Nichlaul','M'],
+['Kardaha','Nichlaul','M'],
+['Karidih','Nichlaul','M'],
+['Karja','Nichlaul','M'],
+['Karmahi','Nichlaul','M'],
+['Karmahia','Nichlaul','M'],
+['Karwati Urf Kataka','Nichlaul','M'],
+['Katahri Kala','Nichlaul','M'],
+['Katahri Khurd','Nichlaul','M'],
+['Katkhor','Nichlaul','M'],
+['Khajuria','Nichlaul','M'],
+['Khamhaura','Nichlaul','M'],
+['Khar Chauli','Nichlaul','M'],
+['Khesaraha','Nichlaul','M'],
+['Khesarari','Nichlaul','M'],
+['Khonhauli','Nichlaul','M'],
+['Khosta','Nichlaul','M'],
+['Khuruhuri','Nichlaul','M'],
+['Khutahwa','Nichlaul','M'],
+['Kishunpur','Nichlaul','M'],
+['Kohrawal','Nichlaul','M'],
+['Kolhua','Nichlaul','M'],
+['Kothibhar','Nichlaul','M'],
+['Kuiyan','Nichlaul','M'],
+['Kuriya','Nichlaul','M'],
+['Kuwari Sati','Nichlaul','M'],
+['Laxmipur Kala','Nichlaul','M'],
+['Laxmipur Kart','Nichlaul','M'],
+['Laxmipur Khurd','Nichlaul','M'],
+['Ledi','Nichlaul','M'],
+['Lohepar','Nichlaul','M'],
+['Lohia','Nichlaul','M'],
+['Lohrauli','Nichlaul','M'],
+['Madanpura','Nichlaul','M'],
+['Madhwalia','Nichlaul','M'],
+['Madu Bani','Nichlaul','M'],
+['Mahada','Nichlaul','M'],
+['Maheshpur Kawelwa','Nichlaul','M'],
+['Mairi','Nichlaul','M'],
+['Majari','Nichlaul','M'],
+['Mathauli Araji','Nichlaul','M'],
+['Mathiya','Nichlaul','M'],
+['Matiaria','Nichlaul','M'],
+['Medhauli Kalan','Nichlaul','M'],
+['Mehdia','Nichlaul','M'],
+['Methauli Khurd','Nichlaul','M'],
+['Mishrauliya','Nichlaul','M'],
+['Mishrawalia','Nichlaul','M'],
+['Mithaura','Nichlaul','M'],
+['Mokhan Uttari','Nichlaul','M'],
+['Moravan Dakshini','Nichlaul','M'],
+['Motiyahi','Nichlaul','M'],
+['Muderi','Nichlaul','M'],
+['Mundera','Nichlaul','M'],
+['Nahchhauri','Nichlaul','M'],
+['Naksha Baksha','Nichlaul','M'],
+['Naturi','Nichlaul','M'],
+['Naunia','Nichlaul','M'],
+['Nauwabari','Nichlaul','M'],
+['Nipania','Nichlaul','M'],
+['Orwalia','Nichlaul','M'],
+['Ovri','Nichlaul','M'],
+['Pachama','Nichlaul','M'],
+['Padari Kalan','Nichlaul','M'],
+['Padari Khurd','Nichlaul','M'],
+['Padari Urf Mirganj','Nichlaul','M'],
+['Paikauli Kala','Nichlaul','M'],
+['Paikauli Khurd','Nichlaul','M'],
+['Pakari Chaube','Nichlaul','M'],
+['Pakri','Nichlaul','M'],
+['Pali Urf Hanuman Ganj','Nichlaul','M'],
+['Paragpur','Nichlaul','M'],
+['Parsa','Nichlaul','M'],
+['Parsauni','Nichlaul','M'],
+['Parsia','Nichlaul','M'],
+['Patauna','Nichlaul','M'],
+['Patkhauni','Nichlaul','M'],
+['Phatakdauna','Nichlaul','M'],
+['Pipar Pati','Nichlaul','M'],
+['Pipara Kazi','Nichlaul','M'],
+['Piparia','Nichlaul','M'],
+['Piparpati','Nichlaul','M'],
+['Pipra','Nichlaul','M'],
+['Pipra Bazar','Nichlaul','M'],
+['Pipria','Nichlaul','M'],
+['Pokher Bhinda','Nichlaul','M'],
+['Pratap Pur','Nichlaul','M'],
+['Raipur','Nichlaul','M'],
+['Rajwal Madarha','Nichlaul','M'],
+['Ramanagar','Nichlaul','M'],
+['Ramchandrahi','Nichlaul','M'],
+['Ramgarhwa','Nichlaul','M'],
+['Rampur Kala','Nichlaul','M'],
+['Rampur Khurd','Nichlaul','M'],
+['Rampurawa','Nichlaul','M'],
+['Rampurwa','Nichlaul','M'],
+['Ratanpur','Nichlaul','M'],
+['Rautar','Nichlaul','M'],
+['Regahia','Nichlaul','M'],
+['Rudalapur','Nichlaul','M'],
+['Rudauli','Nichlaul','M'],
+['Sabaya','Nichlaul','M'],
+['Sagar Dinhi','Nichlaul','M'],
+['Sanda Khurd','Nichlaul','M'],
+['Sekhui','Nichlaul','M'],
+['Semara','Nichlaul','M'],
+['Semari','Nichlaul','M'],
+['Semra Kamahriya Urf Tulsipur','Nichlaul','M'],
+['Semrahana','Nichlaul','M'],
+['Serkuri','Nichlaul','M'],
+['Sheshpur','Nichlaul','M'],
+['Shikarpur','Nichlaul','M'],
+['Shitalapur','Nichlaul','M'],
+['Shitlapur','Nichlaul','M'],
+['Sidhave','Nichlaul','M'],
+['Sinh Pur','Nichlaul','M'],
+['Sirauli','Nichlaul','M'],
+['Sisawa','Nichlaul','M'],
+['Sisawa Buzurg','Nichlaul','M'],
+['Siswa Khurd','Nichlaul','M'],
+['Sofra','Nichlaul','M'],
+['Sohasa','Nichlaul','M'],
+['Sohat','Nichlaul','M'],
+['Sohgi Barwa','Nichlaul','M'],
+['Son Barsa','Nichlaul','M'],
+['Sonbarasa','Nichlaul','M'],
+['Sovar','Nichlaul','M'],
+['Sujauli','Nichlaul','M'],
+['Sukarhar','Nichlaul','M'],
+['Tikar','Nichlaul','M'],
+['Tikulahia','Nichlaul','M'],
+['Togri','Nichlaul','M'],
+['Turkahia','Nichlaul','M'],
+['Vajaha Urf Ahirauli','Nichlaul','M'],
+['Van Tangia-28','Nichlaul','M'],
+['Visokhor','Nichlaul','M'],
+['Achal Garh','Pharenda','M'],
+['Agaya','Pharenda','M'],
+['Ahirauli','Pharenda','M'],
+['Alehadiya Mahdewa','Pharenda','M'],
+['Babhani Buzurg','Pharenda','M'],
+['Babhani Khurd','Pharenda','M'],
+['Badagon','Pharenda','M'],
+['Badihari','Pharenda','M'],
+['Bagahi','Pharenda','M'],
+['Bahadur Garh','Pharenda','M'],
+['Bahduri','Pharenda','M'],
+['Baikunthpur','Pharenda','M'],
+['Baisar','Pharenda','M'],
+['Bajar Dih','Pharenda','M'],
+['Bandha','Pharenda','M'],
+['Banhaita','Pharenda','M'],
+['Banjarha Sonbarsa','Pharenda','M'],
+['Bankata','Pharenda','M'],
+['Bankati','Pharenda','M'],
+['Barahara Devi Charan','Pharenda','M'],
+['Barahara Kanhai','Pharenda','M'],
+['Barat Garha','Pharenda','M'],
+['Bardar','Pharenda','M'],
+['Bargadawa Ramsahai','Pharenda','M'],
+['Bargadwa','Pharenda','M'],
+['Bargahpur','Pharenda','M'],
+['Barhara Indra Datt','Pharenda','M'],
+['Barhya','Pharenda','M'],
+['Basahwa','Pharenda','M'],
+['Basdila','Pharenda','M'],
+['Bela','Pharenda','M'],
+['Belauhi','Pharenda','M'],
+['Belsar','Pharenda','M'],
+['Bhagarhi','Pharenda','M'],
+['Bhagwanpur','Pharenda','M'],
+['Bhagwant Nagar Parsia','Pharenda','M'],
+['Bhainsihya','Pharenda','M'],
+['Bhari Baisi','Pharenda','M'],
+['Bhaura Jot','Pharenda','M'],
+['Bishunpur Adrauna','Pharenda','M'],
+['Budawa','Pharenda','M'],
+['Chainpur','Pharenda','M'],
+['Chak Tolaha','Pharenda','M'],
+['Chandanpur','Pharenda','M'],
+['Chargawan','Pharenda','M'],
+['Chauka','Pharenda','M'],
+['Chautarwa','Pharenda','M'],
+['Chhitahi Buzurg','Pharenda','M'],
+['Chhitauni','Pharenda','M'],
+['Dakahi','Pharenda','M'],
+['Darwar Buzurg','Pharenda','M'],
+['Darwar Khurd','Pharenda','M'],
+['Darzi Chak','Pharenda','M'],
+['Deurwa','Pharenda','M'],
+['Dhani','Pharenda','M'],
+['Dharaicha','Pharenda','M'],
+['Dharaichi','Pharenda','M'],
+['Dhunuva Dih','Pharenda','M'],
+['Dhusawa Khurd','Pharenda','M'],
+['Dondhghat','Pharenda','M'],
+['Dondhghat Tappa Lehra','Pharenda','M'],
+['Dubaulia','Pharenda','M'],
+['Durgapur','Pharenda','M'],
+['Ek Dangawa','Pharenda','M'],
+['Ganesh Pur','Pharenda','M'],
+['Garh','Pharenda','M'],
+['Ghivpid','Pharenda','M'],
+['Gokulpur','Pharenda','M'],
+['Gopalpur','Pharenda','M'],
+['Gopalpur Tappa Lehra','Pharenda','M'],
+['Gopalpur Tappa Sumhakhor','Pharenda','M'],
+['Govindpur','Pharenda','M'],
+['Gujraulia','Pharenda','M'],
+['Gulariha Tappa Lehra','Pharenda','M'],
+['Gulariha Tappa Rinauli','Pharenda','M'],
+['Gulariya Kala','Pharenda','M'],
+['Gurchiha','Pharenda','M'],
+['Harmandil Khurd','Pharenda','M'],
+['Harpur','Pharenda','M'],
+['Harraiya','Pharenda','M'],
+['Harraiya Maulahi','Pharenda','M'],
+['Harraiya Pandit','Pharenda','M'],
+['Hata Bela Harraiya','Pharenda','M'],
+['Hathigarhwa','Pharenda','M'],
+['Ilaha Vas','Pharenda','M'],
+['Jalalgarh','Pharenda','M'],
+['Jamuhara Khurd','Pharenda','M'],
+['Jhagapar','Pharenda','M'],
+['Jhamar','Pharenda','M'],
+['Jhawakot','Pharenda','M'],
+['Jhunuwa','Pharenda','M'],
+['Jiginiha','Pharenda','M'],
+['Jungle Jogia Bari','Pharenda','M'],
+['Kaithwalia Sarvjeet','Pharenda','M'],
+['Kamharia Buzurg','Pharenda','M'],
+['Kamhariya Khurd','Pharenda','M'],
+['Kamnaha','Pharenda','M'],
+['Kanapar Urf Ram Nagar','Pharenda','M'],
+['Karahiya','Pharenda','M'],
+['Karamaha','Pharenda','M'],
+['Karanjahi','Pharenda','M'],
+['Karkhi','Pharenda','M'],
+['Karmahwa Buzurg','Pharenda','M'],
+['Karu Ambla','Pharenda','M'],
+['Kasht Khaira','Pharenda','M'],
+['Kawalpur','Pharenda','M'],
+['Keshauli','Pharenda','M'],
+['Khajuria','Pharenda','M'],
+['Khar Khora','Pharenda','M'],
+['Kharharwa','Pharenda','M'],
+['Kharkhori','Pharenda','M'],
+['Khurrampur','Pharenda','M'],
+['Koila Dand','Pharenda','M'],
+['Kolhui','Pharenda','M'],
+['Kushha','Pharenda','M'],
+['Lalpur','Pharenda','M'],
+['Laukaha','Pharenda','M'],
+['Laukahi','Pharenda','M'],
+['Lavdaha','Pharenda','M'],
+['Ledwa','Pharenda','M'],
+['Lehara','Pharenda','M'],
+['Lehra','Pharenda','M'],
+['Lejar Mahdewa','Pharenda','M'],
+['Madhukar Mahdewa','Pharenda','M'],
+['Madhwapur','Pharenda','M'],
+['Madrahna','Pharenda','M'],
+['Mahav','Pharenda','M'],
+['Mahdeva','Pharenda','M'],
+['Mahdewa','Pharenda','M'],
+['Mahdewa Buzurg','Pharenda','M'],
+['Mahuari','Pharenda','M'],
+['Mahuawa Raja','Pharenda','M'],
+['Mahuawa Sarvjeet','Pharenda','M'],
+['Mahuawa Urf Mahuie','Pharenda','M'],
+['Mahulani','Pharenda','M'],
+['Mainhawa','Pharenda','M'],
+['Mangalpur','Pharenda','M'],
+['Mani Kaura','Pharenda','M'],
+['Mathura Nagar','Pharenda','M'],
+['Matihanwa','Pharenda','M'],
+['Mishrauliya','Pharenda','M'],
+['Mujahana','Pharenda','M'],
+['Murila','Pharenda','M'],
+['Nagawa','Pharenda','M'],
+['Nainsar','Pharenda','M'],
+['Nausagar','Pharenda','M'],
+['Navadih Khurd','Pharenda','M'],
+['Nawadih Kala','Pharenda','M'],
+['Nirnam Paschami','Pharenda','M'],
+['Nirnam Purwi','Pharenda','M'],
+['Orwalia','Pharenda','M'],
+['Orwalia Gosai','Pharenda','M'],
+['Pach Gangpur','Pharenda','M'],
+['Pachrukhi','Pharenda','M'],
+['Pakardiha Raja','Pharenda','M'],
+['Panditpur','Pharenda','M'],
+['Paras Khand','Pharenda','M'],
+['Parasia Khurd','Pharenda','M'],
+['Parsa Beni','Pharenda','M'],
+['Parsa Mahanth','Pharenda','M'],
+['Parsauhiya','Pharenda','M'],
+['Parsauna','Pharenda','M'],
+['Parsia Buzurg','Pharenda','M'],
+['Parsia Khurd','Pharenda','M'],
+['Pattiwar','Pharenda','M'],
+['Pharenda Buzurg','Pharenda','M'],
+['Pharenda Khurd','Pharenda','M'],
+['Pharenda Sarvjeet','Pharenda','M'],
+['Phul Manha','Pharenda','M'],
+['Pipara Bari','Pharenda','M'],
+['Piparahi','Pharenda','M'],
+['Pipra','Pharenda','M'],
+['Pipra Bishambher Pur','Pharenda','M'],
+['Pipra Khalli','Pharenda','M'],
+['Pipra Mauni','Pharenda','M'],
+['Pipraparsauni','Pharenda','M'],
+['Pokhar Bhinda','Pharenda','M'],
+['Prithvipal Garh','Pharenda','M'],
+['Puraina','Pharenda','M'],
+['Puranderpur','Pharenda','M'],
+['Raipur Pandit','Pharenda','M'],
+['Rajmandir Kalan','Pharenda','M'],
+['Rajpur Buzurg','Pharenda','M'],
+['Ramnagar 231 Nirnam Pachhimi','Pharenda','M'],
+['Rampur','Pharenda','M'],
+['Rasoiya','Pharenda','M'],
+['Ratanapar','Pharenda','M'],
+['Ratanpur Khurd','Pharenda','M'],
+['Ratanpur Urf Mardipur','Pharenda','M'],
+['Rithia Padari','Pharenda','M'],
+['Runuwa','Pharenda','M'],
+['Sahjanwa','Pharenda','M'],
+['Sarvadavan Garh','Pharenda','M'],
+['Sauraha','Pharenda','M'],
+['Sekhui','Pharenda','M'],
+['Semara Dari','Pharenda','M'],
+['Semarahni','Pharenda','M'],
+['Semra Mahraja','Pharenda','M'],
+['Semrahna','Pharenda','M'],
+['Semrahni','Pharenda','M'],
+['Shahabad','Pharenda','M'],
+['Shahpur Jungle','Pharenda','M'],
+['Shaldah Urf Kawaldah','Pharenda','M'],
+['Shikar Garh','Pharenda','M'],
+['Shivpur','Pharenda','M'],
+['Sidhwar','Pharenda','M'],
+['Sidhwari','Pharenda','M'],
+['Sikandarajitpur','Pharenda','M'],
+['Sikara','Pharenda','M'],
+['Sinhpur Ayodhya','Pharenda','M'],
+['Siswania Buzurg','Pharenda','M'],
+['Siswania Khurd','Pharenda','M'],
+['Soharwalia Kala','Pharenda','M'],
+['Soharwalia Khurd','Pharenda','M'],
+['Son Bandi','Pharenda','M'],
+['Sonbarsa','Pharenda','M'],
+['Sonchiraia','Pharenda','M'],
+['Sonpipari Buzurg','Pharenda','M'],
+['Sonpipari Khurd','Pharenda','M'],
+['Talhi','Pharenda','M'],
+['Tihur','Pharenda','M'],
+['Uditpur','Pharenda','M'],
+['Varji','Pharenda','M'],
+['Vishrampur','Pharenda','M']
+];
+
         let areaMode = 'village';
-        let areaDebounce;
 
         function setAreaMode(mode) {
             areaMode = mode;
             document.querySelectorAll('.area-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
             const input = document.getElementById('leadArea');
-            input.value = '';
+            const inputWrap = document.querySelector('.area-input-wrap');
+            const blockWrap = document.getElementById('blockSelectWrap');
             document.getElementById('areaSuggestions').classList.remove('show');
+
+            if (mode === 'block') {
+                inputWrap.style.display = 'none';
+                blockWrap.style.display = 'flex';
+                return;
+            }
+            inputWrap.style.display = 'block';
+            blockWrap.style.display = 'none';
+            input.value = '';
             if (mode === 'pin') {
                 input.placeholder = 'Enter 6-digit PIN code';
                 input.setAttribute('inputmode', 'numeric');
@@ -1346,83 +3046,81 @@
             }
         }
 
+        // Official Community Development Blocks (Tehsil-level), sourced from each district's
+        // government website — same administrative structure used for elections/panchayats.
+        const BLOCK_DATA = {
+            M: ['Sadar', 'Brijmanganj', 'Dhani', 'Partawal', 'Paniyara', 'Lakshmipur', 'Ghughali', 'Mithaura', 'Nautanwa', 'Pharenda', 'Nichlaul', 'Siswa'],
+            K: ['Padrauna', 'Vishnupura', 'Kasia (Kushinagar)', 'Hata', 'Motichak', 'Seorahi', 'Nebua Naurangiya', 'Khadda', 'Dudahi', 'Fazilnagar', 'Sukrauli', 'Kaptanganj', 'Ramkola', 'Tamkuhi'],
+            G: ['Pipraich', 'Belghat', 'Uruwa', 'Gagaha', 'Gola', 'Kauri Ram', 'Khajni', 'Jungle Kaudia', 'Khorabar', 'Pali', 'Chargawan', 'Sahjanwa', 'Barhalganj', 'Piprauli', 'Sardarnagar', 'Bhathat', 'Brahmpur', 'Campierganj', 'Bansgaon']
+        };
+
+        function onBlockDistrictChange() {
+            const dist = document.getElementById('blockDistrictSelect').value;
+            const blockSelect = document.getElementById('blockNameSelect');
+            blockSelect.innerHTML = '<option value="">Select Block</option>';
+            if (!dist) { blockSelect.disabled = true; return; }
+            BLOCK_DATA[dist].forEach(b => {
+                const opt = document.createElement('option');
+                opt.value = b;
+                opt.textContent = b;
+                blockSelect.appendChild(opt);
+            });
+            blockSelect.disabled = false;
+        }
+
+        function onBlockSelect() {
+            const dist = document.getElementById('blockDistrictSelect').value;
+            const block = document.getElementById('blockNameSelect').value;
+            if (!dist || !block) return;
+            document.getElementById('leadArea').value = `${block} Block, ${DISTRICT_NAMES[dist]}`;
+        }
+
         function handleAreaInput() {
-            clearTimeout(areaDebounce);
             const query = document.getElementById('leadArea').value.trim();
             const box = document.getElementById('areaSuggestions');
             if (areaMode === 'village') {
                 if (query.length < 2) { box.classList.remove('show'); return; }
-                areaDebounce = setTimeout(() => fetchVillageSuggestions(query), 400);
+                searchLocalVillage(query);
             } else {
-                if (!/^\d{6}$/.test(query)) { box.classList.remove('show'); return; }
-                areaDebounce = setTimeout(() => fetchPinSuggestions(query), 200);
+                if (!query.length) { box.classList.remove('show'); return; }
+                searchLocalPin(query);
             }
         }
 
-        // Only these districts are in Shan Zone's actual service area
-        const SERVICE_DISTRICTS = ['maharajganj', 'kushinagar', 'gorakhpur'];
-        function isInServiceArea(district) {
-            const d = (district || '').toLowerCase();
-            return SERVICE_DISTRICTS.some(sd => d.includes(sd));
-        }
-
-        async function fetchVillageSuggestions(query) {
+        function renderAreaResults(list) {
             const box = document.getElementById('areaSuggestions');
-            box.innerHTML = '<div class="area-suggestion-empty">Searching...</div>';
-            box.classList.add('show');
-            try {
-                const res = await fetch(`https://api.postalpincode.in/postoffice/${encodeURIComponent(query)}`);
-                const data = await res.json();
-                if (!data || !data[0] || data[0].Status !== 'Success') {
-                    box.innerHTML = '<div class="area-suggestion-empty">No matches in Maharajganj, Kushinagar or Gorakhpur — try another spelling</div>';
-                    return;
-                }
-                const results = data[0].PostOffice || [];
-                const list = results.filter(p => isInServiceArea(p.District)).slice(0, 8);
-                if (!list.length) {
-                    box.innerHTML = '<div class="area-suggestion-empty">No matches in Maharajganj, Kushinagar or Gorakhpur — try another spelling</div>';
-                    return;
-                }
-                box.innerHTML = list.map(p =>
-                    `<div class="area-suggestion-item" onclick="selectArea('${p.Name.replace(/'/g, "\\'")}', '${p.Pincode}')">
-                        ${p.Name}
-                        <small>${p.District}, ${p.State} — PIN ${p.Pincode}</small>
-                    </div>`
-                ).join('');
-            } catch (e) {
-                box.innerHTML = '<div class="area-suggestion-empty">Could not fetch suggestions — type manually</div>';
+            if (!list.length) {
+                box.innerHTML = '<div class="area-suggestion-empty">No matches in Maharajganj, Kushinagar or Gorakhpur — try another spelling</div>';
+                box.classList.add('show');
+                return;
             }
+            box.innerHTML = list.slice(0, 8).map(p => {
+                const isPin = /^\d{6}$/.test(p[1]);
+                const districtName = DISTRICT_NAMES[p[2]];
+                const value = isPin ? `${p[0]} - ${p[1]}` : `${p[0]} (${p[1]} Tehsil), ${districtName}`;
+                const subtitle = isPin ? `${districtName}, Uttar Pradesh — PIN ${p[1]}` : `${p[1]} Tehsil, ${districtName} — no individual PIN listed`;
+                return `<div class="area-suggestion-item" onclick="selectArea('${value.replace(/'/g, "\\'")}')">
+                    ${p[0]}
+                    <small>${subtitle}</small>
+                </div>`;
+            }).join('');
+            box.classList.add('show');
         }
 
-        async function fetchPinSuggestions(pin) {
-            const box = document.getElementById('areaSuggestions');
-            box.innerHTML = '<div class="area-suggestion-empty">Searching...</div>';
-            box.classList.add('show');
-            try {
-                const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
-                const data = await res.json();
-                if (!data || !data[0] || data[0].Status !== 'Success') {
-                    box.innerHTML = '<div class="area-suggestion-empty">No matches found for this PIN</div>';
-                    return;
-                }
-                const list = (data[0].PostOffice || []).filter(p => isInServiceArea(p.District)).slice(0, 8);
-                if (!list.length) {
-                    box.innerHTML = '<div class="area-suggestion-empty">This PIN is outside our service area (Maharajganj, Kushinagar, Gorakhpur)</div>';
-                    return;
-                }
-                box.innerHTML = list.map(p =>
-                    `<div class="area-suggestion-item" onclick="selectArea('${p.Name.replace(/'/g, "\\'")}', '${p.Pincode}')">
-                        ${p.Name}
-                        <small>${p.District}, ${p.State}</small>
-                    </div>`
-                ).join('');
-            } catch (e) {
-                box.innerHTML = '<div class="area-suggestion-empty">Could not fetch — type manually</div>';
-            }
+        function searchLocalVillage(query) {
+            const q = query.toLowerCase();
+            const pinMatches = LOCAL_AREA_DATA.filter(p => p[0].toLowerCase().includes(q));
+            const censusMatches = CENSUS_VILLAGES.filter(p => p[0].toLowerCase().includes(q));
+            renderAreaResults([...pinMatches, ...censusMatches]);
         }
 
-        function selectArea(name, pin) {
-            document.getElementById('leadArea').value = `${name} - ${pin}`;
+        function searchLocalPin(query) {
+            const matches = LOCAL_AREA_DATA.filter(p => p[1].startsWith(query));
+            renderAreaResults(matches);
+        }
+
+        function selectArea(value) {
+            document.getElementById('leadArea').value = value;
             document.getElementById('areaSuggestions').classList.remove('show');
         }
 
@@ -1436,23 +3134,40 @@
         // ---- Real speed test (measures the visitor's actual current connection) ----
         // Uses multiple parallel connections + a warm-up phase, like real speed-test tools,
         // because a single sequential connection under-reports true bandwidth due to TCP slow-start.
-        const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 70;
-        const GAUGE_MAX_MBPS = 300;
+        const GAUGE_ARC_LENGTH = 401.4; // precomputed length of the 250° track (R=92)
+        const GAUGE_TICKS = [0, 5, 10, 50, 100, 250, 500, 750, 1000];
+        const GAUGE_ANGLES = [-125, -93.75, -62.5, -31.25, 0, 31.25, 62.5, 93.75, 125];
         const SPEEDTEST_FILE = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
         const PING_ENDPOINT = "https://www.gstatic.com/generate_204";
+        const UPLOAD_ENDPOINT = "https://httpbin.org/post";
         const DOWNLOAD_CONCURRENCY = 6;
+        const UPLOAD_CONCURRENCY = 3;
         const WARMUP_MS = 700;
-        const MEASURE_MS = 4500;
+        const MEASURE_MS = 4000;
+        const UPLOAD_MEASURE_MS = 3500;
 
-        function setGauge(mbps) {
-            const pct = Math.max(0, Math.min(mbps / GAUGE_MAX_MBPS, 1));
-            const offset = GAUGE_CIRCUMFERENCE - pct * GAUGE_CIRCUMFERENCE;
-            document.getElementById('gaugeFill').style.strokeDashoffset = offset;
+        function valueToGaugeAngle(mbps) {
+            const v = Math.max(0, Math.min(mbps, 1000));
+            for (let i = 0; i < GAUGE_TICKS.length - 1; i++) {
+                if (v >= GAUGE_TICKS[i] && v <= GAUGE_TICKS[i + 1]) {
+                    const t = (v - GAUGE_TICKS[i]) / (GAUGE_TICKS[i + 1] - GAUGE_TICKS[i]);
+                    return GAUGE_ANGLES[i] + t * (GAUGE_ANGLES[i + 1] - GAUGE_ANGLES[i]);
+                }
+            }
+            return GAUGE_ANGLES[GAUGE_ANGLES.length - 1];
         }
 
-        async function measurePing() {
+        function setGauge(mbps) {
+            const angle = valueToGaugeAngle(mbps);
+            const pct = (angle - GAUGE_ANGLES[0]) / (GAUGE_ANGLES[GAUGE_ANGLES.length - 1] - GAUGE_ANGLES[0]);
+            document.getElementById('gaugeFill').style.strokeDashoffset = GAUGE_ARC_LENGTH - pct * GAUGE_ARC_LENGTH;
+            document.getElementById('gaugeNeedle').style.transform = `rotate(${angle}deg)`;
+            document.getElementById('gaugeCenterVal').textContent = mbps.toFixed(mbps < 10 ? 2 : 1);
+        }
+
+        async function measurePingAndJitter() {
             const samples = [];
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 7; i++) {
                 const t0 = performance.now();
                 try {
                     await fetch(PING_ENDPOINT + '?cb=' + Math.random() + Date.now(), { mode: 'no-cors', cache: 'no-store' });
@@ -1460,83 +3175,141 @@
                 samples.push(performance.now() - t0);
             }
             samples.shift(); // discard first sample — cold connection setup skews it
-            samples.sort((a, b) => a - b);
-            return Math.round(samples[Math.floor(samples.length / 2)]); // median
+            const sorted = [...samples].sort((a, b) => a - b);
+            const median = sorted[Math.floor(sorted.length / 2)];
+            let jitterSum = 0;
+            for (let i = 1; i < samples.length; i++) jitterSum += Math.abs(samples[i] - samples[i - 1]);
+            const jitter = jitterSum / (samples.length - 1);
+            return { ping: Math.round(median), jitter: jitter.toFixed(1) };
+        }
+
+        async function fetchIspInfo() {
+            try {
+                const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
+                const data = await res.json();
+                document.getElementById('stIsp').textContent = data.org || 'Unknown';
+                document.getElementById('stIp').textContent = data.ip || '—';
+                document.getElementById('stLoc').textContent = [data.city, data.region].filter(Boolean).join(', ') || '—';
+                document.getElementById('stIspRow').style.display = 'flex';
+            } catch (e) {
+                document.getElementById('stIspRow').style.display = 'none';
+            }
+        }
+
+        async function measureThroughput(kind, updateEl, concurrency, measureMs) {
+            const testStart = performance.now();
+            const warmupEndsAt = testStart + WARMUP_MS;
+            const testEndsAt = warmupEndsAt + measureMs;
+
+            let measuredBytes = 0;
+            let measuredStart = null;
+            let switchedToMeasuring = false;
+            let finalMbps = 0;
+
+            function onChunk(len) {
+                if (kind === 'download') {
+                    window.__stTotalBytes = (window.__stTotalBytes || 0) + len;
+                    document.getElementById('stData').textContent = (window.__stTotalBytes / 1e6).toFixed(1);
+                }
+                const now = performance.now();
+                if (now < warmupEndsAt) return;
+                if (!switchedToMeasuring) { switchedToMeasuring = true; measuredStart = now; }
+                measuredBytes += len;
+                const elapsedSec = (now - measuredStart) / 1000;
+                if (elapsedSec > 0.05) {
+                    finalMbps = ((measuredBytes * 8) / 1e6) / elapsedSec;
+                    updateEl.textContent = finalMbps.toFixed(1);
+                    if (kind === 'download') setGauge(finalMbps);
+                }
+            }
+
+            async function downloadWorker() {
+                while (performance.now() < testEndsAt) {
+                    try {
+                        const res = await fetch(SPEEDTEST_FILE + '?cb=' + Math.random() + Date.now(), { cache: 'no-store', mode: 'cors' });
+                        if (!res.body) { const blob = await res.blob(); onChunk(blob.size); continue; }
+                        const reader = res.body.getReader();
+                        while (true) {
+                            const { done, value } = await reader.read();
+                            if (done) break;
+                            onChunk(value.length);
+                            if (performance.now() >= testEndsAt) { reader.cancel(); break; }
+                        }
+                    } catch (e) { break; }
+                }
+            }
+
+            async function uploadWorker() {
+                const payload = new Blob([new Uint8Array(1_000_000)]); // 1MB random-ish payload per request
+                while (performance.now() < testEndsAt) {
+                    try {
+                        await fetch(UPLOAD_ENDPOINT, { method: 'POST', body: payload, cache: 'no-store', mode: 'cors' });
+                        onChunk(payload.size);
+                    } catch (e) { break; }
+                }
+            }
+
+            const worker = kind === 'download' ? downloadWorker : uploadWorker;
+            await Promise.all(Array.from({ length: concurrency }, () => worker()));
+
+            const finalElapsedSec = measuredStart ? (performance.now() - measuredStart) / 1000 : 0;
+            finalMbps = finalElapsedSec > 0 ? ((measuredBytes * 8) / 1e6) / finalElapsedSec : finalMbps;
+            updateEl.textContent = finalMbps.toFixed(1);
+            if (kind === 'download') setGauge(finalMbps);
+            return finalMbps;
+        }
+
+        function updateCategoryRatings(downloadMbps, uploadMbps, ping) {
+            const ratings = {
+                catBrowsing: downloadMbps >= 25 ? 5 : downloadMbps >= 10 ? 4 : downloadMbps >= 3 ? 3 : downloadMbps >= 1 ? 2 : 1,
+                catGaming: (ping <= 30 && downloadMbps >= 15) ? 5 : (ping <= 60 && downloadMbps >= 8) ? 4 : (ping <= 100) ? 3 : 2,
+                catStreaming: downloadMbps >= 50 ? 5 : downloadMbps >= 25 ? 4 : downloadMbps >= 10 ? 3 : downloadMbps >= 5 ? 2 : 1,
+                catVideoChat: (uploadMbps >= 5 && downloadMbps >= 5) ? 5 : (uploadMbps >= 2 && downloadMbps >= 2) ? 4 : (uploadMbps >= 1) ? 3 : 2
+            };
+            Object.entries(ratings).forEach(([id, score]) => {
+                const dotsWrap = document.querySelector(`#${id} .st-dots`);
+                dotsWrap.innerHTML = Array.from({ length: 5 }, (_, i) =>
+                    `<span class="${i < score ? 'filled' : ''}"></span>`
+                ).join('');
+            });
         }
 
         async function runSpeedTest() {
             const btn = document.getElementById('stStartBtn');
             const downloadEl = document.getElementById('stDownload');
+            const uploadEl = document.getElementById('stUpload');
             const pingEl = document.getElementById('stPing');
+            const jitterEl = document.getElementById('stJitter');
             const dataEl = document.getElementById('stData');
             const statusEl = document.getElementById('stStatus');
 
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
             downloadEl.textContent = '0';
+            uploadEl.textContent = '0';
             dataEl.textContent = '0';
             pingEl.textContent = '--';
+            jitterEl.textContent = '--';
+            window.__stTotalBytes = 0;
             setGauge(0);
 
+            fetchIspInfo(); // fire and forget, doesn't block the test
+
             try {
-                statusEl.textContent = 'Measuring ping...';
-                pingEl.textContent = await measurePing();
+                statusEl.textContent = 'Measuring ping & jitter...';
+                const { ping, jitter } = await measurePingAndJitter();
+                pingEl.textContent = ping;
+                jitterEl.textContent = jitter;
 
-                statusEl.textContent = 'Warming up connection...';
-                const testStart = performance.now();
-                const warmupEndsAt = testStart + WARMUP_MS;
-                const testEndsAt = warmupEndsAt + MEASURE_MS;
+                statusEl.textContent = 'Measuring download speed...';
+                const downloadMbps = await measureThroughput('download', downloadEl, DOWNLOAD_CONCURRENCY, MEASURE_MS);
 
-                let totalBytes = 0;      // all bytes, including warm-up (shown as "MB Tested")
-                let measuredBytes = 0;   // bytes counted only after warm-up (used for the real speed figure)
-                let measuredStart = null;
-                let switchedToMeasuring = false;
+                statusEl.textContent = 'Measuring upload speed...';
+                setGauge(0);
+                const uploadMbps = await measureThroughput('upload', uploadEl, UPLOAD_CONCURRENCY, UPLOAD_MEASURE_MS);
+                setGauge(downloadMbps); // leave the needle showing download, the headline number
 
-                function onChunk(len) {
-                    totalBytes += len;
-                    dataEl.textContent = (totalBytes / 1e6).toFixed(1);
-                    const now = performance.now();
-                    if (now < warmupEndsAt) return;
-                    if (!switchedToMeasuring) {
-                        switchedToMeasuring = true;
-                        measuredStart = now;
-                        statusEl.textContent = 'Measuring download speed...';
-                    }
-                    measuredBytes += len;
-                    const elapsedSec = (now - measuredStart) / 1000;
-                    if (elapsedSec > 0.05) {
-                        const mbps = ((measuredBytes * 8) / 1e6) / elapsedSec;
-                        downloadEl.textContent = mbps.toFixed(1);
-                        setGauge(mbps);
-                    }
-                }
-
-                async function worker() {
-                    while (performance.now() < testEndsAt) {
-                        try {
-                            const res = await fetch(SPEEDTEST_FILE + '?cb=' + Math.random() + Date.now(), { cache: 'no-store', mode: 'cors' });
-                            if (!res.body) {
-                                const blob = await res.blob();
-                                onChunk(blob.size);
-                                continue;
-                            }
-                            const reader = res.body.getReader();
-                            while (true) {
-                                const { done, value } = await reader.read();
-                                if (done) break;
-                                onChunk(value.length);
-                                if (performance.now() >= testEndsAt) { reader.cancel(); break; }
-                            }
-                        } catch (e) { break; }
-                    }
-                }
-
-                await Promise.all(Array.from({ length: DOWNLOAD_CONCURRENCY }, () => worker()));
-
-                const finalElapsedSec = measuredStart ? (performance.now() - measuredStart) / 1000 : 0;
-                const finalMbps = finalElapsedSec > 0 ? ((measuredBytes * 8) / 1e6) / finalElapsedSec : 0;
-                downloadEl.textContent = finalMbps.toFixed(1);
-                setGauge(finalMbps);
+                updateCategoryRatings(downloadMbps, uploadMbps, ping);
                 statusEl.textContent = 'Test complete — run again anytime';
             } catch (err) {
                 statusEl.textContent = 'Could not complete test. Check your connection and try again.';
