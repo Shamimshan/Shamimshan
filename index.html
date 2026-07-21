@@ -338,28 +338,48 @@
             animation: statusFloat 4.5s ease-in-out infinite;
         }
 
-        /* ===== Hero lead-capture card ===== */
-        .hero-lead-card {
-            position: absolute; z-index: 4; right: 5%; top: 130px; width: 310px;
-            background: rgba(11,17,33,0.55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(255,255,255,0.16); border-radius: 20px; padding: 24px;
+        /* ===== Check Availability section ===== */
+        .availability-section { background: var(--void); padding: 90px 5%; position: relative; overflow: hidden; }
+        .availability-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 10% 20%, rgba(0,224,199,0.10), transparent 45%),
+                        radial-gradient(circle at 90% 80%, rgba(255,94,20,0.08), transparent 45%);
+        }
+        .availability-wrap {
+            max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 60px;
+            flex-wrap: wrap; position: relative; z-index: 1;
+        }
+        .availability-info { flex: 1; min-width: 300px; }
+        .availability-info .eyebrow { color: var(--pulse); }
+        .availability-info .eyebrow::before { background: var(--pulse); }
+        .availability-info h2 { color: white; font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 16px; }
+        .availability-info h2 .accent-word { color: var(--pulse); }
+        .availability-info p { color: #b9c3da; font-size: 15.5px; line-height: 1.7; margin-bottom: 28px; max-width: 460px; }
+        .availability-points { display: flex; flex-direction: column; gap: 14px; }
+        .availability-points div { display: flex; align-items: center; gap: 10px; color: #cfd8ee; font-size: 14.5px; font-weight: 500; }
+        .availability-points i { color: var(--pulse); font-size: 16px; }
+
+        .availability-card {
+            flex: 0 0 auto; width: 360px; z-index: 4;
+            background: rgba(255,255,255,0.06); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.16); border-radius: 22px; padding: 30px;
             box-shadow: 0 30px 70px rgba(0,0,0,0.4);
         }
-        .hero-lead-card .lead-badge {
+        .availability-card .lead-badge {
             display: inline-flex; align-items: center; gap: 6px; background: rgba(201,164,76,0.16);
             border: 1px solid rgba(201,164,76,0.4); color: var(--gold-light); font-size: 11px; font-weight: 700;
             padding: 5px 12px; border-radius: 999px; margin-bottom: 14px; letter-spacing: 0.03em;
         }
-        .hero-lead-card h3 { color: white; font-size: 1.05rem; margin: 0 0 16px; font-weight: 600; }
-        .hero-lead-card input {
-            width: 100%; padding: 11px 13px; margin-bottom: 11px; border-radius: 8px;
+        .availability-card h3 { color: white; font-size: 1.15rem; margin: 0 0 18px; font-weight: 600; }
+        .availability-card input {
+            width: 100%; padding: 12px 14px; margin-bottom: 12px; border-radius: 8px;
             border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: white;
-            font-family: 'Poppins', sans-serif; font-size: 13.5px; box-sizing: border-box; transition: 0.25s;
+            font-family: 'Poppins', sans-serif; font-size: 14px; box-sizing: border-box; transition: 0.25s;
         }
-        .hero-lead-card input::placeholder { color: #8b96b3; }
-        .hero-lead-card input:focus { outline: none; border-color: var(--pulse); background: rgba(255,255,255,0.1); }
-        .hero-lead-card .lead-note { font-size: 11px; color: #8b96b3; text-align: center; margin-top: 10px; }
-        @media (max-width: 1100px) { .hero-lead-card { display: none; } }
+        .availability-card input::placeholder { color: #8b96b3; }
+        .availability-card input:focus { outline: none; border-color: var(--pulse); background: rgba(255,255,255,0.1); }
+        .availability-card .lead-note { font-size: 11.5px; color: #8b96b3; text-align: center; margin-top: 12px; }
+        @media (max-width: 760px) { .availability-card { width: 100%; } .availability-wrap { gap: 40px; } }
 
         /* ===== Area toggle + autocomplete ===== */
         .area-toggle { display: flex; gap: 6px; margin-bottom: 10px; }
@@ -412,7 +432,7 @@
         @media (max-width: 900px) { .hero-status-card { display: none; } }
 
         .hero-content {
-            position: relative; z-index: 2; max-width: 580px; padding: 60px 5%;
+            position: relative; z-index: 2; max-width: 660px; padding: 60px 5%;
         }
         .hero-content .eyebrow { color: var(--pulse); }
         .hero-content .eyebrow::before { background: var(--pulse); animation: eyebrowPulse 1.8s ease-in-out infinite; }
@@ -578,7 +598,9 @@
         .st-midline i { color: var(--pulse); margin-right: 4px; }
         .st-midline b { color: white; font-weight: 600; }
 
-        .gauge-wrap { position: relative; width: 260px; height: 205px; margin: 6px auto 0; z-index: 1; }
+        .gauge-wrap { position: absolute; inset: 0; z-index: 1; transition: opacity 0.45s ease, transform 0.45s ease; }
+        .gauge-stage { position: relative; width: 260px; height: 205px; margin: 6px auto 0; z-index: 1; }
+        .gauge-wrap.gauge-hidden { opacity: 0; transform: scale(0.9); pointer-events: none; }
         .gauge-svg { width: 100%; height: 100%; }
         .gauge-track-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; stroke-linecap: round; }
         .gauge-track-fill {
@@ -595,6 +617,21 @@
         }
         .gauge-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.9rem; font-weight: 700; color: white; line-height: 1; }
         .gauge-unit { font-size: 10.5px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+        .gauge-result-state {
+            position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 10px; opacity: 0; transform: scale(0.85); transition: opacity 0.45s ease, transform 0.45s ease; pointer-events: none;
+        }
+        .gauge-result-state.show { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .gauge-result-icon {
+            width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 26px; color: white; background: linear-gradient(135deg, var(--pulse), #00b89f);
+            box-shadow: 0 0 0 8px rgba(0,224,199,0.12), 0 10px 26px rgba(0,224,199,0.35);
+            animation: gaugeCheckPop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        @keyframes gaugeCheckPop { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+        .gauge-result-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: white; }
+        .gauge-result-sub { font-size: 11.5px; color: #8b96b3; }
 
         .st-category-row {
             display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
@@ -861,6 +898,7 @@
         <div class="logo"><a href="#home"><img src="logo.jpg" alt="Shan Zone"></a></div>
         <nav class="main-nav" id="mainNav">
             <a href="#home" onclick="closeNav()">Home</a>
+            <a href="#availability" onclick="closeNav()">Check Coverage</a>
             <a href="#about" onclick="closeNav()">About</a>
             <a href="#plans" onclick="closeNav()">Plans</a>
             <a href="#contact" onclick="closeNav()">Contact</a>
@@ -893,37 +931,6 @@
             </div>
         </div>
 
-        <div class="hero-lead-card">
-            <div class="lead-badge">⚡ Quick Response</div>
-            <h3>Check Availability</h3>
-            <input type="text" id="leadName" placeholder="Full Name">
-            <input type="tel" id="leadPhone" placeholder="Mobile Number">
-
-            <div class="area-toggle">
-                <button type="button" class="area-tab active" data-mode="village" onclick="setAreaMode('village')">Village</button>
-                <button type="button" class="area-tab" data-mode="pin" onclick="setAreaMode('pin')">PIN Code</button>
-                <button type="button" class="area-tab" data-mode="block" onclick="setAreaMode('block')">Block</button>
-            </div>
-            <div class="area-input-wrap">
-                <input type="text" id="leadArea" placeholder="Type village name (min 2 letters)" autocomplete="off" oninput="handleAreaInput()">
-                <div class="area-suggestions" id="areaSuggestions"></div>
-            </div>
-            <div class="block-select-wrap" id="blockSelectWrap" style="display:none;">
-                <select id="blockDistrictSelect" onchange="onBlockDistrictChange()">
-                    <option value="">Select District</option>
-                    <option value="M">Maharajganj</option>
-                    <option value="K">Kushinagar</option>
-                    <option value="G">Gorakhpur</option>
-                </select>
-                <select id="blockNameSelect" onchange="onBlockSelect()" disabled>
-                    <option value="">Select Block</option>
-                </select>
-            </div>
-
-            <button class="btn-quote" style="width:100%; justify-content:center;" onclick="submitLeadCard()"><i class="fab fa-whatsapp"></i> Check & Apply</button>
-            <div class="lead-note">We'll confirm on WhatsApp within a few hours.</div>
-        </div>
-
         <div class="hero-content">
             <div class="eyebrow">Fiber + Wireless Network</div>
             <h1><span class="word-reveal"><span style="animation-delay:0.05s">Unstoppable</span></span>
@@ -935,7 +942,7 @@
             <p class="lead">Shan Zone brings reliable, high-speed FTTH and hybrid wireless broadband to homes and businesses — backed by local, on-field support that actually shows up.</p>
 
             <div class="hero-cta-row">
-                <button class="btn-quote" onclick="sendToWhatsapp('a new connection')"><i class="fab fa-whatsapp"></i> Get Connected</button>
+                <a href="#availability" class="btn-quote"><i class="fas fa-map-location-dot"></i> Check Availability</a>
                 <a href="#plans" class="btn-ghost-light"><i class="fas fa-list"></i> View Plans</a>
             </div>
 
@@ -957,6 +964,144 @@
 
         <div class="slide-dots" id="slideDots"></div>
         <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,30 C360,80 1080,-10 1440,35 L1440,70 L0,70 Z" fill="#f6f8fc"></path></svg></div>
+    </section>
+
+    <section id="speedtest" class="speedtest-section reveal">
+        <div class="section-head">
+            <div class="eyebrow" style="justify-content:center;">Know Before You Switch</div>
+            <h2>Test Your Current <span class="accent-word">Internet Speed</span></h2>
+            <p>See what speed you're really getting right now — then compare it with our plans below.</p>
+        </div>
+        <div class="speedtest-card">
+            <div class="st-topline">
+                <div class="st-topline-item">
+                    <div class="st-topline-label"><i class="fas fa-arrow-down"></i> DOWNLOAD <span>Mbps</span></div>
+                    <div class="st-topline-value" id="stDownload">0</div>
+                </div>
+                <div class="st-topline-item">
+                    <div class="st-topline-label"><i class="fas fa-arrow-up"></i> UPLOAD <span>Mbps</span></div>
+                    <div class="st-topline-value" id="stUpload">0</div>
+                </div>
+            </div>
+            <div class="st-midline">
+                <div><i class="fas fa-signal"></i> Ping <b id="stPing">--</b> ms</div>
+                <div><i class="fas fa-wave-square"></i> Jitter <b id="stJitter">--</b> ms</div>
+                <div><i class="fas fa-download"></i> <b id="stData">0</b> MB Tested</div>
+            </div>
+
+            <div class="gauge-stage">
+            <div class="gauge-wrap" id="gaugeWrap">
+                <svg class="gauge-svg" viewBox="0 0 240 190">
+                    <defs>
+                        <linearGradient id="gaugeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ff5e14"/>
+                            <stop offset="55%" stop-color="#c9a44c"/>
+                            <stop offset="100%" stop-color="#00e0c7"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="gauge-track-bg" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
+                    <path class="gauge-track-fill" id="gaugeFill" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
+
+                    <line x1="64.3" y1="167.0" x2="46.3" y2="179.6" class="gauge-tick"/>
+                    <text x="79.0" y="156.7" class="gauge-tick-label" text-anchor="middle">0</text>
+                    <line x1="52.1" y1="132.4" x2="30.2" y2="133.9" class="gauge-tick"/>
+                    <text x="70.1" y="131.3" class="gauge-tick-label" text-anchor="middle">5</text>
+                    <line x1="59.7" y1="96.6" x2="40.2" y2="86.4" class="gauge-tick"/>
+                    <text x="75.6" y="104.9" class="gauge-tick-label" text-anchor="middle">10</text>
+                    <line x1="84.7" y1="69.9" x2="73.3" y2="51.1" class="gauge-tick"/>
+                    <text x="94.1" y="85.3" class="gauge-tick-label" text-anchor="middle">50</text>
+                    <line x1="120.0" y1="60.0" x2="120.0" y2="38.0" class="gauge-tick"/>
+                    <text x="120.0" y="78.0" class="gauge-tick-label" text-anchor="middle">100</text>
+                    <line x1="155.3" y1="69.9" x2="166.7" y2="51.1" class="gauge-tick"/>
+                    <text x="145.9" y="85.3" class="gauge-tick-label" text-anchor="middle">250</text>
+                    <line x1="180.3" y1="96.6" x2="199.8" y2="86.4" class="gauge-tick"/>
+                    <text x="164.4" y="104.9" class="gauge-tick-label" text-anchor="middle">500</text>
+                    <line x1="187.9" y1="132.4" x2="209.8" y2="133.9" class="gauge-tick"/>
+                    <text x="169.9" y="131.3" class="gauge-tick-label" text-anchor="middle">750</text>
+                    <line x1="175.7" y1="167.0" x2="193.7" y2="179.6" class="gauge-tick"/>
+                    <text x="161.0" y="156.7" class="gauge-tick-label" text-anchor="middle">1000</text>
+
+                    <g id="gaugeNeedle" class="gauge-needle-group" style="transform-origin: 120px 128px;">
+                        <line x1="120" y1="128" x2="120" y2="52" class="gauge-needle"/>
+                        <circle cx="120" cy="128" r="6" class="gauge-needle-hub"/>
+                    </g>
+                </svg>
+                <div class="gauge-center-value">
+                    <div class="gauge-value" id="gaugeCenterVal">0</div>
+                    <div class="gauge-unit">Mbps</div>
+                </div>
+            </div>
+            <div class="gauge-result-state" id="gaugeResultState">
+                <div class="gauge-result-icon"><i class="fas fa-check"></i></div>
+                <div class="gauge-result-title">Test Complete</div>
+                <div class="gauge-result-sub">See your results above</div>
+            </div>
+            </div>
+
+            <div class="st-category-row">
+                <div class="st-category" id="catBrowsing"><i class="fas fa-window-restore"></i><span>Browsing</span><div class="st-dots"></div></div>
+                <div class="st-category" id="catGaming"><i class="fas fa-gamepad"></i><span>Gaming</span><div class="st-dots"></div></div>
+                <div class="st-category" id="catStreaming"><i class="fas fa-play"></i><span>Streaming</span><div class="st-dots"></div></div>
+                <div class="st-category" id="catVideoChat"><i class="fas fa-video"></i><span>Video Chat</span><div class="st-dots"></div></div>
+            </div>
+
+            <div class="speedtest-status" id="stStatus">Tap start to test your current connection</div>
+            <button class="btn-speedtest" id="stStartBtn" onclick="runSpeedTest()"><i class="fas fa-gauge-high"></i> Start Test</button>
+
+            <div class="st-isp-row" id="stIspRow" style="display:none;">
+                <div><span class="st-isp-label">ISP</span><span id="stIsp">—</span></div>
+                <div><span class="st-isp-label">IP</span><span id="stIp">—</span></div>
+                <div><span class="st-isp-label">Location</span><span id="stLoc">—</span></div>
+            </div>
+
+            <div class="speedtest-disclaimer">Measures your device's current internet connection in real time via your browser. Actual Shan Zone speeds depend on your active plan.</div>
+        </div>
+    </section>
+
+    <section id="availability" class="availability-section reveal">
+        <div class="availability-wrap">
+            <div class="availability-info">
+                <div class="eyebrow">Check Coverage</div>
+                <h2>Is Shan Zone Available <span class="accent-word">In Your Area?</span></h2>
+                <p>Search by village name, PIN code, or block — across Maharajganj, Kushinagar &amp; Gorakhpur. Find your area and apply in seconds.</p>
+                <div class="availability-points">
+                    <div><i class="fas fa-circle-check"></i> 1,150+ villages already mapped</div>
+                    <div><i class="fas fa-circle-check"></i> Instant WhatsApp confirmation</div>
+                    <div><i class="fas fa-circle-check"></i> No cost to check availability</div>
+                </div>
+            </div>
+
+            <div class="availability-card">
+                <div class="lead-badge">⚡ Quick Response</div>
+                <h3>Check Availability &amp; Apply</h3>
+                <input type="text" id="leadName" placeholder="Full Name">
+                <input type="tel" id="leadPhone" placeholder="Mobile Number">
+
+                <div class="area-toggle">
+                    <button type="button" class="area-tab active" data-mode="village" onclick="setAreaMode('village')">Village</button>
+                    <button type="button" class="area-tab" data-mode="pin" onclick="setAreaMode('pin')">PIN Code</button>
+                    <button type="button" class="area-tab" data-mode="block" onclick="setAreaMode('block')">Block</button>
+                </div>
+                <div class="area-input-wrap">
+                    <input type="text" id="leadArea" placeholder="Type village name (min 2 letters)" autocomplete="off" oninput="handleAreaInput()">
+                    <div class="area-suggestions" id="areaSuggestions"></div>
+                </div>
+                <div class="block-select-wrap" id="blockSelectWrap" style="display:none;">
+                    <select id="blockDistrictSelect" onchange="onBlockDistrictChange()">
+                        <option value="">Select District</option>
+                        <option value="M">Maharajganj</option>
+                        <option value="K">Kushinagar</option>
+                        <option value="G">Gorakhpur</option>
+                    </select>
+                    <select id="blockNameSelect" onchange="onBlockSelect()" disabled>
+                        <option value="">Select Block</option>
+                    </select>
+                </div>
+
+                <button class="btn-quote" style="width:100%; justify-content:center;" onclick="submitLeadCard()"><i class="fab fa-whatsapp"></i> Check & Apply</button>
+                <div class="lead-note">We'll confirm on WhatsApp within a few hours.</div>
+            </div>
+        </div>
     </section>
 
     <section id="about" class="about-section reveal">
@@ -1032,91 +1177,6 @@
             <p class="np-caption">Fiber where it can reach, wireless where it needs to stretch — 99.9% network reliability engineered for buffer-free streaming, work, and gaming.</p>
         </div>
         <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,35 C360,-10 1080,80 1440,30 L1440,70 L0,70 Z" fill="#ffffff"></path></svg></div>
-    </section>
-
-    <section id="speedtest" class="speedtest-section reveal">
-        <div class="section-head">
-            <div class="eyebrow" style="justify-content:center;">Know Before You Switch</div>
-            <h2>Test Your Current <span class="accent-word">Internet Speed</span></h2>
-            <p>See what speed you're really getting right now — then compare it with our plans below.</p>
-        </div>
-        <div class="speedtest-card">
-            <div class="st-topline">
-                <div class="st-topline-item">
-                    <div class="st-topline-label"><i class="fas fa-arrow-down"></i> DOWNLOAD <span>Mbps</span></div>
-                    <div class="st-topline-value" id="stDownload">0</div>
-                </div>
-                <div class="st-topline-item">
-                    <div class="st-topline-label"><i class="fas fa-arrow-up"></i> UPLOAD <span>Mbps</span></div>
-                    <div class="st-topline-value" id="stUpload">0</div>
-                </div>
-            </div>
-            <div class="st-midline">
-                <div><i class="fas fa-signal"></i> Ping <b id="stPing">--</b> ms</div>
-                <div><i class="fas fa-wave-square"></i> Jitter <b id="stJitter">--</b> ms</div>
-                <div><i class="fas fa-download"></i> <b id="stData">0</b> MB Tested</div>
-            </div>
-
-            <div class="gauge-wrap">
-                <svg class="gauge-svg" viewBox="0 0 240 190">
-                    <defs>
-                        <linearGradient id="gaugeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#ff5e14"/>
-                            <stop offset="55%" stop-color="#c9a44c"/>
-                            <stop offset="100%" stop-color="#00e0c7"/>
-                        </linearGradient>
-                    </defs>
-                    <path class="gauge-track-bg" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
-                    <path class="gauge-track-fill" id="gaugeFill" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
-
-                    <line x1="64.3" y1="167.0" x2="46.3" y2="179.6" class="gauge-tick"/>
-                    <text x="79.0" y="156.7" class="gauge-tick-label" text-anchor="middle">0</text>
-                    <line x1="52.1" y1="132.4" x2="30.2" y2="133.9" class="gauge-tick"/>
-                    <text x="70.1" y="131.3" class="gauge-tick-label" text-anchor="middle">5</text>
-                    <line x1="59.7" y1="96.6" x2="40.2" y2="86.4" class="gauge-tick"/>
-                    <text x="75.6" y="104.9" class="gauge-tick-label" text-anchor="middle">10</text>
-                    <line x1="84.7" y1="69.9" x2="73.3" y2="51.1" class="gauge-tick"/>
-                    <text x="94.1" y="85.3" class="gauge-tick-label" text-anchor="middle">50</text>
-                    <line x1="120.0" y1="60.0" x2="120.0" y2="38.0" class="gauge-tick"/>
-                    <text x="120.0" y="78.0" class="gauge-tick-label" text-anchor="middle">100</text>
-                    <line x1="155.3" y1="69.9" x2="166.7" y2="51.1" class="gauge-tick"/>
-                    <text x="145.9" y="85.3" class="gauge-tick-label" text-anchor="middle">250</text>
-                    <line x1="180.3" y1="96.6" x2="199.8" y2="86.4" class="gauge-tick"/>
-                    <text x="164.4" y="104.9" class="gauge-tick-label" text-anchor="middle">500</text>
-                    <line x1="187.9" y1="132.4" x2="209.8" y2="133.9" class="gauge-tick"/>
-                    <text x="169.9" y="131.3" class="gauge-tick-label" text-anchor="middle">750</text>
-                    <line x1="175.7" y1="167.0" x2="193.7" y2="179.6" class="gauge-tick"/>
-                    <text x="161.0" y="156.7" class="gauge-tick-label" text-anchor="middle">1000</text>
-
-                    <g id="gaugeNeedle" class="gauge-needle-group" style="transform-origin: 120px 128px;">
-                        <line x1="120" y1="128" x2="120" y2="52" class="gauge-needle"/>
-                        <circle cx="120" cy="128" r="6" class="gauge-needle-hub"/>
-                    </g>
-                </svg>
-                <div class="gauge-center-value">
-                    <div class="gauge-value" id="gaugeCenterVal">0</div>
-                    <div class="gauge-unit">Mbps</div>
-                </div>
-            </div>
-
-            <div class="st-category-row">
-                <div class="st-category" id="catBrowsing"><i class="fas fa-window-restore"></i><span>Browsing</span><div class="st-dots"></div></div>
-                <div class="st-category" id="catGaming"><i class="fas fa-gamepad"></i><span>Gaming</span><div class="st-dots"></div></div>
-                <div class="st-category" id="catStreaming"><i class="fas fa-play"></i><span>Streaming</span><div class="st-dots"></div></div>
-                <div class="st-category" id="catVideoChat"><i class="fas fa-video"></i><span>Video Chat</span><div class="st-dots"></div></div>
-            </div>
-
-            <div class="speedtest-status" id="stStatus">Tap start to test your current connection</div>
-            <button class="btn-speedtest" id="stStartBtn" onclick="runSpeedTest()"><i class="fas fa-gauge-high"></i> Start Test</button>
-
-            <div class="st-isp-row" id="stIspRow" style="display:none;">
-                <div><span class="st-isp-label">ISP</span><span id="stIsp">—</span></div>
-                <div><span class="st-isp-label">IP</span><span id="stIp">—</span></div>
-                <div><span class="st-isp-label">Location</span><span id="stLoc">—</span></div>
-            </div>
-
-            <div class="speedtest-disclaimer">Measures your device's current internet connection in real time via your browser. Actual Shan Zone speeds depend on your active plan.</div>
-        </div>
     </section>
 
 
@@ -3014,7 +3074,406 @@
 ['Tihur','Pharenda','M'],
 ['Uditpur','Pharenda','M'],
 ['Varji','Pharenda','M'],
-['Vishrampur','Pharenda','M']
+['Vishrampur','Pharenda','M'],
+['Agaya','Maharajganj Sadar','M'],
+['Ahamadpur','Maharajganj Sadar','M'],
+['Ahirauli','Maharajganj Sadar','M'],
+['Allahabad','Maharajganj Sadar','M'],
+['Amorha','Maharajganj Sadar','M'],
+['Amsaha','Maharajganj Sadar','M'],
+['Anarutia','Maharajganj Sadar','M'],
+['Andhya','Maharajganj Sadar','M'],
+['Arajijagpur','Maharajganj Sadar','M'],
+['Aranahawa','Maharajganj Sadar','M'],
+['Arbarahawa','Maharajganj Sadar','M'],
+['Aurahia','Maharajganj Sadar','M'],
+['Ausani','Maharajganj Sadar','M'],
+['Babhanauli','Maharajganj Sadar','M'],
+['Babhanauli Buzurg','Maharajganj Sadar','M'],
+['Babhanauli Mafi','Maharajganj Sadar','M'],
+['Babhnauli','Maharajganj Sadar','M'],
+['Bagahawa','Maharajganj Sadar','M'],
+['Bagapar','Maharajganj Sadar','M'],
+['Baharampur','Maharajganj Sadar','M'],
+['Baida','Maharajganj Sadar','M'],
+['Baij Nathpur Kala','Maharajganj Sadar','M'],
+['Baij Nathpur Khurd','Maharajganj Sadar','M'],
+['Baijauli','Maharajganj Sadar','M'],
+['Baiju Dehara','Maharajganj Sadar','M'],
+['Bairia','Maharajganj Sadar','M'],
+['Ballo Khas','Maharajganj Sadar','M'],
+['Balnahia','Maharajganj Sadar','M'],
+['Balua','Maharajganj Sadar','M'],
+['Bankatia','Maharajganj Sadar','M'],
+['Banspar','Maharajganj Sadar','M'],
+['Baragadahi','Maharajganj Sadar','M'],
+['Baragadahi Basantnath','Maharajganj Sadar','M'],
+['Baragadawa','Maharajganj Sadar','M'],
+['Baragadawa Raja','Maharajganj Sadar','M'],
+['Baragadwa Madhopur','Maharajganj Sadar','M'],
+['Barahara','Maharajganj Sadar','M'],
+['Barahara Baraipar','Maharajganj Sadar','M'],
+['Barahara Meer','Maharajganj Sadar','M'],
+['Barahara Rani','Maharajganj Sadar','M'],
+['Barahara Vaidya','Maharajganj Sadar','M'],
+['Barahra Raja','Maharajganj Sadar','M'],
+['Barawa Chamainia','Maharajganj Sadar','M'],
+['Barawa Fahim','Maharajganj Sadar','M'],
+['Barawa Khurd','Maharajganj Sadar','M'],
+['Barawa Raja','Maharajganj Sadar','M'],
+['Barawa Urf Simarahibhar','Maharajganj Sadar','M'],
+['Barbas','Maharajganj Sadar','M'],
+['Barhawa Chandan Chakhi','Maharajganj Sadar','M'],
+['Barwa Vidyapati','Maharajganj Sadar','M'],
+['Barwar','Maharajganj Sadar','M'],
+['Basahia Buzurg','Maharajganj Sadar','M'],
+['Basahia Khurd','Maharajganj Sadar','M'],
+['Basantpur Khurd','Maharajganj Sadar','M'],
+['Basdila','Maharajganj Sadar','M'],
+['Basdila Urf Amawa','Maharajganj Sadar','M'],
+['Basntpur','Maharajganj Sadar','M'],
+['Basntpur Raja','Maharajganj Sadar','M'],
+['Baspar','Maharajganj Sadar','M'],
+['Baspar Baijauli','Maharajganj Sadar','M'],
+['Baspar Bara','Maharajganj Sadar','M'],
+['Baspar Chhota','Maharajganj Sadar','M'],
+['Baswar','Maharajganj Sadar','M'],
+['Baulia Babu','Maharajganj Sadar','M'],
+['Baulia Raja','Maharajganj Sadar','M'],
+['Bauria','Maharajganj Sadar','M'],
+['Beet Range','Maharajganj Sadar','M'],
+['Beilia','Maharajganj Sadar','M'],
+['Bel Bharia','Maharajganj Sadar','M'],
+['Belaspur','Maharajganj Sadar','M'],
+['Belawa','Maharajganj Sadar','M'],
+['Belawa Barauli','Maharajganj Sadar','M'],
+['Belawa Buzurg','Maharajganj Sadar','M'],
+['Belawa Khurd','Maharajganj Sadar','M'],
+['Belawa Tikar','Maharajganj Sadar','M'],
+['Belrai','Maharajganj Sadar','M'],
+['Beltikara','Maharajganj Sadar','M'],
+['Belwa Kazi','Maharajganj Sadar','M'],
+['Beniganj','Maharajganj Sadar','M'],
+['Bhainsi','Maharajganj Sadar','M'],
+['Bhaisa','Maharajganj Sadar','M'],
+['Bharara','Maharajganj Sadar','M'],
+['Bharawalia','Maharajganj Sadar','M'],
+['Bhargawa Urf Laxmipur','Maharajganj Sadar','M'],
+['Bhatgawa Urf Tarakulawa','Maharajganj Sadar','M'],
+['Bhawanipur','Maharajganj Sadar','M'],
+['Bhisawa','Maharajganj Sadar','M'],
+['Bhiswa Urf Kotia','Maharajganj Sadar','M'],
+['Bhithauli','Maharajganj Sadar','M'],
+['Bhuana','Maharajganj Sadar','M'],
+['Bhuani','Maharajganj Sadar','M'],
+['Bilaspur','Maharajganj Sadar','M'],
+['Bindawalia','Maharajganj Sadar','M'],
+['Biraicha','Maharajganj Sadar','M'],
+['Biraichi','Maharajganj Sadar','M'],
+['Bishunpur','Maharajganj Sadar','M'],
+['Bishunpur Gabarua','Maharajganj Sadar','M'],
+['Bishunpur Ghat','Maharajganj Sadar','M'],
+['Bishunpur Khurd','Maharajganj Sadar','M'],
+['Bishunpura','Maharajganj Sadar','M'],
+['Bishunpurb Madehar','Maharajganj Sadar','M'],
+['Bishwanathpur','Maharajganj Sadar','M'],
+['Bramhpur','Maharajganj Sadar','M'],
+['Budhirampur','Maharajganj Sadar','M'],
+['Chainpur','Maharajganj Sadar','M'],
+['Chak Belbara','Maharajganj Sadar','M'],
+['Chandan Chaki','Maharajganj Sadar','M'],
+['Chaumukha','Maharajganj Sadar','M'],
+['Chauparia','Maharajganj Sadar','M'],
+['Chetara Nursery','Maharajganj Sadar','M'],
+['Chhapia','Maharajganj Sadar','M'],
+['Chhatiram','Maharajganj Sadar','M'],
+['Chowk','Maharajganj Sadar','M'],
+['Chuani','Maharajganj Sadar','M'],
+['Chunawatia','Maharajganj Sadar','M'],
+['Damari Giri','Maharajganj Sadar','M'],
+['Darauli','Maharajganj Sadar','M'],
+['Dartara','Maharajganj Sadar','M'],
+['Daulatpur','Maharajganj Sadar','M'],
+['Dekahi','Maharajganj Sadar','M'],
+['Derawa','Maharajganj Sadar','M'],
+['Devipur','Maharajganj Sadar','M'],
+['Dhanaha','Maharajganj Sadar','M'],
+['Dhangarha','Maharajganj Sadar','M'],
+['Dhangari Munderi','Maharajganj Sadar','M'],
+['Dhanha','Maharajganj Sadar','M'],
+['Dhankhari','Maharajganj Sadar','M'],
+['Dharampur','Maharajganj Sadar','M'],
+['Dharmauli','Maharajganj Sadar','M'],
+['Dharmpur','Maharajganj Sadar','M'],
+['Dhnewa Dhanei','Maharajganj Sadar','M'],
+['Dhodhila','Maharajganj Sadar','M'],
+['Diguri','Maharajganj Sadar','M'],
+['Domara','Maharajganj Sadar','M'],
+['Dubauli','Maharajganj Sadar','M'],
+['Dumar Bhar','Maharajganj Sadar','M'],
+['Ganeshpur','Maharajganj Sadar','M'],
+['Gangarai','Maharajganj Sadar','M'],
+['Gangi','Maharajganj Sadar','M'],
+['Gaunaria Babu','Maharajganj Sadar','M'],
+['Gaunria Raja','Maharajganj Sadar','M'],
+['Gehuana','Maharajganj Sadar','M'],
+['Ghagharua Kharesar','Maharajganj Sadar','M'],
+['Ghughuli Buzurg','Maharajganj Sadar','M'],
+['Gidaha','Maharajganj Sadar','M'],
+['Girgitia','Maharajganj Sadar','M'],
+['Godhawal','Maharajganj Sadar','M'],
+['Gonaha','Maharajganj Sadar','M'],
+['Gopala','Maharajganj Sadar','M'],
+['Gopi','Maharajganj Sadar','M'],
+['Gordhowa','Maharajganj Sadar','M'],
+['Govindpur','Maharajganj Sadar','M'],
+['Hajaratpur','Maharajganj Sadar','M'],
+['Harakha','Maharajganj Sadar','M'],
+['Harakhi','Maharajganj Sadar','M'],
+['Harakhpura','Maharajganj Sadar','M'],
+['Hariharpur','Maharajganj Sadar','M'],
+['Hariramphr','Maharajganj Sadar','M'],
+['Harpur','Maharajganj Sadar','M'],
+['Haskhori','Maharajganj Sadar','M'],
+['Hathiahwa','Maharajganj Sadar','M'],
+['Hemchhapar','Maharajganj Sadar','M'],
+['Imilia','Maharajganj Sadar','M'],
+['Imlia','Maharajganj Sadar','M'],
+['Jagadishpur','Maharajganj Sadar','M'],
+['Jagpur Urf Salamatgarh','Maharajganj Sadar','M'],
+['Jamunia','Maharajganj Sadar','M'],
+['Jarar','Maharajganj Sadar','M'],
+['Jogiya','Maharajganj Sadar','M'],
+['Jungal Baki Tukara No14','Maharajganj Sadar','M'],
+['Jungal Baki Tukra No8','Maharajganj Sadar','M'],
+['Jungal Barahara','Maharajganj Sadar','M'],
+['Jungal Dudhai Urf Chehri','Maharajganj Sadar','M'],
+['Jungal Jaralaha Urf Anantpur','Maharajganj Sadar','M'],
+['Jungal Jaralaha Urf Araji','Maharajganj Sadar','M'],
+['Jungal Jaralaha Urf Barhra','Maharajganj Sadar','M'],
+['Jungal Jaralaha Urf Kanawa Doy','Maharajganj Sadar','M'],
+['Jungal Jaralaha Urf Kanawa I','Maharajganj Sadar','M'],
+['Jungal Jaralaha Urf Tendulahiy','Maharajganj Sadar','M'],
+['Jungal Jaralahi Urf Jardi','Maharajganj Sadar','M'],
+['Jungal Jarlaha Urf Suchitpur','Maharajganj Sadar','M'],
+['Jungal Pharjand Ali','Maharajganj Sadar','M'],
+['Kamasin Buzurg','Maharajganj Sadar','M'],
+['Kamasin Khurd','Maharajganj Sadar','M'],
+['Kamata Buzurg','Maharajganj Sadar','M'],
+['Kamata Khurd','Maharajganj Sadar','M'],
+['Kamharia Kala','Maharajganj Sadar','M'],
+['Kamhariya Khurd','Maharajganj Sadar','M'],
+['Kanaila','Maharajganj Sadar','M'],
+['Kandh','Maharajganj Sadar','M'],
+['Karamahi','Maharajganj Sadar','M'],
+['Karauta','Maharajganj Sadar','M'],
+['Karauta Urf Nebuiya','Maharajganj Sadar','M'],
+['Karmha','Maharajganj Sadar','M'],
+['Kasmaria','Maharajganj Sadar','M'],
+['Katahara Khas','Maharajganj Sadar','M'],
+['Katarari','Maharajganj Sadar','M'],
+['Kewalapur Kalan','Maharajganj Sadar','M'],
+['Kewalapur Khurd','Maharajganj Sadar','M'],
+['Khaincha','Maharajganj Sadar','M'],
+['Khajuria','Maharajganj Sadar','M'],
+['Khanpur','Maharajganj Sadar','M'],
+['Khempipara','Maharajganj Sadar','M'],
+['Khunta Maidan','Maharajganj Sadar','M'],
+['Khutaha','Maharajganj Sadar','M'],
+['Kodaila','Maharajganj Sadar','M'],
+['Kolhuwa','Maharajganj Sadar','M'],
+['Kotamukundpur','Maharajganj Sadar','M'],
+['Kotawa','Maharajganj Sadar','M'],
+['Kritpipra','Maharajganj Sadar','M'],
+['Kuana Chap','Maharajganj Sadar','M'],
+['Kuinya','Maharajganj Sadar','M'],
+['Kunia Urf Maheshpur','Maharajganj Sadar','M'],
+['Kurawa Urf Murkatia','Maharajganj Sadar','M'],
+['Kurthia','Maharajganj Sadar','M'],
+['Kusmaha','Maharajganj Sadar','M'],
+['Lakhima Khas','Maharajganj Sadar','M'],
+['Lakhima Tharua','Maharajganj Sadar','M'],
+['Lalakarpur','Maharajganj Sadar','M'],
+['Laxmipur','Maharajganj Sadar','M'],
+['Laxmipur Deurawa','Maharajganj Sadar','M'],
+['Laxmipur Ekdanga','Maharajganj Sadar','M'],
+['Ledawa','Maharajganj Sadar','M'],
+['Madhonagar','Maharajganj Sadar','M'],
+['Madhopur','Maharajganj Sadar','M'],
+['Mahadeva','Maharajganj Sadar','M'],
+['Mahawan Khor Urf Barahra','Maharajganj Sadar','M'],
+['Mahdeia','Maharajganj Sadar','M'],
+['Mahdeva','Maharajganj Sadar','M'],
+['Mahdeva Urf Baluabhar','Maharajganj Sadar','M'],
+['Mahmada','Maharajganj Sadar','M'],
+['Mahrajganj','Maharajganj Sadar','M'],
+['Mahuawa','Maharajganj Sadar','M'],
+['Mahuawa Mahui','Maharajganj Sadar','M'],
+['Majhaua','Maharajganj Sadar','M'],
+['Malmalia Urf Sirsia','Maharajganj Sadar','M'],
+['Mangalpur','Maharajganj Sadar','M'],
+['Mangalpur Pathkauli','Maharajganj Sadar','M'],
+['Maniar Chapra','Maharajganj Sadar','M'],
+['Mansurganj','Maharajganj Sadar','M'],
+['Matakoya','Maharajganj Sadar','M'],
+['Mathania','Maharajganj Sadar','M'],
+['Mathia','Maharajganj Sadar','M'],
+['Matihania Chaudhari','Maharajganj Sadar','M'],
+['Maulaganj','Maharajganj Sadar','M'],
+['Medanipur','Maharajganj Sadar','M'],
+['Mirzapur Pakari','Maharajganj Sadar','M'],
+['Mithaura','Maharajganj Sadar','M'],
+['Mohanapur','Maharajganj Sadar','M'],
+['Mohiuddinpur','Maharajganj Sadar','M'],
+['Muhammadpur','Maharajganj Sadar','M'],
+['Mujahana Buzurg','Maharajganj Sadar','M'],
+['Mujahna Khurd','Maharajganj Sadar','M'],
+['Mujuri','Maharajganj Sadar','M'],
+['Mundera Kala','Maharajganj Sadar','M'],
+['Mundera Khurd','Maharajganj Sadar','M'],
+['Munderi','Maharajganj Sadar','M'],
+['Murila','Maharajganj Sadar','M'],
+['Murila Chaudhari','Maharajganj Sadar','M'],
+['Murila Tiwari','Maharajganj Sadar','M'],
+['Nabiganj','Maharajganj Sadar','M'],
+['Nadua','Maharajganj Sadar','M'],
+['Nagarauli','Maharajganj Sadar','M'],
+['Nanda Bhar','Maharajganj Sadar','M'],
+['Nandana','Maharajganj Sadar','M'],
+['Narainpur','Maharajganj Sadar','M'],
+['Narakataha','Maharajganj Sadar','M'],
+['Narayanpur','Maharajganj Sadar','M'],
+['Nasirabad','Maharajganj Sadar','M'],
+['Natawa','Maharajganj Sadar','M'],
+['Nath Nagar','Maharajganj Sadar','M'],
+['Netasurhurawa','Maharajganj Sadar','M'],
+['Newas Pokhar','Maharajganj Sadar','M'],
+['Ovari','Maharajganj Sadar','M'],
+['Pachdeuri','Maharajganj Sadar','M'],
+['Padari Khurd','Maharajganj Sadar','M'],
+['Pakari','Maharajganj Sadar','M'],
+['Pakari Bishunpur','Maharajganj Sadar','M'],
+['Pakari Naunia','Maharajganj Sadar','M'],
+['Pakari Sisawa','Maharajganj Sadar','M'],
+['Pakariar Bishunpur','Maharajganj Sadar','M'],
+['Pakariar Buzurg','Maharajganj Sadar','M'],
+['Pakariyar Khurd','Maharajganj Sadar','M'],
+['Panch Rukhia','Maharajganj Sadar','M'],
+['Panewa Panei','Maharajganj Sadar','M'],
+['Paniyara','Maharajganj Sadar','M'],
+['Paras Khar','Maharajganj Sadar','M'],
+['Parasa Buzurg','Maharajganj Sadar','M'],
+['Parasa Chak Govahi','Maharajganj Sadar','M'],
+['Parasa Khurd','Maharajganj Sadar','M'],
+['Parasa Meer','Maharajganj Sadar','M'],
+['Parasa Raja','Maharajganj Sadar','M'],
+['Parasa Urf Parsauna','Maharajganj Sadar','M'],
+['Parasagidahi','Maharajganj Sadar','M'],
+['Parasia','Maharajganj Sadar','M'],
+['Parasia Indarpur','Maharajganj Sadar','M'],
+['Paratawal','Maharajganj Sadar','M'],
+['Parsauni Buzurg','Maharajganj Sadar','M'],
+['Patal Kunie','Maharajganj Sadar','M'],
+['Patarengawan','Maharajganj Sadar','M'],
+['Patkhauli','Maharajganj Sadar','M'],
+['Pauharia','Maharajganj Sadar','M'],
+['Phulwaria','Maharajganj Sadar','M'],
+['Pipar Panti','Maharajganj Sadar','M'],
+['Pipara','Maharajganj Sadar','M'],
+['Pipara Baksh','Maharajganj Sadar','M'],
+['Pipara Barhaman Urf Barigaon','Maharajganj Sadar','M'],
+['Pipara Dargah','Maharajganj Sadar','M'],
+['Pipara Kalyan','Maharajganj Sadar','M'],
+['Pipara Khurd','Maharajganj Sadar','M'],
+['Pipara Munderi','Maharajganj Sadar','M'],
+['Pipara Narayan','Maharajganj Sadar','M'],
+['Pipara Rasulpur','Maharajganj Sadar','M'],
+['Pipara Sonari','Maharajganj Sadar','M'],
+['Piparaich Urf Pachrukhia','Maharajganj Sadar','M'],
+['Piparajaddu','Maharajganj Sadar','M'],
+['Piparia','Maharajganj Sadar','M'],
+['Piparia Gurugo Govindrai','Maharajganj Sadar','M'],
+['Piparia Karjaha','Maharajganj Sadar','M'],
+['Piparia Manik Rai','Maharajganj Sadar','M'],
+['Piparpanti','Maharajganj Sadar','M'],
+['Piprababu','Maharajganj Sadar','M'],
+['Pokhar Bhinda','Maharajganj Sadar','M'],
+['Puraina','Maharajganj Sadar','M'],
+['Puraina Khandi Chaura','Maharajganj Sadar','M'],
+['Purushottampur','Maharajganj Sadar','M'],
+['Rajapur','Maharajganj Sadar','M'],
+['Rajaura Kala','Maharajganj Sadar','M'],
+['Rajaura Khurd','Maharajganj Sadar','M'],
+['Rajaura Panjum','Maharajganj Sadar','M'],
+['Rajawal','Maharajganj Sadar','M'],
+['Rajmandir','Maharajganj Sadar','M'],
+['Ram Charanpur','Maharajganj Sadar','M'],
+['Ramhauli','Maharajganj Sadar','M'],
+['Ramnagar','Maharajganj Sadar','M'],
+['Rampur','Maharajganj Sadar','M'],
+['Rampur Baldiha','Maharajganj Sadar','M'],
+['Rampur Bodarahia','Maharajganj Sadar','M'],
+['Rampur Buzurg','Maharajganj Sadar','M'],
+['Rampur Chakia','Maharajganj Sadar','M'],
+['Rampur Mahuawa','Maharajganj Sadar','M'],
+['Rampur Meer','Maharajganj Sadar','M'],
+['Ranipur','Maharajganj Sadar','M'],
+['Rapur Khurd','Maharajganj Sadar','M'],
+['Ratanpurawa','Maharajganj Sadar','M'],
+['Rehaon','Maharajganj Sadar','M'],
+['Rodhauli Bhawachak','Maharajganj Sadar','M'],
+['Rudalapur','Maharajganj Sadar','M'],
+['Rudalapur Bhaluhi','Maharajganj Sadar','M'],
+['Rudrapur','Maharajganj Sadar','M'],
+['Sadho Chak','Maharajganj Sadar','M'],
+['Saray Khutaha Urf Lakharav','Maharajganj Sadar','M'],
+['Sardiha','Maharajganj Sadar','M'],
+['Satabharia','Maharajganj Sadar','M'],
+['Satguru','Maharajganj Sadar','M'],
+['Sauraha','Maharajganj Sadar','M'],
+['Sawana','Maharajganj Sadar','M'],
+['Sawarejee','Maharajganj Sadar','M'],
+['Semara','Maharajganj Sadar','M'],
+['Semara Chandrauli','Maharajganj Sadar','M'],
+['Semarahi Chak','Maharajganj Sadar','M'],
+['Senduria','Maharajganj Sadar','M'],
+['Shikarpur','Maharajganj Sadar','M'],
+['Shitalapur','Maharajganj Sadar','M'],
+['Shyam Deurawa','Maharajganj Sadar','M'],
+['Singhpur','Maharajganj Sadar','M'],
+['Sirsia','Maharajganj Sadar','M'],
+['Sisawa Munshi','Maharajganj Sadar','M'],
+['Sisawania','Maharajganj Sadar','M'],
+['Siswa','Maharajganj Sadar','M'],
+['Siswa Amahawa','Maharajganj Sadar','M'],
+['Siswa Babu','Maharajganj Sadar','M'],
+['Siswania','Maharajganj Sadar','M'],
+['Siswaraja','Maharajganj Sadar','M'],
+['Sohanpur Urf Sonkatia','Maharajganj Sadar','M'],
+['Soharauna Tiwari','Maharajganj Sadar','M'],
+['Sohas Khas','Maharajganj Sadar','M'],
+['Sohasabanspar','Maharajganj Sadar','M'],
+['Sohawal','Maharajganj Sadar','M'],
+['Sohgaura','Maharajganj Sadar','M'],
+['Sohrauna','Maharajganj Sadar','M'],
+['Sonabarasa','Maharajganj Sadar','M'],
+['Sonara','Maharajganj Sadar','M'],
+['Sonarikhas','Maharajganj Sadar','M'],
+['Sonawal','Maharajganj Sadar','M'],
+['Sonbarasa','Maharajganj Sadar','M'],
+['Sonia Dakhin','Maharajganj Sadar','M'],
+['Sumergarh','Maharajganj Sadar','M'],
+['Tarakulawa','Maharajganj Sadar','M'],
+['Tegarahana','Maharajganj Sadar','M'],
+['Terhwa','Maharajganj Sadar','M'],
+['Tilakwania','Maharajganj Sadar','M'],
+['Tola Kishunpur','Maharajganj Sadar','M'],
+['Unti Khas','Maharajganj Sadar','M'],
+['Usarwaha','Maharajganj Sadar','M'],
+['Uska','Maharajganj Sadar','M'],
+['Variyarpur','Maharajganj Sadar','M'],
+['Vijaypur','Maharajganj Sadar','M'],
+['Vishwanathpur Urf Parawania','Maharajganj Sadar','M']
 ];
 
         let areaMode = 'village';
@@ -3137,11 +3596,11 @@
         const GAUGE_ARC_LENGTH = 401.4; // precomputed length of the 250° track (R=92)
         const GAUGE_TICKS = [0, 5, 10, 50, 100, 250, 500, 750, 1000];
         const GAUGE_ANGLES = [-125, -93.75, -62.5, -31.25, 0, 31.25, 62.5, 93.75, 125];
-        const SPEEDTEST_FILE = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
-        const PING_ENDPOINT = "https://www.gstatic.com/generate_204";
-        const UPLOAD_ENDPOINT = "https://httpbin.org/post";
+        const DOWNLOAD_URL = "https://speed.cloudflare.com/__down?bytes=26214400";
+        const UPLOAD_URL = "https://speed.cloudflare.com/__up";
+        const PING_ENDPOINT = "https://speed.cloudflare.com/__down?bytes=0";
         const DOWNLOAD_CONCURRENCY = 6;
-        const UPLOAD_CONCURRENCY = 3;
+        const UPLOAD_CONCURRENCY = 4;
         const WARMUP_MS = 700;
         const MEASURE_MS = 4000;
         const UPLOAD_MEASURE_MS = 3500;
@@ -3170,7 +3629,7 @@
             for (let i = 0; i < 7; i++) {
                 const t0 = performance.now();
                 try {
-                    await fetch(PING_ENDPOINT + '?cb=' + Math.random() + Date.now(), { mode: 'no-cors', cache: 'no-store' });
+                    await fetch(PING_ENDPOINT + '&cb=' + Math.random() + Date.now(), { mode: 'cors', cache: 'no-store' });
                 } catch (e) { /* ignore, still timed */ }
                 samples.push(performance.now() - t0);
             }
@@ -3226,7 +3685,7 @@
             async function downloadWorker() {
                 while (performance.now() < testEndsAt) {
                     try {
-                        const res = await fetch(SPEEDTEST_FILE + '?cb=' + Math.random() + Date.now(), { cache: 'no-store', mode: 'cors' });
+                        const res = await fetch(DOWNLOAD_URL + '&cb=' + Math.random() + Date.now(), { cache: 'no-store', mode: 'cors' });
                         if (!res.body) { const blob = await res.blob(); onChunk(blob.size); continue; }
                         const reader = res.body.getReader();
                         while (true) {
@@ -3240,10 +3699,10 @@
             }
 
             async function uploadWorker() {
-                const payload = new Blob([new Uint8Array(1_000_000)]); // 1MB random-ish payload per request
+                const payload = new Blob([new Uint8Array(1_000_000)]); // 1MB payload per request
                 while (performance.now() < testEndsAt) {
                     try {
-                        await fetch(UPLOAD_ENDPOINT, { method: 'POST', body: payload, cache: 'no-store', mode: 'cors' });
+                        await fetch(UPLOAD_URL, { method: 'POST', body: payload, cache: 'no-store', mode: 'cors' });
                         onChunk(payload.size);
                     } catch (e) { break; }
                 }
@@ -3291,6 +3750,8 @@
             pingEl.textContent = '--';
             jitterEl.textContent = '--';
             window.__stTotalBytes = 0;
+            document.getElementById('gaugeWrap').classList.remove('gauge-hidden');
+            document.getElementById('gaugeResultState').classList.remove('show');
             setGauge(0);
 
             fetchIspInfo(); // fire and forget, doesn't block the test
@@ -3307,10 +3768,13 @@
                 statusEl.textContent = 'Measuring upload speed...';
                 setGauge(0);
                 const uploadMbps = await measureThroughput('upload', uploadEl, UPLOAD_CONCURRENCY, UPLOAD_MEASURE_MS);
-                setGauge(downloadMbps); // leave the needle showing download, the headline number
 
                 updateCategoryRatings(downloadMbps, uploadMbps, ping);
                 statusEl.textContent = 'Test complete — run again anytime';
+
+                // Ookla-style finish: swap the needle for a clear "done" state so it's obvious the test finished
+                document.getElementById('gaugeWrap').classList.add('gauge-hidden');
+                document.getElementById('gaugeResultState').classList.add('show');
             } catch (err) {
                 statusEl.textContent = 'Could not complete test. Check your connection and try again.';
             }
