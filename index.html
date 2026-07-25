@@ -361,6 +361,18 @@
             margin-bottom: 18px; transition: 0.25s;
         }
         .upi-open-app-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(255,94,20,0.4); }
+        .ive-paid-btn {
+            display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center;
+            background: rgba(61,220,132,0.12); border: 1px solid rgba(61,220,132,0.4); color: #3ddc84;
+            font-size: 13px; font-weight: 700; padding: 11px 22px; border-radius: 999px;
+            cursor: pointer; transition: 0.25s; margin-top: 4px;
+        }
+        .ive-paid-btn:hover:not(:disabled) { background: rgba(61,220,132,0.2); transform: translateY(-1px); }
+        .ive-paid-btn:disabled { opacity: 0.6; cursor: default; }
+        .ive-paid-hint { color: #9aa5c0; font-size: 11px; margin-top: 8px; }
+        .ive-paid-message { margin-top: 12px; font-size: 12.5px; }
+        .ive-paid-message.success { color: #3ddc84; }
+        .ive-paid-message.error { color: #ff4a4a; }
         .upi-tab-switch {
             display: flex; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
             border-radius: 999px; padding: 4px; gap: 4px; margin: 0 auto 20px; max-width: 280px;
@@ -1147,6 +1159,10 @@
                 </div>
 
                 <a class="upi-open-app-btn" id="upiOpenAppBtn" href="#"><i class="fas fa-mobile-screen-button"></i> Open in UPI App</a>
+
+                <button type="button" class="ive-paid-btn" id="ivePaidBtn" onclick="submitPaymentClaim()"><i class="fas fa-circle-check"></i> I've Paid</button>
+                <div class="ive-paid-hint">Click after paying — we'll verify & activate your plan shortly.</div>
+                <div id="ivePaidMessage" class="ive-paid-message"></div>
             </div>
             <div class="recharge-modal-footer" id="rechargeModalFooter"><i class="fas fa-shield-halved"></i> Direct UPI Payment — No Middleman</div>
         </div>
@@ -1820,9 +1836,52 @@
             switchUpiTab('qr');
             updateUpiPaymentLinks();
 
+            const ivePaidBtn = document.getElementById('ivePaidBtn');
+            ivePaidBtn.disabled = false;
+            ivePaidBtn.innerHTML = '<i class="fas fa-circle-check"></i> I\'ve Paid';
+            const ivePaidMsg = document.getElementById('ivePaidMessage');
+            ivePaidMsg.textContent = '';
+            ivePaidMsg.className = 'ive-paid-message';
+
             document.getElementById('rechargePlanList').style.display = 'none';
             document.getElementById('rechargeModalFooter').style.display = 'none';
             document.getElementById('upiQrView').classList.add('show');
+        }
+        function submitPaymentClaim() {
+            const btn = document.getElementById('ivePaidBtn');
+            const msg = document.getElementById('ivePaidMessage');
+            const custId = document.getElementById('upiCustId').value.trim();
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            msg.textContent = '';
+            msg.className = 'ive-paid-message';
+
+            const payload = {
+                userId: (activeRechargeCustomer && activeRechargeCustomer.id) || custId || 'UNKNOWN',
+                name: (activeRechargeCustomer && activeRechargeCustomer.name) || '',
+                plan: currentUpiPlan.name,
+                amount: currentUpiPlan.amount
+            };
+
+            fetch(CUSTOMER_DATA_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(() => {
+                btn.innerHTML = '<i class="fas fa-circle-check"></i> Claim Submitted';
+                msg.textContent = 'Dhanyawad! Aapki payment verify hone ke baad plan activate ho jayega.';
+                msg.classList.add('success');
+            })
+            .catch(err => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-circle-check"></i> I\'ve Paid';
+                msg.textContent = 'Submit nahi ho paya. Internet check karke dobara try karein, ya seedha call kar dein.';
+                msg.classList.add('error');
+                console.error('Payment claim failed:', err);
+            });
         }
         function backToPlanList() {
             document.getElementById('upiQrView').classList.remove('show');
