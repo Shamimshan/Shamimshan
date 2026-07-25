@@ -254,17 +254,18 @@
         .recharge-modal-overlay {
             position: fixed; inset: 0; z-index: 3000; background: rgba(6,11,24,0.75);
             backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            display: none; align-items: center; justify-content: center; padding: 20px;
+            display: none; align-items: stretch; justify-content: flex-end; padding: 0;
             opacity: 0; transition: opacity 0.3s ease;
         }
         .recharge-modal-overlay.show { display: flex; opacity: 1; }
         .recharge-modal {
-            background: var(--void); border-radius: 22px; max-width: 420px; width: 100%;
-            padding: 32px 26px 26px; position: relative; box-shadow: 0 40px 90px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            transform: scale(0.92) translateY(10px); opacity: 0; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease;
+            background: var(--void); border-radius: 0; max-width: 420px; width: 100%;
+            height: 100%; padding: 32px 26px 26px; position: relative; box-shadow: -20px 0 60px rgba(0,0,0,0.5);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            transform: translateX(100%); opacity: 1; transition: transform 0.4s cubic-bezier(0.32,0.72,0,1);
+            overflow-y: auto;
         }
-        .recharge-modal-overlay.show .recharge-modal { transform: scale(1) translateY(0); opacity: 1; }
+        .recharge-modal-overlay.show .recharge-modal { transform: translateX(0); }
         .recharge-modal-close {
             position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%;
             background: rgba(255,255,255,0.08); border: none; color: #cfd8ee; cursor: pointer;
@@ -411,6 +412,12 @@
         .cpr-badge.expired { background: rgba(255,74,74,0.15); color: #ff4a4a; }
         .cpr-notfound { text-align: center; color: #9aa5c0; font-size: 13px; padding: 10px 4px; }
         .cpr-notfound i { display: block; font-size: 24px; color: #ff4a4a; margin-bottom: 10px; }
+        .recharge-login-step { display: flex; flex-direction: column; gap: 14px; }
+        #rechargeAllPlans { display: flex; flex-direction: column; gap: 12px; }
+        .recharge-current-plan-label {
+            color: #9aa5c0; font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; margin: 4px 0 10px;
+        }
         @media (max-width: 560px) { .btn-recharge span.full-label { display: none; } .btn-recharge { padding: 12px 14px; } }
         .btn-quote {
             background: linear-gradient(135deg, var(--orange-2), var(--orange) 55%, #d84400); color: white; padding: 12px 24px; border-radius: 999px;
@@ -1078,7 +1085,6 @@
             <a href="#contact" onclick="closeNav()">Contact</a>
         </nav>
         <div class="header-actions">
-            <button class="btn-recharge" id="btnCheckPlan" onclick="openCheckPlanModal()" style="background:rgba(255,255,255,0.06);"><i class="fas fa-calendar-check"></i><span class="full-label">Check Plan</span></button>
             <button class="btn-recharge" onclick="openRechargeModal()"><i class="fas fa-bolt"></i><span class="full-label">Recharge Now</span></button>
             <a href="tel:6391224488" class="btn-quote"><i class="fas fa-phone-alt"></i><span class="full-label">Call Now</span></a>
             <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1090,40 +1096,27 @@
             <button class="recharge-modal-close" onclick="closeRechargeModal()" aria-label="Close"><i class="fas fa-times"></i></button>
             <div class="recharge-modal-header">
                 <div class="recharge-modal-icon"><i class="fas fa-bolt"></i></div>
-                <h3>Select Your Plan to Recharge</h3>
-                <p>Pay directly via any UPI app — instant & secure.</p>
+                <h3>Recharge Your Plan</h3>
+                <p id="rechargeHeaderSub">Enter your User ID & Mobile Number to continue.</p>
             </div>
-            <div class="recharge-plan-list" id="rechargePlanList">
-                <div class="recharge-plan-btn">
-                    <div class="rpb-left">
-                        <div class="rpb-name">Lite Plan</div>
-                        <div class="rpb-speed">30 Mbps</div>
-                    </div>
-                    <div class="rpb-right">
-                        <div class="rpb-price">₹599</div>
-                        <button type="button" class="upi-pay-btn" onclick="showUpiQr('Lite Plan','30 Mbps',599)"><i class="fas fa-bolt"></i> Pay Now</button>
-                    </div>
+
+            <div class="recharge-login-step" id="rechargeLoginStep">
+                <div class="upi-custid-box" style="max-width:100%;">
+                    <label for="rechargeUserId">User ID</label>
+                    <input type="text" id="rechargeUserId" placeholder="e.g. SZ0245">
                 </div>
-                <div class="recharge-plan-btn featured">
-                    <div class="rpb-left">
-                        <div class="rpb-name">Pro Plan <span class="rpb-tag">Popular</span></div>
-                        <div class="rpb-speed">50 Mbps</div>
-                    </div>
-                    <div class="rpb-right">
-                        <div class="rpb-price">₹799</div>
-                        <button type="button" class="upi-pay-btn" onclick="showUpiQr('Pro Plan','50 Mbps',799)"><i class="fas fa-bolt"></i> Pay Now</button>
-                    </div>
+                <div class="upi-custid-box" style="max-width:100%;">
+                    <label for="rechargeMobile">Mobile Number</label>
+                    <input type="tel" id="rechargeMobile" placeholder="10-digit mobile number" maxlength="10" onkeydown="if(event.key==='Enter') fetchUserDetails()">
                 </div>
-                <div class="recharge-plan-btn">
-                    <div class="rpb-left">
-                        <div class="rpb-name">Boost Plan</div>
-                        <div class="rpb-speed">100 Mbps</div>
-                    </div>
-                    <div class="rpb-right">
-                        <div class="rpb-price">₹1150</div>
-                        <button type="button" class="upi-pay-btn" onclick="showUpiQr('Boost Plan','100 Mbps',1150)"><i class="fas fa-bolt"></i> Pay Now</button>
-                    </div>
-                </div>
+                <button type="button" id="rechargeFetchBtn" class="upi-pay-btn" style="width:100%; justify-content:center; margin-top:6px;" onclick="fetchUserDetails()"><i class="fas fa-magnifying-glass"></i> Fetch</button>
+                <div id="rechargeLoginError" class="cpr-notfound" style="display:none;"></div>
+            </div>
+
+            <div class="recharge-plan-list" id="rechargePlanList" style="display:none;">
+                <div id="rechargeUserDetailsCard"></div>
+                <div class="recharge-current-plan-label">All Plans</div>
+                <div id="rechargeAllPlans"></div>
             </div>
             <div class="upi-qr-view" id="upiQrView">
                 <button type="button" class="upi-qr-back" onclick="backToPlanList()"><i class="fas fa-arrow-left"></i> Back to plans</button>
@@ -1156,27 +1149,6 @@
                 <a class="upi-open-app-btn" id="upiOpenAppBtn" href="#"><i class="fas fa-mobile-screen-button"></i> Open in UPI App</a>
             </div>
             <div class="recharge-modal-footer" id="rechargeModalFooter"><i class="fas fa-shield-halved"></i> Direct UPI Payment — No Middleman</div>
-        </div>
-    </div>
-
-    <div class="recharge-modal-overlay" id="checkPlanModalOverlay" onclick="closeCheckPlanModalOnOverlay(event)">
-        <div class="recharge-modal">
-            <button class="recharge-modal-close" onclick="closeCheckPlanModal()" aria-label="Close"><i class="fas fa-times"></i></button>
-            <div class="recharge-modal-header">
-                <div class="recharge-modal-icon"><i class="fas fa-calendar-check"></i></div>
-                <h3>Check Your Plan Status</h3>
-                <p>Enter your Customer ID to see your active plan & expiry date.</p>
-            </div>
-
-            <div class="upi-custid-box" style="max-width:100%;">
-                <label for="checkPlanIdInput">Customer ID</label>
-                <input type="text" id="checkPlanIdInput" placeholder="e.g. SZ0245" onkeydown="if(event.key==='Enter') checkPlanStatus()">
-            </div>
-            <button type="button" class="upi-pay-btn" style="width:100%; justify-content:center; margin-top:6px;" onclick="checkPlanStatus()"><i class="fas fa-search"></i> Check Status</button>
-
-            <div id="checkPlanResult" class="check-plan-result"></div>
-
-            <div class="recharge-modal-footer"><i class="fas fa-headset"></i> Status not matching? <a href="tel:6391224488" style="color:var(--pulse);text-decoration:none;">Call us</a></div>
         </div>
     </div>
 
@@ -1662,69 +1634,131 @@
         function closeRechargeModal() {
             document.getElementById('rechargeModalOverlay').classList.remove('show');
             document.body.style.overflow = '';
-            backToPlanList();
+            resetRechargeModal();
         }
         function closeRechargeModalOnOverlay(e) {
             if (e.target.id === 'rechargeModalOverlay') closeRechargeModal();
         }
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closeRechargeModal(); closeCheckPlanModal(); }
+            if (e.key === 'Escape') { closeRechargeModal(); }
         });
 
-        // ---- Check Plan Status modal ----
-        // Admin: update this list manually after checking each customer's expiry in H8 CRM.
-        // Format: "CustomerID": { name: "Customer Name", plan: "Plan Name", expiry: "YYYY-MM-DD" }
-        const customerData = {
-            "SZ0001": { name: "Ramesh Kumar", plan: "Pro Plan - 50 Mbps", expiry: "2026-08-15" },
-            "SZ0002": { name: "Anita Singh", plan: "Boost Plan - 100 Mbps", expiry: "2026-07-28" },
-            "SZ0003": { name: "Imran Sheikh", plan: "Lite Plan - 30 Mbps", expiry: "2026-07-20" }
+        // ---- Recharge & Check Plan data ----
+        // Live customer data comes from a Google Apps Script Web App (reads your Google Sheet).
+        // Add/update customers directly in the Sheet — no code change needed here.
+        const CUSTOMER_DATA_URL = 'https://script.google.com/macros/s/AKfycbyzWRsnhYnVX_o9L1eRptc14-cZ3I6_oBbMlug6xspzL7Op_tskH9iXCSVH3XYeAMkYvw/exec';
+        const planCatalog = {
+            lite:  { name: "Lite Plan",  speed: "30 Mbps",  amount: 599 },
+            pro:   { name: "Pro Plan",   speed: "50 Mbps",  amount: 799 },
+            boost: { name: "Boost Plan", speed: "100 Mbps", amount: 1150 }
         };
-        function openCheckPlanModal() {
-            document.getElementById('checkPlanModalOverlay').classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeCheckPlanModal() {
-            const overlay = document.getElementById('checkPlanModalOverlay');
-            if (!overlay.classList.contains('show')) return;
-            overlay.classList.remove('show');
-            document.body.style.overflow = '';
-            document.getElementById('checkPlanResult').innerHTML = '';
-            document.getElementById('checkPlanIdInput').value = '';
-        }
-        function closeCheckPlanModalOnOverlay(e) {
-            if (e.target.id === 'checkPlanModalOverlay') closeCheckPlanModal();
-        }
-        function checkPlanStatus() {
-            const idInput = document.getElementById('checkPlanIdInput').value.trim().toUpperCase();
-            const resultBox = document.getElementById('checkPlanResult');
-            if (!idInput) { resultBox.innerHTML = ''; return; }
+        let activeRechargeCustomer = null;
 
-            const record = customerData[idInput];
-            if (!record) {
-                resultBox.innerHTML = '<div class="cpr-card cpr-notfound"><i class="fas fa-circle-exclamation"></i>No record found for "' + idInput + '". Please check your Customer ID or call support.</div>';
+        function setFetchButtonLoading(isLoading) {
+            const btn = document.getElementById('rechargeFetchBtn');
+            if (!btn) return;
+            btn.disabled = isLoading;
+            btn.innerHTML = isLoading
+                ? '<i class="fas fa-spinner fa-spin"></i> Fetching...'
+                : '<i class="fas fa-magnifying-glass"></i> Fetch';
+        }
+
+        function fetchUserDetails() {
+            const idInput = document.getElementById('rechargeUserId').value.trim().toUpperCase();
+            const mobileInput = document.getElementById('rechargeMobile').value.trim();
+            const errorBox = document.getElementById('rechargeLoginError');
+            errorBox.style.display = 'none';
+
+            if (!idInput || !mobileInput) {
+                errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> Please enter both User ID and Mobile Number.';
+                errorBox.style.display = 'block';
                 return;
             }
 
+            setFetchButtonLoading(true);
+
+            fetch(CUSTOMER_DATA_URL + '?action=customers')
+                .then(res => res.json())
+                .then(customerData => {
+                    setFetchButtonLoading(false);
+                    const record = customerData[idInput];
+                    if (!record || String(record.mobile).trim() !== mobileInput) {
+                        errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> User ID / Mobile number match nahi hua. Dobara check karein ya support ko call karein.';
+                        errorBox.style.display = 'block';
+                        return;
+                    }
+
+                    activeRechargeCustomer = Object.assign({ id: idInput }, record);
+                    renderUserDetailsAndPlans();
+
+                    document.getElementById('rechargeLoginStep').style.display = 'none';
+                    document.getElementById('rechargeHeaderSub').textContent = 'Hi ' + record.name.split(' ')[0] + ', here are your details.';
+                    document.getElementById('rechargePlanList').style.display = '';
+                })
+                .catch(err => {
+                    setFetchButtonLoading(false);
+                    errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> Data fetch nahi ho paya. Internet check karein ya thodi der me try karein.';
+                    errorBox.style.display = 'block';
+                    console.error('Customer fetch failed:', err);
+                });
+        }
+
+        function buildPlanCardHtml(planKey, plan, isCurrent) {
+            const nameLabel = isCurrent
+                ? plan.name + ' <span class="rpb-tag">Current Plan</span>'
+                : plan.name;
+            return '<div class="recharge-plan-btn' + (isCurrent ? ' featured' : '') + '">' +
+                    '<div class="rpb-left">' +
+                        '<div class="rpb-name">' + nameLabel + '</div>' +
+                        '<div class="rpb-speed">' + plan.speed + '</div>' +
+                    '</div>' +
+                    '<div class="rpb-right">' +
+                        '<div class="rpb-price">₹' + plan.amount + '</div>' +
+                        '<button type="button" class="upi-pay-btn" onclick="showUpiQr(\'' + plan.name + '\',\'' + plan.speed + '\',' + plan.amount + ')"><i class="fas fa-bolt"></i> Pay Now</button>' +
+                    '</div>' +
+                '</div>';
+        }
+
+        function renderUserDetailsAndPlans() {
+            const currentKey = activeRechargeCustomer.plan;
+            const current = planCatalog[currentKey];
+
             const today = new Date();
             today.setHours(0,0,0,0);
-            const expiryDate = new Date(record.expiry + 'T00:00:00');
+            const expiryDate = new Date(activeRechargeCustomer.expiry + 'T00:00:00');
             const daysLeft = Math.round((expiryDate - today) / 86400000);
-
             let badgeClass, badgeText;
             if (daysLeft < 0) { badgeClass = 'expired'; badgeText = 'Expired'; }
             else if (daysLeft <= 5) { badgeClass = 'soon'; badgeText = 'Expiring Soon'; }
             else { badgeClass = 'active'; badgeText = 'Active'; }
-
             const formattedExpiry = expiryDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
             const daysText = daysLeft < 0 ? Math.abs(daysLeft) + ' days ago' : daysLeft + ' days left';
 
-            resultBox.innerHTML = `
-                <div class="cpr-card">
-                    <div class="cpr-row"><span class="cpr-label">Customer</span><span class="cpr-value">${record.name}</span></div>
-                    <div class="cpr-row"><span class="cpr-label">Plan</span><span class="cpr-value">${record.plan}</span></div>
+            document.getElementById('rechargeUserDetailsCard').innerHTML = `
+                <div class="cpr-card" style="margin-bottom:18px;">
+                    <div class="cpr-row"><span class="cpr-label">Customer</span><span class="cpr-value">${activeRechargeCustomer.name}</span></div>
+                    <div class="cpr-row"><span class="cpr-label">User ID</span><span class="cpr-value">${activeRechargeCustomer.id}</span></div>
+                    <div class="cpr-row"><span class="cpr-label">Current Plan</span><span class="cpr-value">${current.name} - ${current.speed}</span></div>
                     <div class="cpr-row"><span class="cpr-label">Expiry Date</span><span class="cpr-value">${formattedExpiry}</span></div>
                     <div class="cpr-row"><span class="cpr-label">Status</span><span class="cpr-badge ${badgeClass}">${badgeText} · ${daysText}</span></div>
                 </div>`;
+
+            const allKeys = Object.keys(planCatalog);
+            document.getElementById('rechargeAllPlans').innerHTML = allKeys
+                .map(k => buildPlanCardHtml(k, planCatalog[k], k === currentKey))
+                .join('');
+        }
+
+        function resetRechargeModal() {
+            document.getElementById('upiQrView').classList.remove('show');
+            document.getElementById('rechargePlanList').style.display = 'none';
+            document.getElementById('rechargeModalFooter').style.display = '';
+            document.getElementById('rechargeLoginStep').style.display = '';
+            document.getElementById('rechargeHeaderSub').textContent = 'Enter your User ID & Mobile Number to continue.';
+            document.getElementById('rechargeUserId').value = '';
+            document.getElementById('rechargeMobile').value = '';
+            document.getElementById('rechargeLoginError').style.display = 'none';
+            activeRechargeCustomer = null;
         }
         function copyUpiId() {
             const id = document.getElementById('upiIdText2').textContent.trim();
