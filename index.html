@@ -983,36 +983,42 @@
                 <p>You'll be redirected to Razorpay's secure payment page.</p>
             </div>
             <div class="recharge-plan-list">
-                <a href="https://rzp.io/l/REPLACE-WITH-LITE-LINK" target="_blank" rel="noopener" class="recharge-plan-btn">
+                <div class="recharge-plan-btn">
                     <div class="rpb-left">
                         <div class="rpb-name">Lite Plan</div>
                         <div class="rpb-speed">30 Mbps</div>
                     </div>
                     <div class="rpb-right">
                         <div class="rpb-price">₹599</div>
-                        <i class="fas fa-arrow-right"></i>
+                        <form>
+                            <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_THfq0VI4J9ouwo" async></script>
+                        </form>
                     </div>
-                </a>
-                <a href="https://rzp.io/l/REPLACE-WITH-PRO-LINK" target="_blank" rel="noopener" class="recharge-plan-btn featured">
+                </div>
+                <div class="recharge-plan-btn featured">
                     <div class="rpb-left">
                         <div class="rpb-name">Pro Plan <span class="rpb-tag">Popular</span></div>
                         <div class="rpb-speed">50 Mbps</div>
                     </div>
                     <div class="rpb-right">
                         <div class="rpb-price">₹799</div>
-                        <i class="fas fa-arrow-right"></i>
+                        <form>
+                            <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_THfljzleVnvuNl" async></script>
+                        </form>
                     </div>
-                </a>
-                <a href="https://rzp.io/l/REPLACE-WITH-BOOST-LINK" target="_blank" rel="noopener" class="recharge-plan-btn">
+                </div>
+                <div class="recharge-plan-btn">
                     <div class="rpb-left">
                         <div class="rpb-name">Boost Plan</div>
                         <div class="rpb-speed">100 Mbps</div>
                     </div>
                     <div class="rpb-right">
                         <div class="rpb-price">₹1150</div>
-                        <i class="fas fa-arrow-right"></i>
+                        <form>
+                            <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_THfsnSR3iKbaZs" async></script>
+                        </form>
                     </div>
-                </a>
+                </div>
             </div>
             <div class="recharge-modal-footer"><i class="fas fa-lock"></i> Secured by Razorpay</div>
         </div>
@@ -1309,9 +1315,6 @@
                         <li><i class="fas fa-headset"></i> Standard Support</li>
                     </ul>
                     <button onclick="sendToWhatsapp('Lite Plan')" class="btn-plan lite">Order Now</button>
-                    <form style="margin-top:10px;">
-                        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_THfq0VI4J9ouwo" async></script>
-                    </form>
                 </div>
             </div>
             <div class="price-card featured">
@@ -1328,9 +1331,6 @@
                         <li><i class="fas fa-headset"></i> Priority Support</li>
                     </ul>
                     <button onclick="sendToWhatsapp('Pro Plan')" class="btn-plan pro">Order Now</button>
-                    <form style="margin-top:10px;">
-                        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_THfljzleVnvuNl" async></script>
-                    </form>
                 </div>
             </div>
             <div class="price-card">
@@ -1347,9 +1347,6 @@
                         <li><i class="fas fa-headset"></i> Dedicated Support</li>
                     </ul>
                     <button onclick="sendToWhatsapp('Boost Plan')" class="btn-plan boost">Order Now</button>
-                    <form style="margin-top:10px;">
-                        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_THfsnSR3iKbaZs" async></script>
-                    </form>
                 </div>
             </div>
         </div>
