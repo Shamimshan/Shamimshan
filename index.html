@@ -1119,7 +1119,7 @@
                 </div>
                 <div class="upi-custid-box" style="max-width:100%;">
                     <label for="rechargeMobile">Mobile Number</label>
-                    <input type="tel" id="rechargeMobile" placeholder="10-digit mobile number" maxlength="10" onkeydown="if(event.key==='Enter') fetchUserDetails()">
+                    <input type="tel" id="rechargeMobile" placeholder="10-digit mobile number" maxlength="10" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeydown="if(event.key==='Enter') fetchUserDetails()">
                 </div>
                 <button type="button" id="rechargeFetchBtn" class="upi-pay-btn" style="width:100%; justify-content:center; margin-top:6px;" onclick="fetchUserDetails()"><i class="fas fa-magnifying-glass"></i> Fetch</button>
                 <div id="rechargeLoginError" class="cpr-notfound" style="display:none;"></div>
@@ -1429,7 +1429,7 @@
                 </div>
                 <div class="path-link"><div class="pulse-dot" style="animation-delay:1.2s;"></div></div>
                 <div class="path-node">
-                    <div class="node-icon"><i class="fas fa-house-signal"></i></div>
+                    <div class="node-icon"><i class="fas fa-wifi"></i></div>
                     <span class="node-label">Your Home / Office</span>
                 </div>
             </div>
@@ -1693,12 +1693,11 @@
 
             setFetchButtonLoading(true);
 
-            fetch(CUSTOMER_DATA_URL + '?action=customers')
+            fetch(CUSTOMER_DATA_URL + '?action=customer&userId=' + encodeURIComponent(idInput))
                 .then(res => res.json())
-                .then(customerData => {
+                .then(record => {
                     setFetchButtonLoading(false);
-                    const record = customerData[idInput];
-                    if (!record || String(record.mobile).trim() !== mobileInput) {
+                    if (!record || !record.found || String(record.mobile).trim() !== mobileInput) {
                         errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> User ID / Mobile number match nahi hua. Dobara check karein ya support ko call karein.';
                         errorBox.style.display = 'block';
                         return;
@@ -1870,7 +1869,14 @@
                 body: JSON.stringify(payload)
             })
             .then(res => res.json())
-            .then(() => {
+            .then(result => {
+                if (result && result.status === 'duplicate') {
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-circle-check"></i> Already Submitted';
+                    msg.textContent = 'Ye claim already submit ho chuka hai — verify hone ka wait karein.';
+                    msg.classList.add('success');
+                    return;
+                }
                 btn.innerHTML = '<i class="fas fa-circle-check"></i> Claim Submitted';
                 msg.textContent = 'Dhanyawad! Aapki payment verify hone ke baad plan activate ho jayega.';
                 msg.classList.add('success');
@@ -8481,7 +8487,7 @@
                 if (elapsedSec > 0.05) {
                     finalMbps = ((measuredBytes * 8) / 1e6) / elapsedSec;
                     updateEl.textContent = finalMbps.toFixed(1);
-                    if (kind === 'download') setGauge(finalMbps);
+                    setGauge(finalMbps);
                 }
             }
 
@@ -8517,7 +8523,7 @@
             const finalElapsedSec = measuredStart ? (performance.now() - measuredStart) / 1000 : 0;
             finalMbps = finalElapsedSec > 0 ? ((measuredBytes * 8) / 1e6) / finalElapsedSec : finalMbps;
             updateEl.textContent = finalMbps.toFixed(1);
-            if (kind === 'download') setGauge(finalMbps);
+            setGauge(finalMbps);
             return finalMbps;
         }
 
