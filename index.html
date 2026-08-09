@@ -1697,7 +1697,16 @@
                 .then(res => res.json())
                 .then(record => {
                     setFetchButtonLoading(false);
-                    if (!record || !record.found || String(record.mobile).trim() !== mobileInput) {
+
+                    if (!record || record.error) {
+                        errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> Server se sahi response nahi mila (' +
+                            (record && record.error ? record.error : 'unknown error') +
+                            '). Apps Script deployment check karein.';
+                        errorBox.style.display = 'block';
+                        return;
+                    }
+
+                    if (!record.found || String(record.mobile).trim() !== mobileInput) {
                         errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> User ID / Mobile number match nahi hua. Dobara check karein ya support ko call karein.';
                         errorBox.style.display = 'block';
                         return;
@@ -8474,6 +8483,26 @@
             let switchedToMeasuring = false;
             let finalMbps = 0;
 
+            // Gauge updates are throttled to one per animation frame and lightly
+            // smoothed — without this, high-concurrency downloads fire onChunk
+            // many times per frame and the needle's CSS transition keeps
+            // restarting, making it look stuck/jittery instead of moving smoothly.
+            let gaugeRafScheduled = false;
+            let gaugePendingValue = 0;
+            let gaugeSmoothedValue = 0;
+            function scheduleGaugeUpdate(mbps) {
+                gaugePendingValue = mbps;
+                if (gaugeRafScheduled) return;
+                gaugeRafScheduled = true;
+                requestAnimationFrame(() => {
+                    gaugeRafScheduled = false;
+                    gaugeSmoothedValue = gaugeSmoothedValue === 0
+                        ? gaugePendingValue
+                        : gaugeSmoothedValue * 0.65 + gaugePendingValue * 0.35;
+                    setGauge(gaugeSmoothedValue);
+                });
+            }
+
             function onChunk(len) {
                 if (kind === 'download') {
                     window.__stTotalBytes = (window.__stTotalBytes || 0) + len;
@@ -8487,7 +8516,7 @@
                 if (elapsedSec > 0.05) {
                     finalMbps = ((measuredBytes * 8) / 1e6) / elapsedSec;
                     updateEl.textContent = finalMbps.toFixed(1);
-                    setGauge(finalMbps);
+                    scheduleGaugeUpdate(finalMbps);
                 }
             }
 
@@ -8523,7 +8552,7 @@
             const finalElapsedSec = measuredStart ? (performance.now() - measuredStart) / 1000 : 0;
             finalMbps = finalElapsedSec > 0 ? ((measuredBytes * 8) / 1e6) / finalElapsedSec : finalMbps;
             updateEl.textContent = finalMbps.toFixed(1);
-            setGauge(finalMbps);
+            setGauge(finalMbps); // exact final value, bypassing smoothing so it matches the shown number
             return finalMbps;
         }
 
