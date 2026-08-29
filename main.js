@@ -1,7 +1,3 @@
-// ================================================
-// MAIN.JS — Saare interactive JavaScript
-// ================================================
-
 // DOM ready hote hi preloader hide (fast)
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
@@ -10,21 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 500);
 });
 
-// ----- Preloader (on load event) -----
 window.addEventListener('load', () => {
-    setTimeout(() => {
-        var preloader = document.getElementById('preloader');
-        if (preloader) preloader.classList.add('hide');
-    }, 500);
+    setTimeout(() => preloader.classList.add('hide'), 500);
 });
 
-// ----- Header shrink on scroll -----
+// Header shrink on scroll
 const headerEl = document.querySelector('header');
 window.addEventListener('scroll', () => {
     headerEl.classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// ----- Mobile nav -----
+// Mobile nav
 const navToggle = document.getElementById('navToggle');
 const mainNav = document.getElementById('mainNav');
 navToggle.addEventListener('click', () => {
@@ -33,7 +25,7 @@ navToggle.addEventListener('click', () => {
 });
 function closeNav() { mainNav.classList.remove('open'); navToggle.classList.remove('open'); }
 
-// ----- Hero slider with dots -----
+// Hero slider
 const slides = document.querySelectorAll('.hero-slide-bg');
 const dotsWrap = document.getElementById('slideDots');
 let currentSlide = 0;
@@ -50,13 +42,10 @@ function goToSlide(i) {
     slides[currentSlide].classList.add('active');
     dotsWrap.children[currentSlide].classList.add('active');
 }
-function nextSlide() {
-    const next = (currentSlide + 1) % slides.length;
-    goToSlide(next);
-}
+function nextSlide() { const next = (currentSlide + 1) % slides.length; goToSlide(next); }
 setInterval(nextSlide, 4500);
 
-// ----- Recharge modal -----
+// Recharge modal
 function openRechargeModal() {
     document.getElementById('rechargeModalOverlay').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -73,7 +62,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { closeRechargeModal(); }
 });
 
-// ----- Recharge & Check Plan data -----
+// Recharge & Check Plan data
 const CUSTOMER_DATA_URL = 'https://script.google.com/macros/s/AKfycbyzWRsnhYnVX_o9L1eRptc14-cZ3I6_oBbMlug6xspzL7Op_tskH9iXCSVH3XYeAMkYvw/exec';
 const planCatalog = {
     lite:  { name: "Lite Plan",  speed: "30 Mbps",  amount: 599 },
@@ -86,9 +75,7 @@ function setFetchButtonLoading(isLoading) {
     const btn = document.getElementById('rechargeFetchBtn');
     if (!btn) return;
     btn.disabled = isLoading;
-    btn.innerHTML = isLoading
-        ? '<i class="fas fa-spinner fa-spin"></i> Fetching...'
-        : '<i class="fas fa-magnifying-glass"></i> Fetch';
+    btn.innerHTML = isLoading ? '<i class="fas fa-spinner fa-spin"></i> Fetching...' : '<i class="fas fa-magnifying-glass"></i> Fetch';
 }
 
 function fetchUserDetails() {
@@ -107,9 +94,7 @@ function fetchUserDetails() {
         .then(record => {
             setFetchButtonLoading(false);
             if (!record || record.error) {
-                errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> Server se sahi response nahi mila (' +
-                    (record && record.error ? record.error : 'unknown error') +
-                    '). Apps Script deployment check karein.';
+                errorBox.innerHTML = '<i class="fas fa-circle-exclamation"></i> Server se sahi response nahi mila (' + (record && record.error ? record.error : 'unknown error') + '). Apps Script deployment check karein.';
                 errorBox.style.display = 'block';
                 return;
             }
@@ -133,9 +118,7 @@ function fetchUserDetails() {
 }
 
 function buildPlanCardHtml(planKey, plan, isCurrent) {
-    const nameLabel = isCurrent
-        ? plan.name + ' <span class="rpb-tag">Current Plan</span>'
-        : plan.name;
+    const nameLabel = isCurrent ? plan.name + ' <span class="rpb-tag">Current Plan</span>' : plan.name;
     return '<div class="recharge-plan-btn' + (isCurrent ? ' featured' : '') + '">' +
             '<div class="rpb-left">' +
                 '<div class="rpb-name">' + nameLabel + '</div>' +
@@ -170,9 +153,7 @@ function renderUserDetailsAndPlans() {
             <div class="cpr-row"><span class="cpr-label">Status</span><span class="cpr-badge ${badgeClass}">${badgeText} · ${daysText}</span></div>
         </div>`;
     const allKeys = Object.keys(planCatalog);
-    document.getElementById('rechargeAllPlans').innerHTML = allKeys
-        .map(k => buildPlanCardHtml(k, planCatalog[k], k === currentKey))
-        .join('');
+    document.getElementById('rechargeAllPlans').innerHTML = allKeys.map(k => buildPlanCardHtml(k, planCatalog[k], k === currentKey)).join('');
 }
 
 function resetRechargeModal() {
@@ -203,33 +184,19 @@ function switchUpiTab(tab) {
     const idBtn = document.getElementById('upiTabBtnId');
     const qrPanel = document.getElementById('upiTabQr');
     const idPanel = document.getElementById('upiTabId');
-    if (tab === 'qr') {
-        qrBtn.classList.add('active'); idBtn.classList.remove('active');
-        qrPanel.classList.add('show'); idPanel.classList.remove('show');
-    } else {
-        idBtn.classList.add('active'); qrBtn.classList.remove('active');
-        idPanel.classList.add('show'); qrPanel.classList.remove('show');
-    }
+    if (tab === 'qr') { qrBtn.classList.add('active'); idBtn.classList.remove('active'); qrPanel.classList.add('show'); idPanel.classList.remove('show'); }
+    else { idBtn.classList.add('active'); qrBtn.classList.remove('active'); idPanel.classList.add('show'); qrPanel.classList.remove('show'); }
 }
 function updateUpiPaymentLinks() {
     const custId = document.getElementById('upiCustId').value.trim();
     let note = currentUpiPlan.name + ' Recharge';
     if (custId) note += ' - ID ' + custId;
-    const upiLink = 'upi://pay?pa=' + encodeURIComponent(UPI_ID) +
-        '&pn=' + encodeURIComponent(UPI_PAYEE) +
-        '&am=' + currentUpiPlan.amount + '&cu=INR&tn=' + encodeURIComponent(note);
+    const upiLink = 'upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=' + encodeURIComponent(UPI_PAYEE) + '&am=' + currentUpiPlan.amount + '&cu=INR&tn=' + encodeURIComponent(note);
     document.getElementById('upiOpenAppBtn').href = upiLink;
     const canvasWrap = document.getElementById('upiQrCanvas');
     canvasWrap.innerHTML = '';
     if (window.QRCode) {
-        new QRCode(canvasWrap, {
-            text: upiLink,
-            width: 168,
-            height: 168,
-            colorDark: '#000000',
-            colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.M
-        });
+        new QRCode(canvasWrap, { text: upiLink, width: 168, height: 168, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
     } else {
         canvasWrap.innerHTML = '<span style="color:#333;font-size:11px;padding:10px;display:block;">QR unavailable — use Open in UPI App button below</span>';
     }
@@ -270,9 +237,7 @@ function submitPaymentClaim() {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
-    })
-    .then(res => res.json())
-    .then(result => {
+    }).then(res => res.json()).then(result => {
         if (result && result.status === 'duplicate') {
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-circle-check"></i> Already Submitted';
@@ -283,8 +248,7 @@ function submitPaymentClaim() {
         btn.innerHTML = '<i class="fas fa-circle-check"></i> Claim Submitted';
         msg.textContent = 'Dhanyawad! Aapki payment verify hone ke baad plan activate ho jayega.';
         msg.classList.add('success');
-    })
-    .catch(err => {
+    }).catch(err => {
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-circle-check"></i> I\'ve Paid';
         msg.textContent = 'Submit nahi ho paya. Internet check karke dobara try karein, ya seedha call kar dein.';
@@ -298,7 +262,7 @@ function backToPlanList() {
     document.getElementById('rechargeModalFooter').style.display = '';
 }
 
-// ----- Magnetic buttons -----
+// Magnetic buttons
 document.querySelectorAll('.btn-quote, .btn-ghost-light, .btn-whatsapp-green').forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
@@ -309,7 +273,7 @@ document.querySelectorAll('.btn-quote, .btn-ghost-light, .btn-whatsapp-green').f
     btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
 });
 
-// ----- Cursor spotlight -----
+// Cursor spotlight
 const heroSpotlight = document.getElementById('heroSpotlight');
 const heroSection = document.querySelector('.hero');
 heroSection.addEventListener('mousemove', (e) => {
@@ -318,7 +282,7 @@ heroSection.addEventListener('mousemove', (e) => {
     heroSpotlight.style.top = (e.clientY - rect.top) + 'px';
 });
 
-// ----- 3D tilt on pricing cards -----
+// 3D tilt on pricing cards
 document.querySelectorAll('.price-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -328,12 +292,10 @@ document.querySelectorAll('.price-card').forEach(card => {
         const rotateY = ((x / rect.width) - 0.5) * 8;
         card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
     });
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 
-// ----- Scroll reveal -----
+// Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -345,7 +307,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 revealEls.forEach(el => observer.observe(el));
 
-// ----- Scroll progress bar -----
+// Scroll progress bar
 const progressBar = document.getElementById('scrollProgress');
 window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
@@ -354,14 +316,14 @@ window.addEventListener('scroll', () => {
     progressBar.style.width = pct + '%';
 });
 
-// ----- Back to top -----
+// Back to top
 const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
     backToTop.classList.toggle('show', window.scrollY > 500);
 });
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// ----- Count-up stats -----
+// Count-up stats
 const countEls = document.querySelectorAll('[data-count-to]');
 const countObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -385,7 +347,7 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.6 });
 countEls.forEach(el => countObserver.observe(el));
 
-// ----- Contact form -----
+// Contact form
 function handlePremiumContact() {
     var n = document.getElementById('pname').value;
     var e = document.getElementById('pemail').value;
@@ -409,7 +371,7 @@ function submitLeadCard() {
     window.open("https://wa.me/916391224488?text=" + text);
 }
 
-// ----- Area toggle + autocomplete -----
+// Area toggle + autocomplete (data.js provides LOCAL_AREA_DATA, CENSUS_VILLAGES, BLOCK_DATA, DISTRICT_NAMES)
 let areaMode = 'village';
 function setAreaMode(mode) {
     areaMode = mode;
@@ -418,7 +380,6 @@ function setAreaMode(mode) {
     const inputWrap = document.querySelector('.area-input-wrap');
     const blockWrap = document.getElementById('blockSelectWrap');
     document.getElementById('areaSuggestions').classList.remove('show');
-
     if (mode === 'block') {
         inputWrap.style.display = 'none';
         blockWrap.style.display = 'flex';
