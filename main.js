@@ -10,6 +10,13 @@ window.addEventListener('load', () => {
     setTimeout(() => preloader.classList.add('hide'), 500);
 });
 
+// FALLBACK: Agar sections hide rahein to 2 sec baad dikha do
+setTimeout(function() {
+    document.querySelectorAll('.reveal').forEach(function(el) {
+        el.classList.add('in-view');
+    });
+}, 2000);
+
 // Header shrink on scroll
 const headerEl = document.querySelector('header');
 window.addEventListener('scroll', () => {
