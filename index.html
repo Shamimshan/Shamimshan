@@ -11,11 +11,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- ⚠️ FALLBACK: Preloader ko 3 sec baad force hide karein -->
+    <script>
+        setTimeout(function() {
+            var preloader = document.getElementById('preloader');
+            if (preloader && !preloader.classList.contains('hide')) {
+                preloader.classList.add('hide');
+            }
+        }, 3000);
+    </script>
 </head>
 <body>
 
+    <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="preloader-logo"><i class="fas fa-tower-broadcast"></i></div>
         <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
@@ -545,5 +555,13 @@
     <script src="data.js"></script>
     <script src="main.js"></script>
     <script src="speedtest.js"></script>
+    <!-- Service Worker Register (optional - agar aapko PWA nahi chahiye to ise hata dein) -->
+    <!-- <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('SW registered'))
+            .catch(err => console.log('SW error', err));
+        }
+    </script> -->
 </body>
 </html>
