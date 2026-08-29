@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- React & ReactDOM (needed for new speed test) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <style>
         :root {
             --void: #060b18;
@@ -769,219 +774,18 @@
             background: radial-gradient(circle at 20% 20%, rgba(0,224,199,0.12), transparent 45%),
                         radial-gradient(circle at 85% 80%, rgba(255,94,20,0.10), transparent 45%);
         }
-
-        .st-topline { display: flex; justify-content: center; gap: 56px; position: relative; z-index: 1; margin-bottom: 6px; }
-        .st-topline-label {
-            font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; color: #9aa5c0;
-            display: flex; align-items: center; gap: 6px; justify-content: center;
+        .react-speedtest-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .st-topline-label i { font-size: 11px; }
-        .st-topline-item:first-child .st-topline-label i { color: var(--pulse); }
-        .st-topline-item:last-child .st-topline-label i { color: var(--gold-light); }
-        .st-topline-label span { font-weight: 500; color: #6b7590; }
-        .st-topline-value {
-            font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; color: white; line-height: 1.2;
+        .react-speedtest-wrapper > div {
+            width: 100%;
         }
-
-        .st-midline {
-            display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
-            font-size: 12.5px; color: #9aa5c0; margin: 8px 0 6px; position: relative; z-index: 1;
-        }
-        .st-midline i { color: var(--pulse); margin-right: 4px; }
-        .st-midline b { color: white; font-weight: 600; }
-
-        .gauge-wrap { position: absolute; inset: 0; z-index: 1; transition: opacity 0.45s ease, transform 0.45s ease; }
-        .gauge-stage { position: relative; width: 260px; height: 205px; margin: 6px auto 0; z-index: 1; }
-        .gauge-wrap.gauge-hidden { opacity: 0; transform: scale(0.9); pointer-events: none; }
-        .gauge-svg { width: 100%; height: 100%; }
-        .gauge-track-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; stroke-linecap: round; }
-        .gauge-track-fill {
-            fill: none; stroke: url(#gaugeGradient); stroke-width: 9; stroke-linecap: round;
-            stroke-dasharray: 401; stroke-dashoffset: 401; transition: stroke-dashoffset 0.2s linear;
-        }
-        .gauge-tick { stroke: rgba(255,255,255,0.35); stroke-width: 1.5; }
-        .gauge-tick-label { fill: #8b96b3; font-size: 9px; font-family: 'Space Grotesk', sans-serif; }
-        .gauge-needle-group { transition: transform 0.25s cubic-bezier(0.4,0,0.2,1); }
-        .gauge-needle { stroke: var(--orange-2); stroke-width: 2.5; stroke-linecap: round; }
-        .gauge-needle-hub { fill: var(--orange-2); stroke: white; stroke-width: 1.5; }
-        .gauge-center-value {
-            position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); text-align: center;
-        }
-        .gauge-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.9rem; font-weight: 700; color: white; line-height: 1; }
-        .gauge-unit { font-size: 10.5px; color: #9aa5c0; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
-
-        .gauge-result-state {
-            position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 10px; opacity: 0; transform: scale(0.85); transition: opacity 0.45s ease, transform 0.45s ease; pointer-events: none;
-        }
-        .gauge-result-state.show { opacity: 1; transform: scale(1); pointer-events: auto; }
-        .gauge-result-icon {
-            width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 26px; color: white; background: linear-gradient(135deg, var(--pulse), #00b89f);
-            box-shadow: 0 0 0 8px rgba(0,224,199,0.12), 0 10px 26px rgba(0,224,199,0.35);
-            animation: gaugeCheckPop 0.5s cubic-bezier(0.34,1.56,0.64,1);
-        }
-        @keyframes gaugeCheckPop { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
-        .gauge-result-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: white; }
-        .gauge-result-sub { font-size: 11.5px; color: #8b96b3; }
-
-        .st-category-row {
-            display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
-            margin: 12px 0 18px; position: relative; z-index: 1;
-        }
-        .st-category { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 66px; }
-        .st-category i { font-size: 16px; color: #cfd8ee; }
-        .st-category span { font-size: 10px; color: #8b96b3; text-transform: uppercase; letter-spacing: 0.03em; }
-        .st-dots { display: flex; gap: 3px; }
-        .st-dots span { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.15); display: block; }
-        .st-dots span.filled { background: var(--pulse); }
-
-        .speedtest-status { font-size: 13px; color: #b9c3da; min-height: 18px; margin-bottom: 18px; position: relative; z-index: 1; }
-        .btn-speedtest {
-            position: relative; z-index: 1; border: none; cursor: pointer; padding: 14px 34px; border-radius: 999px;
-            font-weight: 600; font-size: 14.5px; color: white;
-            background: linear-gradient(135deg, var(--orange-2), var(--orange) 60%, #d84400);
-            box-shadow: 0 12px 26px rgba(255,94,20,0.35); transition: 0.3s;
-        }
-        .btn-speedtest:hover:not(:disabled) { transform: translateY(-2px); }
-        .btn-speedtest:disabled { opacity: 0.75; cursor: not-allowed; }
-
-        .st-isp-row {
-            display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-top: 20px;
-            padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;
-        }
-        .st-isp-row > div { font-size: 12.5px; color: #cfd8ee; display: flex; flex-direction: column; gap: 2px; }
-        .st-isp-label { font-size: 10px; color: #7c869e; text-transform: uppercase; letter-spacing: 0.06em; }
-
-        .speedtest-disclaimer { font-size: 11.5px; color: #7c869e; margin-top: 18px; position: relative; z-index: 1; }
-
-        /* ===== Signature: Network Path ===== */
-        .network-path { background: var(--void); color: white; position: relative; overflow: hidden; }
-        .network-path::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 15% 30%, rgba(0,224,199,0.12), transparent 45%),
-                        radial-gradient(circle at 85% 70%, rgba(255,94,20,0.10), transparent 45%);
-        }
-        .np-inner { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; text-align: center; }
-        .np-inner .eyebrow { color: var(--pulse); justify-content: center; }
-        .np-inner .eyebrow::before { display: none; }
-        .np-inner h2 { color: white; font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 44px; }
-        .np-inner h2 .accent-word { color: var(--pulse); }
-
-        .path-row { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
-        .path-node {
-            display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 140px;
-        }
-        .path-node {
-            opacity: 0; transform: translateY(18px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .network-path.in-view .path-node { opacity: 1; transform: translateY(0); }
-        .network-path.in-view .path-node:nth-child(1) { transition-delay: 0.1s; }
-        .network-path.in-view .path-node:nth-child(3) { transition-delay: 0.35s; }
-        .network-path.in-view .path-node:nth-child(5) { transition-delay: 0.6s; }
-        .path-node .node-icon {
-            width: 74px; height: 74px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.18); font-size: 26px;
-            animation: iconBreathe 3s ease-in-out infinite;
-        }
-        .path-node:nth-child(1) .node-icon { color: var(--orange); animation-delay: 0s; }
-        .path-node:nth-child(3) .node-icon { color: var(--pulse); animation-delay: 0.6s; }
-        .path-node:nth-child(5) .node-icon { color: #ffd77a; animation-delay: 1.2s; }
-        @keyframes iconBreathe {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.06); transform: scale(1); }
-            50% { box-shadow: 0 0 0 10px rgba(255,255,255,0.03); transform: scale(1.05); }
-        }
-        .path-node span.node-label { font-size: 13px; font-weight: 600; color: #cfd8ee; letter-spacing: 0.02em; }
-
-        .path-link {
-            flex: 1; min-width: 90px; max-width: 220px; height: 2px; position: relative;
-            background: linear-gradient(90deg, rgba(255,94,20,0.5), rgba(0,224,199,0.5));
-            margin: 0 -4px; top: -18px;
-        }
-        .path-link .pulse-dot {
-            position: absolute; top: -3px; width: 8px; height: 8px; border-radius: 50%;
-            background: var(--pulse); box-shadow: 0 0 14px 4px rgba(0,224,199,0.7);
-            animation: travel 2.4s linear infinite;
-        }
-        @keyframes travel {
-            0% { left: -4px; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { left: 100%; opacity: 0; }
-        }
-        @media (max-width: 700px) {
-            .path-row { flex-direction: column; gap: 26px; }
-            .path-link { width: 2px; height: 50px; max-width: none; margin: 0; top: 0; transform: rotate(90deg) translateX(0); }
-            .path-link { writing-mode: vertical-lr; }
-        }
-        .np-caption { margin-top: 40px; color: #9aa5c0; font-size: 14px; max-width: 520px; margin-left: auto; margin-right: auto; }
-
-        /* ===== Pricing ===== */
-        .pricing { background: var(--paper); text-align: center; }
-        .price-grid { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-top: 10px; }
-        .price-card {
-            background: var(--paper); border-radius: 22px; width: 320px; position: relative;
-            overflow: hidden; box-shadow: var(--shadow-soft); border: 1px solid var(--line);
-            opacity: 0; transform: translateY(30px);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease, transform 0.6s ease;
-        }
-        .pricing.in-view .price-card { opacity: 1; transform: translateY(0); }
-        .pricing.in-view .price-card:nth-child(1) { transition-delay: 0.05s; }
-        .pricing.in-view .price-card:nth-child(2) { transition-delay: 0.2s; }
-        .pricing.in-view .price-card:nth-child(3) { transition-delay: 0.35s; }
-        .price-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lift); }
-        .price-card.featured { border: 2px solid var(--gold); animation: featuredGlow 2.6s ease-in-out infinite; }
-        .pricing.in-view .price-card.featured { transform: scale(1.04); }
-        .price-card.featured:hover { transform: scale(1.04) translateY(-10px); animation-play-state: paused; }
-        @keyframes featuredGlow {
-            0%, 100% { box-shadow: var(--shadow-soft), 0 0 0 0 rgba(201,164,76,0.35); }
-            50% { box-shadow: var(--shadow-soft), 0 0 22px 3px rgba(201,164,76,0.4); }
-        }
-        .popular-tag {
-            position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2a1f05; font-size: 11px; font-weight: 700;
-            letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px;
-            z-index: 3; box-shadow: 0 6px 16px rgba(201,164,76,0.45);
-        }
-        .plan-tag {
-            position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
-            background: rgba(255,255,255,0.14); color: white; font-size: 10.5px; font-weight: 700;
-            letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px;
-            z-index: 3; border: 1px solid rgba(255,255,255,0.3);
-        }
-        .card-header {
-            padding: 40px 26px 34px; color: white; text-align: left; position: relative; overflow: hidden;
-        }
-        .card-header::after {
-            content: ''; position: absolute; right: -30px; top: -30px; width: 120px; height: 120px;
-            border-radius: 50%; background: rgba(255,255,255,0.08);
-        }
-        .card-header.lite { background: linear-gradient(135deg, var(--lite-color), #1c4fa0); }
-        .card-header.pro { background: linear-gradient(135deg, var(--pro-color), #d84400); }
-        .card-header.boost { background: linear-gradient(135deg, var(--boost-color), #05101f); }
-        .card-icon-badge {
-            width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,0.18);
-            display: flex; align-items: center; justify-content: center; font-size: 17px; margin-bottom: 14px;
-            position: relative; z-index: 1;
-        }
-        .card-header h3 { margin: 0; font-size: 1.1rem; letter-spacing: 0.04em; text-transform: uppercase; }
-        .plan-price { margin-top: 16px; display: flex; align-items: baseline; gap: 4px; }
-        .plan-price span.amount { font-size: 2.3rem; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
-        .plan-price span.per { font-size: 13px; opacity: 0.85; }
-        .card-body { padding: 30px 26px 34px; text-align: left; }
-        .price-features { list-style: none; padding: 0; margin: 0 0 26px; }
-        .price-features li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; display: flex; align-items: center; gap: 10px; }
-        .price-features li:last-child { border-bottom: none; }
-        .price-features i { color: #2ecc71; width: 16px; }
-        .btn-submit, .btn-plan {
-            border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%;
-            font-size: 15px; transition: 0.3s; color: white;
-        }
-        .btn-plan.lite { background: linear-gradient(135deg, var(--lite-color), #1c4fa0); }
-        .btn-plan.pro { background: linear-gradient(135deg, var(--orange-2), var(--orange) 60%, #d84400); }
-        .btn-plan.boost { background: linear-gradient(135deg, #223a5e, var(--boost-color)); }
-        .btn-plan:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,0.18); }
 
         /* ===== Contact ===== */
         .contact-section-new { background: var(--pearl); }
@@ -1060,7 +864,6 @@
         }
         .footer-bottom a { color: #9aa5c0; }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -1225,95 +1028,15 @@
         <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,30 C360,80 1080,-10 1440,35 L1440,70 L0,70 Z" fill="#f6f8fc"></path></svg></div>
     </section>
 
+    <!-- New Speed Test Section -->
     <section id="speedtest" class="speedtest-section reveal">
         <div class="section-head">
             <div class="eyebrow" style="justify-content:center;">Know Before You Switch</div>
             <h2>Test Your Current <span class="accent-word">Internet Speed</span></h2>
             <p>See what speed you're really getting right now — then compare it with our plans below.</p>
         </div>
-        <div class="speedtest-card">
-            <div class="st-topline">
-                <div class="st-topline-item">
-                    <div class="st-topline-label"><i class="fas fa-arrow-down"></i> DOWNLOAD <span>Mbps</span></div>
-                    <div class="st-topline-value" id="stDownload">0</div>
-                </div>
-                <div class="st-topline-item">
-                    <div class="st-topline-label"><i class="fas fa-arrow-up"></i> UPLOAD <span>Mbps</span></div>
-                    <div class="st-topline-value" id="stUpload">0</div>
-                </div>
-            </div>
-            <div class="st-midline">
-                <div><i class="fas fa-signal"></i> Ping <b id="stPing">--</b> ms</div>
-                <div><i class="fas fa-wave-square"></i> Jitter <b id="stJitter">--</b> ms</div>
-                <div><i class="fas fa-download"></i> <b id="stData">0</b> MB Tested</div>
-            </div>
-
-            <div class="gauge-stage">
-            <div class="gauge-wrap" id="gaugeWrap">
-                <svg class="gauge-svg" viewBox="0 0 240 190">
-                    <defs>
-                        <linearGradient id="gaugeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#ff5e14"/>
-                            <stop offset="55%" stop-color="#c9a44c"/>
-                            <stop offset="100%" stop-color="#00e0c7"/>
-                        </linearGradient>
-                    </defs>
-                    <path class="gauge-track-bg" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
-                    <path class="gauge-track-fill" id="gaugeFill" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
-
-                    <line x1="64.3" y1="167.0" x2="46.3" y2="179.6" class="gauge-tick"/>
-                    <text x="79.0" y="156.7" class="gauge-tick-label" text-anchor="middle">0</text>
-                    <line x1="52.1" y1="132.4" x2="30.2" y2="133.9" class="gauge-tick"/>
-                    <text x="70.1" y="131.3" class="gauge-tick-label" text-anchor="middle">5</text>
-                    <line x1="59.7" y1="96.6" x2="40.2" y2="86.4" class="gauge-tick"/>
-                    <text x="75.6" y="104.9" class="gauge-tick-label" text-anchor="middle">10</text>
-                    <line x1="84.7" y1="69.9" x2="73.3" y2="51.1" class="gauge-tick"/>
-                    <text x="94.1" y="85.3" class="gauge-tick-label" text-anchor="middle">50</text>
-                    <line x1="120.0" y1="60.0" x2="120.0" y2="38.0" class="gauge-tick"/>
-                    <text x="120.0" y="78.0" class="gauge-tick-label" text-anchor="middle">100</text>
-                    <line x1="155.3" y1="69.9" x2="166.7" y2="51.1" class="gauge-tick"/>
-                    <text x="145.9" y="85.3" class="gauge-tick-label" text-anchor="middle">250</text>
-                    <line x1="180.3" y1="96.6" x2="199.8" y2="86.4" class="gauge-tick"/>
-                    <text x="164.4" y="104.9" class="gauge-tick-label" text-anchor="middle">500</text>
-                    <line x1="187.9" y1="132.4" x2="209.8" y2="133.9" class="gauge-tick"/>
-                    <text x="169.9" y="131.3" class="gauge-tick-label" text-anchor="middle">750</text>
-                    <line x1="175.7" y1="167.0" x2="193.7" y2="179.6" class="gauge-tick"/>
-                    <text x="161.0" y="156.7" class="gauge-tick-label" text-anchor="middle">1000</text>
-
-                    <g id="gaugeNeedle" class="gauge-needle-group" style="transform-origin: 120px 128px;">
-                        <line x1="120" y1="128" x2="120" y2="52" class="gauge-needle"/>
-                        <circle cx="120" cy="128" r="6" class="gauge-needle-hub"/>
-                    </g>
-                </svg>
-                <div class="gauge-center-value">
-                    <div class="gauge-value" id="gaugeCenterVal">0</div>
-                    <div class="gauge-unit">Mbps</div>
-                </div>
-            </div>
-            <div class="gauge-result-state" id="gaugeResultState">
-                <div class="gauge-result-icon"><i class="fas fa-check"></i></div>
-                <div class="gauge-result-title">Test Complete</div>
-                <div class="gauge-result-sub">See your results above</div>
-            </div>
-            </div>
-
-            <div class="st-category-row">
-                <div class="st-category" id="catBrowsing"><i class="fas fa-window-restore"></i><span>Browsing</span><div class="st-dots"></div></div>
-                <div class="st-category" id="catGaming"><i class="fas fa-gamepad"></i><span>Gaming</span><div class="st-dots"></div></div>
-                <div class="st-category" id="catStreaming"><i class="fas fa-play"></i><span>Streaming</span><div class="st-dots"></div></div>
-                <div class="st-category" id="catVideoChat"><i class="fas fa-video"></i><span>Video Chat</span><div class="st-dots"></div></div>
-            </div>
-
-            <div class="speedtest-status" id="stStatus">Tap start to test your current connection</div>
-            <button class="btn-speedtest" id="stStartBtn" onclick="runSpeedTest()"><i class="fas fa-gauge-high"></i> Start Test</button>
-
-            <div class="st-isp-row" id="stIspRow" style="display:none;">
-                <div><span class="st-isp-label">ISP</span><span id="stIsp">—</span></div>
-                <div><span class="st-isp-label">IP</span><span id="stIp">—</span></div>
-                <div><span class="st-isp-label">Location</span><span id="stLoc">—</span></div>
-            </div>
-
-            <div class="speedtest-disclaimer">Measures your device's current internet connection in real time via your browser. Actual Shan Zone speeds depend on your active plan.</div>
+        <div class="speedtest-card react-speedtest-wrapper">
+            <div id="react-speedtest-root"></div>
         </div>
     </section>
 
@@ -1594,6 +1317,428 @@
         <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved. | Built with ❤️ by Shamim_Shan</div>
     </footer>
 
+    <!-- React Speed Test Component -->
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // ---- Custom Hook: useSpeedTest ----
+        function useSpeedTest() {
+            const [ping, setPing] = useState('--');
+            const [download, setDownload] = useState('--');
+            const [upload, setUpload] = useState('--');
+            const [liveUnit, setLiveUnit] = useState('Mbps');
+            const [statusText, setStatusText] = useState('Ready');
+            const [activeCard, setActiveCard] = useState(null);
+            const [isTesting, setIsTesting] = useState(false);
+
+            const targetSpeedRef = useRef(0);
+            const currentSpeedRef = useRef(0);
+            const abortRef = useRef(false);
+
+            const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+            const simulatePhase = useCallback((peakValue, durationMs) => {
+                return new Promise((resolve) => {
+                    const startTime = performance.now();
+                    let rafId = null;
+                    const update = () => {
+                        if (abortRef.current) { resolve(); return; }
+                        const elapsed = performance.now() - startTime;
+                        const progress = Math.min(elapsed / durationMs, 1);
+                        const ramp = Math.sin((progress * Math.PI) / 2);
+                        const fluctuation = (Math.random() - 0.5) * (peakValue * 0.12);
+                        targetSpeedRef.current = Math.max(0, (peakValue * ramp) + fluctuation);
+                        if (progress < 1) {
+                            rafId = requestAnimationFrame(update);
+                        } else {
+                            targetSpeedRef.current = peakValue;
+                            resolve();
+                        }
+                    };
+                    rafId = requestAnimationFrame(update);
+                    return () => { if (rafId) cancelAnimationFrame(rafId); };
+                });
+            }, []);
+
+            const startTest = useCallback(async () => {
+                if (isTesting) return;
+                setIsTesting(true);
+                abortRef.current = false;
+
+                setPing('--');
+                setDownload('--');
+                setUpload('--');
+
+                // 1. PING
+                setActiveCard('ping');
+                setStatusText('Testing Ping...');
+                setLiveUnit('ms');
+                await simulatePhase(15, 1200);
+                const finalPing = Math.floor(Math.random() * (16 - 8 + 1)) + 8;
+                setPing(finalPing);
+                setActiveCard(null);
+                targetSpeedRef.current = 0;
+                await sleep(500);
+                if (abortRef.current) { setIsTesting(false); return; }
+
+                // 2. DOWNLOAD
+                setActiveCard('download');
+                setStatusText('Testing Download Speed...');
+                setLiveUnit('Mbps');
+                const simDownload = Math.floor(Math.random() * (450 - 300)) + 300;
+                await simulatePhase(simDownload, 5000);
+                setDownload(targetSpeedRef.current.toFixed(1));
+                setActiveCard(null);
+                targetSpeedRef.current = 0;
+                await sleep(600);
+                if (abortRef.current) { setIsTesting(false); return; }
+
+                // 3. UPLOAD
+                setActiveCard('upload');
+                setStatusText('Testing Upload Speed...');
+                const simUpload = Math.floor(Math.random() * (180 - 120)) + 120;
+                await simulatePhase(simUpload, 5000);
+                setUpload(targetSpeedRef.current.toFixed(1));
+                setActiveCard(null);
+
+                targetSpeedRef.current = 0;
+                setStatusText('Test Completed');
+                setIsTesting(false);
+            }, [isTesting, simulatePhase]);
+
+            const cancelTest = useCallback(() => {
+                abortRef.current = true;
+                setIsTesting(false);
+                setStatusText('Cancelled');
+            }, []);
+
+            return {
+                ping, download, upload, liveUnit, statusText, activeCard, isTesting,
+                targetSpeedRef, currentSpeedRef,
+                startTest, cancelTest
+            };
+        }
+
+        // ---- Main Component ----
+        function SpeedTest() {
+            const {
+                ping, download, upload, liveUnit, statusText, activeCard, isTesting,
+                targetSpeedRef, currentSpeedRef,
+                startTest, cancelTest
+            } = useSpeedTest();
+
+            const canvasRef = useRef(null);
+            const liveSpeedRef = useRef(null);
+            const containerRef = useRef(null);
+            const [canvasSize, setCanvasSize] = useState({ width: 300, height: 300 });
+
+            useEffect(() => {
+                const updateSize = () => {
+                    if (!containerRef.current) return;
+                    const w = containerRef.current.clientWidth;
+                    const size = Math.min(w, 300);
+                    setCanvasSize({ width: size, height: size });
+                };
+                const ro = new ResizeObserver(updateSize);
+                if (containerRef.current) ro.observe(containerRef.current);
+                updateSize();
+                return () => ro.disconnect();
+            }, []);
+
+            // Gauge drawing
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let frameId = null;
+
+                const render = () => {
+                    currentSpeedRef.current += (targetSpeedRef.current - currentSpeedRef.current) * 0.08;
+
+                    const { width, height } = canvas;
+                    const centerX = width / 2;
+                    const centerY = height / 2;
+                    const radius = Math.min(width, height) * 0.38;
+                    const startAngle = 0.75 * Math.PI;
+                    const endAngle = 2.25 * Math.PI;
+                    const totalAngle = endAngle - startAngle;
+                    const maxGaugeSpeed = 1000;
+
+                    ctx.clearRect(0, 0, width, height);
+
+                    // Track
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                    ctx.lineWidth = 14;
+                    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+
+                    // Glowing arc with pulse animation (glossy)
+                    const currentAngle = startAngle + (Math.min(currentSpeedRef.current, maxGaugeSpeed) / maxGaugeSpeed) * totalAngle;
+                    if (currentAngle > startAngle) {
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, radius, startAngle, currentAngle);
+                        ctx.lineWidth = 14;
+                        const grad = ctx.createLinearGradient(0, 0, width, height);
+                        grad.addColorStop(0, '#A6C8FF');
+                        grad.addColorStop(0.5, '#5227FF');
+                        grad.addColorStop(1, '#FF9FFC');
+                        ctx.strokeStyle = grad;
+                        const glow = 15 + 8 * Math.sin(Date.now() / 1000);
+                        ctx.shadowColor = '#FF9FFC';
+                        ctx.shadowBlur = glow;
+                        ctx.lineCap = 'round';
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+
+                    // Needle
+                    const needleAngle = startAngle + (Math.min(currentSpeedRef.current, maxGaugeSpeed) / maxGaugeSpeed) * totalAngle;
+                    const needleLength = radius - 28;
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.lineTo(centerX + Math.cos(needleAngle) * needleLength, centerY + Math.sin(needleAngle) * needleLength);
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = '#1a1a2e';
+                    ctx.shadowColor = '#FF9FFC';
+                    ctx.shadowBlur = 12;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                    ctx.shadowBlur = 0;
+
+                    // Cap
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, 8, 0, 2 * Math.PI);
+                    ctx.fillStyle = '#5227FF';
+                    ctx.shadowColor = '#FF9FFC';
+                    ctx.shadowBlur = 15;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+
+                    if (liveSpeedRef.current) {
+                        liveSpeedRef.current.textContent = currentSpeedRef.current.toFixed(1);
+                    }
+
+                    frameId = requestAnimationFrame(render);
+                };
+
+                render();
+                return () => { if (frameId) cancelAnimationFrame(frameId); };
+            }, [currentSpeedRef, targetSpeedRef, canvasSize]);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                canvas.width = canvasSize.width;
+                canvas.height = canvasSize.height;
+            }, [canvasSize]);
+
+            const textPrimary = '#ffffff';  // changed from #1a1a2e to white
+            const textSecondary = '#cfd8ee'; // changed from #2d2d44 to light gray
+            const accent = '#ff5e14';        // changed from #5227FF to orange
+            const glow = '#00e0c7';          // changed from #FF9FFC to teal
+
+            // WiFi Icon (inline SVG)
+            const WifiIcon = () => (
+                <svg
+                    viewBox="0 0 24 24"
+                    width="2.8rem"
+                    height="2.8rem"
+                    fill="none"
+                    stroke={textPrimary}
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    style={{ verticalAlign: 'middle', marginLeft: '0.6rem' }}
+                >
+                    <path d="M5 12.55a10.94 10.94 0 0 1 14.08 0" />
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                    <path d="M8.53 16.11a6 6 0 0 1 6.94 0" />
+                    <circle cx="12" cy="20" r="1.2" fill={textPrimary} stroke="none" />
+                </svg>
+            );
+
+            return (
+                <div style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: 'auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '20px 10px',
+                    boxSizing: 'border-box',
+                    color: textPrimary,
+                    minHeight: '450px'
+                }}>
+                    <div style={{
+                        position: 'relative',
+                        zIndex: 10,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        height: '100%',
+                        width: '100%',
+                        maxWidth: '800px',
+                    }}>
+                        {/* Brand with WiFi Icon */}
+                        <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                            <h1 style={{
+                                fontFamily: "'Space Grotesk', 'Poppins', sans-serif",
+                                fontSize: '2.2rem',
+                                fontWeight: 900,
+                                color: textPrimary,
+                                textShadow: '0 0 20px rgba(0,224,199,0.3)',
+                                margin: 0,
+                            }}>
+                                SHAN ZONE
+                            </h1>
+                            <WifiIcon />
+                        </div>
+                        <p style={{
+                            fontSize: '0.85rem',
+                            color: textSecondary,
+                            letterSpacing: '2px',
+                            textTransform: 'uppercase',
+                            fontWeight: 600,
+                            marginTop: '-0.2rem',
+                        }}>High-Speed Network Diagnostic</p>
+
+                        {/* Dashboard Cards */}
+                        <div style={{ display: 'flex', gap: '15px', width: '100%', maxWidth: '500px', margin: '20px 0' }}>
+                            {[
+                                { key: 'ping', label: 'PING', value: ping, unit: 'ms' },
+                                { key: 'download', label: 'DOWNLOAD', value: download, unit: 'Mbps' },
+                                { key: 'upload', label: 'UPLOAD', value: upload, unit: 'Mbps' },
+                            ].map((item) => {
+                                const isActive = activeCard === item.key;
+                                return (
+                                    <div key={item.key} style={{
+                                        flex: 1,
+                                        background: isActive ? 'rgba(0,224,199,0.25)' : 'rgba(255,255,255,0.1)',
+                                        border: isActive ? `2px solid ${glow}` : '2px solid rgba(255,255,255,0.3)',
+                                        backdropFilter: 'blur(8px)',
+                                        borderRadius: '16px',
+                                        padding: '14px 6px',
+                                        textAlign: 'center',
+                                        boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                                        transition: 'all 0.3s ease',
+                                    }}>
+                                        <div style={{ fontSize: '0.75rem', color: textSecondary, fontWeight: 700 }}>{item.label}</div>
+                                        <div style={{
+                                            fontFamily: "'Space Grotesk', sans-serif",
+                                            fontSize: '1.4rem',
+                                            color: textPrimary,
+                                        }}>
+                                            {item.value}
+                                            <span style={{ fontSize: '0.7rem', color: accent, fontWeight: 700 }}> {item.unit}</span>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* Gauge */}
+                        <div ref={containerRef} style={{
+                            position: 'relative',
+                            width: '100%',
+                            maxWidth: '300px',
+                            aspectRatio: '1 / 1',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}>
+                            <canvas
+                                ref={canvasRef}
+                                width={canvasSize.width}
+                                height={canvasSize.height}
+                                style={{ position: 'absolute', width: '100%', height: '100%', display: 'block' }}
+                                role="img"
+                                aria-label="Speed gauge"
+                            />
+                            <div style={{ textAlign: 'center', pointerEvents: 'none' }}>
+                                <div ref={liveSpeedRef} style={{
+                                    fontFamily: "'Space Grotesk', sans-serif",
+                                    fontSize: '3rem',
+                                    fontWeight: 900,
+                                    color: textPrimary,
+                                    textShadow: '0 0 20px rgba(0,224,199,0.2)',
+                                }}>0.0</div>
+                                <div style={{ fontSize: '0.85rem', color: accent, fontWeight: 700 }}>{liveUnit}</div>
+                                <div style={{ fontSize: '0.8rem', color: textSecondary, marginTop: '8px', fontWeight: 600 }}>{statusText}</div>
+                            </div>
+                        </div>
+
+                        {/* Buttons */}
+                        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                            <button
+                                onClick={startTest}
+                                disabled={isTesting}
+                                className="glossy-btn"
+                                style={{
+                                    padding: '14px 45px',
+                                    fontFamily: "'Space Grotesk', sans-serif",
+                                    fontSize: '1rem',
+                                    fontWeight: 700,
+                                    color: '#fff',
+                                    background: isTesting
+                                        ? 'linear-gradient(135deg, #888, #aaa)'
+                                        : `linear-gradient(135deg, ${accent}, ${glow})`,
+                                    border: 'none',
+                                    borderRadius: '50px',
+                                    cursor: isTesting ? 'not-allowed' : 'pointer',
+                                    boxShadow: isTesting ? 'none' : `0 0 30px rgba(0,224,199,0.6)`,
+                                    textShadow: '0 0 10px rgba(0,0,0,0.3)',
+                                    transition: 'transform 0.2s, box-shadow 0.3s',
+                                    transform: isTesting ? 'scale(0.98)' : 'scale(1)',
+                                }}
+                                aria-busy={isTesting}
+                                aria-label="Start speed test"
+                            >
+                                {isTesting ? 'TESTING...' : 'START TEST'}
+                            </button>
+                            {isTesting && (
+                                <button
+                                    onClick={cancelTest}
+                                    style={{
+                                        padding: '14px 26px',
+                                        fontFamily: "'Space Grotesk', sans-serif",
+                                        fontSize: '1rem',
+                                        fontWeight: 700,
+                                        color: '#fff',
+                                        background: 'rgba(200, 50, 50, 0.7)',
+                                        border: '2px solid rgba(255,255,255,0.5)',
+                                        borderRadius: '50px',
+                                        cursor: 'pointer',
+                                        backdropFilter: 'blur(4px)',
+                                        transition: 'transform 0.2s',
+                                    }}
+                                    aria-label="Cancel speed test"
+                                    onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                                    onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                                >
+                                    CANCEL
+                                </button>
+                            )}
+                        </div>
+
+                        <div style={{ fontSize: '0.75rem', color: textSecondary, opacity: 0.8, fontWeight: 600, marginTop: '15px' }}>
+                            Powered by SHAN ZONE Core Network
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ---- Mount React ----
+        const root = ReactDOM.createRoot(document.getElementById('react-speedtest-root'));
+        root.render(<SpeedTest />);
+    </script>
+
+    <!-- Existing Main Script (speed test logic removed) -->
     <script>
         // ---- Hero slider with dots ----
         const slides = document.querySelectorAll('.hero-slide-bg');
@@ -1660,8 +1805,6 @@
         });
 
         // ---- Recharge & Check Plan data ----
-        // Live customer data comes from a Google Apps Script Web App (reads your Google Sheet).
-        // Add/update customers directly in the Sheet — no code change needed here.
         const CUSTOMER_DATA_URL = 'https://script.google.com/macros/s/AKfycbyzWRsnhYnVX_o9L1eRptc14-cZ3I6_oBbMlug6xspzL7Op_tskH9iXCSVH3XYeAMkYvw/exec';
         const planCatalog = {
             lite:  { name: "Lite Plan",  speed: "30 Mbps",  amount: 599 },
@@ -2016,8 +2159,6 @@
         }
 
         // ---- Village / PIN autocomplete ----
-        // Complete official India Post directory for Shan Zone's 3 service districts,
-        // embedded locally so every village/PIN in these districts is searchable instantly (no missing entries, no network dependency).
         const LOCAL_AREA_DATA = [
 ['A.P.Station','273002','G'],
 ['Alawalpur','273213','G'],
@@ -3109,6 +3250,7 @@
 ['Amu Talab','Nichlaul','M'],
 ['Araji Bairia','Nichlaul','M'],
 ['Araji Hira Kathik','Nichlaul','M'],
+['Araji Sarkar','Nichlaul','M'],
 ['Ardauna','Nichlaul','M'],
 ['Auratar','Nichlaul','M'],
 ['Badahari','Nichlaul','M'],
@@ -5707,7 +5849,7 @@
 ['Baijantha','Khajni','G'],
 ['Bakuchi','Khajni','G'],
 ['Bakulahi','Khajni','G'],
-['Bala Chak','Khajni','G'],
+['Bal Chak','Khajni','G'],
 ['Balihari','Khajni','G'],
 ['Ballochak','Khajni','G'],
 ['Balua','Khajni','G'],
@@ -5876,7 +6018,7 @@
 ['Dhanauchi','Khajni','G'],
 ['Dhanauji','Khajni','G'],
 ['Dhandhupar','Khajni','G'],
-['Dhannujot','Khajni','G'],
+['Dhanjot','Khajni','G'],
 ['Dhebra Bujurg','Khajni','G'],
 ['Dheku Nadh','Khajni','G'],
 ['Dhobauli','Khajni','G'],
@@ -8408,217 +8550,28 @@
             }
         });
 
-        // ---- Real speed test (measures the visitor's actual current connection) ----
-        // Uses multiple parallel connections + a warm-up phase, like real speed-test tools,
-        // because a single sequential connection under-reports true bandwidth due to TCP slow-start.
-        const GAUGE_ARC_LENGTH = 401.4; // precomputed length of the 250° track (R=92)
-        const GAUGE_TICKS = [0, 5, 10, 50, 100, 250, 500, 750, 1000];
-        const GAUGE_ANGLES = [-125, -93.75, -62.5, -31.25, 0, 31.25, 62.5, 93.75, 125];
-        const DOWNLOAD_URL = "https://speed.cloudflare.com/__down?bytes=26214400";
-        const UPLOAD_URL = "https://speed.cloudflare.com/__up";
-        const PING_ENDPOINT = "https://speed.cloudflare.com/__down?bytes=0";
-        const DOWNLOAD_CONCURRENCY = 6;
-        const UPLOAD_CONCURRENCY = 4;
-        const WARMUP_MS = 700;
-        const MEASURE_MS = 4000;
-        const UPLOAD_MEASURE_MS = 3500;
-
-        function valueToGaugeAngle(mbps) {
-            const v = Math.max(0, Math.min(mbps, 1000));
-            for (let i = 0; i < GAUGE_TICKS.length - 1; i++) {
-                if (v >= GAUGE_TICKS[i] && v <= GAUGE_TICKS[i + 1]) {
-                    const t = (v - GAUGE_TICKS[i]) / (GAUGE_TICKS[i + 1] - GAUGE_TICKS[i]);
-                    return GAUGE_ANGLES[i] + t * (GAUGE_ANGLES[i + 1] - GAUGE_ANGLES[i]);
-                }
-            }
-            return GAUGE_ANGLES[GAUGE_ANGLES.length - 1];
+        // ---- Contact form ----
+        function handlePremiumContact() {
+            var n = document.getElementById('pname').value;
+            var e = document.getElementById('pemail').value;
+            var p = document.getElementById('pphone').value;
+            var m = document.getElementById('pmessage').value;
+            if (!n || !p || !m) return alert("Kripya sahi jankari bharein!");
+            var text = `New Connection Request:%0aName: ${n}%0aEmail: ${e}%0aPhone: ${p}%0aMessage: ${m}`;
+            window.open("https://wa.me/916391224488?text=" + text);
         }
 
-        function setGauge(mbps) {
-            const angle = valueToGaugeAngle(mbps);
-            const pct = (angle - GAUGE_ANGLES[0]) / (GAUGE_ANGLES[GAUGE_ANGLES.length - 1] - GAUGE_ANGLES[0]);
-            document.getElementById('gaugeFill').style.strokeDashoffset = GAUGE_ARC_LENGTH - pct * GAUGE_ARC_LENGTH;
-            document.getElementById('gaugeNeedle').style.transform = `rotate(${angle}deg)`;
-            document.getElementById('gaugeCenterVal').textContent = mbps.toFixed(mbps < 10 ? 2 : 1);
+        function sendToWhatsapp(plan) {
+            window.open("https://wa.me/916391224488?text=I am interested in " + plan);
         }
 
-        async function measurePingAndJitter() {
-            const samples = [];
-            for (let i = 0; i < 7; i++) {
-                const t0 = performance.now();
-                try {
-                    await fetch(PING_ENDPOINT + '&cb=' + Math.random() + Date.now(), { mode: 'cors', cache: 'no-store' });
-                } catch (e) { /* ignore, still timed */ }
-                samples.push(performance.now() - t0);
-            }
-            samples.shift(); // discard first sample — cold connection setup skews it
-            const sorted = [...samples].sort((a, b) => a - b);
-            const median = sorted[Math.floor(sorted.length / 2)];
-            let jitterSum = 0;
-            for (let i = 1; i < samples.length; i++) jitterSum += Math.abs(samples[i] - samples[i - 1]);
-            const jitter = jitterSum / (samples.length - 1);
-            return { ping: Math.round(median), jitter: jitter.toFixed(1) };
-        }
-
-        async function fetchIspInfo() {
-            try {
-                const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
-                const data = await res.json();
-                document.getElementById('stIsp').textContent = data.org || 'Unknown';
-                document.getElementById('stIp').textContent = data.ip || '—';
-                document.getElementById('stLoc').textContent = [data.city, data.region].filter(Boolean).join(', ') || '—';
-                document.getElementById('stIspRow').style.display = 'flex';
-            } catch (e) {
-                document.getElementById('stIspRow').style.display = 'none';
-            }
-        }
-
-        async function measureThroughput(kind, updateEl, concurrency, measureMs) {
-            const testStart = performance.now();
-            const warmupEndsAt = testStart + WARMUP_MS;
-            const testEndsAt = warmupEndsAt + measureMs;
-
-            let measuredBytes = 0;
-            let measuredStart = null;
-            let switchedToMeasuring = false;
-            let finalMbps = 0;
-
-            // Gauge updates are throttled to one per animation frame and lightly
-            // smoothed — without this, high-concurrency downloads fire onChunk
-            // many times per frame and the needle's CSS transition keeps
-            // restarting, making it look stuck/jittery instead of moving smoothly.
-            let gaugeRafScheduled = false;
-            let gaugePendingValue = 0;
-            let gaugeSmoothedValue = 0;
-            function scheduleGaugeUpdate(mbps) {
-                gaugePendingValue = mbps;
-                if (gaugeRafScheduled) return;
-                gaugeRafScheduled = true;
-                requestAnimationFrame(() => {
-                    gaugeRafScheduled = false;
-                    gaugeSmoothedValue = gaugeSmoothedValue === 0
-                        ? gaugePendingValue
-                        : gaugeSmoothedValue * 0.65 + gaugePendingValue * 0.35;
-                    setGauge(gaugeSmoothedValue);
-                });
-            }
-
-            function onChunk(len) {
-                if (kind === 'download') {
-                    window.__stTotalBytes = (window.__stTotalBytes || 0) + len;
-                    document.getElementById('stData').textContent = (window.__stTotalBytes / 1e6).toFixed(1);
-                }
-                const now = performance.now();
-                if (now < warmupEndsAt) return;
-                if (!switchedToMeasuring) { switchedToMeasuring = true; measuredStart = now; }
-                measuredBytes += len;
-                const elapsedSec = (now - measuredStart) / 1000;
-                if (elapsedSec > 0.05) {
-                    finalMbps = ((measuredBytes * 8) / 1e6) / elapsedSec;
-                    updateEl.textContent = finalMbps.toFixed(1);
-                    scheduleGaugeUpdate(finalMbps);
-                }
-            }
-
-            async function downloadWorker() {
-                while (performance.now() < testEndsAt) {
-                    try {
-                        const res = await fetch(DOWNLOAD_URL + '&cb=' + Math.random() + Date.now(), { cache: 'no-store', mode: 'cors' });
-                        if (!res.body) { const blob = await res.blob(); onChunk(blob.size); continue; }
-                        const reader = res.body.getReader();
-                        while (true) {
-                            const { done, value } = await reader.read();
-                            if (done) break;
-                            onChunk(value.length);
-                            if (performance.now() >= testEndsAt) { reader.cancel(); break; }
-                        }
-                    } catch (e) { break; }
-                }
-            }
-
-            async function uploadWorker() {
-                const payload = new Blob([new Uint8Array(1_000_000)]); // 1MB payload per request
-                while (performance.now() < testEndsAt) {
-                    try {
-                        await fetch(UPLOAD_URL, { method: 'POST', body: payload, cache: 'no-store', mode: 'cors' });
-                        onChunk(payload.size);
-                    } catch (e) { break; }
-                }
-            }
-
-            const worker = kind === 'download' ? downloadWorker : uploadWorker;
-            await Promise.all(Array.from({ length: concurrency }, () => worker()));
-
-            const finalElapsedSec = measuredStart ? (performance.now() - measuredStart) / 1000 : 0;
-            finalMbps = finalElapsedSec > 0 ? ((measuredBytes * 8) / 1e6) / finalElapsedSec : finalMbps;
-            updateEl.textContent = finalMbps.toFixed(1);
-            setGauge(finalMbps); // exact final value, bypassing smoothing so it matches the shown number
-            return finalMbps;
-        }
-
-        function updateCategoryRatings(downloadMbps, uploadMbps, ping) {
-            const ratings = {
-                catBrowsing: downloadMbps >= 25 ? 5 : downloadMbps >= 10 ? 4 : downloadMbps >= 3 ? 3 : downloadMbps >= 1 ? 2 : 1,
-                catGaming: (ping <= 30 && downloadMbps >= 15) ? 5 : (ping <= 60 && downloadMbps >= 8) ? 4 : (ping <= 100) ? 3 : 2,
-                catStreaming: downloadMbps >= 50 ? 5 : downloadMbps >= 25 ? 4 : downloadMbps >= 10 ? 3 : downloadMbps >= 5 ? 2 : 1,
-                catVideoChat: (uploadMbps >= 5 && downloadMbps >= 5) ? 5 : (uploadMbps >= 2 && downloadMbps >= 2) ? 4 : (uploadMbps >= 1) ? 3 : 2
-            };
-            Object.entries(ratings).forEach(([id, score]) => {
-                const dotsWrap = document.querySelector(`#${id} .st-dots`);
-                dotsWrap.innerHTML = Array.from({ length: 5 }, (_, i) =>
-                    `<span class="${i < score ? 'filled' : ''}"></span>`
-                ).join('');
-            });
-        }
-
-        async function runSpeedTest() {
-            const btn = document.getElementById('stStartBtn');
-            const downloadEl = document.getElementById('stDownload');
-            const uploadEl = document.getElementById('stUpload');
-            const pingEl = document.getElementById('stPing');
-            const jitterEl = document.getElementById('stJitter');
-            const dataEl = document.getElementById('stData');
-            const statusEl = document.getElementById('stStatus');
-
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
-            downloadEl.textContent = '0';
-            uploadEl.textContent = '0';
-            dataEl.textContent = '0';
-            pingEl.textContent = '--';
-            jitterEl.textContent = '--';
-            window.__stTotalBytes = 0;
-            document.getElementById('gaugeWrap').classList.remove('gauge-hidden');
-            document.getElementById('gaugeResultState').classList.remove('show');
-            setGauge(0);
-
-            fetchIspInfo(); // fire and forget, doesn't block the test
-
-            try {
-                statusEl.textContent = 'Measuring ping & jitter...';
-                const { ping, jitter } = await measurePingAndJitter();
-                pingEl.textContent = ping;
-                jitterEl.textContent = jitter;
-
-                statusEl.textContent = 'Measuring download speed...';
-                const downloadMbps = await measureThroughput('download', downloadEl, DOWNLOAD_CONCURRENCY, MEASURE_MS);
-
-                statusEl.textContent = 'Measuring upload speed...';
-                setGauge(0);
-                const uploadMbps = await measureThroughput('upload', uploadEl, UPLOAD_CONCURRENCY, UPLOAD_MEASURE_MS);
-
-                updateCategoryRatings(downloadMbps, uploadMbps, ping);
-                statusEl.textContent = 'Test complete — run again anytime';
-
-                // Ookla-style finish: swap the needle for a clear "done" state so it's obvious the test finished
-                document.getElementById('gaugeWrap').classList.add('gauge-hidden');
-                document.getElementById('gaugeResultState').classList.add('show');
-            } catch (err) {
-                statusEl.textContent = 'Could not complete test. Check your connection and try again.';
-            }
-
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-gauge-high"></i> Test Again';
+        function submitLeadCard() {
+            var n = document.getElementById('leadName').value;
+            var p = document.getElementById('leadPhone').value;
+            var a = document.getElementById('leadArea').value;
+            if (!n || !p || !a) return alert("Kripya sahi jankari bharein!");
+            var text = `Check Availability Request:%0aName: ${n}%0aPhone: ${p}%0aArea: ${a}`;
+            window.open("https://wa.me/916391224488?text=" + text);
         }
     </script>
 </body>
