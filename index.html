@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shan Zone Broadband | Fiber & Wireless Internet — Maharajganj</title>
-
     <link rel="icon" type="image/jpeg" href="favicon.png">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="styles.css">
-
-    <!-- ⚠️ FALLBACK: Preloader ko 3 sec baad force hide karein -->
+    <!-- Fallback: Preloader hide after 3s -->
     <script>
         setTimeout(function() {
             var preloader = document.getElementById('preloader');
@@ -25,7 +21,6 @@
 </head>
 <body>
 
-    <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="preloader-logo"><i class="fas fa-tower-broadcast"></i></div>
         <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
@@ -65,7 +60,7 @@
         </div>
     </header>
 
-    <!-- Recharge Modal -->
+    <!-- Recharge Modal (hidden by default via CSS) -->
     <div class="recharge-modal-overlay" id="rechargeModalOverlay" onclick="closeRechargeModalOnOverlay(event)">
         <div class="recharge-modal">
             <button class="recharge-modal-close" onclick="closeRechargeModal()" aria-label="Close"><i class="fas fa-times"></i></button>
@@ -74,7 +69,6 @@
                 <h3>Recharge Your Plan</h3>
                 <p id="rechargeHeaderSub">Enter your User ID & Mobile Number to continue.</p>
             </div>
-
             <div class="recharge-login-step" id="rechargeLoginStep">
                 <div class="upi-custid-box" style="max-width:100%;">
                     <label for="rechargeUserId">User ID</label>
@@ -87,7 +81,6 @@
                 <button type="button" id="rechargeFetchBtn" class="upi-pay-btn" style="width:100%; justify-content:center; margin-top:6px;" onclick="fetchUserDetails()"><i class="fas fa-magnifying-glass"></i> Fetch</button>
                 <div id="rechargeLoginError" class="cpr-notfound" style="display:none;"></div>
             </div>
-
             <div class="recharge-plan-list" id="rechargePlanList" style="display:none;">
                 <div id="rechargeUserDetailsCard"></div>
                 <div class="recharge-current-plan-label">All Plans</div>
@@ -97,22 +90,18 @@
                 <button type="button" class="upi-qr-back" onclick="backToPlanList()"><i class="fas fa-arrow-left"></i> Back to plans</button>
                 <div class="upi-qr-view-plan" id="upiQrPlanName">Lite Plan</div>
                 <div class="upi-qr-view-amount" id="upiQrAmount">₹599</div>
-
                 <div class="upi-custid-box">
                     <label for="upiCustId">Your Customer ID <span>(helps us match your payment faster)</span></label>
                     <input type="text" id="upiCustId" placeholder="e.g. SZ0245" oninput="updateUpiPaymentLinks()">
                 </div>
-
                 <div class="upi-tab-switch">
                     <button type="button" class="upi-tab-btn active" id="upiTabBtnQr" onclick="switchUpiTab('qr')"><i class="fas fa-qrcode"></i> Scan QR</button>
                     <button type="button" class="upi-tab-btn" id="upiTabBtnId" onclick="switchUpiTab('id')"><i class="fas fa-at"></i> Enter UPI ID</button>
                 </div>
-
                 <div class="upi-tab-content show" id="upiTabQr">
                     <div class="upi-qr-canvas-wrap" id="upiQrCanvas"></div>
                     <div class="upi-qr-hint">Scan with any UPI app to pay this exact amount</div>
                 </div>
-
                 <div class="upi-tab-content" id="upiTabId">
                     <div class="upi-id-big-box">
                         <span id="upiIdText2">9984389923@ybl</span>
@@ -120,9 +109,7 @@
                     </div>
                     <div class="upi-qr-hint">Open your UPI app → Send Money → paste this ID → enter <strong id="upiTabIdAmount">₹599</strong></div>
                 </div>
-
                 <a class="upi-open-app-btn" id="upiOpenAppBtn" href="#"><i class="fas fa-mobile-screen-button"></i> Open in UPI App</a>
-
                 <button type="button" class="ive-paid-btn" id="ivePaidBtn" onclick="submitPaymentClaim()"><i class="fas fa-circle-check"></i> I've Paid</button>
                 <div class="ive-paid-hint">Click after paying — we'll verify & activate your plan shortly.</div>
                 <div id="ivePaidMessage" class="ive-paid-message"></div>
@@ -145,7 +132,6 @@
         <div class="float-orb orb-2"></div>
         <div class="float-orb orb-3"></div>
         <div class="float-orb orb-4"></div>
-
         <div class="hero-status-card">
             <div class="status-dot"></div>
             <div>
@@ -153,7 +139,6 @@
                 <div class="status-sub">Maharajganj Fiber + Wireless Grid</div>
             </div>
         </div>
-
         <div class="hero-content">
             <div class="eyebrow">Fiber + Wireless Network</div>
             <h1><span class="word-reveal"><span style="animation-delay:0.05s">Unstoppable</span></span>
@@ -163,19 +148,16 @@
                 <span class="hi-line word-reveal" style="display:block;"><span style="animation-delay:0.55s">महराजगंज की रफ़्तार, अब बिना रुकावट</span></span>
             </h1>
             <p class="lead">Shan Zone brings reliable, high-speed FTTH and hybrid wireless broadband to homes and businesses — backed by local, on-field support that actually shows up.</p>
-
             <div class="hero-cta-row">
                 <a href="#availability" class="btn-quote"><i class="fas fa-map-location-dot"></i> Check Availability</a>
                 <a href="#plans" class="btn-ghost-light"><i class="fas fa-list"></i> View Plans</a>
             </div>
-
             <div class="hero-stats">
                 <div><div class="stat-num" data-count-to="3" data-suffix="+ Yrs">0</div><div class="stat-label">Local Presence</div></div>
                 <div><div class="stat-num" data-count-to="100" data-suffix=" Mbps">0</div><div class="stat-label">Top Speed</div></div>
                 <div><div class="stat-num">24/7</div><div class="stat-label">Priority Support</div></div>
             </div>
         </div>
-
         <div class="slide-dots" id="slideDots"></div>
         <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,30 C360,80 1080,-10 1440,35 L1440,70 L0,70 Z" fill="#f6f8fc"></path></svg></div>
     </section>
@@ -189,86 +171,52 @@
         </div>
         <div class="speedtest-card">
             <div class="st-topline">
-                <div class="st-topline-item">
-                    <div class="st-topline-label"><i class="fas fa-arrow-down"></i> DOWNLOAD <span>Mbps</span></div>
-                    <div class="st-topline-value" id="stDownload">0</div>
-                </div>
-                <div class="st-topline-item">
-                    <div class="st-topline-label"><i class="fas fa-arrow-up"></i> UPLOAD <span>Mbps</span></div>
-                    <div class="st-topline-value" id="stUpload">0</div>
-                </div>
+                <div class="st-topline-item"><div class="st-topline-label"><i class="fas fa-arrow-down"></i> DOWNLOAD <span>Mbps</span></div><div class="st-topline-value" id="stDownload">0</div></div>
+                <div class="st-topline-item"><div class="st-topline-label"><i class="fas fa-arrow-up"></i> UPLOAD <span>Mbps</span></div><div class="st-topline-value" id="stUpload">0</div></div>
             </div>
             <div class="st-midline">
                 <div><i class="fas fa-signal"></i> Ping <b id="stPing">--</b> ms</div>
                 <div><i class="fas fa-wave-square"></i> Jitter <b id="stJitter">--</b> ms</div>
                 <div><i class="fas fa-download"></i> <b id="stData">0</b> MB Tested</div>
             </div>
-
             <div class="gauge-stage">
-            <div class="gauge-wrap" id="gaugeWrap">
-                <svg class="gauge-svg" viewBox="0 0 240 190">
-                    <defs>
-                        <linearGradient id="gaugeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#ff5e14"/>
-                            <stop offset="55%" stop-color="#c9a44c"/>
-                            <stop offset="100%" stop-color="#00e0c7"/>
-                        </linearGradient>
-                    </defs>
-                    <path class="gauge-track-bg" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
-                    <path class="gauge-track-fill" id="gaugeFill" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
-
-                    <line x1="64.3" y1="167.0" x2="46.3" y2="179.6" class="gauge-tick"/>
-                    <text x="79.0" y="156.7" class="gauge-tick-label" text-anchor="middle">0</text>
-                    <line x1="52.1" y1="132.4" x2="30.2" y2="133.9" class="gauge-tick"/>
-                    <text x="70.1" y="131.3" class="gauge-tick-label" text-anchor="middle">5</text>
-                    <line x1="59.7" y1="96.6" x2="40.2" y2="86.4" class="gauge-tick"/>
-                    <text x="75.6" y="104.9" class="gauge-tick-label" text-anchor="middle">10</text>
-                    <line x1="84.7" y1="69.9" x2="73.3" y2="51.1" class="gauge-tick"/>
-                    <text x="94.1" y="85.3" class="gauge-tick-label" text-anchor="middle">50</text>
-                    <line x1="120.0" y1="60.0" x2="120.0" y2="38.0" class="gauge-tick"/>
-                    <text x="120.0" y="78.0" class="gauge-tick-label" text-anchor="middle">100</text>
-                    <line x1="155.3" y1="69.9" x2="166.7" y2="51.1" class="gauge-tick"/>
-                    <text x="145.9" y="85.3" class="gauge-tick-label" text-anchor="middle">250</text>
-                    <line x1="180.3" y1="96.6" x2="199.8" y2="86.4" class="gauge-tick"/>
-                    <text x="164.4" y="104.9" class="gauge-tick-label" text-anchor="middle">500</text>
-                    <line x1="187.9" y1="132.4" x2="209.8" y2="133.9" class="gauge-tick"/>
-                    <text x="169.9" y="131.3" class="gauge-tick-label" text-anchor="middle">750</text>
-                    <line x1="175.7" y1="167.0" x2="193.7" y2="179.6" class="gauge-tick"/>
-                    <text x="161.0" y="156.7" class="gauge-tick-label" text-anchor="middle">1000</text>
-
-                    <g id="gaugeNeedle" class="gauge-needle-group" style="transform-origin: 120px 128px;">
-                        <line x1="120" y1="128" x2="120" y2="52" class="gauge-needle"/>
-                        <circle cx="120" cy="128" r="6" class="gauge-needle-hub"/>
-                    </g>
-                </svg>
-                <div class="gauge-center-value">
-                    <div class="gauge-value" id="gaugeCenterVal">0</div>
-                    <div class="gauge-unit">Mbps</div>
+                <div class="gauge-wrap" id="gaugeWrap">
+                    <svg class="gauge-svg" viewBox="0 0 240 190">
+                        <defs><linearGradient id="gaugeGradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff5e14"/><stop offset="55%" stop-color="#c9a44c"/><stop offset="100%" stop-color="#00e0c7"/></linearGradient></defs>
+                        <path class="gauge-track-bg" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
+                        <path class="gauge-track-fill" id="gaugeFill" d="M 44.6 180.8 A 92 92 0 1 1 195.4 180.8"></path>
+                        <line x1="64.3" y1="167.0" x2="46.3" y2="179.6" class="gauge-tick"/><text x="79.0" y="156.7" class="gauge-tick-label" text-anchor="middle">0</text>
+                        <line x1="52.1" y1="132.4" x2="30.2" y2="133.9" class="gauge-tick"/><text x="70.1" y="131.3" class="gauge-tick-label" text-anchor="middle">5</text>
+                        <line x1="59.7" y1="96.6" x2="40.2" y2="86.4" class="gauge-tick"/><text x="75.6" y="104.9" class="gauge-tick-label" text-anchor="middle">10</text>
+                        <line x1="84.7" y1="69.9" x2="73.3" y2="51.1" class="gauge-tick"/><text x="94.1" y="85.3" class="gauge-tick-label" text-anchor="middle">50</text>
+                        <line x1="120.0" y1="60.0" x2="120.0" y2="38.0" class="gauge-tick"/><text x="120.0" y="78.0" class="gauge-tick-label" text-anchor="middle">100</text>
+                        <line x1="155.3" y1="69.9" x2="166.7" y2="51.1" class="gauge-tick"/><text x="145.9" y="85.3" class="gauge-tick-label" text-anchor="middle">250</text>
+                        <line x1="180.3" y1="96.6" x2="199.8" y2="86.4" class="gauge-tick"/><text x="164.4" y="104.9" class="gauge-tick-label" text-anchor="middle">500</text>
+                        <line x1="187.9" y1="132.4" x2="209.8" y2="133.9" class="gauge-tick"/><text x="169.9" y="131.3" class="gauge-tick-label" text-anchor="middle">750</text>
+                        <line x1="175.7" y1="167.0" x2="193.7" y2="179.6" class="gauge-tick"/><text x="161.0" y="156.7" class="gauge-tick-label" text-anchor="middle">1000</text>
+                        <g id="gaugeNeedle" class="gauge-needle-group" style="transform-origin: 120px 128px;"><line x1="120" y1="128" x2="120" y2="52" class="gauge-needle"/><circle cx="120" cy="128" r="6" class="gauge-needle-hub"/></g>
+                    </svg>
+                    <div class="gauge-center-value"><div class="gauge-value" id="gaugeCenterVal">0</div><div class="gauge-unit">Mbps</div></div>
+                </div>
+                <div class="gauge-result-state" id="gaugeResultState">
+                    <div class="gauge-result-icon"><i class="fas fa-check"></i></div>
+                    <div class="gauge-result-title">Test Complete</div>
+                    <div class="gauge-result-sub">See your results above</div>
                 </div>
             </div>
-            <div class="gauge-result-state" id="gaugeResultState">
-                <div class="gauge-result-icon"><i class="fas fa-check"></i></div>
-                <div class="gauge-result-title">Test Complete</div>
-                <div class="gauge-result-sub">See your results above</div>
-            </div>
-            </div>
-
             <div class="st-category-row">
                 <div class="st-category" id="catBrowsing"><i class="fas fa-window-restore"></i><span>Browsing</span><div class="st-dots"></div></div>
                 <div class="st-category" id="catGaming"><i class="fas fa-gamepad"></i><span>Gaming</span><div class="st-dots"></div></div>
                 <div class="st-category" id="catStreaming"><i class="fas fa-play"></i><span>Streaming</span><div class="st-dots"></div></div>
                 <div class="st-category" id="catVideoChat"><i class="fas fa-video"></i><span>Video Chat</span><div class="st-dots"></div></div>
             </div>
-
             <div class="speedtest-status" id="stStatus">Tap start to test your current connection</div>
             <button class="btn-speedtest" id="stStartBtn" onclick="runSpeedTest()"><i class="fas fa-gauge-high"></i> Start Test</button>
-
             <div class="st-isp-row" id="stIspRow" style="display:none;">
                 <div><span class="st-isp-label">ISP</span><span id="stIsp">—</span></div>
                 <div><span class="st-isp-label">IP</span><span id="stIp">—</span></div>
                 <div><span class="st-isp-label">Location</span><span id="stLoc">—</span></div>
             </div>
-
             <div class="speedtest-disclaimer">Measures your device's current internet connection in real time via your browser. Actual Shan Zone speeds depend on your active plan.</div>
         </div>
     </section>
@@ -286,13 +234,11 @@
                     <div><i class="fas fa-circle-check"></i> No cost to check availability</div>
                 </div>
             </div>
-
             <div class="availability-card">
                 <div class="lead-badge">⚡ Quick Response</div>
                 <h3>Check Availability &amp; Apply</h3>
                 <input type="text" id="leadName" placeholder="Full Name">
                 <input type="tel" id="leadPhone" placeholder="Mobile Number">
-
                 <div class="area-toggle">
                     <button type="button" class="area-tab active" data-mode="village" onclick="setAreaMode('village')">Village</button>
                     <button type="button" class="area-tab" data-mode="pin" onclick="setAreaMode('pin')">PIN Code</button>
@@ -313,14 +259,13 @@
                         <option value="">Select Block</option>
                     </select>
                 </div>
-
                 <button class="btn-quote" style="width:100%; justify-content:center;" onclick="submitLeadCard()"><i class="fab fa-whatsapp"></i> Check & Apply</button>
                 <div class="lead-note">We'll confirm on WhatsApp within a few hours.</div>
             </div>
         </div>
     </section>
 
-    <!-- About, Features, Network Path, Pricing, Contact, Footer (same as original) -->
+    <!-- About Section -->
     <section id="about" class="about-section reveal">
         <div class="about-card">
             <div class="eyebrow" style="justify-content:center;">Who We Are</div>
@@ -341,6 +286,7 @@
         </div>
     </section>
 
+    <!-- Features Section -->
     <section id="why" class="features-section reveal">
         <div class="section-head">
             <div class="eyebrow" style="justify-content:center;">Why Choose Us</div>
@@ -348,54 +294,31 @@
             <p>Not just a connection — a service that stands behind it.</p>
         </div>
         <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                <h3>Ultra-Fast Speed</h3>
-                <p>Fiber-backed bandwidth built to handle streaming, gaming, and work-from-home without buffering.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-headset"></i></div>
-                <h3>24/7 Priority Support</h3>
-                <p>Local, on-field technicians who actually show up — not a call-center queue.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-diagram-project"></i></div>
-                <h3>Hybrid Fiber + Wireless</h3>
-                <p>FTTH where it reaches, wireless relay where it stretches — built for Maharajganj's terrain.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
-                <h3>Zero Hidden Costs</h3>
-                <p>Transparent pricing, upfront installation terms, no surprise charges on your bill.</p>
-            </div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-bolt"></i></div><h3>Ultra-Fast Speed</h3><p>Fiber-backed bandwidth built to handle streaming, gaming, and work-from-home without buffering.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-headset"></i></div><h3>24/7 Priority Support</h3><p>Local, on-field technicians who actually show up — not a call-center queue.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-diagram-project"></i></div><h3>Hybrid Fiber + Wireless</h3><p>FTTH where it reaches, wireless relay where it stretches — built for Maharajganj's terrain.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-halved"></i></div><h3>Zero Hidden Costs</h3><p>Transparent pricing, upfront installation terms, no surprise charges on your bill.</p></div>
         </div>
     </section>
 
+    <!-- Network Path -->
     <section class="network-path grain-surface reveal">
         <div class="np-inner">
             <div class="eyebrow">How It Reaches You</div>
             <h2>One <span class="accent-word">Hybrid Network</span>. Built for Maharajganj.</h2>
             <div class="path-row">
-                <div class="path-node">
-                    <div class="node-icon"><i class="fas fa-tower-broadcast"></i></div>
-                    <span class="node-label">Shan Zone Tower</span>
-                </div>
+                <div class="path-node"><div class="node-icon"><i class="fas fa-tower-broadcast"></i></div><span class="node-label">Shan Zone Tower</span></div>
                 <div class="path-link"><div class="pulse-dot"></div></div>
-                <div class="path-node">
-                    <div class="node-icon"><i class="fas fa-diagram-project"></i></div>
-                    <span class="node-label">FTTH + Wireless Relay</span>
-                </div>
+                <div class="path-node"><div class="node-icon"><i class="fas fa-diagram-project"></i></div><span class="node-label">FTTH + Wireless Relay</span></div>
                 <div class="path-link"><div class="pulse-dot" style="animation-delay:1.2s;"></div></div>
-                <div class="path-node">
-                    <div class="node-icon"><i class="fas fa-wifi"></i></div>
-                    <span class="node-label">Your Home / Office</span>
-                </div>
+                <div class="path-node"><div class="node-icon"><i class="fas fa-wifi"></i></div><span class="node-label">Your Home / Office</span></div>
             </div>
             <p class="np-caption">Fiber where it can reach, wireless where it needs to stretch — 99.9% network reliability engineered for buffer-free streaming, work, and gaming.</p>
         </div>
         <div class="section-wave bottom"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,35 C360,-10 1080,80 1440,30 L1440,70 L0,70 Z" fill="#ffffff"></path></svg></div>
     </section>
 
+    <!-- Pricing Section -->
     <section id="plans" class="pricing reveal">
         <div class="section-head">
             <div class="eyebrow" style="justify-content:center;">Simple, Honest Pricing</div>
@@ -404,55 +327,32 @@
         </div>
         <div class="price-grid">
             <div class="price-card">
-                <div class="card-header lite">
-                    <div class="card-icon-badge"><i class="fas fa-wifi"></i></div>
-                    <h3>Lite Plan</h3>
-                    <div class="plan-price"><span class="amount">₹599</span><span class="per">/month</span></div>
-                </div>
+                <div class="card-header lite"><div class="card-icon-badge"><i class="fas fa-wifi"></i></div><h3>Lite Plan</h3><div class="plan-price"><span class="amount">₹599</span><span class="per">/month</span></div></div>
                 <div class="card-body">
-                    <ul class="price-features">
-                        <li><i class="fas fa-bolt"></i> 30 Mbps Speed</li>
-                        <li><i class="fas fa-infinity"></i> Unlimited Data</li>
-                        <li><i class="fas fa-headset"></i> Standard Support</li>
-                    </ul>
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 30 Mbps Speed</li><li><i class="fas fa-infinity"></i> Unlimited Data</li><li><i class="fas fa-headset"></i> Standard Support</li></ul>
                     <button onclick="sendToWhatsapp('Lite Plan')" class="btn-plan lite">Order Now</button>
                 </div>
             </div>
             <div class="price-card featured">
                 <div class="popular-tag">Most Popular</div>
-                <div class="card-header pro">
-                    <div class="card-icon-badge"><i class="fas fa-star"></i></div>
-                    <h3>Pro Plan</h3>
-                    <div class="plan-price"><span class="amount">₹799</span><span class="per">/month</span></div>
-                </div>
+                <div class="card-header pro"><div class="card-icon-badge"><i class="fas fa-star"></i></div><h3>Pro Plan</h3><div class="plan-price"><span class="amount">₹799</span><span class="per">/month</span></div></div>
                 <div class="card-body">
-                    <ul class="price-features">
-                        <li><i class="fas fa-bolt"></i> 50 Mbps Speed</li>
-                        <li><i class="fas fa-tv"></i> 4K Streaming Ready</li>
-                        <li><i class="fas fa-headset"></i> Priority Support</li>
-                    </ul>
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 50 Mbps Speed</li><li><i class="fas fa-tv"></i> 4K Streaming Ready</li><li><i class="fas fa-headset"></i> Priority Support</li></ul>
                     <button onclick="sendToWhatsapp('Pro Plan')" class="btn-plan pro">Order Now</button>
                 </div>
             </div>
             <div class="price-card">
                 <div class="plan-tag">Giga Speed</div>
-                <div class="card-header boost">
-                    <div class="card-icon-badge"><i class="fas fa-rocket"></i></div>
-                    <h3>Boost Plan</h3>
-                    <div class="plan-price"><span class="amount">₹1150</span><span class="per">/month</span></div>
-                </div>
+                <div class="card-header boost"><div class="card-icon-badge"><i class="fas fa-rocket"></i></div><h3>Boost Plan</h3><div class="plan-price"><span class="amount">₹1150</span><span class="per">/month</span></div></div>
                 <div class="card-body">
-                    <ul class="price-features">
-                        <li><i class="fas fa-bolt"></i> 100 Mbps Speed</li>
-                        <li><i class="fas fa-gamepad"></i> Ultra-Low Latency</li>
-                        <li><i class="fas fa-headset"></i> Dedicated Support</li>
-                    </ul>
+                    <ul class="price-features"><li><i class="fas fa-bolt"></i> 100 Mbps Speed</li><li><i class="fas fa-gamepad"></i> Ultra-Low Latency</li><li><i class="fas fa-headset"></i> Dedicated Support</li></ul>
                     <button onclick="sendToWhatsapp('Boost Plan')" class="btn-plan boost">Order Now</button>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="contact-section-new reveal">
         <div class="new-contact-wrapper">
             <div class="contact-card-left">
@@ -462,15 +362,12 @@
                 <div class="info-item"><strong>Industry Presence:</strong> 3+ Years of Excellence</div>
                 <div class="info-item"><strong>Core Expertise:</strong> Fiber-to-the-Home (FTTH) & Wireless Infrastructure</div>
                 <div class="info-item"><strong>Our Workforce:</strong> Certified Network Specialists & On-Field Technicians</div>
-
                 <div class="sub-heading"><i class="fas fa-address-book"></i> Contact Info</div>
                 <div class="info-item"><i class="fas fa-map-marker-alt"></i><strong>Address:</strong> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj, UP</div>
                 <div class="info-item"><i class="fas fa-phone-alt"></i><strong>Phone:</strong> +91-6391224488, +91-9984389923</div>
                 <div class="info-item"><i class="fas fa-envelope"></i><strong>Email:</strong> shanzones1313@gmail.com</div>
-
                 <div class="sub-heading"><i class="fas fa-eye"></i> Our Vision</div>
                 <p class="vision-text">To lead the digital transformation in Maharajganj by making world-class, high-speed internet a standard for every household and commercial enterprise, fostering a truly connected community.</p>
-
                 <div class="sub-heading"><i class="fas fa-bullseye"></i> Our Mission</div>
                 <ul class="list-style-new">
                     <li><i class="fas fa-check"></i> Deploying high-performance infrastructure for buffer-free internet.</li>
@@ -478,7 +375,6 @@
                     <li><i class="fas fa-check"></i> Delivering localized, rapid-response technical assistance.</li>
                     <li><i class="fas fa-check"></i> Expanding our footprint to empower rural and underserved areas.</li>
                 </ul>
-
                 <div class="sub-heading"><i class="fas fa-star"></i> Why Choose Shan Zone?</div>
                 <ul class="list-style-new">
                     <li><i class="fas fa-star"></i> Reliable Hybrid Technology (Fiber + Wireless)</li>
@@ -486,7 +382,6 @@
                     <li><i class="fas fa-star"></i> Rapid deployment and zero hidden costs</li>
                 </ul>
             </div>
-
             <div class="contact-card-right">
                 <h2>Request a Connection</h2>
                 <div id="premiumForm">
@@ -498,18 +393,14 @@
                 </div>
             </div>
         </div>
-
         <div class="get-connected-footer">
             <h2>Let's Get You Connected</h2>
             <p><i class="fas fa-phone-alt" style="color: var(--orange);"></i> Support: +91-6391224488, +91-9984389923 &nbsp;|&nbsp; <i class="fas fa-envelope" style="color: var(--orange);"></i> shanzones1313@gmail.com</p>
-            <a href="https://wa.me/916391224488" class="btn-whatsapp-green">
-                <i class="fab fa-whatsapp"></i> Instant Help on WhatsApp
-            </a>
+            <a href="https://wa.me/916391224488" class="btn-whatsapp-green"><i class="fab fa-whatsapp"></i> Instant Help on WhatsApp</a>
         </div>
     </section>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
-
     <a href="https://wa.me/916391224488" class="float-whatsapp" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
     <div class="mobile-action-bar">
@@ -521,47 +412,17 @@
 
     <footer class="grain-surface">
         <div class="footer-grid">
-            <div class="footer-col">
-                <img src="logo.jpg" style="height:56px; background:white; padding:6px; border-radius:8px; margin-bottom:18px;">
-                <p style="line-height: 1.7;">
-                    "महराजगंज का विश्वसनीय नेटवर्क — शान ज़ोन। हम केवल इंटरनेट नहीं, बल्कि दुनिया से जुड़ने का एक तेज़ और भरोसेमंद रास्ता प्रदान करते हैं। कल के डिजिटल महराजगंज की शुरुआत आज हमारे साथ करें।"
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="#home">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#plans">Our Plans</a>
-                <a href="#contact">Contact Support</a>
-            </div>
-
-            <div class="footer-col">
-                <h4>Follow Our Journey</h4>
-                <a href="https://www.facebook.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</a>
-                <a href="https://www.instagram.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-instagram" style="color: #E4405F;"></i> Instagram</a>
-            </div>
-
-            <div class="footer-col">
-                <h4>Registered Office</h4>
-                <p style="margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--orange); margin-right: 8px;"></i> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj (U.P.) 273301</p>
-                <p style="margin-bottom: 10px;"><i class="fas fa-phone-alt" style="color: var(--orange); margin-right: 8px;"></i> 6391224488, 9984389923</p>
-                <p style="margin-bottom: 10px;"><i class="fas fa-envelope" style="color: var(--orange); margin-right: 8px;"></i> shanzones1313@gmail.com</p>
-            </div>
+            <div class="footer-col"><img src="logo.jpg" style="height:56px; background:white; padding:6px; border-radius:8px; margin-bottom:18px;"><p style="line-height: 1.7;">"महराजगंज का विश्वसनीय नेटवर्क — शान ज़ोन। हम केवल इंटरनेट नहीं, बल्कि दुनिया से जुड़ने का एक तेज़ और भरोसेमंद रास्ता प्रदान करते हैं। कल के डिजिटल महराजगंज की शुरुआत आज हमारे साथ करें।"</p></div>
+            <div class="footer-col"><h4>Quick Links</h4><a href="#home">Home</a><a href="#about">About Us</a><a href="#plans">Our Plans</a><a href="#contact">Contact Support</a></div>
+            <div class="footer-col"><h4>Follow Our Journey</h4><a href="https://www.facebook.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</a><a href="https://www.instagram.com/shanzone13/" target="_blank" class="social-link"><i class="fab fa-instagram" style="color: #E4405F;"></i> Instagram</a></div>
+            <div class="footer-col"><h4>Registered Office</h4><p style="margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--orange); margin-right: 8px;"></i> Malmaliya Urf Sirsia, Partawal Bazar, Maharajganj (U.P.) 273301</p><p style="margin-bottom: 10px;"><i class="fas fa-phone-alt" style="color: var(--orange); margin-right: 8px;"></i> 6391224488, 9984389923</p><p style="margin-bottom: 10px;"><i class="fas fa-envelope" style="color: var(--orange); margin-right: 8px;"></i> shanzones1313@gmail.com</p></div>
         </div>
         <div class="footer-bottom">&copy; 2026 Shan Zone Broadband. All rights reserved. | Built with ❤️ by Shamim_Shan</div>
     </footer>
 
-    <!-- JavaScript Files -->
+    <!-- JavaScript -->
     <script src="data.js"></script>
     <script src="main.js"></script>
     <script src="speedtest.js"></script>
-    <!-- Service Worker Register (optional - agar aapko PWA nahi chahiye to ise hata dein) -->
-    <!-- <script>
-        if('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('SW registered'))
-            .catch(err => console.log('SW error', err));
-        }
-    </script> -->
 </body>
 </html>
