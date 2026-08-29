@@ -1,11 +1,21 @@
 // ================================================
-// MAIN.JS — Saare interactive JavaScript (Hero slider, Modal, Autocomplete, etc.)
+// MAIN.JS — Saare interactive JavaScript
 // ================================================
 
-// ----- Preloader -----
+// DOM ready hote hi preloader hide (fast)
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        var preloader = document.getElementById('preloader');
+        if (preloader) preloader.classList.add('hide');
+    }, 500);
+});
+
+// ----- Preloader (on load event) -----
 window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    setTimeout(() => preloader.classList.add('hide'), 500);
+    setTimeout(() => {
+        var preloader = document.getElementById('preloader');
+        if (preloader) preloader.classList.add('hide');
+    }, 500);
 });
 
 // ----- Header shrink on scroll -----
